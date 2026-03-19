@@ -1,0 +1,31 @@
+{
+  "name": "sameer-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "extract-audio": "ffmpeg -i public/video.mp4 -q:a 0 -map a public/bg-music.mp3"
+  },
+  "dependencies": {
+    "framer-motion": "^11.3.8",
+    "next": "14.2.5",
+    "pdf-lib": "^1.17.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "resend": "^6.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

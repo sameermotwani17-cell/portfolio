@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm --version)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(python -c \":*)",
+      "Bash(dir \"C:\\\\Users\\\\samee\\\\Desktop\\\\My Portfolio\" /B)",
+      "Bash(findstr /i \".mp3 .wav .ogg .m4a .aac .flac .mp4\")",
+      "Bash(python3 -c \" import sys, json data = sys.stdin.read\\(\\) lines = data.strip\\(\\).split\\(''\\\\n''\\) for line in lines[-20:]: try: obj = json.loads\\(line\\) msg = obj.get\\(''message'', {}\\) role = msg.get\\(''role'', ''''\\) content = msg.get\\(''content'', ''''\\) if isinstance\\(content, list\\): for c in content: if isinstance\\(c, dict\\) and c.get\\(''type''\\) == ''text'': print\\(f''[{role}]: {c[\"\"text\"\"][:200]}''\\) elif isinstance\\(content, str\\): print\\(f''[{role}]: {content[:200]}''\\) except: pass \")",
+      "Bash(python3 -c \" import sys, json data = sys.stdin.read\\(\\) lines = data.strip\\(\\).split\\(''\\\\n''\\) for line in lines[-50:]: try: obj = json.loads\\(line\\) msg = obj.get\\(''message'', {}\\) role = msg.get\\(''role'', ''''\\) content = msg.get\\(''content'', ''''\\) if isinstance\\(content, list\\): for c in content: if isinstance\\(c, dict\\) and c.get\\(''type''\\) == ''text'': text = c[''text''].strip\\(\\) if text: print\\(f''[{role}]: {text[:300]}''\\) print\\(''---''\\) elif isinstance\\(content, str\\) and content.strip\\(\\): print\\(f''[{role}]: {content[:300]}''\\) print\\(''---''\\) except: pass \")",
+      "Bash(python3 -c \" import sys, json data = sys.stdin.read\\(\\) lines = data.strip\\(\\).split\\(''\\\\n''\\) # Get last 100 lines for line in lines[-100:]: try: obj = json.loads\\(line\\) msg = obj.get\\(''message'', {}\\) role = msg.get\\(''role'', ''''\\) content = msg.get\\(''content'', ''''\\) if isinstance\\(content, list\\): for c in content: if isinstance\\(c, dict\\) and c.get\\(''type''\\) == ''text'': text = c[''text''].strip\\(\\) if text and len\\(text\\) > 20: print\\(f''[{role}]: {text[:400]}''\\) print\\(''---''\\) elif isinstance\\(content, str\\) and len\\(content.strip\\(\\)\\) > 20: print\\(f''[{role}]: {content[:400]}''\\) print\\(''---''\\) except: pass \")",
+      "Bash(cd /mnt/c/Users/samee/Desktop/'My Portfolio')",
+      "Bash(npm install stripe @stripe/stripe-js resend pdf-lib)",
+      "Bash(ls *.png *.jpg)",
+      "Bash(ls \"C:/Users/samee/Desktop/My Portfolio/\"*.png \"C:/Users/samee/Desktop/My Portfolio/\"*.mp3 \"C:/Users/samee/Desktop/My Portfolio/\"*.aac \"C:/Users/samee/Desktop/My Portfolio/\"*.mp4 \"C:/Users/samee/Desktop/My Portfolio/\"*.wav \"C:/Users/samee/Desktop/My Portfolio/\"*.m4a)",
+      "mcp__25f94fc8-5786-487f-a39b-5d40c3a63d5e__deploy_to_vercel",
+      "Bash(npx vercel --version)",
+      "mcp__25f94fc8-5786-487f-a39b-5d40c3a63d5e__list_teams",
+      "mcp__25f94fc8-5786-487f-a39b-5d40c3a63d5e__list_projects",
+      "Bash(npx vercel whoami)"
+    ]
+  }
+}
