@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   motion,
   useScroll,
@@ -146,6 +146,13 @@ function WelcomeReveal() {
 export default function HeroScene() {
   const ref = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
+  // the transition layers (golden light, burning hoop) weigh ~1MB combined;
+  // mount them just after first paint so they never compete with the LCP hero
+  const [layersReady, setLayersReady] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setLayersReady(true), 600)
+    return () => clearTimeout(t)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -215,17 +222,22 @@ export default function HeroScene() {
   return (
     <section ref={ref} id="home" className="relative" style={{ height: '320vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* backdrop: full-bleed landscape crop framed on the figure */}
+        {/* backdrop: full-bleed landscape crop framed on the figure.
+            plain <picture> so phones get the 85KB variant and the LCP
+            image carries fetchpriority=high */}
         <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
-          <Image
-            src="/scenes/butterflies.webp"
-            alt="Sameer Motwani surrounded by butterflies against a white sky"
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-            style={{ objectPosition: 'center 42%' }}
-          />
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/scenes/butterflies-sm.webp" />
+            <img
+              src="/scenes/butterflies.webp"
+              alt="Sameer Motwani surrounded by butterflies against a white sky"
+              // @ts-expect-error - fetchpriority is valid HTML, React types lag
+              fetchpriority="high"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: 'center 42%' }}
+            />
+          </picture>
         </motion.div>
 
         {/* ambient butterfly field */}
@@ -271,6 +283,7 @@ export default function HeroScene() {
         <motion.div className="absolute inset-0 z-30 pointer-events-none bg-ink" style={{ opacity: dim }} />
 
         {/* the golden light: the verse backdrop crossfades over the butterflies */}
+        {layersReady && (
         <motion.div className="absolute inset-0 z-[31] pointer-events-none" style={{ opacity: lightIn }}>
           <Image
             src="/scenes/verse-light.webp"
@@ -291,8 +304,10 @@ export default function HeroScene() {
             style={{ background: 'linear-gradient(to bottom, rgba(10,6,2,0.3) 0%, transparent 30%, rgba(10,6,2,0.45) 100%)' }}
           />
         </motion.div>
+        )}
 
         {/* the fire morphs in at the end: burning hoop crossfades over the light */}
+        {layersReady && (
         <motion.div className="absolute inset-0 z-[32] pointer-events-none" style={{ opacity: hoopIn }}>
           <Image
             src="/scenes/burning-hoop.webp"
@@ -309,6 +324,7 @@ export default function HeroScene() {
             style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.35) 40%, rgba(5,5,5,0.72) 100%)' }}
           />
         </motion.div>
+        )}
         {/* warm bloom leads the morph */}
         <motion.div
           className="absolute inset-0 z-[33] pointer-events-none"
