@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import type { Album, VaultItem } from '@/lib/projects'
+import StickemCinema from './StickemCinema'
 
 type OverlayItem = (Album | VaultItem) & {
   cover?: string | null
@@ -11,6 +12,7 @@ type OverlayItem = (Album | VaultItem) & {
   coverBg?: string
   stencil?: boolean
   mono?: boolean
+  cinema?: boolean
   logo?: string
 }
 
@@ -107,15 +109,34 @@ export default function CaseStudyOverlay({
         layoutId={`album-${item.id}`}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="relative mx-auto w-full max-w-3xl rounded-2xl overflow-hidden"
+        className={`relative mx-auto w-full ${item.cinema ? 'max-w-6xl' : 'max-w-3xl'} rounded-2xl overflow-hidden`}
         style={{
-          background: panelBg,
+          background: item.cinema ? '#0a0610' : panelBg,
           border: `1px solid ${hairline}`,
           boxShadow: mono
             ? '0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(255,255,255,0.06)'
             : `0 40px 120px rgba(0,0,0,0.9), 0 0 80px ${accent}12`,
         }}
       >
+        {/* close — first child so it survives both layouts */}
+        <button
+          ref={closeRef}
+          onClick={onClose}
+          aria-label="Close case study"
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center font-body text-sm transition-colors"
+          style={{
+            background: 'rgba(0,0,0,0.55)',
+            border: '1px solid rgba(255,255,255,0.18)',
+            color: 'rgba(245,245,242,0.85)',
+          }}
+        >
+          ✕
+        </button>
+
+        {item.cinema ? (
+          <StickemCinema item={item} />
+        ) : (
+          <>
         {/* hero art */}
         <div className="relative h-52 md:h-64 overflow-hidden">
           {item.cover ? (
@@ -140,21 +161,6 @@ export default function CaseStudyOverlay({
             }}
           />
         </div>
-
-        {/* close */}
-        <button
-          ref={closeRef}
-          onClick={onClose}
-          aria-label="Close case study"
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center font-body text-sm transition-colors"
-          style={{
-            background: 'rgba(0,0,0,0.55)',
-            border: '1px solid rgba(255,255,255,0.18)',
-            color: 'rgba(245,245,242,0.85)',
-          }}
-        >
-          ✕
-        </button>
 
         {/* header */}
         <div className="px-6 md:px-10 -mt-10 relative z-[5]">
@@ -315,6 +321,8 @@ export default function CaseStudyOverlay({
             </div>
           </div>
         </div>
+          </>
+        )}
       </motion.div>
     </motion.div>
   )

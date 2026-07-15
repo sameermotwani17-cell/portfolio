@@ -38,6 +38,8 @@ export type Album = {
   stencil?: boolean
   /** monochrome black/white case-study theme (RETRO raven) */
   mono?: boolean
+  /** landscape chopstick-cinema case study (Stick'Em) */
+  cinema?: boolean
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -53,6 +55,8 @@ export type VaultItem = {
   badge: string | null
   accent: string
   mono?: boolean
+  /** landscape chopstick-cinema case study (Stick'Em) */
+  cinema?: boolean
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -76,6 +80,7 @@ export const albums: Album[] = [
     coverContain: true,
     coverBg: '#f6f0fa',
     logo: '/stickem.png',
+    cinema: true,
     detail: {
       overview:
         "Hired by the CEO of Stick'Em — Hult Prize Global 2025 winner — to fix lesson delivery that black-screened on slow connections. Replaced Google Slides iframes with a pre-processed WebP pipeline and a virtualized viewer, legacy iframe kept as automatic fallback.",
@@ -272,6 +277,7 @@ export const vault: VaultItem[] = [
     badge: 'Hult Prize Global Winner 2025',
     accent: '#a855f7',
     logo: '/stickem.png',
+    cinema: true,
     detail: {
       overview:
         'Maps STEM lessons to official government curriculum standards across the UK, India, and USA — killing hours of manual planning per teacher per term, and unblocking the procurement requirement in institutional sales.',
