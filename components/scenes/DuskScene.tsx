@@ -235,6 +235,13 @@ function ContactBlock() {
         Open to serious engineering work, collaborations, and problems worth losing sleep over.
       </motion.p>
 
+      <motion.p {...fadeUp} transition={{ duration: 1, delay: 0.3, ease: EXHALE }}
+        className="font-body text-[11px] tracking-[0.14em] uppercase mt-5 max-w-xl mx-auto leading-loose"
+        style={{ color: 'rgba(139,147,201,0.65)' }}>
+        currently — rebuilding production slide infrastructure for Stick&apos;Em (contract) ·
+        running Retro Studios under StarLabs · BBA at APU, Beppu
+      </motion.p>
+
       <motion.div {...fadeUp} transition={{ duration: 1, delay: 0.35, ease: EXHALE }}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
         <a href="mailto:sameermotwani17@gmail.com"
@@ -305,6 +312,15 @@ function ContactBlock() {
         <p className="font-body text-[11px] tracking-widest" style={{ color: 'rgba(245,245,242,0.2)' }}>
           © 2026 Sameer Motwani — one continuous take, light to dusk.
         </p>
+        <a
+          href="https://github.com/sameermotwani17-cell/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-body text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 hover:text-white/60"
+          style={{ color: 'rgba(245,245,242,0.25)' }}
+        >
+          view source ↗
+        </a>
       </motion.div>
     </div>
   )

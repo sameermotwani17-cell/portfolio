@@ -31,3 +31,6 @@ next-env.d.ts
 # claude local settings
 .claude/settings.local.json
 .env*
+
+# private work list
+TODO-HIRABILITY.md

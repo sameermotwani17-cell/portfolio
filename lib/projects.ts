@@ -475,7 +475,7 @@ export const vault: VaultItem[] = [
     accent: '#f97316',
     detail: {
       overview:
-        'MIRU is a full-stack AI system with real-time interaction and structured evaluation. It maintains conversational state across sessions, enforces deterministic scoring schemas, applies a Japanese HR cultural reasoning layer, and generates multi-stage post-interview debrief outputs — including radar charts, internal evaluator monologue, rewritten responses, and cultural matrix alignment. Built with FastAPI (Python) backend and Next.js frontend.',
+        'MIRU is a full-stack AI system with real-time interaction and structured evaluation — at its core, an exercise in LLM evaluation design: deterministic scoring rubrics, per-turn scoring with session-level aggregation, and schema-validated outputs instead of vibes. It maintains conversational state across sessions, applies a Japanese HR cultural reasoning layer, and generates multi-stage post-interview debrief outputs — radar charts, internal evaluator monologue, rewritten responses, and cultural matrix alignment. Built with FastAPI (Python) backend and Next.js frontend.',
       sections: [
         {
           title: 'Stateful Interview Engine',
@@ -487,7 +487,7 @@ export const vault: VaultItem[] = [
           ],
         },
         {
-          title: 'Structured Scoring & Cultural Reasoning Layer',
+          title: 'Evaluation Design & Cultural Reasoning Layer',
           items: [
             'Deterministic scoring schema: communication, clarity, cultural_fit, problem_solving (0–10 per turn)',
             'Per-turn scoring with session aggregation for consistent cross-session evaluation',
