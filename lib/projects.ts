@@ -324,38 +324,6 @@ export const vault: VaultItem[] = [
     },
   },
   {
-    id: 'github-agent',
-    title: 'Retro GitHub Agent',
-    subtitle: 'Autonomous AI Coding Agent',
-    tag: 'Independent Builder · Feb 2026–Present',
-    short: 'Fully autonomous AI agent that creates and edits GitHub repos from a single text prompt.',
-    tech: ['Claude Code CLI', 'n8n', 'Node.js', 'Express', 'ngrok', 'GitHub', 'Vercel'],
-    badge: null,
-    accent: '#f97316',
-    detail: {
-      overview:
-        'A hand-rolled coding agent: natural-language prompt in, autonomous clone-edit-commit-push out. Built from scratch at 3AM as a first systems project — comparable in concept to Devin, with zero frameworks.',
-      flow: [
-        {
-          label: 'the loop',
-          headline: 'prompt → clone → edit → commit → push',
-          points: ['n8n webhook → local Express via ngrok', 'Claude Code CLI spawned with full repo context', 'Deterministic <file> tag parsing'],
-        },
-        {
-          label: 'why it matters',
-          headline: 'Agent architecture, end to end',
-          points: ['Trigger → orchestration → tool use → side effects', 'Chains APIs, CLIs, and webhooks into one system'],
-        },
-        {
-          label: 'honest limits',
-          headline: 'v1 has sharp edges — documented, not hidden',
-          points: ['No auth on the webhook', 'No cost ceiling per run', 'No rollback on bad changes'],
-        },
-      ],
-      links: [],
-    },
-  },
-  {
     id: 'aihack-2026',
     title: 'AI Hack 2026',
     subtitle: 'Credit Default Risk Prediction',
