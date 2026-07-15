@@ -110,29 +110,56 @@ export const albums: Album[] = [
   {
     id: 'scrapyard',
     title: 'SCRAPYARD',
-    subtitle: 'A Browser Game, Built for Fun',
-    tag: 'Side quest · Built with Claude Fable 5 · 2026',
-    short: 'Built a full working browser game as a side quest.',
-    tracklist: ['01 — Spawn In', '02 — Container Yard', '03 — Last Mag'],
-    tech: ['Claude Fable 5', 'Browser', 'TODO: full stack'],
-    badge: null,
+    subtitle: '3D Multiplayer Browser FPS',
+    tag: 'One-day build · Spec-driven with Claude Fable 5 · 2026',
+    short:
+      'A CoD-inspired 3D multiplayer browser FPS built in one day from a ~200-line spec — zero code written by hand.',
+    tracklist: ['01 — 200-Line Spec', '02 — Container Yard', '03 — 30Hz Tick', '04 — Contact!'],
+    tech: ['Three.js', 'Cloudflare Durable Objects', 'WebSockets', 'Client-side Prediction', 'FSM AI Bots', 'Claude Fable 5'],
+    badge: 'Live — playable in browser',
     accent: '#eab308',
     cover: '/scenes/scrapyard.webp',
     stencil: true,
     detail: {
       overview:
-        'A full working browser game built with Claude Fable 5, for no reason other than it sounded fun. Container-yard firefights, scrap, and zero production justification. TODO: Sameer — drop the real mechanics description here.',
+        'A Call of Duty-inspired 3D multiplayer browser FPS, built as a one-day experiment: instead of writing code, I authored a ~200-line specification prompt and had Claude Code execute it milestone-by-milestone, with proof-of-run gates and 91 automated tests along the way. Free-for-all deathmatch in an urban salvage yard, live on the open web. No monetization intent — pure build-in-public for Retro Studios. The transferable asset is not the game; it is the spec-writing skill and the reusable pipeline.',
+      stats: [
+        { value: '1 day', label: 'From blank prompt to deployed multiplayer FPS' },
+        { value: '0', label: 'Lines of code written by hand — spec-driven build' },
+        { value: '91', label: 'Automated tests gating each milestone' },
+        { value: '30Hz', label: 'Deterministic fixed-timestep server simulation' },
+      ],
       sections: [
         {
-          title: 'The Point',
+          title: 'The Game',
           items: [
-            'Proof that shipping something playable can be a weekend impulse, not a roadmap item',
-            'Same engineering brain as the production work, aimed at recoil patterns instead of CDN pipelines',
-            'TODO: Sameer — 2–3 lines on the actual gameplay loop and what was hard to build',
+            'Free-for-all deathmatch — first to 30 kills or a 10-minute timer',
+            'Urban salvage yard, ~60m × 60m at Shipment/Rust scale: shipping containers, a 2-story concrete skeleton, car wrecks, 3 vertical layers max',
+            'Up to 8 humans per room; the server backfills with AI bots so at least 4 combatants are always active',
+            'Feel targets hit: 250–400ms time-to-kill, 100 HP with regen after 4s, 3s respawn, 60fps',
+            'FSM-based bot tactics with voice callouts — "contact!", "man down!"',
+          ],
+        },
+        {
+          title: 'The Engineering',
+          items: [
+            'Server-authoritative netcode with client-side prediction and lag compensation',
+            'Deterministic 30Hz fixed-timestep simulation on Cloudflare Durable Objects',
+            'Hand-rolled AABB collision and raycast hitscan — no physics engine',
+            'Three.js client in vanilla ES modules: no React, no bundler',
+            'AI-generated textures, gun SFX, and music',
+          ],
+        },
+        {
+          title: 'The Actual Point',
+          items: [
+            'Zero hand-written code — the deliverable was a ~200-line spec precise enough for an agent to build against',
+            'Milestone-based pipeline with proof-of-run at each stage, not one giant prompt-and-pray',
+            'The reusable asset is the spec-writing discipline and the build pipeline — the game is just the receipt',
           ],
         },
       ],
-      links: [{ label: 'Play it', href: 'TODO-playable-build-link' }],
+      links: [{ label: 'Play SCRAPYARD', href: 'https://scrapyard-lake.vercel.app' }],
     },
   },
   {

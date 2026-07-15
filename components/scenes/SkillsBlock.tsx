@@ -16,13 +16,25 @@ const skillGroups = [
     skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'React', 'Express.js', 'Node.js', 'SQL'],
   },
   {
-    category: 'Infrastructure',
+    category: 'Automation & Agents',
     color: '#f97316',
-    skills: ['Git', 'Railway', 'Vercel', 'n8n', 'Airtable', 'Google Slides API', 'PWA', 'REST APIs', 'Linux'],
+    skills: [
+      'n8n (advanced)',
+      'Workflow Orchestration',
+      'Agent Architecture',
+      'Claude Code Pipelines',
+      'Spec-Driven Development',
+      'Webhooks & Integrations',
+    ],
+  },
+  {
+    category: 'Infrastructure',
+    color: '#3b82f6',
+    skills: ['Git', 'Railway', 'Vercel', 'Cloudflare', 'Airtable', 'Google Slides API', 'PWA', 'REST APIs', 'Linux'],
   },
   {
     category: 'Security',
-    color: '#3b82f6',
+    color: '#f97316',
     skills: ['TryHackMe Certified', 'Penetration Testing', 'Web Security', 'Network Security'],
   },
 ]
