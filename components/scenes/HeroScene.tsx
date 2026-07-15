@@ -294,9 +294,10 @@ export default function HeroScene() {
           }}
         />
 
-        {/* the re-introduction — lands on the static fire frame */}
+        {/* the re-introduction — lands on the static fire frame, anchored left
+            so the figure on the right stays clear */}
         <motion.div
-          className="absolute inset-0 z-[36] flex flex-col items-center justify-center px-6 text-center pointer-events-none"
+          className="absolute inset-0 z-[36] flex flex-col items-center md:items-start justify-center px-6 md:pl-[6vw] md:pr-[34vw] text-center md:text-left pointer-events-none"
           style={{ opacity: introOpacity, y: introY }}
         >
           <p
