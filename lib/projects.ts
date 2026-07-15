@@ -72,7 +72,9 @@ export const albums: Album[] = [
     tech: ['Next.js', 'React', 'Node', 'Sharp', 'Supabase / Postgres', 'Google Slides & Drive API', 'Vercel'],
     badge: 'Hult Prize Global Winner client',
     accent: '#a855f7',
-    cover: null,
+    cover: '/stickem.png',
+    coverContain: true,
+    coverBg: '#f6f0fa',
     logo: '/stickem.png',
     detail: {
       overview:
