@@ -165,18 +165,11 @@ export default function HeroScene() {
       <section id="home" className="relative h-screen overflow-hidden">
         <Image
           src="/scenes/butterflies.webp"
-          alt=""
-          aria-hidden
-          fill
-          className="object-cover"
-          style={{ filter: 'blur(36px) brightness(1.04)', transform: 'scale(1.12)' }}
-        />
-        <Image
-          src="/scenes/butterflies.webp"
           alt="Sameer Motwani surrounded by butterflies against a white sky"
           fill
           priority
-          className="object-contain"
+          className="object-cover"
+          style={{ objectPosition: 'center 42%' }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-between py-[12vh] px-6">
           <p className="font-body text-sm tracking-[0.3em] uppercase" style={{ color: 'rgba(20,20,20,0.72)' }}>
@@ -198,24 +191,16 @@ export default function HeroScene() {
   return (
     <section ref={ref} id="home" className="relative" style={{ height: '260vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* backdrop: blurred fill behind the full uncropped portrait */}
+        {/* backdrop: full-bleed landscape crop framed on the figure */}
         <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
-          <Image
-            src="/scenes/butterflies.webp"
-            alt=""
-            aria-hidden
-            fill
-            className="object-cover"
-            sizes="100vw"
-            style={{ filter: 'blur(36px) brightness(1.04)', transform: 'scale(1.12)' }}
-          />
           <Image
             src="/scenes/butterflies.webp"
             alt="Sameer Motwani surrounded by butterflies against a white sky"
             fill
             priority
-            className="object-contain"
+            className="object-cover"
             sizes="100vw"
+            style={{ objectPosition: 'center 42%' }}
           />
         </motion.div>
 

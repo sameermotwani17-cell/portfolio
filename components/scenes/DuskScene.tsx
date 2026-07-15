@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import Character from '@/components/Character'
 
 // slower, softer easing personality for the dusk scene
 const EXHALE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -390,17 +389,6 @@ export default function DuskScene() {
           </div>
 
           <AwardsList />
-
-          {/* the player card, relocated from the old hero */}
-          <motion.div {...fadeUp} transition={{ duration: 1.2, ease: EXHALE }}
-            className="mt-28 flex flex-col items-center gap-5">
-            <p className="font-body text-[10px] tracking-[0.3em] uppercase" style={{ color: 'rgba(139,147,201,0.6)' }}>
-              player card · freshman tier
-            </p>
-            <div className="scale-90 md:scale-100">
-              <Character />
-            </div>
-          </motion.div>
 
           <ContactBlock />
         </div>
