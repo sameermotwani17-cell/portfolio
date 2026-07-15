@@ -22,7 +22,7 @@ function RetroBlock() {
       style={{ border: '1px solid rgba(139,147,201,0.16)', background: 'rgba(10,15,30,0.55)', backdropFilter: 'blur(8px)' }}>
       <div className="flex flex-col sm:flex-row">
         <div className="relative sm:w-44 h-40 sm:h-auto shrink-0">
-          <Image src="/cinematic.png" alt="Retro Studios cinematic work" fill className="object-cover" sizes="176px"
+          <Image src="/blocks/cinematic.webp" alt="Retro Studios cinematic work" fill className="object-cover" sizes="176px"
             style={{ filter: 'brightness(0.6) saturate(0.85)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, rgba(10,15,30,0.9))' }} />
         </div>
@@ -73,7 +73,7 @@ function GymBlock() {
       style={{ border: '1px solid rgba(139,147,201,0.16)', background: 'rgba(10,15,30,0.55)', backdropFilter: 'blur(8px)' }}>
       <div className="flex flex-col sm:flex-row">
         <div className="relative sm:w-44 h-40 sm:h-auto shrink-0">
-          <Image src="/basketball.png" alt="Basketball" fill className="object-cover" sizes="176px"
+          <Image src="/blocks/basketball.webp" alt="Basketball" fill className="object-cover" sizes="176px"
             style={{ filter: 'brightness(0.5) saturate(0.7) hue-rotate(-10deg)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, rgba(10,15,30,0.9))' }} />
         </div>
@@ -102,7 +102,7 @@ function MusicBlock() {
       style={{ border: '1px solid rgba(139,147,201,0.16)', background: 'rgba(10,15,30,0.55)', backdropFilter: 'blur(8px)' }}>
       <div className="flex flex-col sm:flex-row">
         <div className="relative sm:w-44 h-40 sm:h-auto shrink-0">
-          <Image src="/music.png" alt="Music" fill className="object-cover" sizes="176px"
+          <Image src="/blocks/music.webp" alt="Music" fill className="object-cover" sizes="176px"
             style={{ filter: 'brightness(0.45) saturate(1.1)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, rgba(10,15,30,0.9))' }} />
         </div>
@@ -143,7 +143,7 @@ function ChessBlock() {
       style={{ border: '1px solid rgba(139,147,201,0.16)', background: 'rgba(10,15,30,0.55)', backdropFilter: 'blur(8px)' }}>
       <div className="flex flex-col sm:flex-row">
         <div className="relative sm:w-44 h-40 sm:h-auto shrink-0">
-          <Image src="/chess.png" alt="Chess" fill className="object-cover" sizes="176px"
+          <Image src="/blocks/chess.webp" alt="Chess" fill className="object-cover" sizes="176px"
             style={{ filter: 'brightness(0.5) saturate(0.6)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, transparent 60%, rgba(10,15,30,0.9))' }} />
         </div>
@@ -273,7 +273,7 @@ function ContactBlock() {
         style={{ borderTop: '1px solid rgba(139,147,201,0.12)' }}>
         <div className="flex items-center gap-4">
           <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-white/10 shrink-0">
-            <Image src="/apu-logo.jpg" alt="APU" fill className="object-contain p-1.5 bg-white/5" sizes="48px" />
+            <Image src="/blocks/apu-logo.webp" alt="APU" fill className="object-contain p-1.5 bg-white/5" sizes="48px" />
           </div>
           <div className="text-left">
             <p className="font-body text-sm font-medium" style={{ color: 'rgba(245,245,242,0.65)' }}>
