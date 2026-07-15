@@ -38,8 +38,8 @@ export type Album = {
   stencil?: boolean
   /** monochrome black/white case-study theme (RETRO raven) */
   mono?: boolean
-  /** landscape chopstick-cinema case study (Stick'Em) */
-  cinema?: boolean
+  /** bespoke case-study world */
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -55,8 +55,8 @@ export type VaultItem = {
   badge: string | null
   accent: string
   mono?: boolean
-  /** landscape chopstick-cinema case study (Stick'Em) */
-  cinema?: boolean
+  /** bespoke case-study world */
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -80,7 +80,7 @@ export const albums: Album[] = [
     coverContain: true,
     coverBg: '#f6f0fa',
     logo: '/stickem.png',
-    cinema: true,
+    world: 'stickem',
     detail: {
       overview:
         "Hired by the CEO of Stick'Em — Hult Prize Global 2025 winner — to fix lesson delivery that black-screened on slow connections. Replaced Google Slides iframes with a pre-processed WebP pipeline and a virtualized viewer, legacy iframe kept as automatic fallback.",
@@ -128,6 +128,7 @@ export const albums: Album[] = [
     accent: '#eab308',
     cover: '/scenes/scrapyard.webp',
     stencil: true,
+    world: 'scrapyard',
     detail: {
       overview:
         'A one-day experiment: author a ~200-line spec, let Claude Code execute it milestone-by-milestone with proof-of-run gates and 91 automated tests. Free-for-all deathmatch in a salvage yard, live on the open web. The transferable asset is the spec — the game is the receipt.',
@@ -166,9 +167,9 @@ export const albums: Album[] = [
     id: 'gomi-snap',
     title: 'GOMI Snap',
     subtitle: 'AI Civic-Tech — a Completed Chapter',
-    tag: 'Founder & CEO · Nov 2025 – 2026 · folded into StarLabs',
+    tag: 'Founder & CTO · Nov 2025 – 2026 · folded into StarLabs',
     short: 'AI waste-classification PWA for Japanese municipalities. Wound down and folded into StarLabs.',
-    tracklist: ['01 — 20 Categories', '02 — 500 Users', '03 — City Hall', '04 — StarLabs'],
+    tracklist: ['01 — 20 Categories', '02 — 520 Users', '03 — City Hall', '04 — StarLabs'],
     tech: ['React', 'TypeScript', 'Express.js', 'OpenAI Vision API', 'PWA'],
     badge: '1st Place — APU Hackathon 2025',
     accent: '#3f9142',
@@ -176,12 +177,13 @@ export const albums: Album[] = [
     coverContain: true,
     coverBg: '#f2f5f0',
     logo: '/gomi-logo.png',
+    world: 'gomi',
     detail: {
       overview:
         'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city — then honestly wound down and folded into StarLabs.',
       stats: [
         { value: '95.3%', label: 'Survey adoption intent (n=400)' },
-        { value: '500+', label: 'Organic users · zero paid acquisition' },
+        { value: '520+', label: 'Organic users · zero paid acquisition' },
         { value: '¥25K', label: 'Monthly operating cost' },
         { value: '2x', label: 'Podiums: APU Hackathon 1st · Hult Prize runner-up' },
       ],
@@ -207,7 +209,13 @@ export const albums: Album[] = [
           points: ['1st place APU Hackathon 2025', 'Hult Prize APU runner-up + Best Speaker', 'The systems thinking moved on with the team'],
         },
       ],
-      links: [],
+      links: [
+        { label: 'GOMI Snap 2.0', href: 'https://gomisnap.org/2point0' },
+        {
+          label: 'Launch Post',
+          href: 'https://www.linkedin.com/posts/gomi-snap_we-just-shipped-gomi-snap-20-the-original-activity-7461724404855783424-Me90',
+        },
+      ],
     },
   },
   {
@@ -223,6 +231,7 @@ export const albums: Album[] = [
     accent: '#f5f5f2',
     cover: '/scenes/retro-raven.webp',
     mono: true,
+    world: 'retro',
     detail: {
       overview:
         'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Currently running full creative direction and technical production for DK2R Football Wear — a premium 12-country jersey brand tied to the 2026 FIFA World Cup.',
@@ -277,7 +286,7 @@ export const vault: VaultItem[] = [
     badge: 'Hult Prize Global Winner 2025',
     accent: '#a855f7',
     logo: '/stickem.png',
-    cinema: true,
+    world: 'stickem',
     detail: {
       overview:
         'Maps STEM lessons to official government curriculum standards across the UK, India, and USA — killing hours of manual planning per teacher per term, and unblocking the procurement requirement in institutional sales.',

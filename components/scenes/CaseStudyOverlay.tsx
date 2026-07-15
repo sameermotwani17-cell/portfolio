@@ -5,6 +5,9 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import type { Album, VaultItem } from '@/lib/projects'
 import StickemCinema from './StickemCinema'
+import ScrapyardWorld from './ScrapyardWorld'
+import RetroWorld from './RetroWorld'
+import GomiWorld from './GomiWorld'
 
 type OverlayItem = (Album | VaultItem) & {
   cover?: string | null
@@ -12,8 +15,15 @@ type OverlayItem = (Album | VaultItem) & {
   coverBg?: string
   stencil?: boolean
   mono?: boolean
-  cinema?: boolean
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
   logo?: string
+}
+
+const WORLDS: Record<string, React.ComponentType<{ item: OverlayItem }>> = {
+  stickem: StickemCinema,
+  scrapyard: ScrapyardWorld,
+  retro: RetroWorld,
+  gomi: GomiWorld,
 }
 
 /**
@@ -109,9 +119,9 @@ export default function CaseStudyOverlay({
         layoutId={`album-${item.id}`}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className={`relative mx-auto w-full ${item.cinema ? 'max-w-6xl' : 'max-w-3xl'} rounded-2xl overflow-hidden`}
+        className={`relative mx-auto w-full ${item.world ? 'max-w-6xl' : 'max-w-3xl'} rounded-2xl overflow-hidden`}
         style={{
-          background: item.cinema ? '#0a0610' : panelBg,
+          background: item.world ? '#0a0610' : panelBg,
           border: `1px solid ${hairline}`,
           boxShadow: mono
             ? '0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(255,255,255,0.06)'
@@ -133,8 +143,11 @@ export default function CaseStudyOverlay({
           ✕
         </button>
 
-        {item.cinema ? (
-          <StickemCinema item={item} />
+        {item.world && WORLDS[item.world] ? (
+          (() => {
+            const World = WORLDS[item.world]
+            return <World item={item} />
+          })()
         ) : (
           <>
         {/* hero art */}
