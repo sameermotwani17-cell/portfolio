@@ -148,9 +148,12 @@ export default function HeroScene() {
   // camera push-in
   const bgScale = useTransform(scrollYProgress, [0.1, 0.62], [1, 1.45])
   const bgY = useTransform(scrollYProgress, [0.1, 0.62], ['0%', '-4%'])
-  // white sky grades to black
-  const darken = useTransform(scrollYProgress, [0.3, 0.62], [0, 1])
-  const vignette = useTransform(scrollYProgress, [0.12, 0.55], [0, 1])
+  // the frame dims (never to black) while the vignette closes in
+  const dim = useTransform(scrollYProgress, [0.3, 0.6], [0, 0.55])
+  const vignette = useTransform(scrollYProgress, [0.12, 0.55], [0, 0.85])
+  // the fire morphs in over the butterflies: glow first, then the full image
+  const glowIn = useTransform(scrollYProgress, [0.48, 0.62, 0.78, 0.92], [0, 0.9, 0.9, 0.45])
+  const hoopIn = useTransform(scrollYProgress, [0.55, 0.88], [0, 1])
   // title card exits early
   const textOpacity = useTransform(scrollYProgress, [0.08, 0.24], [1, 0])
   const textY = useTransform(scrollYProgress, [0.08, 0.24], [0, -60])
@@ -162,10 +165,18 @@ export default function HeroScene() {
       <section id="home" className="relative h-screen overflow-hidden">
         <Image
           src="/scenes/butterflies.webp"
+          alt=""
+          aria-hidden
+          fill
+          className="object-cover"
+          style={{ filter: 'blur(36px) brightness(1.04)', transform: 'scale(1.12)' }}
+        />
+        <Image
+          src="/scenes/butterflies.webp"
           alt="Sameer Motwani surrounded by butterflies against a white sky"
           fill
           priority
-          className="object-cover object-top"
+          className="object-contain"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-between py-[12vh] px-6">
           <p className="font-body text-sm tracking-[0.3em] uppercase" style={{ color: 'rgba(20,20,20,0.72)' }}>
@@ -187,14 +198,23 @@ export default function HeroScene() {
   return (
     <section ref={ref} id="home" className="relative" style={{ height: '260vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* backdrop */}
+        {/* backdrop: blurred fill behind the full uncropped portrait */}
         <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
+          <Image
+            src="/scenes/butterflies.webp"
+            alt=""
+            aria-hidden
+            fill
+            className="object-cover"
+            sizes="100vw"
+            style={{ filter: 'blur(36px) brightness(1.04)', transform: 'scale(1.12)' }}
+          />
           <Image
             src="/scenes/butterflies.webp"
             alt="Sameer Motwani surrounded by butterflies against a white sky"
             fill
             priority
-            className="object-cover object-top"
+            className="object-contain"
             sizes="100vw"
           />
         </motion.div>
@@ -232,8 +252,34 @@ export default function HeroScene() {
             background: 'radial-gradient(ellipse at center, transparent 26%, rgba(5,5,5,0.92) 82%)',
           }}
         />
-        {/* full darkening pass */}
-        <motion.div className="absolute inset-0 z-30 pointer-events-none bg-ink" style={{ opacity: darken }} />
+        {/* dimming pass — never fully black */}
+        <motion.div className="absolute inset-0 z-30 pointer-events-none bg-ink" style={{ opacity: dim }} />
+
+        {/* the fire morphs in: burning hoop crossfades over the butterflies */}
+        <motion.div className="absolute inset-0 z-[32] pointer-events-none" style={{ opacity: hoopIn }}>
+          <Image
+            src="/scenes/burning-hoop.webp"
+            alt=""
+            aria-hidden
+            fill
+            className="object-cover"
+            sizes="100vw"
+            style={{ objectPosition: 'center 30%' }}
+          />
+          {/* same legibility grade as the fire scene, so the handoff is seamless */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.35) 40%, rgba(5,5,5,0.72) 100%)' }}
+          />
+        </motion.div>
+        {/* warm bloom leads the morph */}
+        <motion.div
+          className="absolute inset-0 z-[33] pointer-events-none"
+          style={{
+            opacity: glowIn,
+            background: 'radial-gradient(ellipse 60% 55% at 30% 52%, rgba(249,115,22,0.5) 0%, rgba(249,115,22,0.12) 40%, transparent 70%)',
+          }}
+        />
 
         {/* title card */}
         <motion.div
@@ -259,7 +305,8 @@ export default function HeroScene() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 2.15 }}
-              className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase"
+              className="font-body text-white/85 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase"
+              style={{ textShadow: '0 2px 14px rgba(0,0,0,0.6)' }}
             >
               engineer · founder · builder — beppu, japan
             </motion.p>

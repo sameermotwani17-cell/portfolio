@@ -27,10 +27,9 @@ export default function FireScene() {
     offset: ['start start', 'end end'],
   })
 
-  // "the glow appears first, then the full image": a black veil hides the
-  // backdrop while the warm bloom (rendered above the veil) rises out of it
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.05, 0.12, 0.2], [0, 1, 0.9, 0.5])
-  const imageVeil = useTransform(scrollYProgress, [0.05, 0.14], [1, 0])
+  // the hero already morphed the burning hoop in — this scene starts lit,
+  // with the warm bloom settling as the content arrives
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.14], [0.45, 0.25])
 
   // transition 2: the fire dies — desaturate, dim, drift upward, navy bleeds in
   const dieFilter = useTransform(
@@ -77,12 +76,7 @@ export default function FireScene() {
           />
         </motion.div>
 
-        {/* black veil — the seam with the hero's black beat; lifts to reveal the image */}
-        {!reduced && (
-          <motion.div className="absolute inset-0 bg-ink pointer-events-none" style={{ opacity: imageVeil }} />
-        )}
-
-        {/* warm bloom that leads the reveal (hoop sits left-center) — above the veil */}
+        {/* warm bloom settling over the hoop (left-center) */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
