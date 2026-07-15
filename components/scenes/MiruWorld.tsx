@@ -1,30 +1,19 @@
 'use client'
 
+import Image from 'next/image'
 import type { Album, VaultItem } from '@/lib/projects'
 
 /**
- * MIRU (見る — to see) — the storyline in evaluator teal. Five chapters:
- * the brief, the engine, the scoring, the culture layer, the podium.
- * Assets are code-drawn: the eye, the session state flow, the debrief
- * radar, the 和 translation card, and the podium.
+ * MIRU (見る — to see) — a 72-hour film in the brand's navy and teal.
+ * Cream identity band with the wordmark, then five scenes: the arena,
+ * the gap, the engine, the scoring, the podium (the real 銅賞 photo).
  */
 
-const TEAL = '#14b8a6'
-const DARK = '#04100e'
+const TEAL = '#2ec4b6'
+const NAVY = '#16305e'
+const DARK = '#0a1526'
 
-/* the mark — an evaluating eye */
-function Eye({ size = 88 }: { size?: number }) {
-  return (
-    <svg viewBox="0 0 120 70" width={size} height={(size * 70) / 120} aria-hidden>
-      <path d="M6 35 Q60 -8 114 35 Q60 78 6 35 Z" fill="none" stroke={TEAL} strokeWidth={4} />
-      <circle cx={60} cy={35} r={16} fill={`${TEAL}22`} stroke={TEAL} strokeWidth={4} />
-      <circle cx={60} cy={35} r={6} fill={TEAL} />
-      <path d="M60 8 L60 0 M84 14 L89 7 M36 14 L31 7" stroke={TEAL} strokeWidth={3} strokeLinecap="round" />
-    </svg>
-  )
-}
-
-/* CH II — session state flow */
+/* SCENE III — session state flow */
 function StateFlow() {
   const nodes = [
     { x: 18, label: 'mic in' },
@@ -50,7 +39,6 @@ function StateFlow() {
           <path d="M0 0 L8 4 L0 8 Z" fill={TEAL} />
         </marker>
       </defs>
-      {/* loop back */}
       <path d="M256 64 Q256 96 150 96 Q46 96 46 64" fill="none" stroke={`${TEAL}88`} strokeWidth={1.8} strokeDasharray="5 5" markerEnd="url(#arr)" />
       <text x={150} y={92} fontSize={9} fill="rgba(255,255,255,0.5)" fontFamily="monospace" textAnchor="middle">
         no loops · no premature endings · state persists
@@ -59,7 +47,7 @@ function StateFlow() {
   )
 }
 
-/* CH III — the debrief radar */
+/* SCENE IV — the debrief radar */
 function Radar() {
   const axes = ['communication', 'clarity', 'cultural_fit', 'problem_solving']
   const cx = 150
@@ -69,7 +57,7 @@ function Radar() {
     const a = (Math.PI / 2) * i - Math.PI / 2
     return [cx + r * Math.cos(a), cy + r * Math.sin(a)]
   }
-  const scores = [0.85, 0.7, 0.55, 0.78] // illustrative turn scores
+  const scores = [0.85, 0.7, 0.55, 0.78]
   const poly = scores.map((s, i) => pt(i, R * s).map((v) => v.toFixed(1)).join(',')).join(' ')
   return (
     <svg viewBox="0 0 300 160" className="w-full" aria-label="Debrief radar chart across communication, clarity, cultural fit and problem solving">
@@ -94,13 +82,13 @@ function Radar() {
         )
       })}
       <text x={cx} y={155} fontSize={9} fill="rgba(255,255,255,0.4)" fontFamily="monospace" textAnchor="middle">
-        scored 0–10, every turn — deterministic, schema-validated
+        scored quietly, every turn — then explained in English
       </text>
     </svg>
   )
 }
 
-/* CH IV — the culture translation card */
+/* SCENE II — the culture-gap translation card */
 function WaCard() {
   return (
     <div className="rounded-lg p-5" style={{ border: `1px dashed ${TEAL}70`, background: 'rgba(255,255,255,0.02)' }}>
@@ -110,73 +98,80 @@ function WaCard() {
         </span>
         <div>
           <p className="font-mono text-sm" style={{ color: '#fff' }}>
-            “I achieved X.”
+            “I want to build my career at your company.”
           </p>
           <p className="font-mono text-xs mt-1.5" style={{ color: TEAL }}>
-            → flagged: harmony (和) · humility
+            → heard as: taking, not giving
           </p>
         </div>
       </div>
       <p className="font-body text-[11px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-        the same answer reads differently across cultures. MIRU rewrites it the way a
-        Japanese HR evaluator would want to hear it — and shows you their internal monologue.
+        the same answer lands differently across cultures. MIRU makes the invisible air of a
+        Japanese interview visible — then shows you what the interviewer was really thinking.
       </p>
     </div>
   )
 }
 
-/* CH V — the podium */
-function Podium() {
+/* SCENE V — the real podium moment */
+function TeamPhoto() {
   return (
-    <svg viewBox="0 0 240 130" className="w-full max-w-[300px] mx-auto" aria-label="Hackathon podium, third place highlighted">
-      {/* 2nd */}
-      <rect x={20} y={62} width={60} height={58} rx={4} fill="rgba(255,255,255,0.08)" />
-      <text x={50} y={95} fontSize={18} fill="rgba(255,255,255,0.45)" fontFamily="var(--font-display)" textAnchor="middle">2</text>
-      {/* 1st */}
-      <rect x={90} y={40} width={60} height={80} rx={4} fill="rgba(255,255,255,0.08)" />
-      <text x={120} y={75} fontSize={18} fill="rgba(255,255,255,0.45)" fontFamily="var(--font-display)" textAnchor="middle">1</text>
-      {/* 3rd — ours */}
-      <rect x={160} y={76} width={60} height={44} rx={4} fill={`${TEAL}30`} stroke={TEAL} strokeWidth={2.5} />
-      <text x={190} y={103} fontSize={18} fill={TEAL} fontFamily="var(--font-display)" textAnchor="middle">3</text>
-      {/* eye standing on 3rd */}
-      <g transform="translate(168 48) scale(0.38)">
-        <path d="M6 35 Q60 -8 114 35 Q60 78 6 35 Z" fill={DARK} stroke={TEAL} strokeWidth={5} />
-        <circle cx={60} cy={35} r={14} fill={TEAL} />
-      </g>
-      <text x={120} y={16} fontSize={10} fill="rgba(255,255,255,0.5)" fontFamily="monospace" textAnchor="middle">
-        demo day
-      </text>
-    </svg>
+    <figure>
+      <div className="relative rounded-lg overflow-hidden" style={{ border: `1.5px solid ${TEAL}60` }}>
+        <Image
+          src="/scenes/miru-team.webp"
+          alt="Team MIRU receiving the bronze prize (銅賞) certificate at the Kyutech × Science Tokyo × APU Joint Hackathon 2026"
+          width={1000}
+          height={1330}
+          className="w-full h-auto object-cover"
+          sizes="(max-width: 768px) 90vw, 460px"
+        />
+        <div className="absolute inset-x-0 bottom-0 h-1/5 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(10,21,38,0.8), transparent)' }} />
+        <span className="absolute bottom-3 left-3 font-body text-[10px] tracking-[0.2em] uppercase text-white/85 bg-black/50 rounded px-2 py-1">
+          銅賞 · the moment
+        </span>
+      </div>
+    </figure>
   )
 }
 
 type WorldItem = (Album | VaultItem) & { logo?: string }
 
-const CHAPTER_ASSETS: (null | (() => JSX.Element))[] = [null, StateFlow, Radar, WaCard, Podium]
+const SCENE_ASSETS: (null | (() => JSX.Element))[] = [null, WaCard, StateFlow, Radar, TeamPhoto]
 
 export default function MiruWorld({ item }: { item: WorldItem }) {
   const flow = item.detail.flow
   return (
     <div style={{ background: DARK }}>
-      {/* ── identity band ── */}
-      <div
-        className="relative px-6 md:px-10 py-9 overflow-hidden"
-        style={{ background: `radial-gradient(ellipse 80% 120% at 50% 0%, ${TEAL}1f, transparent 60%), ${DARK}` }}
-      >
-        <div className="relative flex flex-col md:flex-row items-center gap-6">
-          <Eye />
+      {/* ── production strip ── */}
+      <div className="px-6 py-3 flex items-center justify-between" style={{ background: NAVY }}>
+        <span className="font-body text-[10px] tracking-[0.35em] uppercase" style={{ color: 'rgba(255,255,255,0.75)' }}>
+          team miru presents
+        </span>
+        <span className="font-body text-[10px] tracking-[0.35em] uppercase" style={{ color: TEAL }}>
+          a 72-hour film
+        </span>
+      </div>
+
+      {/* ── cream identity band, straight off the brand board ── */}
+      <div className="relative px-6 md:px-10 py-8" style={{ background: '#faf5e9' }}>
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <Image src="/miru-logo.svg" alt="MIRU wordmark" width={340} height={170} className="w-56 md:w-72 h-auto" />
           <div className="text-center md:text-left">
             {item.badge && (
-              <span className="inline-block font-body text-[10px] tracking-[0.14em] uppercase rounded px-2.5 py-1 mb-2.5" style={{ color: TEAL, border: `1.5px solid ${TEAL}70`, background: `${TEAL}12` }}>
+              <span
+                className="inline-block font-body text-[10px] tracking-[0.12em] uppercase rounded px-2.5 py-1 mb-2.5"
+                style={{ color: NAVY, border: `1.5px solid ${NAVY}55`, background: `${TEAL}18` }}
+              >
                 {item.badge}
               </span>
             )}
-            <h2 className="font-display text-white leading-none" style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)' }}>
-              {item.title}
-              <span className="ml-3 align-middle" style={{ fontSize: '0.45em', color: TEAL }}>見る — to see</span>
-            </h2>
-            <p className="font-body text-[11px] tracking-[0.16em] uppercase mt-2" style={{ color: 'rgba(245,245,242,0.5)' }}>
+            <p className="font-body text-[11px] tracking-[0.16em] uppercase" style={{ color: `${NAVY}aa` }}>
               {item.tag}
+            </p>
+            <p className="font-body text-sm mt-2 max-w-md" style={{ color: `${NAVY}cc` }}>
+              見る — to see. an AI interview coach that makes the invisible air of
+              Japanese hiring visible.
             </p>
           </div>
         </div>
@@ -190,12 +185,28 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
         <p className="font-body text-sm md:text-[0.95rem] leading-relaxed max-w-3xl" style={{ color: 'rgba(245,245,242,0.8)' }}>
           {item.detail.overview}
         </p>
+        {item.detail.links && item.detail.links.length > 0 && (
+          <div className="flex flex-wrap gap-2.5 mt-4">
+            {item.detail.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-[11px] tracking-[0.12em] uppercase rounded-md px-3 py-1.5 transition-colors hover:text-white"
+                style={{ color: TEAL, border: `1px solid ${TEAL}55`, background: `${TEAL}0d` }}
+              >
+                {link.label} ↗
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* ── five chapters ── */}
+      {/* ── five scenes ── */}
       <div className="px-6 md:px-10 pb-4 flex flex-col gap-8">
         {flow.map((stage, i) => {
-          const Asset = CHAPTER_ASSETS[i]
+          const Asset = SCENE_ASSETS[i]
           return (
             <div
               key={stage.label}
@@ -210,7 +221,7 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
                     {i + 1}
                   </span>
                   <span className="text-base" style={{ fontFamily: 'var(--font-scrawl), cursive', color: TEAL }}>
-                    {stage.label}
+                    scene {String(i + 1).padStart(2, '0')} — {stage.label}
                   </span>
                 </div>
                 <h3 className="font-display text-white leading-tight mt-3" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
@@ -237,12 +248,13 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
         })}
       </div>
 
-      {/* ── stack ── */}
+      {/* ── credits ── */}
       <div className="px-6 md:px-10 py-8">
         <div className="pt-5" style={{ borderTop: `1px solid ${TEAL}30` }}>
-          <div className="font-body text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: 'rgba(245,245,242,0.35)' }}>
-            the stack
-          </div>
+          <p className="font-body text-[12px] leading-relaxed mb-4" style={{ color: 'rgba(245,245,242,0.55)' }}>
+            Team MIRU — Sameer (development: the working voice product, technical design) ·
+            Siddik (research & systems) · Jeana (strategy) · Takako (Japanese presentation — the bridge itself).
+          </p>
           <div className="flex flex-wrap gap-2">
             {item.tech.map((t) => (
               <span key={t} className="font-body text-[11px] px-2.5 py-1 rounded" style={{ border: `1px solid ${TEAL}30`, color: 'rgba(245,245,242,0.65)', background: `${TEAL}0a` }}>

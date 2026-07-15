@@ -54,6 +54,10 @@ export type VaultItem = {
   tech: string[]
   badge: string | null
   accent: string
+  /** optional case-study hero art (overlay only) */
+  cover?: string | null
+  coverContain?: boolean
+  coverBg?: string
   mono?: boolean
   /** bespoke case-study world */
   world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack' | 'miru'
@@ -405,43 +409,47 @@ export const vault: VaultItem[] = [
     id: 'miru',
     title: 'MIRU',
     subtitle: 'AI Interview Simulation & Evaluation System',
-    tag: 'Full-Stack AI Builder · Hackathon · 2026',
-    short: 'Stateful AI interview engine with a Japanese HR cultural reasoning layer. 3rd place hackathon finish.',
-    tech: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'OpenAI', 'ElevenLabs'],
-    badge: '3rd Place — Hackathon',
-    accent: '#14b8a6',
+    tag: 'Developer · Team MIRU · 72-Hour Build · March 2026',
+    short: 'AI interview coach for foreigners job-hunting in Japan. Bronze — the only APU team on the podium.',
+    tech: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'Claude', 'ElevenLabs'],
+    badge: '銅賞 Bronze — Kyutech × Science Tokyo × APU Hackathon 2026',
+    accent: '#2ec4b6',
+    cover: '/miru-logo.svg',
+    coverContain: true,
+    coverBg: '#faf5e9',
+    logo: '/miru-logo.svg',
     world: 'miru',
     detail: {
       overview:
-        'A hackathon build that took 3rd place: an AI interviewer that actually evaluates. MIRU (見る — to see) runs real-time voice interviews, scores every turn against deterministic rubrics, reads Western answers through a Japanese HR lens, and debriefs you with radar charts, the evaluator’s internal monologue, and rewritten answers. An exercise in LLM evaluation design, not a chatbot wrapper.',
+        'MIRU (見る — to see) is an AI interview coach for foreigners job-hunting in Japan, built in 72 nearly sleepless hours at the Kyutech × Science Tokyo × APU Joint Hackathon 2026. A simulated Japanese HR interviewer runs a formal, low-affect voice interview, quietly scores it on the dimensions Japanese companies actually weigh, then switches to English and tells you what the interviewer was really thinking. Bronze prize — the only APU team on a podium otherwise owned by Japan’s top STEM schools.',
       flow: [
         {
-          label: 'the brief',
-          headline: 'An AI interviewer that actually evaluates',
-          points: ['Hackathon build — closed-loop evaluation pipeline', 'FastAPI backend, Next.js front, voice in real time', 'Not a chatbot wrapper, by design'],
+          label: 'the arena',
+          headline: 'Business students at an engineering hackathon',
+          points: ['Kyutech × Science Tokyo × APU · 15+ teams · 72 hours', 'Theme: Crossing Borders, Creating Connections', '3 business + 1 social science student vs Japan’s top STEM schools'],
+        },
+        {
+          label: 'the gap',
+          headline: '“It’s not a language problem. It’s a culture problem.”',
+          points: ['“I want to build my career at your company” reads as taking, not giving', 'The invisible air of Japanese interviews, made visible', 'Born from living between cultures at APU'],
         },
         {
           label: 'the engine',
-          headline: 'Stateful interviews, not scripts',
-          points: ['Session-persistent transcripts + question progression', 'Adaptive follow-ups from prior answers', 'Strict /turn /results /debrief contracts'],
+          headline: 'A Japanese HR interviewer, simulated in voice',
+          points: ['Built on Claude, grounded in real profiles of major Japanese companies', 'Formal, low-affect Japanese interview style', 'Session-persistent state, adaptive questioning'],
         },
         {
           label: 'the scoring',
-          headline: 'Deterministic rubrics, 0–10 every turn',
-          points: ['communication · clarity · cultural_fit · problem_solving', 'Schema-validated, aggregated per session'],
-        },
-        {
-          label: 'the culture layer',
-          headline: 'Western answers, read through Japanese HR',
-          points: ['"I achieved X" → flagged on Wa (和) + humility', 'Internal evaluator monologue + rewritten answers', 'Rule-based heuristics + LLM synthesis'],
+          headline: 'Quiet evaluation, honest English debrief',
+          points: ['Scored on the dimensions Japanese hiring actually weighs', 'Then the switch: what the interviewer was really thinking', 'Radar debrief + rewritten answers'],
         },
         {
           label: 'the podium',
-          headline: '3rd place on demo day',
-          points: ['Live voice demo: ElevenLabs TTS, silence detection, turn timing', 'Radar-chart debrief shown end-to-end', 'Full-stack pipeline debugged under hackathon pressure'],
+          headline: '銅賞 — the only APU team up there',
+          points: ['I coded near-nonstop: technical design, the working voice product', 'Siddik — research & systems · Jeana — strategy · Takako — the Japanese presentation', 'A business team on an engineering podium'],
         },
       ],
-      links: [],
+      links: [{ label: 'APU Feature', href: 'https://www.apu.ac.jp/home/blog/article/?storyid=273' }],
     },
   },
 ]

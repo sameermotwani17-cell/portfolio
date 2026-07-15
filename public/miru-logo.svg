@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-label="MIRU — グローバル人材と日本の採用基準をつなぐ">
+  <defs>
+    <linearGradient id="ribbonA" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1d3f7a"/>
+      <stop offset="55%" stop-color="#2563a8"/>
+      <stop offset="100%" stop-color="#2ec4b6"/>
+    </linearGradient>
+    <linearGradient id="ribbonB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ec4b6"/>
+      <stop offset="60%" stop-color="#1f4e8c"/>
+      <stop offset="100%" stop-color="#16305e"/>
+    </linearGradient>
+    <linearGradient id="uTail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c3a6b"/>
+      <stop offset="100%" stop-color="#2ec4b6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ribbon M : two overlapping arches -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M40 250 Q100 78 160 178 T280 250" stroke="url(#ribbonA)" stroke-width="42"/>
+    <path d="M148 250 Q208 66 268 170 T292 214" stroke="url(#ribbonB)" stroke-width="42"/>
+  </g>
+
+  <!-- IRU -->
+  <g fill="#16305e" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="150" letter-spacing="6">
+    <text x="330" y="252">IR</text>
+  </g>
+  <g font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="150">
+    <text x="540" y="252" fill="url(#uTail)">U</text>
+  </g>
+
+  <!-- tagline -->
+  <text x="340" y="300" text-anchor="middle" font-family="'Yu Gothic', 'Hiragino Kaku Gothic Pro', sans-serif" font-size="21" fill="#1c3a6b">
+    グローバル人材と日本の採用基準をつなぐ
+  </text>
+</svg>
