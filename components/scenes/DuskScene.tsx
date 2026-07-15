@@ -193,7 +193,7 @@ function AwardsList() {
             <h4 className="font-body font-medium text-[15px] md:text-base text-white/85 group-hover:text-white transition-colors duration-500 leading-snug">
               {award.title}
             </h4>
-            <p className="font-body text-xs mt-1" style={{ color: 'rgba(245,245,242,0.4)' }}>
+            <p className="font-body text-xs mt-1" style={{ color: 'rgba(245,245,242,0.55)' }}>
               {award.subtitle}
             </p>
           </div>
@@ -237,10 +237,43 @@ function ContactBlock() {
 
       <motion.p {...fadeUp} transition={{ duration: 1, delay: 0.3, ease: EXHALE }}
         className="font-body text-[11px] tracking-[0.14em] uppercase mt-5 max-w-xl mx-auto leading-loose"
-        style={{ color: 'rgba(139,147,201,0.65)' }}>
+        style={{ color: 'rgba(139,147,201,0.75)' }}>
         currently — rebuilding production slide infrastructure for Stick&apos;Em (contract) ·
         running Retro Studios under StarLabs · BBA at APU, Beppu
       </motion.p>
+
+      {/* open to — the recruiter strip */}
+      <motion.div {...fadeUp} transition={{ duration: 1, delay: 0.35, ease: EXHALE }} className="mt-10">
+        <p className="text-lg mb-4" style={{ fontFamily: 'var(--font-scrawl), cursive', color: '#8b5cf6', transform: 'rotate(-1.5deg)' }}>
+          currently open to
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
+          {['AI Engineer', 'Founding / Early-Stage Engineer', 'Full-Stack Product Engineer'].map((role) => (
+            <span
+              key={role}
+              className="font-body text-xs md:text-[13px] tracking-[0.08em] px-4 py-2 rounded-full"
+              style={{ border: '1.5px solid rgba(139,92,246,0.55)', color: 'rgba(245,245,242,0.9)', background: 'rgba(139,92,246,0.1)' }}
+            >
+              {role}
+            </span>
+          ))}
+        </div>
+        <p className="font-body text-[11px] tracking-[0.16em] uppercase mt-4" style={{ color: 'rgba(245,245,242,0.55)' }}>
+          full-time · contract · internship — remote worldwide or Japan
+        </p>
+        <p className="font-body text-[12px] mt-3" style={{ color: 'rgba(245,245,242,0.6)' }}>
+          brands &amp; founders: Retro Studios is taking briefs — cinematic AI content, directed and delivered by one person.{' '}
+          <a
+            href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4 transition-colors hover:text-white"
+            style={{ color: '#fbbf24' }}
+          >
+            see the work
+          </a>
+        </p>
+      </motion.div>
 
       <motion.div {...fadeUp} transition={{ duration: 1, delay: 0.35, ease: EXHALE }}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
@@ -313,19 +346,19 @@ function ContactBlock() {
         className="mt-20 pb-14 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#8b5cf6' }} />
-          <span className="font-body text-xs tracking-[0.2em]" style={{ color: 'rgba(245,245,242,0.3)' }}>
+          <span className="font-body text-xs tracking-[0.2em]" style={{ color: 'rgba(245,245,242,0.55)' }}>
             sameermotwani17@gmail.com
           </span>
         </div>
-        <p className="font-body text-[11px] tracking-widest" style={{ color: 'rgba(245,245,242,0.2)' }}>
+        <p className="font-body text-[11px] tracking-widest" style={{ color: 'rgba(245,245,242,0.42)' }}>
           © 2026 Sameer Motwani — one continuous take, light to dusk.
         </p>
         <a
           href="https://github.com/sameermotwani17-cell/portfolio"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-body text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 hover:text-white/60"
-          style={{ color: 'rgba(245,245,242,0.25)' }}
+          className="font-body text-[10px] tracking-[0.2em] uppercase transition-colors duration-300 hover:text-white"
+          style={{ color: 'rgba(245,245,242,0.45)' }}
         >
           view source ↗
         </a>

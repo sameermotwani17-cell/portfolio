@@ -1,128 +1,59 @@
 # Sameer Motwani — Portfolio
 
-Personal portfolio built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion. Cinematic design, GPU-animated UI, and a custom cursor.
+[![CI](https://github.com/sameermotwani17-cell/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/sameermotwani17-cell/portfolio/actions/workflows/ci.yml)
 
-**Live site:** [sameermotwani.vercel.app](https://sameermotwani.vercel.app)
+A cinematic scroll narrative — light → fire → dusk — where every project opens
+into its own branded world. Built and art-directed as one continuous take.
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 14 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Animation | Framer Motion |
-| Fonts | Cormorant Garamond · DM Sans (Google Fonts) |
-| Deployment | Vercel |
+**Live:** [portfolio-gamma-two-d8j6b2mgkq.vercel.app](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app) · **Resume:** [/resume.pdf](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app/resume.pdf)
 
 ---
 
-## Project Structure
+## Architecture
 
-```
-my-portfolio/
-├── app/
-│   ├── layout.tsx          # Root layout — fonts, CustomCursor
-│   ├── page.tsx            # Page assembly
-│   └── globals.css         # CSS variables, scrollbar, cursor: none
-├── components/
-│   ├── Hero.tsx            # Full-bleed photo, parallax, cinematic overlay
-│   ├── Navbar.tsx          # Blur backdrop nav + mobile hamburger
-│   ├── Projects.tsx        # Project cards + modal detail view
-│   ├── Skills.tsx          # Skill groups
-│   ├── Awards.tsx          # Award timeline
-│   ├── Hobbies.tsx         # Basketball, Chess, Cinematic, Music cards
-│   ├── Contact.tsx         # CTA + education row + footer
-│   ├── CustomCursor.tsx    # Lerp-smoothed glowing dot + ring
-│   ├── Character.tsx       # FIFA-style stat card
-│   ├── ParticlesBurst.tsx  # SVG concentric rings animation
-│   └── StarField.tsx       # Background star canvas
-├── public/
-│   ├── photo.png           # Hero portrait
-│   ├── apu-logo.jpg        # APU university logo
-│   ├── hult-prize.jpg      # Hult Prize logo
-│   └── ...                 # Other assets
-├── next.config.js
-├── tailwind.config.ts
-└── tsconfig.json
-```
+Three pinned scenes assembled in [`app/page.tsx`](app/page.tsx), each using a
+sticky-backdrop pattern (full-viewport sticky layer + content flowing over it),
+scroll-scrubbed with framer-motion `useScroll` and smoothed by Lenis.
 
----
+| Scene | File | What happens |
+|---|---|---|
+| 01 — Light | [`HeroScene.tsx`](components/scenes/HeroScene.tsx) | Butterfly field (hand-drawn SVGs, 3 parallax depths), camera push-in, three-layer crossfade into the verse card, then the fire |
+| 02 — Fire | [`FireScene.tsx`](components/scenes/FireScene.tsx) | Album-cover project grid with shared-layout expansion into per-project worlds; vault row; skills |
+| 03 — Dusk | [`DuskScene.tsx`](components/scenes/DuskScene.tsx) | Life blocks, awards, open-to roles, contact |
 
-## Sections
+Every case study is a bespoke component behind one registry
+([`CaseStudyOverlay.tsx`](components/scenes/CaseStudyOverlay.tsx)):
+chopstick cinema for Stick'Em, a match-lobby HUD for the Scrapyard FPS,
+a three-movement black-and-white film for Retro Studios, and storyline
+worlds for GOMI Snap, AI Hack (AIFUL red), and MIRU — all data-driven
+from [`lib/projects.ts`](lib/projects.ts).
 
-### Hero
-Full-bleed portrait with parallax scroll, idle camera drift, animated word reveal, and a FIFA-style stat card on the right.
+## Engineering notes
 
-### Projects
-Five project cards with hover-reveal descriptions and click-to-expand modals:
+- **Performance:** ~160KB first-load JS, one eager image (~309KB hero),
+  everything below the fold lazy, per-world assets load only when a case
+  study opens. All animation is transform/opacity only. Static prerender.
+- **Images:** sources neural-upscaled 4x (OpenCV EDSR) and served as
+  right-sized WebP; `Cache-Control` with stale-while-revalidate on all
+  static imagery.
+- **Accessibility:** focus-trapped dialogs with Esc handling, full
+  `prefers-reduced-motion` fallbacks per scene, aria labels throughout.
+- **Resume:** generated from the same verified project data via
+  [`scripts/generate-resume.js`](scripts/generate-resume.js) (pdf-lib).
 
-- **GOMI Snap** — AI civic-tech startup. CV-powered waste classification. 1st Place APU Hackathon 2025.
-- **Stick'Em** — Curriculum alignment engine. 13 standards across UK/India/USA. Hult Prize Global Winner 2025.
-- **Retro GitHub Agent** — Autonomous AI coding agent. Chains Claude API + n8n + GitHub.
-- **AI Hack 2026** — Credit default risk model. AUC ~0.763. Top ~8 finish at Kyoto Finals (AIFUL).
-- **MIRU** — Stateful AI interview evaluation system. Structured scoring + Japanese HR cultural reasoning layer.
+## Stack
 
-### Skills
-Grouped skill tags: AI/ML, Programming, Infrastructure, Security, Finance/Business.
+Next.js 14 (App Router) · TypeScript · Tailwind · framer-motion · Lenis ·
+sharp · pdf-lib · Vercel (git-connected, CI on every push)
 
-### Awards
-Timeline of competition wins and recognitions.
-
-### Hobbies
-Animated cards for Basketball, Chess, Cinematic Creation (links to [Retro Studios Instagram](https://www.instagram.com/retro.studios_)), and Music (links to [Spotify](https://open.spotify.com/artist/2vNpaYQTU7PNUh3BjOx07b) + [Apple Music](https://music.apple.com/jp/artist/retro/1803961641)).
-
-### Contact
-Email, LinkedIn, GitHub CTAs + education row (APU + YOUNITED).
-
----
-
-## Design System
-
-```css
---color-bg:        #0a0a0a
---color-primary:   #f97316   /* orange */
---color-secondary: #3b82f6   /* blue */
---color-text:      #f5f5f5
-```
-
-Fonts are configured as Tailwind utilities:
-- `font-display` → Cormorant Garamond (headings)
-- `font-body` → DM Sans (body text)
-
----
-
-## Running Locally
+## Running locally
 
 ```bash
-npm install
+npm ci
 npm run dev
-# → http://localhost:3000
 ```
-
-Build for production:
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## Deployment
-
-Deployed on Vercel. Push to `main` triggers automatic redeployment.
-
-```bash
-git add .
-git commit -m "your message"
-git push origin main
-```
-
----
 
 ## License
 
-Personal portfolio — all rights reserved. Code structure may be referenced for learning purposes.
+Personal portfolio — all rights reserved. Code structure may be referenced
+for learning.
