@@ -26,6 +26,8 @@ export type Album = {
   cover: string | null
   /** scrapyard uses the stencil face */
   stencil?: boolean
+  /** brand logo chip (e.g. Stick'Em) */
+  logo?: string
   detail: ProjectDetail
 }
 
@@ -38,6 +40,8 @@ export type VaultItem = {
   tech: string[]
   badge: string | null
   accent: string
+  /** brand logo chip (e.g. Stick'Em) */
+  logo?: string
   detail: ProjectDetail
 }
 
@@ -56,6 +60,7 @@ export const albums: Album[] = [
     badge: 'Hult Prize Global Winner client',
     accent: '#3b82f6',
     cover: null,
+    logo: '/stickem.png',
     detail: {
       overview:
         "Contracted by the CEO of Stick'Em Pte Ltd — a Singapore EdTech company and Hult Prize Global 2025 winner — to fix a revenue-impacting performance failure: lesson delivery relied on embedded Google Slides iframes that black-screened on the slow connections common in Brunei and the Philippines. Replaced them with a pre-processed WebP asset pipeline and a virtualized scroll viewer, with the legacy iframe kept as an automatic fallback so production could never regress.",
@@ -294,6 +299,7 @@ export const vault: VaultItem[] = [
     tech: ['React 18', 'Express 5', 'OpenAI API', 'Airtable', 'Zod', 'pdfmake', 'Node.js'],
     badge: 'Hult Prize Global Winner 2025',
     accent: '#3b82f6',
+    logo: '/stickem.png',
     detail: {
       overview:
         "Teacher-facing B2B web application that automatically maps STEM lesson content to official government curriculum standards across the UK, India, and USA — eliminating hours of manual curriculum planning work per teacher per term. Deployed for Stick'Em, a Hult Prize Global Winner in education.",

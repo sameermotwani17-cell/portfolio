@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 import type { VaultItem } from '@/lib/projects'
 
@@ -20,20 +21,26 @@ function VaultCard({
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
       className="snap-start shrink-0 w-[270px] md:w-[300px] text-left group focus:outline-none"
       aria-label={`Open ${item.title} case study`}
     >
       <motion.div
         layoutId={`album-${item.id}`}
-        className="relative h-full rounded-xl p-5"
+        className="relative h-full rounded-xl p-5 transition-shadow duration-300 group-hover:shadow-[0_16px_44px_rgba(0,0,0,0.6)]"
         style={{
           background: 'rgba(10,10,10,0.72)',
           backdropFilter: 'blur(8px)',
           border: '1px solid rgba(255,255,255,0.09)',
         }}
       >
-        <span className="block w-8 h-[2px] mb-4 rounded-full" style={{ background: item.accent }} />
+        <div className="flex items-center justify-between mb-4">
+          <span className="block w-8 h-[2px] rounded-full" style={{ background: item.accent }} />
+          {item.logo && (
+            <span className="block w-9 h-9 rounded-md overflow-hidden bg-white/95 p-1">
+              <Image src={item.logo} alt={`${item.title} brand logo`} width={36} height={36} className="w-full h-full object-contain" />
+            </span>
+          )}
+        </div>
         <h4 className="font-display text-xl text-white leading-tight">{item.title}</h4>
         <p className="font-body text-[10px] tracking-[0.16em] uppercase mt-1.5" style={{ color: 'rgba(245,245,242,0.45)' }}>
           {item.tag}

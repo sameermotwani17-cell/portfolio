@@ -152,6 +152,38 @@ export default function FireScene() {
           </motion.p>
         </div>
 
+        {/* the mentality — a beat alone with the fire */}
+        <div className="min-h-[55vh] flex items-center justify-center px-6 pb-10">
+          <motion.blockquote
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-25%' }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl text-center"
+          >
+            <p
+              style={{
+                fontFamily: 'var(--font-scrawl), cursive',
+                fontSize: 'clamp(1.5rem, 4.2vw, 2.7rem)',
+                lineHeight: 1.35,
+                color: '#f5f5f2',
+                transform: 'rotate(-1.5deg)',
+                textShadow: '0 4px 30px rgba(0,0,0,0.7)',
+              }}
+            >
+              &ldquo;i love the pressure,
+              <br />
+              <span style={{ color: '#f97316' }}>it&rsquo;s the reason i am where i am today.&rdquo;</span>
+            </p>
+            <footer
+              className="font-body text-[10px] tracking-[0.35em] uppercase mt-6"
+              style={{ color: 'rgba(245,245,242,0.45)' }}
+            >
+              — the mentality
+            </footer>
+          </motion.blockquote>
+        </div>
+
         {/* album grid */}
         <div className="max-w-6xl mx-auto px-6 md:px-10 pb-24">
           <AlbumGrid albums={albums} onOpen={open} />

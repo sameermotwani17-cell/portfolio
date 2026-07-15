@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import type { Album, VaultItem } from '@/lib/projects'
 
-type OverlayItem = (Album | VaultItem) & { cover?: string | null; stencil?: boolean }
+type OverlayItem = (Album | VaultItem) & { cover?: string | null; stencil?: boolean; logo?: string }
 
 /**
  * Full-screen case study. The panel shares layoutId `album-{id}` with its
@@ -142,6 +142,11 @@ export default function CaseStudyOverlay({
 
         {/* header */}
         <div className="px-6 md:px-10 -mt-10 relative z-[5]">
+          {item.logo && (
+            <span className="block w-14 h-14 rounded-xl overflow-hidden bg-white/95 p-1.5 mb-3 shadow-lg">
+              <Image src={item.logo} alt={`${item.title} brand logo`} width={56} height={56} className="w-full h-full object-contain" />
+            </span>
+          )}
           {item.badge && (
             <span
               className="inline-block font-body text-[10px] tracking-[0.14em] uppercase rounded px-2.5 py-1 mb-3"

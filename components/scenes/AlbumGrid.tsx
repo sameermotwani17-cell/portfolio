@@ -29,20 +29,14 @@ function AlbumCard({
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.85, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       className="relative block w-full text-left group focus:outline-none"
-      style={{ perspective: 900 }}
       aria-label={`Open ${album.title} case study`}
     >
+      {/* layout-morph source: keep this element free of transforms so the
+          shared-layout expansion into the overlay stays glitch-free */}
       <motion.div
         layoutId={`album-${album.id}`}
-        animate={
-          hovered
-            ? { rotateX: 3.5, rotateY: -4, scale: 1.02 }
-            : { rotateX: 0, rotateY: 0, scale: 1 }
-        }
-        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-        className="relative aspect-square rounded-xl overflow-hidden"
+        className="relative aspect-square rounded-xl overflow-hidden transition-shadow duration-400"
         style={{
-          transformStyle: 'preserve-3d',
           border: hovered ? `1px solid ${album.accent}70` : '1px solid rgba(255,255,255,0.1)',
           boxShadow: hovered
             ? `0 24px 70px rgba(0,0,0,0.75), 0 0 50px ${album.accent}28`
@@ -78,13 +72,20 @@ function AlbumCard({
           style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.14), transparent)' }}
         />
 
+        {/* brand logo chip */}
+        {album.logo && (
+          <div className="absolute top-4 left-4 w-12 h-12 rounded-lg overflow-hidden bg-white/95 p-1.5 shadow-lg">
+            <Image src={album.logo} alt={`${album.title} brand logo`} width={48} height={48} className="w-full h-full object-contain" />
+          </div>
+        )}
+
         {/* tracklist — hover reveal */}
         <div
-          className="absolute top-4 right-4 flex flex-col items-end gap-1 transition-all duration-400"
+          className="absolute top-4 right-4 flex flex-col items-end gap-1"
           style={{
             opacity: hovered ? 1 : 0,
             transform: hovered ? 'translateY(0)' : 'translateY(-8px)',
-            transitionDuration: '0.4s',
+            transition: 'opacity 0.4s, transform 0.4s',
           }}
           aria-hidden
         >
