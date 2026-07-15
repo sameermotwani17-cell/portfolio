@@ -39,7 +39,7 @@ export type Album = {
   /** monochrome black/white case-study theme (RETRO raven) */
   mono?: boolean
   /** bespoke case-study world */
-  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack'
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack' | 'miru'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -56,7 +56,7 @@ export type VaultItem = {
   accent: string
   mono?: boolean
   /** bespoke case-study world */
-  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack'
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack' | 'miru'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -405,34 +405,40 @@ export const vault: VaultItem[] = [
     id: 'miru',
     title: 'MIRU',
     subtitle: 'AI Interview Simulation & Evaluation System',
-    tag: 'Full-Stack AI Builder · 2026',
-    short: 'Stateful AI interview engine with structured scoring and a Japanese HR cultural reasoning layer.',
+    tag: 'Full-Stack AI Builder · Hackathon · 2026',
+    short: 'Stateful AI interview engine with a Japanese HR cultural reasoning layer. 3rd place hackathon finish.',
     tech: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'OpenAI', 'ElevenLabs'],
-    badge: null,
+    badge: '3rd Place — Hackathon',
     accent: '#14b8a6',
+    world: 'miru',
     detail: {
       overview:
-        'An exercise in LLM evaluation design: deterministic rubrics, per-turn scoring with session aggregation, schema-validated outputs — wrapped in a real-time voice interview that reads your answers through a Japanese HR lens.',
+        'A hackathon build that took 3rd place: an AI interviewer that actually evaluates. MIRU (見る — to see) runs real-time voice interviews, scores every turn against deterministic rubrics, reads Western answers through a Japanese HR lens, and debriefs you with radar charts, the evaluator’s internal monologue, and rewritten answers. An exercise in LLM evaluation design, not a chatbot wrapper.',
       flow: [
         {
+          label: 'the brief',
+          headline: 'An AI interviewer that actually evaluates',
+          points: ['Hackathon build — closed-loop evaluation pipeline', 'FastAPI backend, Next.js front, voice in real time', 'Not a chatbot wrapper, by design'],
+        },
+        {
           label: 'the engine',
-          headline: 'Stateful interviews, not chatbot scripts',
+          headline: 'Stateful interviews, not scripts',
           points: ['Session-persistent transcripts + question progression', 'Adaptive follow-ups from prior answers', 'Strict /turn /results /debrief contracts'],
         },
         {
           label: 'the scoring',
-          headline: 'Deterministic rubrics, 0–10 per turn',
+          headline: 'Deterministic rubrics, 0–10 every turn',
           points: ['communication · clarity · cultural_fit · problem_solving', 'Schema-validated, aggregated per session'],
         },
         {
           label: 'the culture layer',
           headline: 'Western answers, read through Japanese HR',
-          points: ['"I achieved X" → flagged on Wa + humility', 'Internal evaluator monologue + rewrites'],
+          points: ['"I achieved X" → flagged on Wa (和) + humility', 'Internal evaluator monologue + rewritten answers', 'Rule-based heuristics + LLM synthesis'],
         },
         {
-          label: 'the debrief',
-          headline: 'Radar charts + a full voice pipeline',
-          points: ['ElevenLabs TTS, mic input, silence detection', 'Async orchestration across LLM + TTS'],
+          label: 'the podium',
+          headline: '3rd place on demo day',
+          points: ['Live voice demo: ElevenLabs TTS, silence detection, turn timing', 'Radar-chart debrief shown end-to-end', 'Full-stack pipeline debugged under hackathon pressure'],
         },
       ],
       links: [],
