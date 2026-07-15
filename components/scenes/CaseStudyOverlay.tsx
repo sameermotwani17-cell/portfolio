@@ -8,6 +8,7 @@ import StickemCinema from './StickemCinema'
 import ScrapyardWorld from './ScrapyardWorld'
 import RetroWorld from './RetroWorld'
 import GomiWorld from './GomiWorld'
+import AihackWorld from './AihackWorld'
 
 type OverlayItem = (Album | VaultItem) & {
   cover?: string | null
@@ -15,7 +16,7 @@ type OverlayItem = (Album | VaultItem) & {
   coverBg?: string
   stencil?: boolean
   mono?: boolean
-  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack'
   logo?: string
 }
 
@@ -24,6 +25,7 @@ const WORLDS: Record<string, React.ComponentType<{ item: OverlayItem }>> = {
   scrapyard: ScrapyardWorld,
   retro: RetroWorld,
   gomi: GomiWorld,
+  aihack: AihackWorld,
 }
 
 /**

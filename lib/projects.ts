@@ -39,7 +39,7 @@ export type Album = {
   /** monochrome black/white case-study theme (RETRO raven) */
   mono?: boolean
   /** bespoke case-study world */
-  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -56,7 +56,7 @@ export type VaultItem = {
   accent: string
   mono?: boolean
   /** bespoke case-study world */
-  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi'
+  world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack'
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -355,41 +355,47 @@ export const vault: VaultItem[] = [
     id: 'aihack-2026',
     title: 'AI Hack 2026',
     subtitle: 'Credit Default Risk Prediction',
-    tag: 'Lead Modeling & Risk Strategy · 2026',
-    short: 'Production-grade credit risk scoring system. Top ~8 finish at Kyoto Finals (AIFUL).',
-    tech: ['Python', 'CatBoost', 'LightGBM', 'scikit-learn', 'pandas', 'NumPy', 'SciPy'],
-    badge: 'Top ~8 — AI Hack 2026 Final Round · Kyoto',
+    tag: 'Lead Modeler & Technical Documentation · Team StarLabs · March 2026',
+    short: 'Credit default prediction on real AIFUL data — Kyoto finalist, the only all-freshman team in the field.',
+    tech: ['Python', 'LightGBM', 'CatBoost', 'XGBoost', 'Optuna', 'scikit-learn', 'Google Colab'],
+    badge: 'Kyoto Finalist — top 8 nationwide',
     accent: '#e0242c',
     logo: '/aiful-logo.png',
+    world: 'aihack',
     detail: {
       overview:
-        'Predicting 12-month consumer-loan default on real AIFUL data, under class imbalance and temporal drift. Competed as Team StarLabs — Kyoto Final Round, Top ~8.',
+        'AIFUL AI Hackathon 2026: predict 12-month credit default from real anonymized Japanese consumer-finance data. As lead modeler for StarLabs, I took the team from a 4th-place preliminary finish (peak public AUC 0.7635, briefly 2nd) to the live Kyoto final — the only all-freshman team in a top-8 field dominated by Master’s and PhD candidates in math and quantitative finance.',
       stats: [
-        { value: '~0.763', label: 'AUC-ROC — peak public leaderboard' },
-        { value: 'Top ~8', label: 'Final Round finish · Kyoto' },
-        { value: '77+', label: 'Engineered features' },
-        { value: '~200', label: 'Submissions managed' },
+        { value: '0.7635', label: 'Peak public AUC — briefly 2nd place' },
+        { value: '4th', label: 'Preliminary round finish' },
+        { value: 'top 8', label: 'Kyoto finalist, nationwide field (finished 8th)' },
+        { value: 'only', label: 'All-freshman team to reach the final' },
       ],
       flow: [
         {
-          label: 'the task',
-          headline: 'Predict 12-month default on real AIFUL data',
-          points: ['Class imbalance + temporal distribution shift', 'Team StarLabs → Kyoto finals'],
+          label: 'the arena',
+          headline: 'Real consumer-finance default data, scored on AUC',
+          points: ['68,546 labeled applications · ~9.7% default rate', '42 features: demographics, income, bureau history', 'Public prelim → private-LB + live judged final'],
         },
         {
-          label: 'the signal',
-          headline: '77+ engineered features drove ~0.76 AUC',
-          points: ['Debt-to-income, utilization, delinquency × exposure', 'Drift-aware feature × time interactions'],
+          label: 'the diagnosis',
+          headline: 'Temporal drift: fold AUC 0.774 → 0.686 across cohorts',
+          points: ['Drift is structure, not noise', 'Dual validation: StratifiedKFold + out-of-time split', 'Debt-to-income, delinquency ratios, credit age, log transforms'],
         },
         {
-          label: 'the validation',
-          headline: 'Built for the private leaderboard, not the public one',
-          points: ['Temporal GroupKFold + adversarial validation', 'Time-sliced AUC diagnostics per cohort', 'Rejected leaky high-scoring models'],
+          label: 'the climb',
+          headline: 'Briefly 2nd on the public board · 4th at prelims',
+          points: ['5 CatBoost + 3 LightGBM variants, LR stacker', 'Logit-space blending, 80/20 rank-sum ensemble', 'HEDGE strategy: performance blend + time-stable blend'],
         },
         {
-          label: 'the finish',
-          headline: 'Top ~8 · Kyoto Final Round',
-          points: ['Logit-space blending: +0.001–0.002 AUC over naive averaging', 'Public-LB model + time-stable hedge portfolio'],
+          label: 'the crisis',
+          headline: 'Lost the codebase mid-competition — rebuilt it from math',
+          points: ['Reverse-engineered the pipeline from submitted CSVs', 'Solved linear systems over rank arrays to recover blend weights', 'Proof that a good pipeline is auditable from its outputs'],
+        },
+        {
+          label: 'kyoto',
+          headline: 'The only freshmen in a room of Master’s and PhDs',
+          points: ['Live judged final, March 18–19, Kyoto', 'Bilingual EN/JP decks; Momoka presented, I built the narrative', 'Finished 8th of 8 — in a field we weren’t supposed to reach'],
         },
       ],
       links: [],
