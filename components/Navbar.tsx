@@ -83,6 +83,14 @@ export default function Navbar() {
         {/* socials — desktop */}
         <div className="hidden md:flex items-center gap-4">
           <a
+            href="/resume.pdf"
+            download="Sameer_Motwani_Resume.pdf"
+            className="text-[11px] tracking-[0.2em] uppercase font-body transition-colors duration-300 hover:!text-primary"
+            style={{ color: textColor }}
+          >
+            Resume
+          </a>
+          <a
             href="https://github.com/sameermotwani17-cell"
             target="_blank"
             rel="noopener noreferrer"

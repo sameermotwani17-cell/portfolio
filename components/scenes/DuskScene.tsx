@@ -265,6 +265,14 @@ function ContactBlock() {
           </svg>
           GitHub
         </a>
+        <a href="/resume.pdf" download="Sameer_Motwani_Resume.pdf"
+          className="px-9 py-4 rounded-full font-body text-xs tracking-[0.2em] uppercase flex items-center gap-2.5 transition-colors duration-300 hover:text-white hover:border-white/40"
+          style={{ border: '1px solid rgba(139,147,201,0.3)', color: 'rgba(245,245,242,0.7)' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
+          </svg>
+          Resume
+        </a>
       </motion.div>
 
       {/* education row */}
