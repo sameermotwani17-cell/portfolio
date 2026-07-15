@@ -105,44 +105,26 @@ export default function FireScene() {
 
       {/* ── content flowing over the sticky backdrop ── */}
       <div className="relative -mt-[100vh]" style={{ zIndex: 1 }}>
-        {/* re-introduction: the alter ego steps out of the dark */}
-        <div className="min-h-[75vh] flex flex-col items-center justify-center px-6 text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-25%' }}
-            transition={{ duration: 0.8 }}
-            className="text-lg md:text-xl mb-4"
-            style={{ fontFamily: 'var(--font-scrawl), cursive', color: 'rgba(249,115,22,0.9)', transform: 'rotate(-2deg)' }}
-          >
-            oh — and they call me
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-25%' }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
+        {/* re-introduction lives inside the hero transition; static fallback
+            here for reduced-motion users who never see the pin */}
+        {reduced && (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center">
+            <p className="text-lg md:text-xl mb-4" style={{ fontFamily: 'var(--font-scrawl), cursive', color: 'rgba(249,115,22,0.9)' }}>
+              allow me to re-introduce myself —
+            </p>
             <LayeredTitle
-              text="RETRO"
+              text="MY NAME IS RETRO"
               accent="#f97316"
               scrawl="nice to meet you"
-              className="font-display text-white leading-none"
-              style={{ fontSize: 'clamp(4.5rem, 16vw, 12rem)', textShadow: '0 6px 40px rgba(0,0,0,0.6)' }}
+              className="font-display text-white leading-[0.95]"
+              style={{ fontSize: 'clamp(2.6rem, 9vw, 7.5rem)' }}
             />
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-25%' }}
-            transition={{ duration: 0.9, delay: 0.5 }}
-            className="font-body text-sm md:text-base max-w-md leading-relaxed mt-8"
-            style={{ color: 'rgba(245,245,242,0.65)' }}
-          >
-            retro is the creative part of sameer — the half that directs the camera,
-            cuts the film, and makes the music. the engineer ships. retro makes it cinematic.
-          </motion.p>
-        </div>
+            <p className="font-body text-sm md:text-base max-w-md leading-relaxed mt-8" style={{ color: 'rgba(245,245,242,0.65)' }}>
+              retro is the creative part of sameer — the half that directs the camera,
+              cuts the film, and makes the music. the engineer ships. retro makes it cinematic.
+            </p>
+          </div>
+        )}
 
         {/* title beat */}
         <div ref={titleRef} className="min-h-screen flex flex-col items-center justify-center px-6">

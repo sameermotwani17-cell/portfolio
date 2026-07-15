@@ -48,10 +48,10 @@ function AmbientButterfly({ cfg, progress }: { cfg: Amb; progress: MotionValue<n
   const mult = cfg.depth * 42
   const dirX = (cfg.x - 50) / 50
   const dirY = (cfg.y - 45) / 45
-  const x = useTransform(progress, [0.12, 0.6], [0, dirX * mult], { clamp: true })
-  const y = useTransform(progress, [0.12, 0.6], [0, dirY * mult - cfg.depth * 6], { clamp: true })
-  const scale = useTransform(progress, [0.12, 0.6], [1, 1 + cfg.depth * 0.45])
-  const opacity = useTransform(progress, [0.45, 0.62], [1, 0])
+  const x = useTransform(progress, [0.1, 0.5], [0, dirX * mult], { clamp: true })
+  const y = useTransform(progress, [0.1, 0.5], [0, dirY * mult - cfg.depth * 6], { clamp: true })
+  const scale = useTransform(progress, [0.1, 0.5], [1, 1 + cfg.depth * 0.45])
+  const opacity = useTransform(progress, [0.38, 0.52], [1, 0])
 
   return (
     <motion.div
@@ -92,11 +92,11 @@ function Sweeper({
   colors: { color: string; accent: string }
   flapDur: number
 }) {
-  const x = useTransform(progress, [0.14, 0.52], [`${from}vw`, `${to}vw`])
-  const y = useTransform(progress, [0.14, 0.52], [`${top[0]}vh`, `${top[1]}vh`])
-  const rotate = useTransform(progress, [0.14, 0.52], [from < to ? -12 : 14, from < to ? 16 : -18])
-  const scale = useTransform(progress, [0.14, 0.52], [0.9, 1.7])
-  const opacity = useTransform(progress, [0.1, 0.16, 0.48, 0.55], [0, 1, 1, 0])
+  const x = useTransform(progress, [0.12, 0.46], [`${from}vw`, `${to}vw`])
+  const y = useTransform(progress, [0.12, 0.46], [`${top[0]}vh`, `${top[1]}vh`])
+  const rotate = useTransform(progress, [0.12, 0.46], [from < to ? -12 : 14, from < to ? 16 : -18])
+  const scale = useTransform(progress, [0.12, 0.46], [0.9, 1.7])
+  const opacity = useTransform(progress, [0.08, 0.14, 0.42, 0.5], [0, 1, 1, 0])
 
   return (
     <motion.div
@@ -153,18 +153,21 @@ export default function HeroScene() {
   })
 
   // camera push-in
-  const bgScale = useTransform(scrollYProgress, [0.1, 0.62], [1, 1.45])
-  const bgY = useTransform(scrollYProgress, [0.1, 0.62], ['0%', '-4%'])
+  const bgScale = useTransform(scrollYProgress, [0.08, 0.52], [1, 1.45])
+  const bgY = useTransform(scrollYProgress, [0.08, 0.52], ['0%', '-4%'])
   // the frame dims (never to black) while the vignette closes in
-  const dim = useTransform(scrollYProgress, [0.3, 0.6], [0, 0.55])
-  const vignette = useTransform(scrollYProgress, [0.12, 0.55], [0, 0.85])
+  const dim = useTransform(scrollYProgress, [0.26, 0.5], [0, 0.55])
+  const vignette = useTransform(scrollYProgress, [0.1, 0.46], [0, 0.85])
   // the fire morphs in over the butterflies: glow first, then the full image
-  const glowIn = useTransform(scrollYProgress, [0.48, 0.62, 0.78, 0.92], [0, 0.9, 0.9, 0.45])
-  const hoopIn = useTransform(scrollYProgress, [0.55, 0.88], [0, 1])
+  const glowIn = useTransform(scrollYProgress, [0.38, 0.52, 0.66, 0.8], [0, 0.9, 0.9, 0.45])
+  const hoopIn = useTransform(scrollYProgress, [0.44, 0.68], [0, 1])
+  // the re-introduction lands on the static fire frame
+  const introOpacity = useTransform(scrollYProgress, [0.72, 0.84], [0, 1])
+  const introY = useTransform(scrollYProgress, [0.72, 0.84], [40, 0])
   // title card exits early
-  const textOpacity = useTransform(scrollYProgress, [0.08, 0.24], [1, 0])
-  const textY = useTransform(scrollYProgress, [0.08, 0.24], [0, -60])
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0])
+  const textOpacity = useTransform(scrollYProgress, [0.07, 0.2], [1, 0])
+  const textY = useTransform(scrollYProgress, [0.07, 0.2], [0, -60])
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.07], [1, 0])
 
   if (reduced) {
     // static, accessible version — no pin, no scrub
@@ -208,7 +211,7 @@ export default function HeroScene() {
   }
 
   return (
-    <section ref={ref} id="home" className="relative" style={{ height: '260vh' }}>
+    <section ref={ref} id="home" className="relative" style={{ height: '320vh' }}>
       <div className="sticky top-0 h-screen overflow-hidden">
         {/* backdrop: full-bleed landscape crop framed on the figure */}
         <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
@@ -290,6 +293,38 @@ export default function HeroScene() {
             background: 'radial-gradient(ellipse 60% 55% at 30% 52%, rgba(249,115,22,0.5) 0%, rgba(249,115,22,0.12) 40%, transparent 70%)',
           }}
         />
+
+        {/* the re-introduction — lands on the static fire frame */}
+        <motion.div
+          className="absolute inset-0 z-[36] flex flex-col items-center justify-center px-6 text-center pointer-events-none"
+          style={{ opacity: introOpacity, y: introY }}
+        >
+          <p
+            className="text-lg md:text-2xl mb-5"
+            style={{
+              fontFamily: 'var(--font-scrawl), cursive',
+              color: 'rgba(249,115,22,0.95)',
+              transform: 'rotate(-2deg)',
+              textShadow: '0 3px 20px rgba(0,0,0,0.7)',
+            }}
+          >
+            allow me to re-introduce myself —
+          </p>
+          <LayeredTitle
+            text="MY NAME IS RETRO"
+            accent="#f97316"
+            scrawl="nice to meet you"
+            className="font-display text-white leading-[0.95]"
+            style={{ fontSize: 'clamp(2.6rem, 9vw, 7.5rem)', textShadow: '0 6px 40px rgba(0,0,0,0.7)' }}
+          />
+          <p
+            className="font-body text-sm md:text-base max-w-md leading-relaxed mt-9"
+            style={{ color: 'rgba(245,245,242,0.7)', textShadow: '0 2px 14px rgba(0,0,0,0.6)' }}
+          >
+            retro is the creative part of sameer — the half that directs the camera,
+            cuts the film, and makes the music. the engineer ships. retro makes it cinematic.
+          </p>
+        </motion.div>
 
         {/* title card */}
         <motion.div
