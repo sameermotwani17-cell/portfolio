@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import LayeredTitle from './LayeredTitle'
 
 // slower, softer easing personality for the dusk scene
 const EXHALE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -372,10 +373,15 @@ export default function DuskScene() {
             className="font-body text-[11px] tracking-mega uppercase mb-5" style={{ color: 'rgba(139,147,201,0.8)' }}>
             the fire burns out · the sky comes back
           </motion.p>
-          <motion.h2 {...fadeUp} transition={{ duration: 1.2, delay: 0.1, ease: EXHALE }}
-            className="font-display text-white leading-none" style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)' }}>
-            BEYOND THE CODE
-          </motion.h2>
+          <motion.div {...fadeUp} transition={{ duration: 1.2, delay: 0.1, ease: EXHALE }}>
+            <LayeredTitle
+              text="BEYOND THE CODE"
+              accent="#8b5cf6"
+              scrawl="dusk."
+              className="font-display text-white leading-none"
+              style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)' }}
+            />
+          </motion.div>
           <motion.p {...fadeUp} transition={{ duration: 1.1, delay: 0.22, ease: EXHALE }}
             className="font-body text-sm md:text-base mt-5 max-w-lg leading-relaxed" style={{ color: 'rgba(245,245,242,0.55)' }}>
             The quieter tracks. What happens when the laptop closes.

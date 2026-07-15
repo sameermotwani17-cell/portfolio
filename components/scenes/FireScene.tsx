@@ -16,6 +16,7 @@ import VaultRow from './VaultRow'
 import SkillsBlock from './SkillsBlock'
 import CaseStudyOverlay from './CaseStudyOverlay'
 import Embers from './Embers'
+import LayeredTitle from './LayeredTitle'
 
 export default function FireScene() {
   const ref = useRef<HTMLElement>(null)
@@ -113,17 +114,21 @@ export default function FireScene() {
             className="font-body text-[11px] tracking-mega uppercase mb-5"
             style={{ color: 'rgba(249,115,22,0.85)' }}
           >
-            scene 02 — the fire
+            scene 02
           </motion.p>
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={titleInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-white text-center leading-none"
-            style={{ fontSize: 'clamp(4rem, 14vw, 11rem)', textShadow: '0 6px 40px rgba(0,0,0,0.6)' }}
           >
-            PROJECTS
-          </motion.h2>
+            <LayeredTitle
+              text="PROJECTS"
+              accent="#f97316"
+              scrawl="the fire"
+              className="font-display text-white text-center leading-none"
+              style={{ fontSize: 'clamp(4rem, 14vw, 11rem)', textShadow: '0 6px 40px rgba(0,0,0,0.6)' }}
+            />
+          </motion.div>
           {/* flame underline */}
           <motion.div
             initial={{ scaleX: 0 }}

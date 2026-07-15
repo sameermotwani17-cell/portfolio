@@ -34,6 +34,7 @@ const config: Config = {
         display: ['var(--font-display)', 'Impact', 'sans-serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
         stencil: ['var(--font-stencil)', 'Impact', 'sans-serif'],
+        scrawl: ['var(--font-scrawl)', 'cursive'],
       },
       letterSpacing: {
         mega: '0.35em',

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Anton, Space_Grotesk, Black_Ops_One } from 'next/font/google'
+import { Anton, Space_Grotesk, Black_Ops_One, Permanent_Marker } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -22,6 +22,13 @@ const blackOps = Black_Ops_One({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-stencil',
+  display: 'swap',
+})
+
+const marker = Permanent_Marker({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-scrawl',
   display: 'swap',
 })
 
@@ -74,7 +81,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable}`}>
+    <html lang="en" className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable} ${marker.variable}`}>
       <body className="bg-ink text-paper antialiased">
         <script
           type="application/ld+json"

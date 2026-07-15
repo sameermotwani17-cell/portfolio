@@ -10,6 +10,7 @@ import {
   MotionValue,
 } from 'framer-motion'
 import Butterfly from './Butterfly'
+import LayeredTitle from './LayeredTitle'
 
 // ─── Ambient butterfly field (fixed data → no hydration mismatch) ─────────────
 // depth 1 = far (small, slow), 3 = near (big, fast past the lens)
@@ -176,11 +177,16 @@ export default function HeroScene() {
             Welcome to the Sameer Motwani portfolio
           </p>
           <div className="text-center">
-            <h1 className="font-display text-white leading-[0.9]" style={{ fontSize: 'clamp(3.5rem, 11vw, 9rem)', textShadow: '0 4px 30px rgba(0,0,0,0.45)' }}>
-              SAMEER MOTWANI
-            </h1>
-            <p className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase">
-              engineer · founder · builder — beppu, japan
+            <LayeredTitle
+              as="h1"
+              text="SAMEER MOTWANI"
+              accent="#f97316"
+              scrawl="beppu, japan"
+              className="font-display text-white leading-[0.9]"
+              style={{ fontSize: 'clamp(3.5rem, 11vw, 9rem)', textShadow: '0 4px 30px rgba(0,0,0,0.45)' }}
+            />
+            <p className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-6 lowercase">
+              engineer · founder · builder
             </p>
           </div>
         </div>
@@ -274,26 +280,31 @@ export default function HeroScene() {
           <WelcomeReveal />
 
           <div className="text-center px-4">
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               transition={{ duration: 0.9, delay: 1.55, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-white leading-[0.9]"
-              style={{
-                fontSize: 'clamp(3.5rem, 11vw, 9rem)',
-                textShadow: '0 4px 30px rgba(0,0,0,0.45)',
-              }}
             >
-              SAMEER MOTWANI
-            </motion.h1>
+              <LayeredTitle
+                as="h1"
+                text="SAMEER MOTWANI"
+                accent="#f97316"
+                scrawl="beppu, japan"
+                className="font-display text-white leading-[0.9]"
+                style={{
+                  fontSize: 'clamp(3.5rem, 11vw, 9rem)',
+                  textShadow: '0 4px 30px rgba(0,0,0,0.45)',
+                }}
+              />
+            </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 2.15 }}
-              className="font-body text-white/85 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase"
+              className="font-body text-white/85 text-xs md:text-sm tracking-[0.25em] mt-6 lowercase"
               style={{ textShadow: '0 2px 14px rgba(0,0,0,0.6)' }}
             >
-              engineer · founder · builder — beppu, japan
+              engineer · founder · builder
             </motion.p>
           </div>
         </motion.div>
