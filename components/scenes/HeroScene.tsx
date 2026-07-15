@@ -376,9 +376,11 @@ export default function HeroScene() {
 
           <div className="text-center px-4">
             <motion.div
-              initial={{ opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.9, delay: 1.55, ease: [0.22, 1, 0.36, 1] }}
+              /* no opacity-from-0 here: this is the page's LCP element, so it
+                 must paint immediately — the entrance is scale + blur only */
+              initial={{ scale: 1.1, filter: 'blur(9px)' }}
+              animate={{ scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               <LayeredTitle
                 as="h1"
