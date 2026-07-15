@@ -30,6 +30,10 @@ export type Album = {
   accent: string
   /** cover image src; null renders the code-drawn cover */
   cover: string | null
+  /** render the cover contained (for logo covers) instead of full-bleed */
+  coverContain?: boolean
+  /** backdrop behind a contained cover */
+  coverBg?: string
   /** scrapyard uses the stencil face */
   stencil?: boolean
   /** monochrome black/white case-study theme (RETRO raven) */
@@ -161,7 +165,10 @@ export const albums: Album[] = [
     tech: ['React', 'TypeScript', 'Express.js', 'OpenAI Vision API', 'PWA'],
     badge: '1st Place — APU Hackathon 2025',
     accent: '#3f9142',
-    cover: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80',
+    cover: '/gomi-logo.png',
+    coverContain: true,
+    coverBg: '#f2f5f0',
+    logo: '/gomi-logo.png',
     detail: {
       overview:
         'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city — then honestly wound down and folded into StarLabs.',
@@ -336,6 +343,7 @@ export const vault: VaultItem[] = [
     tech: ['Python', 'CatBoost', 'LightGBM', 'scikit-learn', 'pandas', 'NumPy', 'SciPy'],
     badge: 'Top ~8 — AI Hack 2026 Final Round · Kyoto',
     accent: '#e0242c',
+    logo: '/aiful-logo.png',
     detail: {
       overview:
         'Predicting 12-month consumer-loan default on real AIFUL data, under class imbalance and temporal drift. Competed as Team StarLabs — Kyoto Final Round, Top ~8.',

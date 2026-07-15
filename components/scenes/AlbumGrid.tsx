@@ -46,14 +46,28 @@ function AlbumCard({
       >
         {/* cover art */}
         {album.cover ? (
-          <Image
-            src={album.cover}
-            alt={`${album.title} cover art`}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-            sizes="(max-width: 768px) 92vw, 520px"
-            unoptimized={album.cover.startsWith('http')}
-          />
+          album.coverContain ? (
+            <div className="absolute inset-0 p-10 md:p-14" style={{ background: album.coverBg || '#0b0b0b' }}>
+              <div className="relative w-full h-full">
+                <Image
+                  src={album.cover}
+                  alt={`${album.title} cover art`}
+                  fill
+                  className="object-contain transition-transform duration-700 group-hover:scale-[1.04]"
+                  sizes="(max-width: 768px) 92vw, 520px"
+                />
+              </div>
+            </div>
+          ) : (
+            <Image
+              src={album.cover}
+              alt={`${album.title} cover art`}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+              sizes="(max-width: 768px) 92vw, 520px"
+              unoptimized={album.cover.startsWith('http')}
+            />
+          )
         ) : (
           <CodeCover accent={album.accent} title={album.title} />
         )}
@@ -72,8 +86,8 @@ function AlbumCard({
           style={{ background: 'linear-gradient(to right, rgba(255,255,255,0.14), transparent)' }}
         />
 
-        {/* brand logo chip */}
-        {album.logo && (
+        {/* brand logo chip (skip when the cover already is the logo) */}
+        {album.logo && !album.coverContain && (
           <div className="absolute top-4 left-4 w-12 h-12 rounded-lg overflow-hidden bg-white/95 p-1.5 shadow-lg">
             <Image src={album.logo} alt={`${album.title} brand logo`} width={48} height={48} className="w-full h-full object-contain" />
           </div>

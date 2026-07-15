@@ -5,7 +5,14 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import type { Album, VaultItem } from '@/lib/projects'
 
-type OverlayItem = (Album | VaultItem) & { cover?: string | null; stencil?: boolean; mono?: boolean; logo?: string }
+type OverlayItem = (Album | VaultItem) & {
+  cover?: string | null
+  coverContain?: boolean
+  coverBg?: string
+  stencil?: boolean
+  mono?: boolean
+  logo?: string
+}
 
 /**
  * Full-screen case study, themed per project (accent color; RETRO gets the
@@ -111,7 +118,15 @@ export default function CaseStudyOverlay({
         {/* hero art */}
         <div className="relative h-52 md:h-64 overflow-hidden">
           {item.cover ? (
-            <Image src={item.cover} alt="" fill className="object-cover" sizes="768px" unoptimized={item.cover.startsWith('http')} />
+            item.coverContain ? (
+              <div className="absolute inset-0 py-6" style={{ background: item.coverBg || '#0b0b0b' }}>
+                <div className="relative w-full h-full">
+                  <Image src={item.cover} alt="" fill className="object-contain" sizes="768px" />
+                </div>
+              </div>
+            ) : (
+              <Image src={item.cover} alt="" fill className="object-cover" sizes="768px" unoptimized={item.cover.startsWith('http')} />
+            )
           ) : (
             <CodeCover accent={accent} title={item.title} />
           )}
