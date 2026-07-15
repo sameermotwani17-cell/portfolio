@@ -163,9 +163,9 @@ export default function HeroScene() {
   // then the fire bleeds in at the very end, glow leading, seamless into projects
   const glowIn = useTransform(scrollYProgress, [0.78, 0.86, 0.96, 1], [0, 0.9, 0.9, 0.5])
   const hoopIn = useTransform(scrollYProgress, [0.84, 0.97], [0, 1])
-  // the re-introduction lands on the light
-  const introOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1])
-  const introY = useTransform(scrollYProgress, [0.6, 0.7], [40, 0])
+  // the re-introduction lands on the light — and leaves before the fire arrives
+  const introOpacity = useTransform(scrollYProgress, [0.6, 0.7, 0.78, 0.86], [0, 1, 1, 0])
+  const introY = useTransform(scrollYProgress, [0.6, 0.7, 0.78, 0.86], [40, 0, 0, -40])
   // title card exits early
   const textOpacity = useTransform(scrollYProgress, [0.07, 0.2], [1, 0])
   const textY = useTransform(scrollYProgress, [0.07, 0.2], [0, -60])
