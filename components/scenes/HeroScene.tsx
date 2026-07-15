@@ -158,12 +158,14 @@ export default function HeroScene() {
   // the frame dims (never to black) while the vignette closes in
   const dim = useTransform(scrollYProgress, [0.26, 0.5], [0, 0.55])
   const vignette = useTransform(scrollYProgress, [0.1, 0.46], [0, 0.85])
-  // the fire morphs in over the butterflies: glow first, then the full image
-  const glowIn = useTransform(scrollYProgress, [0.38, 0.52, 0.66, 0.8], [0, 0.9, 0.9, 0.45])
-  const hoopIn = useTransform(scrollYProgress, [0.44, 0.68], [0, 1])
-  // the re-introduction lands on the static fire frame
-  const introOpacity = useTransform(scrollYProgress, [0.72, 0.84], [0, 1])
-  const introY = useTransform(scrollYProgress, [0.72, 0.84], [40, 0])
+  // the golden light morphs in over the butterflies — the verse lands here
+  const lightIn = useTransform(scrollYProgress, [0.4, 0.58], [0, 1])
+  // then the fire bleeds in at the very end, glow leading, seamless into projects
+  const glowIn = useTransform(scrollYProgress, [0.78, 0.86, 0.96, 1], [0, 0.9, 0.9, 0.5])
+  const hoopIn = useTransform(scrollYProgress, [0.84, 0.97], [0, 1])
+  // the re-introduction lands on the light
+  const introOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1])
+  const introY = useTransform(scrollYProgress, [0.6, 0.7], [40, 0])
   // title card exits early
   const textOpacity = useTransform(scrollYProgress, [0.07, 0.2], [1, 0])
   const textY = useTransform(scrollYProgress, [0.07, 0.2], [0, -60])
@@ -268,7 +270,29 @@ export default function HeroScene() {
         {/* dimming pass — never fully black */}
         <motion.div className="absolute inset-0 z-30 pointer-events-none bg-ink" style={{ opacity: dim }} />
 
-        {/* the fire morphs in: burning hoop crossfades over the butterflies */}
+        {/* the golden light: the verse backdrop crossfades over the butterflies */}
+        <motion.div className="absolute inset-0 z-[31] pointer-events-none" style={{ opacity: lightIn }}>
+          <Image
+            src="/scenes/verse-light.webp"
+            alt=""
+            aria-hidden
+            fill
+            className="object-cover"
+            sizes="100vw"
+            style={{ objectPosition: 'center 40%' }}
+          />
+          {/* left scrim so the verse type reads over the trees */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to right, rgba(10,6,2,0.55) 0%, rgba(10,6,2,0.25) 40%, transparent 65%)' }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, rgba(10,6,2,0.3) 0%, transparent 30%, rgba(10,6,2,0.45) 100%)' }}
+          />
+        </motion.div>
+
+        {/* the fire morphs in at the end: burning hoop crossfades over the light */}
         <motion.div className="absolute inset-0 z-[32] pointer-events-none" style={{ opacity: hoopIn }}>
           <Image
             src="/scenes/burning-hoop.webp"
