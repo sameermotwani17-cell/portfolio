@@ -1,0 +1,289 @@
+'use client'
+
+import Image from 'next/image'
+import { useRef } from 'react'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  MotionValue,
+} from 'framer-motion'
+import Butterfly from './Butterfly'
+
+// ─── Ambient butterfly field (fixed data → no hydration mismatch) ─────────────
+// depth 1 = far (small, slow), 3 = near (big, fast past the lens)
+
+type Amb = {
+  x: number // vw
+  y: number // vh
+  size: number
+  depth: 1 | 2 | 3
+  flapDur: number
+  driftDur: number
+  driftDelay: number
+  color: string
+  accent: string
+}
+
+const MONARCH = { color: '#d97b31', accent: '#a8541c' }
+const TEAL = { color: '#3aa7bd', accent: '#22758a' }
+const MOSS = { color: '#b9c46a', accent: '#8a9a3e' }
+const SKY = { color: '#5b96d6', accent: '#3b6ea8' }
+
+const AMBIENT: Amb[] = [
+  { x: 12, y: 16, size: 34, depth: 1, flapDur: 0.9, driftDur: 11, driftDelay: 0.0, ...TEAL },
+  { x: 78, y: 12, size: 30, depth: 1, flapDur: 1.1, driftDur: 13, driftDelay: 1.2, ...MOSS },
+  { x: 30, y: 8,  size: 38, depth: 2, flapDur: 0.8, driftDur: 10, driftDelay: 0.6, ...MONARCH },
+  { x: 66, y: 30, size: 44, depth: 2, flapDur: 0.75, driftDur: 12, driftDelay: 2.0, ...SKY },
+  { x: 8,  y: 48, size: 48, depth: 2, flapDur: 0.85, driftDur: 9,  driftDelay: 1.6, ...MOSS },
+  { x: 88, y: 44, size: 52, depth: 3, flapDur: 0.7, driftDur: 8,  driftDelay: 0.3, ...MONARCH },
+  { x: 20, y: 70, size: 58, depth: 3, flapDur: 0.65, driftDur: 9,  driftDelay: 2.4, ...MONARCH },
+  { x: 72, y: 66, size: 46, depth: 3, flapDur: 0.72, driftDur: 10, driftDelay: 1.0, ...TEAL },
+]
+
+function AmbientButterfly({ cfg, progress }: { cfg: Amb; progress: MotionValue<number> }) {
+  // camera pushes in → butterflies accelerate outward from frame center
+  const mult = cfg.depth * 42
+  const dirX = (cfg.x - 50) / 50
+  const dirY = (cfg.y - 45) / 45
+  const x = useTransform(progress, [0.12, 0.6], [0, dirX * mult], { clamp: true })
+  const y = useTransform(progress, [0.12, 0.6], [0, dirY * mult - cfg.depth * 6], { clamp: true })
+  const scale = useTransform(progress, [0.12, 0.6], [1, 1 + cfg.depth * 0.45])
+  const opacity = useTransform(progress, [0.45, 0.62], [1, 0])
+
+  return (
+    <motion.div
+      className={cfg.depth === 1 ? 'absolute hidden md:block' : 'absolute'}
+      style={{
+        left: `${cfg.x}vw`,
+        top: `${cfg.y}vh`,
+        x: useTransform(x, (v) => `${v}vw`),
+        y: useTransform(y, (v) => `${v}vh`),
+        scale,
+        opacity,
+        zIndex: cfg.depth,
+        filter: cfg.depth === 1 ? 'blur(0.6px)' : undefined,
+      }}
+    >
+      <div style={{ animation: `butterflyDrift ${cfg.driftDur}s ease-in-out ${cfg.driftDelay}s infinite` }}>
+        <Butterfly size={cfg.size} color={cfg.color} accent={cfg.accent} flapDur={cfg.flapDur} />
+      </div>
+    </motion.div>
+  )
+}
+
+// two big foreground butterflies that sweep across and out of frame on scroll
+function Sweeper({
+  progress,
+  from,
+  to,
+  top,
+  size,
+  colors,
+  flapDur,
+}: {
+  progress: MotionValue<number>
+  from: number
+  to: number
+  top: [number, number]
+  size: number
+  colors: { color: string; accent: string }
+  flapDur: number
+}) {
+  const x = useTransform(progress, [0.14, 0.52], [`${from}vw`, `${to}vw`])
+  const y = useTransform(progress, [0.14, 0.52], [`${top[0]}vh`, `${top[1]}vh`])
+  const rotate = useTransform(progress, [0.14, 0.52], [from < to ? -12 : 14, from < to ? 16 : -18])
+  const scale = useTransform(progress, [0.14, 0.52], [0.9, 1.7])
+  const opacity = useTransform(progress, [0.1, 0.16, 0.48, 0.55], [0, 1, 1, 0])
+
+  return (
+    <motion.div
+      className="absolute left-0 top-0 z-20"
+      style={{ x, y, rotate, scale, opacity, filter: 'blur(1.5px)' }}
+    >
+      <Butterfly size={size} color={colors.color} accent={colors.accent} flapDur={flapDur} />
+    </motion.div>
+  )
+}
+
+// ─── Welcome title card ───────────────────────────────────────────────────────
+
+const WELCOME_WORDS = ['Welcome', 'to', 'the', 'Sameer', 'Motwani', 'portfolio']
+
+function WelcomeReveal() {
+  return (
+    <p
+      aria-label="Welcome to the Sameer Motwani portfolio"
+      className="font-body text-ink/70 text-sm md:text-base tracking-[0.3em] uppercase flex flex-wrap justify-center gap-x-3 gap-y-1"
+      style={{ color: 'rgba(20,20,20,0.72)' }}
+    >
+      {WELCOME_WORDS.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden">
+          <motion.span
+            className="inline-block"
+            initial={{ y: '115%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.65, delay: 0.35 + i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </p>
+  )
+}
+
+// ─── Scene ────────────────────────────────────────────────────────────────────
+
+export default function HeroScene() {
+  const ref = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end end'],
+  })
+
+  // camera push-in
+  const bgScale = useTransform(scrollYProgress, [0.1, 0.62], [1, 1.45])
+  const bgY = useTransform(scrollYProgress, [0.1, 0.62], ['0%', '-4%'])
+  // white sky grades to black
+  const darken = useTransform(scrollYProgress, [0.3, 0.62], [0, 1])
+  const vignette = useTransform(scrollYProgress, [0.12, 0.55], [0, 1])
+  // title card exits early
+  const textOpacity = useTransform(scrollYProgress, [0.08, 0.24], [1, 0])
+  const textY = useTransform(scrollYProgress, [0.08, 0.24], [0, -60])
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0])
+
+  if (reduced) {
+    // static, accessible version — no pin, no scrub
+    return (
+      <section id="home" className="relative h-screen overflow-hidden">
+        <Image
+          src="/scenes/butterflies.webp"
+          alt="Sameer Motwani surrounded by butterflies against a white sky"
+          fill
+          priority
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 flex flex-col items-center justify-between py-[12vh] px-6">
+          <p className="font-body text-sm tracking-[0.3em] uppercase" style={{ color: 'rgba(20,20,20,0.72)' }}>
+            Welcome to the Sameer Motwani portfolio
+          </p>
+          <div className="text-center">
+            <h1 className="font-display text-white leading-[0.9]" style={{ fontSize: 'clamp(3.5rem, 11vw, 9rem)', textShadow: '0 4px 30px rgba(0,0,0,0.45)' }}>
+              SAMEER MOTWANI
+            </h1>
+            <p className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase">
+              engineer · founder · builder — beppu, japan
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section ref={ref} id="home" className="relative" style={{ height: '260vh' }}>
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* backdrop */}
+        <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
+          <Image
+            src="/scenes/butterflies.webp"
+            alt="Sameer Motwani surrounded by butterflies against a white sky"
+            fill
+            priority
+            className="object-cover object-top"
+            sizes="100vw"
+          />
+        </motion.div>
+
+        {/* ambient butterfly field */}
+        <div className="absolute inset-0 z-10">
+          {AMBIENT.map((cfg, i) => (
+            <AmbientButterfly key={i} cfg={cfg} progress={scrollYProgress} />
+          ))}
+          <Sweeper
+            progress={scrollYProgress}
+            from={-14}
+            to={112}
+            top={[64, 18]}
+            size={150}
+            colors={MONARCH}
+            flapDur={0.55}
+          />
+          <Sweeper
+            progress={scrollYProgress}
+            from={108}
+            to={-22}
+            top={[30, 72]}
+            size={120}
+            colors={TEAL}
+            flapDur={0.6}
+          />
+        </div>
+
+        {/* vignette that closes in */}
+        <motion.div
+          className="absolute inset-0 z-30 pointer-events-none"
+          style={{
+            opacity: vignette,
+            background: 'radial-gradient(ellipse at center, transparent 26%, rgba(5,5,5,0.92) 82%)',
+          }}
+        />
+        {/* full darkening pass */}
+        <motion.div className="absolute inset-0 z-30 pointer-events-none bg-ink" style={{ opacity: darken }} />
+
+        {/* title card */}
+        <motion.div
+          className="absolute inset-0 z-40 flex flex-col items-center justify-between pointer-events-none"
+          style={{ opacity: textOpacity, y: textY, paddingTop: '13vh', paddingBottom: '14vh' }}
+        >
+          <WelcomeReveal />
+
+          <div className="text-center px-4">
+            <motion.h1
+              initial={{ opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 0.9, delay: 1.55, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-white leading-[0.9]"
+              style={{
+                fontSize: 'clamp(3.5rem, 11vw, 9rem)',
+                textShadow: '0 4px 30px rgba(0,0,0,0.45)',
+              }}
+            >
+              SAMEER MOTWANI
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 2.15 }}
+              className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-4 lowercase"
+            >
+              engineer · founder · builder — beppu, japan
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* scroll cue */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2"
+          style={{ opacity: cueOpacity }}
+        >
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.7, duration: 0.8 }}
+            className="font-body text-[10px] tracking-[0.35em] uppercase text-white/70"
+          >
+            scroll
+          </motion.span>
+          <div className="w-px h-12 overflow-hidden">
+            <div className="w-px h-12 bg-white/60" style={{ animation: 'scrollCue 1.8s ease-in-out infinite' }} />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

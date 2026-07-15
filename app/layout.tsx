@@ -1,35 +1,46 @@
-import type { Metadata } from 'next'
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Anton, Space_Grotesk, Black_Ops_One } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
-import StarField from '@/components/StarField'
+import SmoothScroll from '@/components/SmoothScroll'
 
-const cormorant = Cormorant_Garamond({
+const anton = Anton({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
+  weight: '400',
+  variable: '--font-display',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-dm-sans',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+const blackOps = Black_Ops_One({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-stencil',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Sameer Motwani — AI Builder',
+  title: 'Sameer Motwani — Engineer · Founder · Builder',
   description:
-    'I build AI that ships. Combining computer vision, LLMs, and modern web infrastructure to create products people actually use.',
-  keywords: ['AI', 'Machine Learning', 'Web Development', 'Portfolio', 'Sameer Motwani'],
+    'Engineer and founder in Beppu, Japan. Production infrastructure, AI systems, and the occasional game built as a side quest.',
+  keywords: ['AI', 'Software Engineer', 'Founder', 'Portfolio', 'Sameer Motwani'],
+}
+
+export const viewport: Viewport = {
+  themeColor: '#050505',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="text-[#f5f5f5] antialiased" style={{ backgroundColor: 'transparent' }}>
-        <StarField />
+    <html lang="en" className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable}`}>
+      <body className="bg-ink text-paper antialiased">
+        <SmoothScroll />
         <CustomCursor />
         {children}
       </body>
