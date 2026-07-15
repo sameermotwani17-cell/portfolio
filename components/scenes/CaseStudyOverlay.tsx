@@ -5,12 +5,13 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import type { Album, VaultItem } from '@/lib/projects'
 
-type OverlayItem = (Album | VaultItem) & { cover?: string | null; stencil?: boolean; logo?: string }
+type OverlayItem = (Album | VaultItem) & { cover?: string | null; stencil?: boolean; mono?: boolean; logo?: string }
 
 /**
- * Full-screen case study. The panel shares layoutId `album-{id}` with its
- * grid cover so the album visually "opens". Traps focus, closes on Esc,
- * locks body + Lenis scroll while open.
+ * Full-screen case study, themed per project (accent color; RETRO gets the
+ * monochrome raven treatment). Content is a design-slide roadmap — numbered
+ * stages with one headline and a few short points — not walls of text.
+ * Traps focus, closes on Esc, locks body + Lenis scroll while open.
  */
 export default function CaseStudyOverlay({
   item,
@@ -67,7 +68,13 @@ export default function CaseStudyOverlay({
   }, [onClose])
 
   const accent = item.accent
+  const mono = !!item.mono
   const displayFont = item.stencil ? 'var(--font-stencil)' : 'var(--font-display)'
+  const panelBg = mono
+    ? '#000'
+    : `radial-gradient(ellipse 90% 40% at 50% 0%, ${accent}14, transparent 60%), #0c0c0c`
+  const hairline = mono ? 'rgba(255,255,255,0.22)' : `${accent}35`
+  const softText = 'rgba(245,245,242,0.6)'
 
   return (
     <motion.div
@@ -94,13 +101,15 @@ export default function CaseStudyOverlay({
         onClick={(e) => e.stopPropagation()}
         className="relative mx-auto w-full max-w-3xl rounded-2xl overflow-hidden"
         style={{
-          background: '#0c0c0c',
-          border: `1px solid ${accent}35`,
-          boxShadow: `0 40px 120px rgba(0,0,0,0.9), 0 0 80px ${accent}12`,
+          background: panelBg,
+          border: `1px solid ${hairline}`,
+          boxShadow: mono
+            ? '0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(255,255,255,0.06)'
+            : `0 40px 120px rgba(0,0,0,0.9), 0 0 80px ${accent}12`,
         }}
       >
         {/* hero art */}
-        <div className="relative h-52 md:h-72 overflow-hidden">
+        <div className="relative h-52 md:h-64 overflow-hidden">
           {item.cover ? (
             <Image src={item.cover} alt="" fill className="object-cover" sizes="768px" unoptimized={item.cover.startsWith('http')} />
           ) : (
@@ -108,21 +117,12 @@ export default function CaseStudyOverlay({
           )}
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, #0c0c0c 4%, rgba(12,12,12,0.35) 45%, transparent 100%)' }}
-          />
-          {/* spinning vinyl peeking out */}
-          <div
-            aria-hidden
-            className="absolute -right-16 top-1/2 -translate-y-1/2 w-48 h-48 rounded-full hidden md:block"
             style={{
-              background: `radial-gradient(circle, #0a0a0a 18%, #151515 19%, #0a0a0a 21%, #131313 40%, #0a0a0a 41%, #161616 62%, #0b0b0b 63%, #181818 84%, #0c0c0c 85%)`,
-              border: `1px solid ${accent}30`,
-              animation: 'vinylSpin 9s linear infinite',
+              background: mono
+                ? 'linear-gradient(to top, #000 4%, rgba(0,0,0,0.3) 50%, transparent 100%)'
+                : 'linear-gradient(to top, #0c0c0c 4%, rgba(12,12,12,0.35) 45%, transparent 100%)',
             }}
-          >
-            <div className="absolute inset-0 m-auto w-14 h-14 rounded-full" style={{ background: accent, opacity: 0.85 }} />
-            <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-ink" />
-          </div>
+          />
         </div>
 
         {/* close */}
@@ -150,7 +150,11 @@ export default function CaseStudyOverlay({
           {item.badge && (
             <span
               className="inline-block font-body text-[10px] tracking-[0.14em] uppercase rounded px-2.5 py-1 mb-3"
-              style={{ color: accent, border: `1px solid ${accent}45`, background: `${accent}12` }}
+              style={{
+                color: mono ? '#fff' : accent,
+                border: `1px solid ${hairline}`,
+                background: mono ? 'rgba(255,255,255,0.06)' : `${accent}12`,
+              }}
             >
               {item.badge}
             </span>
@@ -168,47 +172,42 @@ export default function CaseStudyOverlay({
           {/* links */}
           {item.detail.links && item.detail.links.length > 0 && (
             <div className="flex flex-wrap gap-2.5 mt-4">
-              {item.detail.links.map((link) =>
-                link.href.startsWith('TODO') ? (
-                  <span
-                    key={link.label}
-                    className="font-body text-[11px] tracking-[0.12em] uppercase rounded-md px-3 py-1.5 opacity-60"
-                    style={{ color: accent, border: `1px dashed ${accent}60` }}
-                  >
-                    {link.label} — TODO: link coming
-                  </span>
-                ) : (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body text-[11px] tracking-[0.12em] uppercase rounded-md px-3 py-1.5 transition-colors hover:text-white"
-                    style={{ color: accent, border: `1px solid ${accent}50`, background: `${accent}0d` }}
-                  >
-                    {link.label} ↗
-                  </a>
-                )
-              )}
+              {item.detail.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-[11px] tracking-[0.12em] uppercase rounded-md px-3 py-1.5 transition-colors hover:text-white"
+                  style={{
+                    color: mono ? '#fff' : accent,
+                    border: `1px solid ${hairline}`,
+                    background: mono ? 'rgba(255,255,255,0.06)' : `${accent}0d`,
+                  }}
+                >
+                  {link.label} ↗
+                </a>
+              ))}
             </div>
           )}
         </div>
 
         {/* body */}
         <div className="px-6 md:px-10 py-7 md:py-9">
-          <p className="font-body text-sm md:text-[0.95rem] leading-relaxed" style={{ color: 'rgba(245,245,242,0.82)' }}>
+          <p className="font-body text-sm md:text-[0.95rem] leading-relaxed" style={{ color: 'rgba(245,245,242,0.8)' }}>
             {item.detail.overview}
           </p>
 
+          {/* stats */}
           {item.detail.stats && item.detail.stats.length > 0 && (
             <div className="grid grid-cols-2 gap-3 mt-7">
               {item.detail.stats.map((stat) => (
                 <div
                   key={stat.label}
                   className="rounded-xl px-4 py-3.5"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${accent}22` }}
+                  style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : `${accent}22`}` }}
                 >
-                  <div className="font-display text-2xl md:text-3xl" style={{ color: accent }}>
+                  <div className="font-display text-2xl md:text-3xl" style={{ color: mono ? '#fff' : accent }}>
                     {stat.value}
                   </div>
                   <div className="font-body text-[11px] leading-snug mt-1.5" style={{ color: 'rgba(245,245,242,0.5)' }}>
@@ -219,29 +218,64 @@ export default function CaseStudyOverlay({
             </div>
           )}
 
-          {item.detail.sections.map((section) => (
-            <div key={section.title} className="mt-8">
-              <div className="flex items-center gap-2.5 mb-3.5">
-                <span className="w-5 h-px" style={{ background: accent }} />
-                <span className="font-body text-[10px] tracking-[0.22em] uppercase font-semibold" style={{ color: accent }}>
-                  {section.title}
-                </span>
+          {/* the roadmap */}
+          <div className="relative mt-10">
+            {/* rail */}
+            <div
+              aria-hidden
+              className="absolute left-[19px] top-3 bottom-3 w-px"
+              style={{ background: `linear-gradient(to bottom, ${mono ? 'rgba(255,255,255,0.4)' : accent}, transparent)` }}
+            />
+            {item.detail.flow.map((stage, i) => (
+              <div key={stage.label} className="relative flex gap-5 md:gap-6 pb-9 last:pb-0">
+                {/* node */}
+                <div
+                  className="relative z-[2] shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-display text-sm"
+                  style={{
+                    background: mono ? '#000' : '#0c0c0c',
+                    border: `1.5px solid ${mono ? 'rgba(255,255,255,0.6)' : accent}`,
+                    color: mono ? '#fff' : accent,
+                  }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </div>
+                <div className="pt-0.5 min-w-0">
+                  <span
+                    className="block text-base"
+                    style={{ fontFamily: 'var(--font-scrawl), cursive', color: mono ? 'rgba(255,255,255,0.75)' : accent }}
+                  >
+                    {stage.label}
+                  </span>
+                  <h4
+                    className="text-white leading-tight mt-1"
+                    style={{ fontFamily: displayFont, fontSize: 'clamp(1.15rem, 3vw, 1.6rem)' }}
+                  >
+                    {stage.headline}
+                  </h4>
+                  {stage.points && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {stage.points.map((p) => (
+                        <span
+                          key={p}
+                          className="font-body text-[11px] md:text-xs px-2.5 py-1 rounded-md"
+                          style={{
+                            border: `1px solid ${mono ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.1)'}`,
+                            background: 'rgba(255,255,255,0.03)',
+                            color: softText,
+                          }}
+                        >
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              <ul className="flex flex-col gap-2">
-                {section.items.map((line, i) => (
-                  <li key={i} className="flex gap-2.5 font-body text-[13px] md:text-sm leading-relaxed" style={{ color: 'rgba(245,245,242,0.72)' }}>
-                    <span className="shrink-0 pt-[3px] text-[11px]" style={{ color: accent }}>
-                      —
-                    </span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
 
           {/* tech */}
-          <div className="mt-9 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="mt-10 pt-6" style={{ borderTop: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.07)'}` }}>
             <div className="font-body text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: 'rgba(245,245,242,0.35)' }}>
               Stack
             </div>
@@ -272,7 +306,7 @@ export function CodeCover({ accent, title }: { accent: string; title: string }) 
   return (
     <div
       className="absolute inset-0 overflow-hidden"
-      style={{ background: `linear-gradient(150deg, #0a1630 0%, #060a18 55%, #050505 100%)` }}
+      style={{ background: `linear-gradient(150deg, #1a1030 0%, #0a0618 55%, #050505 100%)` }}
       aria-hidden
     >
       {/* stacked slide frames */}

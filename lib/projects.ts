@@ -1,13 +1,19 @@
 // ─── Shared project types ─────────────────────────────────────────────────────
 
 export type ProjectStat = { value: string; label: string }
-export type ProjectSection = { title: string; items: string[] }
 export type ProjectLink = { label: string; href: string }
+
+/** one node in the case-study roadmap */
+export type FlowStage = {
+  label: string
+  headline: string
+  points?: string[]
+}
 
 export type ProjectDetail = {
   overview: string
   stats?: ProjectStat[]
-  sections: ProjectSection[]
+  flow: FlowStage[]
   links?: ProjectLink[]
 }
 
@@ -26,6 +32,8 @@ export type Album = {
   cover: string | null
   /** scrapyard uses the stencil face */
   stencil?: boolean
+  /** monochrome black/white case-study theme (RETRO raven) */
+  mono?: boolean
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -40,6 +48,7 @@ export type VaultItem = {
   tech: string[]
   badge: string | null
   accent: string
+  mono?: boolean
   /** brand logo chip (e.g. Stick'Em) */
   logo?: string
   detail: ProjectDetail
@@ -58,55 +67,38 @@ export const albums: Album[] = [
     tracklist: ['01 — The Regression', '02 — 678ms', '03 — Two Lanes', '04 — The Fallback'],
     tech: ['Next.js', 'React', 'Node', 'Sharp', 'Supabase / Postgres', 'Google Slides & Drive API', 'Vercel'],
     badge: 'Hult Prize Global Winner client',
-    accent: '#3b82f6',
+    accent: '#a855f7',
     cover: null,
     logo: '/stickem.png',
     detail: {
       overview:
-        "Contracted by the CEO of Stick'Em Pte Ltd — a Singapore EdTech company and Hult Prize Global 2025 winner — to fix a revenue-impacting performance failure: lesson delivery relied on embedded Google Slides iframes that black-screened on the slow connections common in Brunei and the Philippines. Replaced them with a pre-processed WebP asset pipeline and a virtualized scroll viewer, with the legacy iframe kept as an automatic fallback so production could never regress.",
+        "Hired by the CEO of Stick'Em — Hult Prize Global 2025 winner — to fix lesson delivery that black-screened on slow connections. Replaced Google Slides iframes with a pre-processed WebP pipeline and a virtualized viewer, legacy iframe kept as automatic fallback.",
       stats: [
-        { value: '~15x', label: 'Faster load on simulated Slow-3G (678ms vs 10s+)' },
-        { value: '55+', label: 'Slides per deck validated in the virtualized viewer' },
-        { value: '2', label: 'Countries of teachers served (Brunei, Philippines)' },
-        { value: '1', label: 'Public-bundle secret exposure caught before merge' },
+        { value: '~15x', label: 'Faster on simulated Slow-3G (678ms vs 10s+)' },
+        { value: '55+', label: 'Slides per deck validated in the viewer' },
+        { value: '2', label: 'Countries of teachers served' },
+        { value: '1', label: 'Public-bundle secret caught before merge' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'The Architecture',
-          items: [
-            'Replaced live Google Slides iframes with static WebP served from a CDN — eliminating the per-request dependency on Google’s slide-rendering infrastructure',
-            'Pipeline: Airtable lesson metadata → Google Slides + Drive API (dedicated GCP service account) → Sharp WebP conversion → Supabase Storage + Postgres',
-            'Animated-GIF detection via binary magic-byte inspection (47 49 46) on raw Drive buffers, working around a Slides API limitation that silently flattens GIFs',
-            'Cache invalidation from Google Drive revision-ID comparison with a delete-and-reinsert strategy after an upsert approach caused stale-cache bugs',
-            'Converted native Slides EMU coordinates (9,144,000 × 5,143,500 units) to CSS percentage positioning for responsive click-through overlays',
-          ],
+          label: 'the problem',
+          headline: 'Google Slides iframes died on slow connections',
+          points: ['Teachers in Brunei & the Philippines', 'Revenue-linked production failure', 'Black screens, broken GIFs'],
         },
         {
-          title: 'The Scroll Viewer',
-          items: [
-            'Vertically-snapping virtualized viewer rendering only the current slide ± 2 neighbors — DOM and memory bounded regardless of deck length',
-            'Dual IntersectionObserver design: one tracks the current slide with hysteresis to avoid flicker, the second gates media loading at a 0.6 visibility threshold',
-            'Two-lane asset fetch: WebP slides load via native image src caching while GIFs route through a dedicated blob-fetch queue off the render path',
-            'YouTube iframes mount and unmount with visibility, so offscreen players stop consuming bandwidth and CPU',
-            'Client-validated by the CEO across Fast-4G and Slow-4G throttling profiles',
-          ],
+          label: 'the rebuild',
+          headline: 'Slides API → Sharp → WebP on a CDN',
+          points: ['Magic-byte GIF detection on raw Drive buffers', 'Revision-ID cache invalidation', 'EMU → CSS coordinate translation for overlays'],
         },
         {
-          title: 'Verification Discipline',
-          items: [
-            'Confirmed every reported completion against live Supabase updated_at timestamps instead of trusting self-reported success — caught multiple false positives',
-            'Audited an automated QA sweep and found YouTube-slide health checks overclaimed: only 2 of 13 carried a genuine ok:true',
-            'Local bulk-processing script built outside the Vercel request lifecycle to sidestep serverless timeout limits for ~3-minute deck jobs',
-            'Stale-processing safeguard: decks stuck over 10 minutes are auto-errored and made retry-eligible',
-          ],
+          label: 'the viewer',
+          headline: 'Virtualized snap-scroll: current slide ± 2',
+          points: ['Dual IntersectionObserver media gating', 'Two-lane fetch: WebP direct, GIFs queued', 'YouTube mounts only when visible'],
         },
         {
-          title: 'Security & Standards',
-          items: [
-            'Flagged a server-only secret named with a NEXT_PUBLIC_ prefix before merge — it would have compiled into the public client bundle; corrected, re-minted, and moved behind a server-only endpoint',
-            'Strict branch isolation: all work on feature/slide-viewer, zero commits to main, existing iframe kept as automatic fallback',
-            'Ported a TypeScript/App-Router prototype into the production Pages-Router/JSX codebase without disturbing its established conventions',
-          ],
+          label: 'the receipts',
+          headline: '678ms vs 10s+ on Slow-3G',
+          points: ['SQL-verified QA, never self-reports', 'NEXT_PUBLIC_ secret exposure stopped pre-merge', 'Zero commits to main, fallback-first'],
         },
       ],
       links: [],
@@ -127,41 +119,33 @@ export const albums: Album[] = [
     stencil: true,
     detail: {
       overview:
-        'A Call of Duty-inspired 3D multiplayer browser FPS, built as a one-day experiment: instead of writing code, I authored a ~200-line specification prompt and had Claude Code execute it milestone-by-milestone, with proof-of-run gates and 91 automated tests along the way. Free-for-all deathmatch in an urban salvage yard, live on the open web. No monetization intent — pure build-in-public for Retro Studios. The transferable asset is not the game; it is the spec-writing skill and the reusable pipeline.',
+        'A one-day experiment: author a ~200-line spec, let Claude Code execute it milestone-by-milestone with proof-of-run gates and 91 automated tests. Free-for-all deathmatch in a salvage yard, live on the open web. The transferable asset is the spec — the game is the receipt.',
       stats: [
-        { value: '1 day', label: 'From blank prompt to deployed multiplayer FPS' },
-        { value: '0', label: 'Lines of code written by hand — spec-driven build' },
-        { value: '91', label: 'Automated tests gating each milestone' },
-        { value: '30Hz', label: 'Deterministic fixed-timestep server simulation' },
+        { value: '1 day', label: 'Blank prompt to deployed multiplayer FPS' },
+        { value: '0', label: 'Lines of code written by hand' },
+        { value: '91', label: 'Automated tests gating milestones' },
+        { value: '30Hz', label: 'Deterministic fixed-timestep sim' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'The Game',
-          items: [
-            'Free-for-all deathmatch — first to 30 kills or a 10-minute timer',
-            'Urban salvage yard, ~60m × 60m at Shipment/Rust scale: shipping containers, a 2-story concrete skeleton, car wrecks, 3 vertical layers max',
-            'Up to 8 humans per room; the server backfills with AI bots so at least 4 combatants are always active',
-            'Feel targets hit: 250–400ms time-to-kill, 100 HP with regen after 4s, 3s respawn, 60fps',
-            'FSM-based bot tactics with voice callouts — "contact!", "man down!"',
-          ],
+          label: 'the spec',
+          headline: '~200 lines. Zero code written by hand.',
+          points: ['Authored the spec, Claude Code executed', 'Milestone gates with proof-of-run', '91 automated tests'],
         },
         {
-          title: 'The Engineering',
-          items: [
-            'Server-authoritative netcode with client-side prediction and lag compensation',
-            'Deterministic 30Hz fixed-timestep simulation on Cloudflare Durable Objects',
-            'Hand-rolled AABB collision and raycast hitscan — no physics engine',
-            'Three.js client in vanilla ES modules: no React, no bundler',
-            'AI-generated textures, gun SFX, and music',
-          ],
+          label: 'the game',
+          headline: '8-player FFA deathmatch in a salvage yard',
+          points: ['First to 30 kills or 10 minutes', '250–400ms TTK · 3s respawn · 60fps', 'FSM bots yelling "contact!"'],
         },
         {
-          title: 'The Actual Point',
-          items: [
-            'Zero hand-written code — the deliverable was a ~200-line spec precise enough for an agent to build against',
-            'Milestone-based pipeline with proof-of-run at each stage, not one giant prompt-and-pray',
-            'The reusable asset is the spec-writing discipline and the build pipeline — the game is just the receipt',
-          ],
+          label: 'the netcode',
+          headline: 'Server-authoritative, deterministic 30Hz',
+          points: ['Client-side prediction + lag compensation', 'Hand-rolled AABB + raycast hitscan', 'Cloudflare Durable Objects'],
+        },
+        {
+          label: 'the point',
+          headline: 'Build-in-public for Retro Studios',
+          points: ['No product, no monetization — on purpose', 'The spec-writing skill is the reusable asset'],
         },
       ],
       links: [{ label: 'Play SCRAPYARD', href: 'https://scrapyard-lake.vercel.app' }],
@@ -176,57 +160,37 @@ export const albums: Album[] = [
     tracklist: ['01 — 20 Categories', '02 — 500 Users', '03 — City Hall', '04 — StarLabs'],
     tech: ['React', 'TypeScript', 'Express.js', 'OpenAI Vision API', 'PWA'],
     badge: '1st Place — APU Hackathon 2025',
-    accent: '#f97316',
+    accent: '#3f9142',
     cover: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&q=80',
     detail: {
       overview:
-        'B2B SaaS platform that reduces municipal waste mis-sorting through AI image recognition, a localized rule engine, and behavioral data collection. Built and piloted in Beppu, Japan — a city with 20+ waste categories, significant foreign resident population, and zero real-time sorting guidance. A completed chapter: the project was wound down and folded into StarLabs, carrying its lessons (and its users) forward.',
+        'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city — then honestly wound down and folded into StarLabs.',
       stats: [
         { value: '95.3%', label: 'Survey adoption intent (n=400)' },
         { value: '500+', label: 'Organic users · zero paid acquisition' },
         { value: '¥25K', label: 'Monthly operating cost' },
-        { value: '2x', label: 'Podium finishes: APU Hackathon 1st · Hult Prize APU runner-up' },
+        { value: '2x', label: 'Podiums: APU Hackathon 1st · Hult Prize runner-up' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'The Problem',
-          items: [
-            'Beppu city uses 20+ distinct waste categories with weekday and week-of-month rules',
-            'Foreign residents, students, and tourists have no reliable real-time sorting guidance',
-            'Mis-sorted waste gets incinerated — costing municipalities money and increasing emissions',
-            'The barrier is not awareness — it is friction at the exact moment of disposal',
-            'Existing guidance: a 40-page PDF in Japanese, updated annually',
-          ],
+          label: 'the problem',
+          headline: '20+ waste categories, zero real-time guidance',
+          points: ['Weekday + week-of-month rules', 'The official UX: a 40-page Japanese PDF', 'Friction at the exact moment of disposal'],
         },
         {
-          title: 'System Architecture',
-          items: [
-            'AI Vision Layer — camera-based item identification tuned for poor lighting and partial items',
-            'Waste Rule Engine — machine-readable logic from official Beppu municipal PDFs, covering weekday rules and week-of-month schedules',
-            'Behavioral Data Layer — scan volume, category distribution, and misclassification patterns per building',
-            'B2B Dashboard — property managers view compliance trends and resident engagement metrics',
-            'QR Distribution — physical stickers at waste stations, no app install required',
-          ],
+          label: 'the build',
+          headline: 'Photo in → disposal instructions out',
+          points: ['GPT-4V vision layer, tuned for bad lighting', 'Rule engine reverse-engineered from municipal PDFs', 'QR stickers at waste stations — no install'],
         },
         {
-          title: 'Go-To-Market Journey',
-          items: [
-            'Phase 1 · Build: architected backend from scratch, reverse-engineered Beppu waste rules from Japanese PDFs',
-            'Phase 2 · Validate: 400-person survey (95.3% adoption), 500 organic users in first month',
-            'Phase 3 · Institutional: engaged Beppu City government, presented pilot framework and cost-reduction logic',
-            'Phase 4 · Pilot: free QR sticker pilots with local retailers and property managers',
-            'Final phase · Sunset: wound down and folded into StarLabs — the team, the systems thinking, and the users moved on with it',
-          ],
+          label: 'the traction',
+          headline: '500+ organic users in month one',
+          points: ['95.3% adoption intent across 400 surveyed', 'Beppu City government engagement', 'B2B dashboard for property managers'],
         },
         {
-          title: 'My Role',
-          items: [
-            'Full system architecture and backend development',
-            'AI prompt engineering and waste classification logic',
-            'Financial modeling: 3-year projections, NPV, sensitivity analysis',
-            'Go-to-market strategy and institutional outreach',
-            'City government engagement and pilot design',
-          ],
+          label: 'the chapter close',
+          headline: 'Wound down, folded into StarLabs',
+          points: ['1st place APU Hackathon 2025', 'Hult Prize APU runner-up + Best Speaker', 'The systems thinking moved on with the team'],
         },
       ],
       links: [],
@@ -242,47 +206,46 @@ export const albums: Album[] = [
     tracklist: ["01 — Director's Brief", '02 — Anti-Perfection', '03 — 12 Editions', '04 — One Person'],
     tech: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Seedance 2.0', 'Suno', 'CapCut', 'Next.js 14', 'Supabase', 'Vercel'],
     badge: 'Live paid client campaign',
-    accent: '#fbbf24',
-    cover: '/cinematic.png',
+    accent: '#f5f5f2',
+    cover: '/scenes/retro-raven.webp',
+    mono: true,
     detail: {
       overview:
-        'Founder and sole operator of Retro Studios (under StarLabs), a one-person AI-powered creative studio producing agency-grade cinematic brand content — statics, reels, and commercial ads — without a traditional crew, studio, or production budget. Core thesis: one person with the right AI stack and systems thinking can outproduce a full creative agency. Currently running full creative direction and technical production for DK2R Football Wear, a premium 12-country limited-edition jersey brand tied to the 2026 FIFA World Cup.',
+        'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Currently running full creative direction and technical production for DK2R Football Wear — a premium 12-country jersey brand tied to the 2026 FIFA World Cup.',
       stats: [
         { value: '12', label: 'Country editions art-directed' },
-        { value: '36', label: 'SKU variants (3 silhouettes × 12 countries)' },
+        { value: '36', label: 'SKU variants (3 silhouettes × 12)' },
         { value: '150+', label: 'AI-generated hero images delivered' },
-        { value: '1', label: 'Person doing the work of a full agency' },
+        { value: '1', label: 'Person doing the work of an agency' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'DK2R — 2026 World Cup Capsule',
-          items: [
-            'Full creative direction and technical production for a premium jersey brand: 300 numbered pieces per edition, no restocks',
-            'Completed 60-image campaigns for Mexico, Brazil, USA, England ("Crown & Country"), and Argentina ("Vamos Argentina") — each with a distinct visual register',
-            '12-country content pipeline: 10 videos + 10 statics per market, with commercial-grade ads planned for four flagship markets',
-            '55-asset, 14-edition manufacturing QA report with zero redos — translating AI reference renders into factory-ready sublimation sheets',
-            'Solo-built the DK2R e-commerce platform: Next.js 14 + Supabase, live PayPal checkout + Stripe, Vercel deploy with full DNS/MX/Workspace setup',
-          ],
+          label: 'the thesis',
+          headline: 'One operator outproduces an agency',
+          points: ['Founded April 2026 under StarLabs', 'Statics, reels, commercial ads — no crew'],
         },
         {
-          title: 'The Prompt System',
-          items: [
-            '8-layer, reference-locked prompt architecture reused across every new country edition — cutting generation-to-approval time and eliminating jersey-accuracy errors',
-            '"Anti-Perfection Layer" designed to defeat AI-image tells: skin, lighting, fabric, backgrounds, pose, catchlights, focus plane',
-            'Locked "Visual DNA" blocks for cross-campaign consistency: ARRI Alexa colour science, Kodak 2383 emulation, cold blue-grey palette',
-            "Director's Brief methodology before every generation: who / where / what just happened / emotion / next action / camera awareness",
-          ],
+          label: 'the client',
+          headline: 'DK2R — 2026 World Cup capsule',
+          points: ['12 editions · 36 SKUs · 300 numbered pieces each', '60-image campaigns: Mexico, Brazil, USA, England, Argentina', 'Solo-built Next.js + Supabase store, live PayPal'],
         },
         {
-          title: 'The Business',
-          items: [
-            'Productized pricing: UGC ads, cinematic reels, music videos, monthly retainers',
-            'No paid engagement without a signed contract and upfront deposit',
-            'Every campaign delivered as both a client asset and a portfolio case study — the studio reel compounds with every job',
-          ],
+          label: 'the system',
+          headline: '8-layer, reference-locked prompt architecture',
+          points: ['"Anti-Perfection Layer" kills AI-image tells', 'Locked Visual DNA: ARRI colour science, Kodak 2383', "Director's Brief before every generation"],
+        },
+        {
+          label: 'the bridge',
+          headline: 'AI renders → factory production sheets',
+          points: ['55-asset, 14-edition QA report, zero redos', 'Contract + deposit before any engagement', 'Every job compounds the studio reel'],
         },
       ],
-      links: [{ label: 'Instagram', href: 'https://www.instagram.com/retro.studios_' }],
+      links: [
+        {
+          label: 'Instagram',
+          href: 'https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr',
+        },
+      ],
     },
   },
 ]
@@ -298,55 +261,32 @@ export const vault: VaultItem[] = [
     short: 'AI-powered curriculum alignment engine for global STEAM deployment.',
     tech: ['React 18', 'Express 5', 'OpenAI API', 'Airtable', 'Zod', 'pdfmake', 'Node.js'],
     badge: 'Hult Prize Global Winner 2025',
-    accent: '#3b82f6',
+    accent: '#a855f7',
     logo: '/stickem.png',
     detail: {
       overview:
-        "Teacher-facing B2B web application that automatically maps STEM lesson content to official government curriculum standards across the UK, India, and USA — eliminating hours of manual curriculum planning work per teacher per term. Deployed for Stick'Em, a Hult Prize Global Winner in education.",
+        'Maps STEM lessons to official government curriculum standards across the UK, India, and USA — killing hours of manual planning per teacher per term, and unblocking the procurement requirement in institutional sales.',
       stats: [
         { value: '13', label: 'Curriculum standards (UK, India, USA)' },
         { value: '72+', label: 'Lessons served from Airtable' },
         { value: '3', label: 'Countries deployed' },
         { value: 'temp 0.3', label: 'GPT-4o-mini alignment engine' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'The Problem It Solves',
-          items: [
-            "Teachers using Stick'Em's physical STEM lessons manually cross-reference content with national curricula",
-            'This process is slow, error-prone, and a barrier to school adoption',
-            'Curriculum alignment is a procurement requirement in most institutional sales cycles',
-            'No automated tool existed for multi-country, multi-standard STEM content alignment',
-          ],
+          label: 'the problem',
+          headline: 'Manual curriculum mapping blocks school sales',
+          points: ['Slow, error-prone teacher cross-referencing', 'Alignment is a procurement requirement'],
         },
         {
-          title: 'System Architecture',
-          items: [
-            'Teacher UI — React 18 frontend for lesson selection and alignment output',
-            '/api/lessons — Airtable proxy serving 72+ lessons with 60-minute in-memory cache',
-            '/api/curricula — 13 curriculum JSON files verbatim from government documents',
-            '/api/curriculum/generate — core alignment engine with six-step reasoning framework',
-            '/api/translate/batch — multi-language output including Hindi/Devanagari with regex validation',
-            'PDF export — server-side pdfmake, landscape A4, full alignment data with fit badges and bridge statements',
-          ],
+          label: 'the engine',
+          headline: 'LLM picks indices — it never writes standards',
+          points: ['Index-only selection kills fabricated codes', 'Six-step reasoning, step 1 internal-only', 'Two-tier validation with one auto-retry'],
         },
         {
-          title: 'Key Engineering Decisions',
-          items: [
-            'Anti-hallucination via index-only selection — LLM selects integer indices from pre-loaded government JSON, never writes curriculum text, structurally preventing fabricated codes',
-            'Six-step reasoning framework — concept extraction, fit scoring, descriptor selection, bridge statement, adaptation suggestions, activity generation. Step 1 is internal-only to prevent reasoning leakage',
-            'Two-tier validation with automatic retry — hard errors (wrong IDs, out-of-range indices, missing bridge statements, Zod failures) block output and trigger one automatic LLM retry with error context injected',
-            'Fit classification: direct (80–100), indirect (50–79), weak (20–49), no_fit (0–19)',
-          ],
-        },
-        {
-          title: 'Scale & Scope',
-          items: [
-            '13 curriculum standards: UK National Curriculum, India CBSE / AI / IT / CS, USA CSTA / NGSS',
-            'Multi-language support including Hindi/Devanagari output with regex-level validation',
-            '72+ lessons from Airtable with in-memory caching to reduce API costs',
-            'PDF export with full alignment data, fit badges, bridge statements, and suggested activities',
-          ],
+          label: 'the scale',
+          headline: '13 standards · 3 countries · 72+ lessons',
+          points: ['UK NC · India CBSE/AI/IT/CS · USA CSTA/NGSS', 'Hindi/Devanagari output with regex validation', 'Server-side PDF export with fit badges'],
         },
       ],
       links: [
@@ -366,45 +306,22 @@ export const vault: VaultItem[] = [
     accent: '#f97316',
     detail: {
       overview:
-        'A self-built AI coding agent that accepts natural language prompts and autonomously makes code changes to any GitHub repository — cloning, editing, committing, and pushing without human intervention. Built from scratch at 3AM as a first systems project. Comparable in concept to Devin and GitHub Copilot Workspace, but hand-rolled.',
-      sections: [
+        'A hand-rolled coding agent: natural-language prompt in, autonomous clone-edit-commit-push out. Built from scratch at 3AM as a first systems project — comparable in concept to Devin, with zero frameworks.',
+      flow: [
         {
-          title: 'How It Works',
-          items: [
-            '1. User sends a POST request with { repo, prompt } to the n8n webhook',
-            '2. n8n forwards the request to the local Express server exposed via ngrok tunnel',
-            '3. Server clones the target repo (or pulls latest) and reads existing file context',
-            '4. Claude Code CLI is spawned with full codebase context + user prompt',
-            '5. Claude generates <file path="..."> blocks — server parses and writes them to disk',
-            '6. Server auto-commits and force-pushes changes to GitHub',
-          ],
+          label: 'the loop',
+          headline: 'prompt → clone → edit → commit → push',
+          points: ['n8n webhook → local Express via ngrok', 'Claude Code CLI spawned with full repo context', 'Deterministic <file> tag parsing'],
         },
         {
-          title: 'Key Engineering Decisions',
-          items: [
-            'File context injection — before Claude acts, server reads all existing repo files and injects them as XML blocks, giving Claude full codebase awareness',
-            "Structured output parsing — Claude's response is parsed via regex for <file path=\"\"> and <delete path=\"\"/> tags, enabling deterministic file operations",
-            'ngrok as the bridge — solves the n8n cloud → localhost problem cleanly without deploying infrastructure',
-            'Git credential persistence — credential.helper store eliminates per-run auth prompts',
-          ],
+          label: 'why it matters',
+          headline: 'Agent architecture, end to end',
+          points: ['Trigger → orchestration → tool use → side effects', 'Chains APIs, CLIs, and webhooks into one system'],
         },
         {
-          title: 'Why It Is Portfolio-Worthy',
-          items: [
-            'Built from scratch with no frameworks or scaffolding — demonstrates real systems thinking',
-            'Shows understanding of agent architecture: trigger → orchestration → tool use → side effects',
-            'Chains external APIs, CLIs, and webhooks into a working autonomous system end-to-end',
-            'Comparable in architecture to Devin / GitHub Copilot Workspace',
-          ],
-        },
-        {
-          title: 'Honest Limitations',
-          items: [
-            'Not persistent — requires manual server and ngrok restart between sessions',
-            'Single-user with no auth layer on the webhook endpoint',
-            'Claude Code CLI costs accrue per run — no cost ceiling in current version',
-            "No rollback mechanism if Claude's changes introduce errors",
-          ],
+          label: 'honest limits',
+          headline: 'v1 has sharp edges — documented, not hidden',
+          points: ['No auth on the webhook', 'No cost ceiling per run', 'No rollback on bad changes'],
         },
       ],
       links: [],
@@ -418,53 +335,36 @@ export const vault: VaultItem[] = [
     short: 'Production-grade credit risk scoring system. Top ~8 finish at Kyoto Finals (AIFUL).',
     tech: ['Python', 'CatBoost', 'LightGBM', 'scikit-learn', 'pandas', 'NumPy', 'SciPy'],
     badge: 'Top ~8 — AI Hack 2026 Final Round · Kyoto',
-    accent: '#3b82f6',
+    accent: '#e0242c',
     detail: {
       overview:
-        'Designed and built a production-grade credit risk scoring system to predict 12-month default probability for consumer loans using real-world Japanese financial data (AIFUL). Competed as Team StarLabs, advancing to the Kyoto Final Round and finishing Top ~8. Optimized AUC under class imbalance and temporal distribution shift constraints.',
+        'Predicting 12-month consumer-loan default on real AIFUL data, under class imbalance and temporal drift. Competed as Team StarLabs — Kyoto Final Round, Top ~8.',
       stats: [
-        { value: '~0.763', label: 'AUC-ROC — peak public leaderboard performance' },
+        { value: '~0.763', label: 'AUC-ROC — peak public leaderboard' },
         { value: 'Top ~8', label: 'Final Round finish · Kyoto' },
-        { value: '77+', label: 'Engineered features from raw financial data' },
-        { value: '~200', label: 'Submissions managed across experiment loop' },
+        { value: '77+', label: 'Engineered features' },
+        { value: '~200', label: 'Submissions managed' },
       ],
-      sections: [
+      flow: [
         {
-          title: 'Feature Engineering',
-          items: [
-            'Engineered ~77 features from raw financial and bureau data — primary signal driver (~0.76 AUC)',
-            'Credit-risk-specific ratios: debt-to-income, limit-to-income, utilization, delinquency × exposure interactions',
-            'Temporal features: age at application, employment tenure, credit recency, months since last delinquency',
-            'Drift-aware interactions: feature × time index to handle distribution shift between train and test',
-            'Account-level aggregation features across bureau data',
-          ],
+          label: 'the task',
+          headline: 'Predict 12-month default on real AIFUL data',
+          points: ['Class imbalance + temporal distribution shift', 'Team StarLabs → Kyoto finals'],
         },
         {
-          title: 'Model Development & Optimization',
-          items: [
-            'CatBoost (primary) — leveraged native categorical handling, tuned for temporal generalization',
-            'LightGBM (diversity model) — seed averaging and stochastic variants for ensemble diversity',
-            'Variance reduction across folds via multi-seed ensembling',
-            'Tuned for generalization under temporal shift, not raw public leaderboard score',
-          ],
+          label: 'the signal',
+          headline: '77+ engineered features drove ~0.76 AUC',
+          points: ['Debt-to-income, utilization, delinquency × exposure', 'Drift-aware feature × time interactions'],
         },
         {
-          title: 'Drift-Aware Validation Design',
-          items: [
-            'Multi-layer validation: Stratified K-Fold (baseline) + Temporal GroupKFold (forward validation)',
-            'Adversarial validation to measure train–test distribution drift',
-            'Time-sliced AUC diagnostics to ensure robustness across loan cohorts',
-            'Reduced overfitting risk and improved private leaderboard stability',
-          ],
+          label: 'the validation',
+          headline: 'Built for the private leaderboard, not the public one',
+          points: ['Temporal GroupKFold + adversarial validation', 'Time-sliced AUC diagnostics per cohort', 'Rejected leaky high-scoring models'],
         },
         {
-          title: 'Ensemble & Submission Strategy',
-          items: [
-            'Logit-space blending framework — preserved probability calibration, +0.001–0.002 AUC gain vs naive averaging',
-            'Submission portfolio: public LB optimized model + time-stable hedge model',
-            'Rank averaging and logistic regression stacking',
-            'Identified and rejected suspicious high-scoring models prone to leakage/overfitting',
-          ],
+          label: 'the finish',
+          headline: 'Top ~8 · Kyoto Final Round',
+          points: ['Logit-space blending: +0.001–0.002 AUC over naive averaging', 'Public-LB model + time-stable hedge portfolio'],
         },
       ],
       links: [],
@@ -478,38 +378,30 @@ export const vault: VaultItem[] = [
     short: 'Stateful AI interview engine with structured scoring and a Japanese HR cultural reasoning layer.',
     tech: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'OpenAI', 'ElevenLabs'],
     badge: null,
-    accent: '#f97316',
+    accent: '#14b8a6',
     detail: {
       overview:
-        'MIRU is a full-stack AI system with real-time interaction and structured evaluation — at its core, an exercise in LLM evaluation design: deterministic scoring rubrics, per-turn scoring with session-level aggregation, and schema-validated outputs instead of vibes. It maintains conversational state across sessions, applies a Japanese HR cultural reasoning layer, and generates multi-stage post-interview debrief outputs — radar charts, internal evaluator monologue, rewritten responses, and cultural matrix alignment. Built with FastAPI (Python) backend and Next.js frontend.',
-      sections: [
+        'An exercise in LLM evaluation design: deterministic rubrics, per-turn scoring with session aggregation, schema-validated outputs — wrapped in a real-time voice interview that reads your answers through a Japanese HR lens.',
+      flow: [
         {
-          title: 'Stateful Interview Engine',
-          items: [
-            'Session-based engine with persistent transcript history, question progression, and session IDs',
-            'Adaptive questioning logic based on prior answers — not linear scripted flow',
-            'Prevents loop repetition and premature termination through state tracking',
-            'API contract: /turn, /results, /debrief endpoints with strict schema validation',
-          ],
+          label: 'the engine',
+          headline: 'Stateful interviews, not chatbot scripts',
+          points: ['Session-persistent transcripts + question progression', 'Adaptive follow-ups from prior answers', 'Strict /turn /results /debrief contracts'],
         },
         {
-          title: 'Evaluation Design & Cultural Reasoning Layer',
-          items: [
-            'Deterministic scoring schema: communication, clarity, cultural_fit, problem_solving (0–10 per turn)',
-            'Per-turn scoring with session aggregation for consistent cross-session evaluation',
-            'Cultural translation engine: maps Western responses to Japanese HR interpretation using rule-based heuristics + LLM synthesis',
-            'Penalty logic per phrase pattern — e.g. "I achieved X" → flagged on Wa + humility dimensions',
-            'Generates internal HR monologue, rewritten answers, and cultural reasoning per response',
-          ],
+          label: 'the scoring',
+          headline: 'Deterministic rubrics, 0–10 per turn',
+          points: ['communication · clarity · cultural_fit · problem_solving', 'Schema-validated, aggregated per session'],
         },
         {
-          title: 'Debrief & Voice Pipeline',
-          items: [
-            'Multi-stage debrief engine: radar chart (quantitative scoring), internal monologue (qualitative), rewrite (actionable correction), cultural matrix alignment',
-            'ElevenLabs TTS integration with mic input, silence detection logic, and turn timing',
-            'Real-time async API orchestration across LLM + TTS layers',
-            'Debugged full-stack pipeline: API schema mismatches, state desynchronization, async response failures, memory vs DB fallback',
-          ],
+          label: 'the culture layer',
+          headline: 'Western answers, read through Japanese HR',
+          points: ['"I achieved X" → flagged on Wa + humility', 'Internal evaluator monologue + rewrites'],
+        },
+        {
+          label: 'the debrief',
+          headline: 'Radar charts + a full voice pipeline',
+          points: ['ElevenLabs TTS, mic input, silence detection', 'Async orchestration across LLM + TTS'],
         },
       ],
       links: [],

@@ -28,6 +28,20 @@ const skillGroups = [
     ],
   },
   {
+    category: 'Creative & Social — Retro Studios',
+    color: '#fbbf24',
+    skills: [
+      'Creative Direction',
+      'AI Image / Video Generation',
+      'Prompt Architecture (8-layer)',
+      'Short-Form Content (Reels / TikTok)',
+      'CapCut Post-Production',
+      'Meta Business Suite + TikTok Studio',
+      'Brand Systems Across 12 Markets',
+      '10-Posts/Day Content Pipelines',
+    ],
+  },
+  {
     category: 'Infrastructure',
     color: '#3b82f6',
     skills: ['Git', 'Railway', 'Vercel', 'Cloudflare', 'Airtable', 'Google Slides API', 'PWA', 'REST APIs', 'Linux'],

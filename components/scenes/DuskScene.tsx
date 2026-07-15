@@ -36,7 +36,7 @@ function RetroBlock() {
             Cinematic brand content, shipped daily.
           </p>
           <a
-            href="https://www.instagram.com/retro.studios_"
+            href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
             target="_blank"
             rel="noopener noreferrer"
             className="relative inline-flex items-center gap-2.5 mt-5 font-body text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full transition-all duration-500 hover:text-white"
