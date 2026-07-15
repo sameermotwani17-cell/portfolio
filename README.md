@@ -1,7 +1,5 @@
 # Sameer Motwani — Portfolio
 
-[![CI](https://github.com/sameermotwani17-cell/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/sameermotwani17-cell/portfolio/actions/workflows/ci.yml)
-
 A cinematic scroll narrative — light → fire → dusk — where every project opens
 into its own branded world. Built and art-directed as one continuous take.
 
