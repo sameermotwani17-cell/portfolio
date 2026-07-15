@@ -32,10 +32,9 @@ export default function Navbar() {
     }
   }
 
-  // scene 1 is the only light moment — dark text at the top, light after
-  const idle = !scrolled
-  const textColor = idle ? 'rgba(20,20,20,0.75)' : 'rgba(245,245,242,0.6)'
-  const logoColor = idle ? 'rgba(20,20,20,0.9)' : 'rgba(245,245,242,0.9)'
+  // the hero carries a top scrim, so light text reads in every scene
+  const textColor = 'rgba(245,245,242,0.7)'
+  const logoColor = 'rgba(245,245,242,0.92)'
 
   return (
     <>
@@ -128,7 +127,7 @@ export default function Navbar() {
                       : '-rotate-45 -translate-y-2 !bg-white'
                   : ''
               }`}
-              style={{ background: menuOpen ? '#fff' : idle ? 'rgba(20,20,20,0.8)' : 'rgba(245,245,242,0.9)' }}
+              style={{ background: menuOpen ? '#fff' : 'rgba(245,245,242,0.9)' }}
             />
           ))}
         </button>

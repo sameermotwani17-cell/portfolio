@@ -79,7 +79,7 @@ export default function CaseStudyOverlay({
   const displayFont = item.stencil ? 'var(--font-stencil)' : 'var(--font-display)'
   const panelBg = mono
     ? '#000'
-    : `radial-gradient(ellipse 90% 40% at 50% 0%, ${accent}14, transparent 60%), #0c0c0c`
+    : `radial-gradient(ellipse 90% 40% at 50% 0%, ${accent}1f, transparent 60%), radial-gradient(ellipse 70% 30% at 50% 100%, ${accent}0d, transparent 60%), #0c0c0c`
   const hairline = mono ? 'rgba(255,255,255,0.22)' : `${accent}35`
   const softText = 'rgba(245,245,242,0.6)'
 
@@ -90,7 +90,8 @@ export default function CaseStudyOverlay({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
       onClick={onClose}
-      className="fixed inset-0 z-[9999] overflow-y-auto"
+      data-lenis-prevent
+      className="fixed inset-0 z-[9999] overflow-y-auto overscroll-contain"
       style={{
         background: 'rgba(3,3,3,0.88)',
         backdropFilter: 'blur(10px)',
@@ -220,7 +221,10 @@ export default function CaseStudyOverlay({
                 <div
                   key={stat.label}
                   className="rounded-xl px-4 py-3.5"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : `${accent}22`}` }}
+                  style={{
+                    background: mono ? 'rgba(255,255,255,0.04)' : `${accent}0c`,
+                    border: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : `${accent}30`}`,
+                  }}
                 >
                   <div className="font-display text-2xl md:text-3xl" style={{ color: mono ? '#fff' : accent }}>
                     {stat.value}
@@ -274,9 +278,9 @@ export default function CaseStudyOverlay({
                           key={p}
                           className="font-body text-[11px] md:text-xs px-2.5 py-1 rounded-md"
                           style={{
-                            border: `1px solid ${mono ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.1)'}`,
-                            background: 'rgba(255,255,255,0.03)',
-                            color: softText,
+                            border: `1px solid ${mono ? 'rgba(255,255,255,0.16)' : `${accent}2e`}`,
+                            background: mono ? 'rgba(255,255,255,0.03)' : `${accent}0a`,
+                            color: 'rgba(245,245,242,0.72)',
                           }}
                         >
                           {p}
@@ -300,9 +304,9 @@ export default function CaseStudyOverlay({
                   key={t}
                   className="font-body text-[11px] px-2.5 py-1 rounded"
                   style={{
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: 'rgba(245,245,242,0.6)',
-                    background: 'rgba(255,255,255,0.03)',
+                    border: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : `${accent}26`}`,
+                    color: 'rgba(245,245,242,0.65)',
+                    background: mono ? 'rgba(255,255,255,0.03)' : `${accent}08`,
                   }}
                 >
                   {t}

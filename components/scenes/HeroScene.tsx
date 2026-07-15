@@ -116,8 +116,14 @@ function WelcomeReveal() {
   return (
     <p
       aria-label="Welcome to the Sameer Motwani portfolio"
-      className="font-body text-ink/70 text-sm md:text-base tracking-[0.3em] uppercase flex flex-wrap justify-center gap-x-3 gap-y-1"
-      style={{ color: 'rgba(20,20,20,0.72)' }}
+      className="font-body text-sm md:text-base tracking-[0.3em] uppercase flex flex-wrap justify-center gap-x-3 gap-y-1 rounded-full px-6 py-2.5 mx-4"
+      style={{
+        color: 'rgba(245,245,242,0.92)',
+        background: 'rgba(5,5,5,0.38)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        textShadow: '0 1px 8px rgba(0,0,0,0.5)',
+      }}
     >
       {WELCOME_WORDS.map((word, i) => (
         <span key={i} className="inline-block overflow-hidden">
@@ -173,7 +179,14 @@ export default function HeroScene() {
           style={{ objectPosition: 'center 42%' }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-between py-[12vh] px-6">
-          <p className="font-body text-sm tracking-[0.3em] uppercase" style={{ color: 'rgba(20,20,20,0.72)' }}>
+          <p
+            className="font-body text-sm tracking-[0.3em] uppercase rounded-full px-6 py-2.5"
+            style={{
+              color: 'rgba(245,245,242,0.92)',
+              background: 'rgba(5,5,5,0.38)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
             Welcome to the Sameer Motwani portfolio
           </p>
           <div className="text-center">
@@ -234,6 +247,12 @@ export default function HeroScene() {
             flapDur={0.6}
           />
         </div>
+
+        {/* top scrim so the navbar and welcome line always read */}
+        <div
+          className="absolute inset-x-0 top-0 z-[29] pointer-events-none"
+          style={{ height: 130, background: 'linear-gradient(to bottom, rgba(5,5,5,0.55), transparent)' }}
+        />
 
         {/* vignette that closes in */}
         <motion.div
