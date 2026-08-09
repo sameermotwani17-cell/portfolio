@@ -76,26 +76,51 @@ function IconChopbot() {
   )
 }
 
-/* ACT III — the viewer: chopsticks gripping a stack of slides like sushi */
-function IconStack() {
+/* ACT II — the constraints: chopstick guardrails under a live light */
+function IconRails() {
   return (
     <svg viewBox="0 0 140 110" className="w-28 h-24" aria-hidden>
       <WoodDefs />
-      <Stick x={12} y={30} len={116} angle={14} />
-      <Stick x={14} y={58} len={116} angle={2} />
-      <g transform="rotate(6 70 55)">
-        <rect x={46} y={30} width={48} height={12} rx={3} fill="#f5f5f2" opacity={0.45} />
-        <rect x={44} y={46} width={52} height={13} rx={3} fill="#f5f5f2" opacity={0.75} />
-        <rect x={42} y={63} width={56} height={14} rx={3} fill="#f5f5f2" />
-        <text x={70} y={73.5} textAnchor="middle" fontSize="8.5" fontWeight="bold" fill={PURPLE} fontFamily="monospace">
-          slide ±2
-        </text>
-      </g>
+      {/* posts */}
+      <Stick x={30} y={98} len={56} angle={-90} w={6} />
+      <Stick x={70} y={98} len={56} angle={-90} w={6} />
+      <Stick x={110} y={98} len={56} angle={-90} w={6} />
+      {/* rails */}
+      <Stick x={12} y={56} len={116} angle={0} />
+      <Stick x={12} y={78} len={116} angle={0} />
+      {/* live badge */}
+      <rect x={50} y={14} width={40} height={17} rx={3} fill="#161616" stroke={PURPLE} strokeWidth={2} />
+      <circle cx={59} cy={22.5} r={3} fill={PURPLE} />
+      <text x={74} y={26} textAnchor="middle" fontSize="8" fill="#f5f5f2" fontFamily="monospace">
+        live
+      </text>
     </svg>
   )
 }
 
-/* ACT IV — the receipts: chopsticks presenting the stopwatch */
+/* ACT IV — the decisions: a chopstick balance, speed outweighing freshness */
+function IconScale() {
+  return (
+    <svg viewBox="0 0 140 110" className="w-28 h-24" aria-hidden>
+      <WoodDefs />
+      {/* post */}
+      <Stick x={70} y={102} len={56} angle={-90} w={6} />
+      {/* beam, tilted toward the heavier choice */}
+      <Stick x={20} y={54} len={100} angle={-8} />
+      {/* pans */}
+      <rect x={8} y={58} width={32} height={19} rx={3} fill="#161616" stroke={PURPLE} strokeWidth={2} />
+      <text x={24} y={70.5} textAnchor="middle" fontSize="8" fill="#f5f5f2" fontFamily="monospace">
+        fast
+      </text>
+      <rect x={102} y={24} width={32} height={19} rx={3} fill="#161616" stroke={PURPLE} strokeWidth={2} />
+      <text x={118} y={36.5} textAnchor="middle" fontSize="8" fill="#f5f5f2" fontFamily="monospace">
+        fresh
+      </text>
+    </svg>
+  )
+}
+
+/* ACT V — the results: chopsticks presenting the stopwatch */
 function IconStopwatch() {
   return (
     <svg viewBox="0 0 140 110" className="w-28 h-24" aria-hidden>
@@ -107,13 +132,13 @@ function IconStopwatch() {
       <path d="M70 50 L70 32" stroke="#f5f5f2" strokeWidth={3} strokeLinecap="round" />
       <path d="M70 50 L82 56" stroke={PURPLE} strokeWidth={3} strokeLinecap="round" />
       <text x={70} y={97} textAnchor="middle" fontSize="12" fontWeight="bold" fill={PURPLE} fontFamily="var(--font-display)">
-        678ms
+        0.7s
       </text>
     </svg>
   )
 }
 
-const ACT_ICONS = [IconBroken, IconChopbot, IconStack, IconStopwatch]
+const ACT_ICONS = [IconBroken, IconRails, IconChopbot, IconScale, IconStopwatch]
 const ROMAN = ['I', 'II', 'III', 'IV', 'V']
 
 /* film sprocket strip */

@@ -373,7 +373,7 @@ export function CodeCover({ accent, title }: { accent: string; title: string }) 
         className="absolute right-[8%] bottom-[14%] font-display leading-none"
         style={{ color: accent, fontSize: 'clamp(2rem, 6vw, 3.4rem)', opacity: 0.92 }}
       >
-        678ms
+        0.7s
       </div>
       <div
         className="absolute right-[8%] bottom-[8%] font-body text-[9px] tracking-[0.3em] uppercase"
