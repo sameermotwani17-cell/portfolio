@@ -91,7 +91,7 @@ function VaultCard({
           )}
         </div>
         <span
-          className="mt-4 inline-flex items-center gap-1.5 font-body text-[10px] tracking-[0.18em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="touch-show mt-4 inline-flex items-center gap-1.5 font-body text-[10px] tracking-[0.18em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ color: item.accent }}
           aria-hidden
         >

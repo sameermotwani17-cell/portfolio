@@ -92,10 +92,10 @@ function Leaderboard() {
             fontWeight: r.us ? 700 : 400,
           }}
         >
-          <span className="w-5 font-display text-sm">{r.rank}</span>
-          <span className="flex-1 tracking-wide">{r.name}</span>
-          <span className="font-mono">{r.auc}</span>
-          {r.us && <span className="text-[9px] tracking-[0.2em] uppercase bg-black/25 rounded px-1.5 py-0.5">freshmen</span>}
+          <span className="w-5 shrink-0 font-display text-sm">{r.rank}</span>
+          <span className="flex-1 min-w-0 truncate tracking-wide">{r.name}</span>
+          <span className="font-mono shrink-0">{r.auc}</span>
+          {r.us && <span className="shrink-0 text-[9px] tracking-[0.2em] uppercase bg-black/25 rounded px-1.5 py-0.5">freshmen</span>}
         </div>
       ))}
       <p className="px-4 py-2 font-body text-[10px]" style={{ color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.02)' }}>
@@ -201,9 +201,9 @@ export default function AihackWorld({ item }: { item: WorldItem }) {
           return (
             <div
               key={stage.label}
-              className={`grid gap-6 md:gap-10 items-center ${Asset ? 'md:grid-cols-2' : ''} ${i % 2 === 1 && Asset ? 'md:[direction:rtl]' : ''}`}
+              className={`grid grid-cols-1 gap-6 md:gap-10 items-center ${Asset ? 'md:grid-cols-2' : ''} ${i % 2 === 1 && Asset ? 'md:[direction:rtl]' : ''}`}
             >
-              <div className="md:[direction:ltr]">
+              <div className="md:[direction:ltr] min-w-0">
                 <div className="flex items-center gap-3">
                   <span
                     className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center font-display text-sm"
@@ -230,7 +230,7 @@ export default function AihackWorld({ item }: { item: WorldItem }) {
                 )}
               </div>
               {Asset && (
-                <div className="md:[direction:ltr]">
+                <div className="md:[direction:ltr] min-w-0">
                   <Asset />
                 </div>
               )}

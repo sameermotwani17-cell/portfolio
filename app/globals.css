@@ -45,6 +45,15 @@ body {
   }
 }
 
+/* Hover-revealed affordances stay visible on devices that cannot hover
+   (phones and tablets) — otherwise "open" cues and card descriptions
+   would be unreachable */
+@media (hover: none) {
+  .touch-show {
+    opacity: 1 !important;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 3px;

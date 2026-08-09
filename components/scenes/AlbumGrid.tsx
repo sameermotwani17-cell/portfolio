@@ -138,9 +138,8 @@ function AlbumCard({
             {album.subtitle}
           </p>
           <p
-            className="font-body text-xs leading-relaxed mt-2 max-w-[92%] transition-opacity duration-300"
+            className="touch-show font-body text-xs leading-relaxed mt-2 max-w-[92%] transition-opacity duration-300"
             style={{ color: 'rgba(245,245,242,0.6)', opacity: hovered ? 1 : 0 }}
-            aria-hidden={!hovered}
           >
             {album.short}
           </p>
@@ -148,7 +147,7 @@ function AlbumCard({
 
         {/* open affordance */}
         <div
-          className="absolute bottom-5 right-5 flex items-center gap-1.5 font-body text-[10px] tracking-[0.2em] uppercase transition-opacity duration-300"
+          className="touch-show absolute bottom-5 right-5 flex items-center gap-1.5 font-body text-[10px] tracking-[0.2em] uppercase transition-opacity duration-300"
           style={{ color: album.accent, opacity: hovered ? 1 : 0 }}
           aria-hidden
         >

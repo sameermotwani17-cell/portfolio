@@ -139,7 +139,7 @@ export default function ScrapyardWorld({ item }: { item: WorldItem }) {
                 {item.badge}
               </span>
             )}
-            <h2 className="font-stencil text-white leading-none" style={{ fontSize: 'clamp(2.2rem, 6vw, 4.2rem)', textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
+            <h2 className="font-stencil text-white leading-none" style={{ fontSize: 'clamp(1.85rem, 6vw, 4.2rem)', textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
               {item.title}
             </h2>
             <p className="font-body text-[11px] tracking-[0.16em] uppercase mt-2" style={{ color: 'rgba(245,245,242,0.55)' }}>

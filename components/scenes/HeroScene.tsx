@@ -227,7 +227,8 @@ export default function HeroScene() {
             image carries fetchpriority=high */}
         <motion.div className="absolute inset-0" style={{ scale: bgScale, y: bgY }}>
           <picture>
-            <source media="(max-width: 768px)" srcSet="/scenes/butterflies-sm.webp" />
+            {/* phones get the light variant; tablets (641px+) get the sharp one */}
+            <source media="(max-width: 640px)" srcSet="/scenes/butterflies-sm.webp" />
             <img
               src="/scenes/butterflies.webp"
               alt="Sameer Motwani surrounded by butterflies against a white sky"
