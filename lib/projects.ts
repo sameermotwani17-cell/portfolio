@@ -346,10 +346,7 @@ export const vault: VaultItem[] = [
           points: ['UK NC · India CBSE/AI/IT/CS · USA CSTA/NGSS', 'Hindi/Devanagari output with regex validation', 'Server-side PDF export with fit badges'],
         },
       ],
-      links: [
-        { label: 'Live App', href: 'https://coolcompanies.replit.app' },
-        { label: 'GitHub', href: 'https://github.com/sameermotwani17-cell/stickem-curriculum-helper' },
-      ],
+      links: [],
     },
   },
   {
@@ -446,7 +443,11 @@ export const vault: VaultItem[] = [
           points: ['I coded near-nonstop: technical design, the working voice product', 'Siddik — research & systems · Jeana — strategy · Takako — the Japanese presentation', 'A business team on an engineering podium'],
         },
       ],
-      links: [{ label: 'APU Feature', href: 'https://www.apu.ac.jp/home/blog/article/?storyid=273' }],
+      links: [
+        { label: 'GitHub — Frontend', href: 'https://github.com/sameermotwani17-cell/miru-frontend' },
+        { label: 'GitHub — Backend', href: 'https://github.com/sameermotwani17-cell/miru-backend' },
+        { label: 'APU Feature', href: 'https://www.apu.ac.jp/home/blog/article/?storyid=273' },
+      ],
     },
   },
 ]
