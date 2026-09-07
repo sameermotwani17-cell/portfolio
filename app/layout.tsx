@@ -35,28 +35,41 @@ const marker = Permanent_Marker({
 /* ── Retro Studios discography: each release borrows the real typeface its own
       site ships, so the six read as six different labels, not six skins ── */
 
+/* These three are worn only by records in the discography and by the case
+   study each one opens, so nothing on first screen asks for them. They are
+   declared preload: false: the browser fetches each when a node actually uses
+   it, instead of racing the hero for bandwidth. Together they were 3 of the 7
+   font files preloaded at first paint. The other four stay preloaded, scrawl
+   included, since the hero signature is set in it. */
+
 // Afro Week 2026 (millennium-hall) renders its display type in Bebas Neue
 const bebas = Bebas_Neue({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-bebas',
   display: 'swap',
+  preload: false,
 })
 
-// Too Easy loads Inter and nothing else — the quietest record in the set
+// Too Easy loads Inter and nothing else, the quietest record in the set.
+// 400 only: nothing on the site ever renders these two at 600. Checked by
+// walking every element on the page, and inside an opened case study, and
+// reading its computed weight; the semibold cut was shipping unused.
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '600'],
+  weight: ['400'],
   variable: '--font-grid',
   display: 'swap',
+  preload: false,
 })
 
 // First Light pairs Cormorant with Inter for its warm, editorial keepsake feel
 const cormorant = Cormorant({
   subsets: ['latin'],
-  weight: ['400', '600'],
+  weight: ['400'],
   variable: '--font-editorial',
   display: 'swap',
+  preload: false,
 })
 
 const SITE_URL = 'https://portfolio-gamma-two-d8j6b2mgkq.vercel.app'
