@@ -2,6 +2,15 @@
 const nextConfig = {
   images: {
     unoptimized: true,
+    // RETRO Studios release covers are served by each project's own deployment,
+    // so the art on a card is always the art that project actually ships
+    remotePatterns: [
+      { protocol: 'https', hostname: 'too-easy-seven.vercel.app' },
+      { protocol: 'https', hostname: 'plastivore-plum.vercel.app' },
+      { protocol: 'https', hostname: 'millennium-hall.vercel.app' },
+      { protocol: 'https', hostname: 'danflix-murex.vercel.app' },
+      { protocol: 'https', hostname: 'first-light-alpha.vercel.app' },
+    ],
   },
   async headers() {
     return [
