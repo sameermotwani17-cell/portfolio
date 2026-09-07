@@ -125,7 +125,7 @@ async function main() {
   // ── profile ──
   section('Profile')
   bullet(
-    'Creative director who ships the whole pipeline: brand identity and art direction through campaign photography, motion, copy, and the production-grade site the work sells on. Ran a paid 12-country World Cup apparel campaign solo, as director, prompt engineer and technical producer, from first brief to delivered assets and a live storefront.'
+    'Creative director who takes a brand the whole way: identity and art direction, campaign photography and motion, the copy, and the site it sells on. Ran a paid 12-country World Cup apparel campaign solo as director, prompt engineer and technical producer, from first brief through to delivered assets and a working storefront.'
   )
   gap(6)
 
@@ -176,17 +176,17 @@ async function main() {
   work(
     'Too Easy - too-easy-seven.vercel.app',
     'Brand & product-first commerce',
-    'A minimal streetwear label built as an exercise in restraint: five hero pieces shot and priced like a real drop, carried entirely by the product grid - no manifesto, no lifestyle campaign.'
+    'A minimal streetwear label built as an exercise in restraint. Five pieces shot and priced like a real drop, carried by the product grid alone, with no manifesto and no lifestyle campaign.'
   )
   work(
     'First Light - first-light-alpha.vercel.app',
     'Product design & editorial art direction',
-    'An AI photo-culling tool made as a gift: point it at 1,847 wedding frames, describe the edit in plain English, get a ranked shortlist with a one-line reason per pick. Sold in warm editorial photography rather than UI chrome, with a local-first privacy story.'
+    'A photo-culling tool made as a gift. Point it at 1,847 wedding frames, describe the edit in plain English, get a ranked shortlist with a line of reasoning on each pick. Sold with warm editorial photography rather than UI screenshots, and nothing full size leaves the machine.'
   )
   work(
     'Danflix - danflix-murex.vercel.app',
     'Interface art direction',
-    'A birthday gift built as a streaming service - profile gate, wordmark ident with audio sting, ten titles with posters, hover previews, detail modals and a subtitled player - set to Netflix’s own design tokens.'
+    'A birthday gift built as a streaming service. Profile gate, wordmark ident with its own audio sting, ten titles with posters, hover previews, detail modals and a subtitled player, all set to Netflix’s own design tokens.'
   )
   gap(4)
 
