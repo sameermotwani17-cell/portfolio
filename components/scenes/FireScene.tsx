@@ -10,18 +10,73 @@ import {
   useInView,
   useReducedMotion,
 } from 'framer-motion'
-import { albums, vault, type Album, type VaultItem } from '@/lib/projects'
-import AlbumGrid from './AlbumGrid'
+import { albums, retroReleases, vault, type Album, type Track, type VaultItem } from '@/lib/projects'
+import AlbumGrid, { ReleaseGrid } from './AlbumGrid'
 import VaultRow from './VaultRow'
 import SkillsBlock from './SkillsBlock'
 import CaseStudyOverlay from './CaseStudyOverlay'
 import Embers from './Embers'
 import LayeredTitle from './LayeredTitle'
 
+/**
+ * Side A / Side B. The record is one release with two sides — the split is
+ * organisational, not a redesign: both tracks render the identical sleeve.
+ * Creative leads, because that is the half the site used to bury.
+ */
+const TRACKS: { id: Track; label: string; note: string; accent: string }[] = [
+  { id: 'creative', label: 'creative direction', note: 'side a', accent: '#f5f5f2' },
+  { id: 'tech', label: 'engineering', note: 'side b', accent: '#f97316' },
+]
+
+function TrackToggle({ value, onChange }: { value: Track; onChange: (t: Track) => void }) {
+  return (
+    <div className="flex flex-col items-center gap-4 mb-14">
+      <div
+        role="tablist"
+        aria-label="Project track"
+        className="inline-flex p-1 rounded-full"
+        style={{ border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(0,0,0,0.45)' }}
+      >
+        {TRACKS.map((t) => {
+          const active = t.id === value
+          return (
+            <button
+              key={t.id}
+              role="tab"
+              aria-selected={active}
+              onClick={() => onChange(t.id)}
+              className="relative px-5 md:px-7 py-2.5 rounded-full font-body text-[11px] md:text-xs tracking-[0.18em] uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              style={{ color: active ? '#0a0a0a' : 'rgba(245,245,242,0.6)' }}
+            >
+              {active && (
+                <motion.span
+                  layoutId="track-pill"
+                  className="absolute inset-0 rounded-full"
+                  style={{ background: t.accent }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                />
+              )}
+              <span className="relative flex items-center gap-2">
+                <span className="opacity-50 tabular-nums">{t.note}</span>
+                {t.label}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+      <p className="font-body text-[11px] tracking-[0.16em] uppercase" style={{ color: 'rgba(245,245,242,0.4)' }}>
+        two sides of the same record
+      </p>
+    </div>
+  )
+}
+
 export default function FireScene() {
   const ref = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
   const [selected, setSelected] = useState<Album | VaultItem | null>(null)
+  // creative leads: this site is being read by design hires as often as eng ones
+  const [track, setTrack] = useState<Track>('creative')
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -169,7 +224,7 @@ export default function FireScene() {
             className="font-body text-sm text-center mt-6 max-w-md leading-relaxed"
             style={{ color: 'rgba(245,245,242,0.6)' }}
           >
-            Four records that mattered. Click an album to open it.
+            Two sides: the studio and the engineering. Click an album to open it.
           </motion.p>
         </div>
 
@@ -205,9 +260,55 @@ export default function FireScene() {
           </motion.blockquote>
         </div>
 
-        {/* album grid */}
+        {/* album grid — split into two tracks */}
         <div className="max-w-6xl mx-auto px-6 md:px-10 pb-24">
-          <AlbumGrid albums={albums} onOpen={open} />
+          <TrackToggle value={track} onChange={setTrack} />
+
+          <AlbumGrid albums={albums.filter((a) => a.track === track)} onOpen={open} />
+
+          {/* the discography — RETRO Studios is the artist, each release its own album */}
+          {track === 'creative' && (
+            <div className="mt-28">
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-15%' }}
+                transition={{ duration: 0.8 }}
+                className="font-body text-[11px] tracking-mega uppercase mb-5 text-center"
+                style={{ color: 'rgba(245,245,242,0.5)' }}
+              >
+                scene 02b — the discography
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-15%' }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="flex justify-center"
+              >
+                <LayeredTitle
+                  text="RETRO STUDIOS"
+                  accent="#f5f5f2"
+                  scrawl="the back catalogue"
+                  className="font-display text-white text-center leading-none"
+                  style={{ fontSize: 'clamp(2.2rem, 7vw, 5rem)', textShadow: '0 6px 40px rgba(0,0,0,0.6)' }}
+                />
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: '-15%' }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="font-body text-sm text-center mt-10 mb-14 max-w-lg mx-auto leading-relaxed"
+                style={{ color: 'rgba(245,245,242,0.6)' }}
+              >
+                Six releases under one studio. Each one carries its own colour and its own
+                typeface — taken from the brand it belongs to, not from this site. ▶ open goes
+                straight to the live work.
+              </motion.p>
+              <ReleaseGrid releases={retroReleases} />
+            </div>
+          )}
         </div>
 
         {/* the vault */}

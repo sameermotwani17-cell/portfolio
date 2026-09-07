@@ -17,17 +17,26 @@ export type ProjectDetail = {
   links?: ProjectLink[]
 }
 
+/** which side of the PROJECTS split a record belongs to */
+export type Track = 'tech' | 'creative'
+
 export type Album = {
   id: string
   title: string
   subtitle: string
   tag: string
   short: string
+  /** tech vs creative track in the PROJECTS scene */
+  track: Track
   /** hover-state "tracklist" lines on the album cover */
   tracklist: string[]
   tech: string[]
   badge: string | null
   accent: string
+  /** extra signature colors, drawn as a colorway bar under the badge */
+  accents?: string[]
+  /** CSS font-family for the record title; defaults to the site display face */
+  font?: string
   /** cover image src; null renders the code-drawn cover */
   cover: string | null
   /** render the cover contained (for logo covers) instead of full-bleed */
@@ -66,11 +75,37 @@ export type VaultItem = {
   detail: ProjectDetail
 }
 
+/**
+ * A mini-album inside the RETRO Studios discography. Same record shell as the
+ * featured albums — cover, numbered chapters, "▶ open" — but the click leaves
+ * for the live project instead of opening a case-study overlay.
+ */
+export type Release = {
+  id: string
+  title: string
+  subtitle: string
+  tag: string
+  short: string
+  tracklist: string[]
+  badge: string | null
+  accent: string
+  accents?: string[]
+  font?: string
+  cover: string | null
+  coverContain?: boolean
+  coverBg?: string
+  /** the live project — every release opens externally */
+  href: string
+  /** optional secondary links (socials, asset folders) shown as small chips */
+  links?: ProjectLink[]
+}
+
 // ─── The four featured albums ─────────────────────────────────────────────────
 
 export const albums: Album[] = [
   {
     id: 'slideviewer',
+    track: 'tech',
     title: "Stick'Em SlideViewer",
     subtitle: 'Production Infrastructure Rebuild',
     tag: "Software Engineer · Stick'Em Pte Ltd · May–Aug 2026",
@@ -150,6 +185,7 @@ export const albums: Album[] = [
   },
   {
     id: 'scrapyard',
+    track: 'tech',
     title: 'SCRAPYARD',
     subtitle: '3D Multiplayer Browser FPS',
     tag: 'One-day build · Spec-driven with Claude Fable 5 · 2026',
@@ -198,6 +234,7 @@ export const albums: Album[] = [
   },
   {
     id: 'gomi-snap',
+    track: 'tech',
     title: 'GOMI Snap',
     subtitle: 'AI Civic-Tech — a Completed Chapter',
     tag: 'Founder & CTO · Nov 2025 – 2026 · folded into StarLabs',
@@ -253,6 +290,7 @@ export const albums: Album[] = [
   },
   {
     id: 'retro-studios',
+    track: 'creative',
     title: 'RETRO Studios',
     subtitle: 'AI Cinematic Production · StarLabs',
     tag: 'Founder & Creative Director · Founded April 2026',
@@ -303,6 +341,118 @@ export const albums: Album[] = [
         },
       ],
     },
+  },
+]
+
+// ─── The RETRO Studios discography ────────────────────────────────────────────
+// RETRO Studios is the artist; each entry below is one of its releases. Every
+// palette and typeface here is lifted from that project's own live site — the
+// declared theme-color, the CSS custom properties, the fonts it actually loads.
+// Nothing on this list is a guess.
+
+export const retroReleases: Release[] = [
+  {
+    id: 'dk2r',
+    title: 'DK2R',
+    subtitle: 'Football. Identity. Prestige.',
+    tag: 'Creative Director · Prompt Engineer · Technical Producer · for founder Hassan Kai Turay',
+    short:
+      'A 12-country, 300-piece-per-edition limited jersey line for the 2026 World Cup, run solo. Morocco’s Zellige tiles, Japan’s kintsugi-slashed sakura, Brazil’s rhinestone crest — each edition got its own visual language, translated into AI campaign photography and video across three silhouettes. Built on an 8-layer prompt architecture with a dedicated anti-perfection layer to kill the tells of synthetic imagery, locked to ARRI Alexa / Kodak 2383 colour science across every asset. Shipped alongside the live store it sells on.',
+    tracklist: ['01 — Director’s Brief', '02 — 12 Editions', '03 — Anti-Perfection', '04 — The Drop'],
+    badge: '300 numbered pieces · no restocks',
+    // the brand's locked Visual DNA — cold, institutional, deliberately at odds
+    // with the warm mercado photography it grades
+    accent: '#8fa3b8',
+    // closest to the site's own display face: DK2R is the most on-brand-for-Retro release
+    font: 'var(--font-display)',
+    cover: '/dk2r/dk2r-mercado-jersey.webp',
+    coverBg: '#0b0b0b',
+    href: 'https://dkai2ray.company/',
+    links: [{ label: '@dk2rwear', href: 'https://www.instagram.com/dk2rwear' }],
+  },
+  {
+    id: 'too-easy',
+    title: 'TOO EASY',
+    subtitle: 'Minimal Streetwear',
+    tag: 'Concept brand · a design exercise in restraint',
+    short:
+      'A minimal streetwear label, built as a design exercise. No manifesto, no lifestyle shoot — just five hero pieces shot and priced like a real drop. The point was restraint: prove a clean, product-first e-commerce grid without leaning on lore or campaign photography to carry it.',
+    tracklist: ['01 — Five Pieces', '02 — No Manifesto', '03 — Product-First Grid', '04 — Restraint'],
+    badge: '5 hero pieces · $89–$249',
+    // the brand declares exactly two colors: #0D0D0D ink on #FFFFFF paper
+    accent: '#ededed',
+    font: 'var(--font-grid)',
+    cover: 'https://too-easy-seven.vercel.app/images/jersey.png',
+    coverContain: true,
+    coverBg: '#ffffff',
+    href: 'https://too-easy-seven.vercel.app/',
+    links: [{ label: 'Brand assets', href: 'https://drive.google.com/drive/folders/1u-UNW_YvpI0KB_-1Q5qtutXyOYDUkjdf' }],
+  },
+  {
+    id: 'plastivore',
+    title: 'PLASTIVORE',
+    subtitle: 'Every step eats plastic.',
+    tag: 'Concept brand · AD WARS marketing simulation, APU',
+    short:
+      'A concept brand built for a marketing simulation, not a real product. The pitch: microplastics are in your blood, your rain, your floor — so instead of another recycling campaign, build a shoe that eats them. BioSole™ is presented as a four-layer enzyme membrane (grounded in PETase, the real plastic-digesting enzyme discovered in 2016), sold across three colorways — Origin, Reef, Deep Sea — with the whole site pitched in an investor-deck register rather than a product page. Fictional science, real design and copywriting discipline.',
+    tracklist: ['01 — Microplastics', '02 — BioSole™', '03 — Three Colorways', '04 — The Ask'],
+    badge: 'Concept brand — the science is fictional',
+    // straight from the site's own CSS custom properties
+    accent: '#9eff00',
+    accents: ['#9eff00', '#00e0c6', '#5aa9ff'],
+    font: 'var(--font-body)',
+    cover: 'https://plastivore-plum.vercel.app/assets/colorway_origin.png',
+    coverBg: '#07090a',
+    href: 'https://plastivore-plum.vercel.app/',
+  },
+  {
+    id: 'afro-week',
+    title: 'AFRO WEEK 2026',
+    subtitle: 'Seat Reservation · Millennium Hall, APU',
+    tag: 'Event site & booking flow · 26 June 2026 · Millennium Hall, APU',
+    short:
+      'A ticketing site, not a poster. Afro Week 2026 stages “The Lines They Drew” — a theatrical journey through Africa’s past told between a grandfather and a grandchild, carried by drama, music, dance, choir and traditional fashion. The build had to do the unglamorous half too: 732 seats held in live availability, a seat picker, free admission down to a name and an email, and a QR e-ticket that lands instantly. The pan-African red-gold-green runs as a structural rule through every band and divider rather than sitting on top as decoration.',
+    tracklist: ['01 — The Lines They Drew', '02 — 732 Seats', '03 — Pick Your Seat', '04 — QR At The Door'],
+    badge: '732 seats · free admission · QR entry',
+    // the flag bar the site draws across every section edge
+    accent: '#fcd116',
+    accents: ['#c8102e', '#fcd116', '#006b3f'],
+    font: 'var(--font-bebas)',
+    cover: 'https://millennium-hall.vercel.app/afrifest-crew3.jpg',
+    coverBg: '#0a0a0a',
+    href: 'https://millennium-hall.vercel.app/',
+  },
+  {
+    id: 'danflix',
+    title: 'DANFLIX',
+    subtitle: 'A Netflix Built For One Person',
+    tag: 'Personal build · a birthday release for Dan',
+    short:
+      'A birthday gift dressed as a streaming service. It opens on a real “Who’s watching?” profile gate, plays a wordmark ident with its own audio sting, then hands you a browse page of ten titles — a limited series, a nature strand, a deadpan park-ranger documentary, a finale called The Bench — each with its own poster, hover preview, detail modal and full-screen player with subtitles. Every title is footage of one person, cut and graded to Netflix’s own design tokens. Not a product: a gift with a build behind it, made for one person and one occasion.',
+    tracklist: ['01 — Who’s Watching?', '02 — The Ident', '03 — Ten Titles', '04 — The Bench'],
+    badge: 'Made for Dan',
+    // lifted from netflix.com's live DOM by the project itself, in css/tokens.css
+    accent: '#e50914',
+    font: '"Helvetica Neue", "Segoe UI", Roboto, Ubuntu, sans-serif',
+    cover: 'https://danflix-murex.vercel.app/assets/poster/igotyou-card.jpg',
+    coverBg: '#141414',
+    href: 'https://danflix-murex.vercel.app/',
+  },
+  {
+    id: 'first-light',
+    title: 'First Light',
+    subtitle: 'Photo Culling, As A Gift',
+    tag: 'Secret Santa build · made for one person',
+    short:
+      'A photo-culling tool built as a gift, not a product. Point it at a shoot — 1,847 frames from a wedding, in the real example — describe what you want in plain English (“20 lovely candid photos, eyes open, nothing repeated”), and it hands back a ranked shortlist with a one-line reason for every pick, duplicates of the same moment collapsed to the sharpest one. The whole site is designed around that specific, personal use case rather than generic SaaS landing-page language, with an explicit local-first privacy story: nothing full-size ever leaves your computer.',
+    tracklist: ['01 — 1,847 Photos', '02 — Plain English', '03 — One Line, One Reason', '04 — Stays Local'],
+    badge: '1,847 photos → a shortlist',
+    // the site's own declared theme-color
+    accent: '#f8f3ea',
+    font: 'var(--font-editorial)',
+    cover: 'https://first-light-alpha.vercel.app/_next/static/immutable/media/ha-window.3ukoirfs21_b2.jpg',
+    coverBg: '#f8f3ea',
+    href: 'https://first-light-alpha.vercel.app/',
   },
 ]
 

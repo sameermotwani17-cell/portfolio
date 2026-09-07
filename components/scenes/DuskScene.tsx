@@ -248,7 +248,7 @@ function ContactBlock() {
           currently open to
         </p>
         <div className="flex flex-wrap items-center justify-center gap-2.5">
-          {['AI Engineer', 'Founding / Early-Stage Engineer', 'Full-Stack Product Engineer'].map((role) => (
+          {['AI Engineer', 'Founding / Early-Stage Engineer', 'Full-Stack Product Engineer', 'Multimedia Designer'].map((role) => (
             <span
               key={role}
               className="font-body text-xs md:text-[13px] tracking-[0.08em] px-4 py-2 rounded-full"
@@ -298,13 +298,22 @@ function ContactBlock() {
           </svg>
           GitHub
         </a>
-        <a href="/resume.pdf" download="Sameer_Motwani_Resume.pdf"
+        {/* two documents, because there are two tracks */}
+        <a href="/cv-creative.pdf" download="Sameer_Motwani_CV_Creative.pdf"
+          className="px-9 py-4 rounded-full font-body text-xs tracking-[0.2em] uppercase flex items-center gap-2.5 transition-colors duration-300 hover:text-white"
+          style={{ border: '1px solid rgba(251,191,36,0.45)', color: '#fbbf24', background: 'rgba(251,191,36,0.07)' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
+          </svg>
+          CV — Creative
+        </a>
+        <a href="/resume.pdf" download="Sameer_Motwani_Resume_Tech.pdf"
           className="px-9 py-4 rounded-full font-body text-xs tracking-[0.2em] uppercase flex items-center gap-2.5 transition-colors duration-300 hover:text-white hover:border-white/40"
           style={{ border: '1px solid rgba(139,147,201,0.3)', color: 'rgba(245,245,242,0.7)' }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
           </svg>
-          Resume
+          Résumé — Tech
         </a>
       </motion.div>
 

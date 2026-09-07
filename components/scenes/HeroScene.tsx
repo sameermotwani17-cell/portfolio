@@ -211,7 +211,7 @@ export default function HeroScene() {
               style={{ fontSize: 'clamp(3.5rem, 11vw, 9rem)', textShadow: '0 4px 30px rgba(0,0,0,0.45)' }}
             />
             <p className="font-body text-white/75 text-xs md:text-sm tracking-[0.25em] mt-6 lowercase">
-              engineer · founder · builder
+              engineer · creative director · builder
             </p>
           </div>
         </div>
@@ -402,7 +402,7 @@ export default function HeroScene() {
               className="font-body text-white/85 text-xs md:text-sm tracking-[0.25em] mt-6 lowercase"
               style={{ textShadow: '0 2px 14px rgba(0,0,0,0.6)' }}
             >
-              engineer · founder · builder
+              engineer · creative director · builder
             </motion.p>
           </div>
         </motion.div>

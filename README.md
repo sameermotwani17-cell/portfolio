@@ -36,8 +36,14 @@ from [`lib/projects.ts`](lib/projects.ts).
   static imagery.
 - **Accessibility:** focus-trapped dialogs with Esc handling, full
   `prefers-reduced-motion` fallbacks per scene, aria labels throughout.
-- **Resume:** generated from the same verified project data via
-  [`scripts/generate-resume.js`](scripts/generate-resume.js) (pdf-lib).
+- **Two tracks:** the PROJECTS scene splits into side A (creative direction)
+  and side B (engineering). Side A opens into the RETRO Studios discography —
+  six releases, each carrying the accent colour and typeface taken from that
+  project's own live site rather than from this one.
+- **Documents:** both generated from the same verified project data via pdf-lib
+  — [`scripts/generate-cv.js`](scripts/generate-cv.js) (creative direction) and
+  [`scripts/generate-resume.js`](scripts/generate-resume.js) (engineering).
+  Regenerate with `npm run generate-cv` / `npm run generate-resume`.
 
 ## Stack
 
