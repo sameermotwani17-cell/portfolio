@@ -180,7 +180,6 @@ export default function CaseStudyOverlay({
                     fill
                     className="object-contain"
                     sizes="768px"
-                    unoptimized={item.cover.startsWith('http')}
                     onError={() => setCoverFailed(true)}
                   />
                 </div>
@@ -193,7 +192,6 @@ export default function CaseStudyOverlay({
                 fill
                 className="object-cover"
                 sizes="768px"
-                unoptimized={item.cover.startsWith('http')}
                 onError={() => setCoverFailed(true)}
               />
             )

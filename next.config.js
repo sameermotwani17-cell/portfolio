@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
-    // RETRO Studios release covers are served by each project's own deployment,
-    // so the art on a card is always the art that project actually ships
+    // Optimization is ON so release covers get resized to the size the card
+    // actually renders. The originals are full-resolution art from each
+    // project's own deployment (Afro Week's is 1.6MB, Plastivore's 1.0MB) and
+    // shipping those raw into a 520px sleeve was the single heaviest thing on
+    // the page. The LCP hero is a hand-rolled <picture>, so it is unaffected.
     remotePatterns: [
       { protocol: 'https', hostname: 'too-easy-seven.vercel.app' },
       { protocol: 'https', hostname: 'plastivore-plum.vercel.app' },

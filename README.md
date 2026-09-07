@@ -30,10 +30,15 @@ from [`lib/projects.ts`](lib/projects.ts).
 
 - **Performance:** ~160KB first-load JS, one eager image (~309KB hero),
   everything below the fold lazy, per-world assets load only when a case
-  study opens. All animation is transform/opacity only. Static prerender.
+  study opens. Static prerender. Animation is transform/opacity only: the
+  fire dying is a pre-graded copy of the frame cross-faded on opacity, not a
+  `filter` animated per frame, which measured 27.8ms -> 18ms median frame
+  time in that scene at 4x CPU throttle.
 - **Images:** sources neural-upscaled 4x (OpenCV EDSR) and served as
   right-sized WebP; `Cache-Control` with stale-while-revalidate on all
-  static imagery.
+  static imagery. Next image optimization is on so remote release covers,
+  which are full-resolution art from each project's own deployment, get
+  resized to the size the card renders rather than shipped raw.
 - **Accessibility:** focus-trapped dialogs with Esc handling, full
   `prefers-reduced-motion` fallbacks per scene, aria labels throughout.
 - **Two tracks:** the PROJECTS scene splits into side A (creative direction)
