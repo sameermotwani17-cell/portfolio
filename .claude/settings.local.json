@@ -19,7 +19,10 @@
       "Bash(npx vercel --version)",
       "mcp__25f94fc8-5786-487f-a39b-5d40c3a63d5e__list_teams",
       "mcp__25f94fc8-5786-487f-a39b-5d40c3a63d5e__list_projects",
-      "Bash(npx vercel whoami)"
+      "Bash(npx vercel whoami)",
+      "Bash(git rm *)",
+      "Bash(rm -f public/cv-sameer-motwani.pdf)",
+      "Bash(cp \"/root/.claude/uploads/aad05876-8269-5073-9578-3a5b4b8e88b0/0d2f1c43-Sameer_CV__2026.pdf\" public/cv.pdf)"
     ]
   }
 }

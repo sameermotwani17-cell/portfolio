@@ -302,7 +302,7 @@ export default function FireScene() {
                 className="font-body text-sm text-center mt-10 mb-14 max-w-lg mx-auto leading-relaxed"
                 style={{ color: 'rgba(245,245,242,0.6)' }}
               >
-                Six releases under one studio. Each one carries its own colour and its own
+                Seven releases under one studio. Each one carries its own colour and its own
                 typeface — taken from the brand it belongs to, not from this site. ▶ open goes
                 straight to the live work.
               </motion.p>

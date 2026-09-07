@@ -1,7 +1,7 @@
 /**
  * Generates public/cv-creative.pdf — the creative-direction counterpart to
- * resume.pdf. Same one-page discipline, set in Helvetica rather than Times
- * because this one is read by design and brand hires, not engineering ones.
+ * public/cv.pdf. One page, set in Helvetica, because this one is read by
+ * design and brand hires rather than engineering ones.
  *
  * Every claim here is sourced from the portfolio's verified project data and
  * from each project's own live site. Nothing is invented.

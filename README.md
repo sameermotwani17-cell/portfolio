@@ -3,7 +3,7 @@
 A cinematic scroll narrative — light → fire → dusk — where every project opens
 into its own branded world. Built and art-directed as one continuous take.
 
-**Live:** [portfolio-gamma-two-d8j6b2mgkq.vercel.app](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app) · **Resume:** [/resume.pdf](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app/resume.pdf)
+**Live:** [portfolio-gamma-two-d8j6b2mgkq.vercel.app](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app) · **CV:** [/cv.pdf](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app/cv.pdf) · **Creative CV:** [/cv-creative.pdf](https://portfolio-gamma-two-d8j6b2mgkq.vercel.app/cv-creative.pdf)
 
 ---
 
@@ -38,12 +38,12 @@ from [`lib/projects.ts`](lib/projects.ts).
   `prefers-reduced-motion` fallbacks per scene, aria labels throughout.
 - **Two tracks:** the PROJECTS scene splits into side A (creative direction)
   and side B (engineering). Side A opens into the RETRO Studios discography —
-  six releases, each carrying the accent colour and typeface taken from that
+  seven releases, each carrying the accent colour and typeface taken from that
   project's own live site rather than from this one.
-- **Documents:** both generated from the same verified project data via pdf-lib
-  — [`scripts/generate-cv.js`](scripts/generate-cv.js) (creative direction) and
-  [`scripts/generate-resume.js`](scripts/generate-resume.js) (engineering).
-  Regenerate with `npm run generate-cv` / `npm run generate-resume`.
+- **Documents:** two downloads — `public/cv.pdf` (the general CV) and
+  `public/cv-creative.pdf`, a creative-direction one-pager generated from the
+  same verified project data via [`scripts/generate-cv.js`](scripts/generate-cv.js)
+  (pdf-lib). Regenerate the latter with `npm run generate-cv`.
 
 ## Stack
 

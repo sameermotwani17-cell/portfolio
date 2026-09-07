@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-resume": "node scripts/generate-resume.js",
     "generate-cv": "node scripts/generate-cv.js",
     "extract-audio": "ffmpeg -i public/video.mp4 -q:a 0 -map a public/bg-music.mp3"
   },

@@ -454,6 +454,23 @@ export const retroReleases: Release[] = [
     coverBg: '#f8f3ea',
     href: 'https://first-light-alpha.vercel.app/',
   },
+  {
+    // the closing track: the studio's own folder rather than a shipped project,
+    // so it wears RETRO Studios' own raven and monochrome accent
+    id: 'retro-projects',
+    title: 'RETRO PROJECTS',
+    subtitle: 'The Studio Folder',
+    tag: 'Retro Studios · working archive · view only',
+    short:
+      'The studio’s working folder, opened up. Not a case study and not a cut reel — Retro Studios’ own project Drive, shared read only. Click through and look around.',
+    tracklist: ['01 — The Archive', '02 — Open Folder', '03 — Shared Drive', '04 — Have A Look'],
+    badge: 'Google Drive — view only',
+    accent: '#f5f5f2',
+    font: 'var(--font-display)',
+    cover: '/scenes/retro-raven.webp',
+    coverBg: '#000000',
+    href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV',
+  },
 ]
 
 // ─── The vault: every other project, fully preserved ──────────────────────────

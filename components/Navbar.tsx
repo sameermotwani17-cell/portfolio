@@ -88,15 +88,15 @@ export default function Navbar() {
             className="text-[11px] tracking-[0.2em] uppercase font-body transition-colors duration-300 hover:!text-primary"
             style={{ color: textColor }}
           >
-            CV
+            Creative CV
           </a>
           <a
-            href="/resume.pdf"
-            download="Sameer_Motwani_Resume_Tech.pdf"
+            href="/cv.pdf"
+            download="Sameer_Motwani_CV.pdf"
             className="text-[11px] tracking-[0.2em] uppercase font-body transition-colors duration-300 hover:!text-primary"
             style={{ color: textColor }}
           >
-            Résumé
+            CV
           </a>
           <a
             href="https://github.com/sameermotwani17-cell"
