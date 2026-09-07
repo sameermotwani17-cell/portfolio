@@ -10,8 +10,9 @@ import {
   useInView,
   useReducedMotion,
 } from 'framer-motion'
-import { albums, retroReleases, vault, type Album, type Track, type VaultItem } from '@/lib/projects'
+import { albums, retroReleases, vault, type Album, type Release, type Track, type VaultItem } from '@/lib/projects'
 import AlbumGrid, { ReleaseGrid } from './AlbumGrid'
+import InfinityWipe from './InfinityWipe'
 import VaultRow from './VaultRow'
 import SkillsBlock from './SkillsBlock'
 import CaseStudyOverlay from './CaseStudyOverlay'
@@ -28,9 +29,23 @@ const TRACKS: { id: Track; label: string; note: string; accent: string }[] = [
   { id: 'tech', label: 'engineering', note: 'side b', accent: '#f97316' },
 ]
 
-function TrackToggle({ value, onChange }: { value: Track; onChange: (t: Track) => void }) {
+function TrackToggle({
+  value,
+  onChange,
+  switches,
+  reduced,
+}: {
+  value: Track
+  onChange: (t: Track) => void
+  switches: number
+  reduced: boolean | null
+}) {
+  const other = TRACKS.find((t) => t.id !== value)!
+  const current = TRACKS.find((t) => t.id === value)!
   return (
     <div className="flex flex-col items-center gap-4 mb-14">
+      {/* the interchange: one continuous loop, crossing the centre once */}
+      <InfinityWipe active={switches} from={other.accent} to={current.accent} reduced={reduced} />
       <div
         role="tablist"
         aria-label="Project track"
@@ -74,9 +89,11 @@ function TrackToggle({ value, onChange }: { value: Track; onChange: (t: Track) =
 export default function FireScene() {
   const ref = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
-  const [selected, setSelected] = useState<Album | VaultItem | null>(null)
+  const [selected, setSelected] = useState<Album | VaultItem | Release | null>(null)
   // creative leads: this site is being read by design hires as often as eng ones
   const [track, setTrack] = useState<Track>('creative')
+  // bumping this restarts the lemniscate trace on every interchange
+  const [switches, setSwitches] = useState(0)
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -100,8 +117,14 @@ export default function FireScene() {
   const titleRef = useRef<HTMLDivElement>(null)
   const titleInView = useInView(titleRef, { once: true, margin: '-30%' })
 
-  const open = useCallback((item: Album | VaultItem) => setSelected(item), [])
+  const open = useCallback((item: Album | VaultItem | Release) => setSelected(item), [])
   const close = useCallback(() => setSelected(null), [])
+  const switchTrack = useCallback((t: Track) => {
+    setTrack((prev) => {
+      if (prev !== t) setSwitches((n) => n + 1)
+      return t
+    })
+  }, [])
 
   return (
     <section ref={ref} id="projects" className="relative bg-ink">
@@ -262,7 +285,7 @@ export default function FireScene() {
 
         {/* album grid — split into two tracks */}
         <div className="max-w-6xl mx-auto px-6 md:px-10 pb-24">
-          <TrackToggle value={track} onChange={setTrack} />
+          <TrackToggle value={track} onChange={switchTrack} switches={switches} reduced={reduced} />
 
           <AlbumGrid albums={albums.filter((a) => a.track === track)} onOpen={open} />
 
@@ -302,11 +325,11 @@ export default function FireScene() {
                 className="font-body text-sm text-center mt-10 mb-14 max-w-lg mx-auto leading-relaxed"
                 style={{ color: 'rgba(245,245,242,0.6)' }}
               >
-                Seven releases under one studio. Each one carries its own colour and its own
-                typeface — taken from the brand it belongs to, not from this site. ▶ open goes
-                straight to the live work.
+                Seven releases under one studio. Each one opens its own story — why it exists
+                and what it cost — in the colour and typeface of the brand it belongs to, not
+                this site&apos;s. The live work is one click further in.
               </motion.p>
-              <ReleaseGrid releases={retroReleases} />
+              <ReleaseGrid releases={retroReleases} onOpen={open} />
             </div>
           )}
         </div>
