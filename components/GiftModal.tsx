@@ -93,7 +93,7 @@ export default function GiftModal({ onClose }: Props) {
             </span>
           </h2>
           <p className="text-white/40 font-body text-sm mt-3 leading-relaxed">
-            A retro FIFA-style Founder Card — PDF — will be emailed to you after payment.
+            A retro FIFA-style Founder Card (PDF) will be emailed to you after payment.
           </p>
         </div>
 

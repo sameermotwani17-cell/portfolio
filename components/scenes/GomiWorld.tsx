@@ -13,11 +13,11 @@ const GREEN = '#3f9142'
 const DARKGREEN = '#25522a'
 
 const TIMELINE = [
-  { when: 'hour 0', what: 'Built in 48 hours at the APU hackathon — 1st place', detail: 'GPT-4V vision + a rule engine reverse-engineered from Beppu municipal PDFs' },
+  { when: 'hour 0', what: 'Built in 48 hours at the APU hackathon · 1st place', detail: 'GPT-4V vision + a rule engine reverse-engineered from Beppu municipal PDFs' },
   { when: 'month 1', what: '520+ organic users, zero paid acquisition', detail: '95.3% adoption intent across a 400-person survey' },
   { when: 'the pivot', what: 'City hall and property managers at the table', detail: 'Pilot framework + cost-reduction logic presented to Beppu City' },
   { when: '2.0 ships', what: 'From sorting guide to accountability layer', detail: 'QR per tenant · every disposal logged · live compliance dashboard' },
-  { when: 'now', what: 'Pilot conversations live with Beppu operators', detail: 'Then wound down as a company — folded into StarLabs, lessons carried forward' },
+  { when: 'now', what: 'Pilot conversations live with Beppu operators', detail: 'Then wound down as a company, folded into StarLabs, lessons carried forward' },
 ]
 
 const FEATURES = [
@@ -75,7 +75,7 @@ export default function GomiWorld({ item }: { item: WorldItem }) {
             “Which room put the wrong bag there?”
           </h3>
           <p className="font-body text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(245,245,242,0.7)' }}>
-            Mis-sorting is a real operational cost — staff time, complaints, rejected bags.
+            Mis-sorting is a real operational cost: staff time, complaints, rejected bags.
             2.0 is the accountability layer that makes it traceable.
           </p>
         </div>

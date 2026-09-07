@@ -82,7 +82,7 @@ function Radar() {
         )
       })}
       <text x={cx} y={155} fontSize={9} fill="rgba(255,255,255,0.4)" fontFamily="monospace" textAnchor="middle">
-        scored quietly, every turn — then explained in English
+        scored quietly, every turn, then explained in English
       </text>
     </svg>
   )
@@ -107,7 +107,7 @@ function WaCard() {
       </div>
       <p className="font-body text-[11px] mt-4 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
         the same answer lands differently across cultures. MIRU makes the invisible air of a
-        Japanese interview visible — then shows you what the interviewer was really thinking.
+        Japanese interview visible, then shows you what the interviewer was really thinking.
       </p>
     </div>
   )
@@ -170,7 +170,7 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
               {item.tag}
             </p>
             <p className="font-body text-sm mt-2 max-w-md" style={{ color: `${NAVY}cc` }}>
-              見る — to see. an AI interview coach that makes the invisible air of
+              見る, to see. an AI interview coach that makes the invisible air of
               Japanese hiring visible.
             </p>
           </div>
@@ -221,7 +221,7 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
                     {i + 1}
                   </span>
                   <span className="text-base" style={{ fontFamily: 'var(--font-scrawl), cursive', color: TEAL }}>
-                    scene {String(i + 1).padStart(2, '0')} — {stage.label}
+                    scene {String(i + 1).padStart(2, '0')} · {stage.label}
                   </span>
                 </div>
                 <h3 className="font-display text-white leading-tight mt-3" style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
@@ -252,8 +252,8 @@ export default function MiruWorld({ item }: { item: WorldItem }) {
       <div className="px-6 md:px-10 py-8">
         <div className="pt-5" style={{ borderTop: `1px solid ${TEAL}30` }}>
           <p className="font-body text-[12px] leading-relaxed mb-4" style={{ color: 'rgba(245,245,242,0.55)' }}>
-            Team MIRU — Sameer (development: the working voice product, technical design) ·
-            Siddik (research & systems) · Jeana (strategy) · Takako (Japanese presentation — the bridge itself).
+            Team MIRU · Sameer (development: the working voice product, technical design) ·
+            Siddik (research & systems) · Jeana (strategy) · Takako (Japanese presentation, the bridge itself).
           </p>
           <div className="flex flex-wrap gap-2">
             {item.tech.map((t) => (
