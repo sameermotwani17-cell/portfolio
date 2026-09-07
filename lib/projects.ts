@@ -359,7 +359,7 @@ export const retroReleases: Release[] = [
     subtitle: 'Football. Identity. Prestige.',
     tag: 'Creative Director · Prompt Engineer · Technical Producer · for founder Hassan Kai Turay',
     short:
-      'A 12-country, 300-piece-per-edition limited jersey line for the 2026 World Cup, run solo. Morocco’s Zellige tiles, Japan’s kintsugi-slashed sakura, Brazil’s rhinestone crest — each edition got its own visual language, translated into AI campaign photography and video across three silhouettes. Built on an 8-layer prompt architecture with a dedicated anti-perfection layer to kill the tells of synthetic imagery, locked to ARRI Alexa / Kodak 2383 colour science across every asset. Shipped alongside the live store it sells on.',
+      'Twelve country editions for the 2026 World Cup, 300 numbered pieces each, run solo. Morocco got Zellige tiles, Japan got kintsugi through the sakura, Brazil got the rhinestone crest. Every edition its own language, shot across three silhouettes. Eight prompt layers underneath it, one of them there purely to kill the tells that give AI imagery away. Same colour science on all of it. I built the store it sold from too.',
     tracklist: ['01 — Director’s Brief', '02 — 12 Editions', '03 — Anti-Perfection', '04 — The Drop'],
     badge: '300 numbered pieces · no restocks',
     // the brand's own declared theme-color on dkai2ray.company
@@ -372,17 +372,17 @@ export const retroReleases: Release[] = [
     links: [{ label: '@dk2rwear', href: 'https://www.instagram.com/dk2rwear' }],
     detail: {
       overview:
-        'The studio’s first paid engagement, and the one that had to prove the thesis. Hassan Kai Turay had a brand and a deadline that could not move: a limited jersey line tied to the 2026 World Cup, twelve country editions, 300 numbered pieces each, no restocks. An agency quote for that much campaign photography was never going to clear. I took the whole pipeline solo — creative direction, prompt engineering, technical production — and delivered it against the tournament calendar. It ran its course when the World Cup ended.',
+        'First paid job the studio ever took, and the one that had to work. Hassan Kai Turay came to me with a brand and a date he couldn’t move: a limited jersey line for the 2026 World Cup, twelve country editions, 300 numbered pieces each, no restocks. Shooting twelve markets properly costs more than the line would ever make back. So I ran it alone. Direction, prompts, production, and the store it sold from. It closed out when the tournament did.',
       stats: [
         { value: '12', label: 'Country editions, each with its own visual language' },
-        { value: '300', label: 'Numbered pieces per edition — no restocks, ever' },
+        { value: '300', label: 'Numbered pieces per edition. No restocks, ever' },
         { value: '8', label: 'Prompt layers, reference-locked across every asset' },
         { value: '150+', label: 'Hero images delivered, zero manufacturing redos' },
       ],
       flow: [
         {
           label: 'the brief',
-          headline: 'Twelve countries, one deadline that cannot move',
+          headline: 'Twelve countries, one date that can’t move',
           points: [
             'A World Cup capsule only has value while the tournament is on',
             'Agency-rate campaign photography for 12 markets was never in budget',
@@ -393,9 +393,9 @@ export const retroReleases: Release[] = [
           label: 'the editions',
           headline: 'Each country gets its own language, not a recolour',
           points: [
-            'Morocco — Zellige tilework',
-            'Japan — kintsugi-slashed sakura',
-            'Brazil — the rhinestone crest',
+            'Morocco: Zellige tilework',
+            'Japan: kintsugi-slashed sakura',
+            'Brazil: the rhinestone crest',
             'Three silhouettes per edition, 36 SKUs in total',
           ],
         },
@@ -403,20 +403,20 @@ export const retroReleases: Release[] = [
           label: 'anti-perfection',
           headline: 'The layer that hides the machine',
           points: [
-            'AI imagery tells on itself: sourceless light, static fabric, flawless skin',
+            'AI imagery tells on itself: sourceless light, fabric that never moves, skin with no pores',
             'A dedicated layer in the stack exists purely to break those tells',
-            'ARRI Alexa / Kodak 2383 colour science locked across all 12 markets',
-            'A director’s brief written before a single generation',
+            'ARRI Alexa and Kodak 2383 colour science locked across all 12 markets',
+            'A director’s brief written before anything got generated',
           ],
         },
         {
           label: 'the drop',
           headline: 'Renders on one side, a factory and a checkout on the other',
           points: [
-            'AI renders bridged into factory production sheets',
-            '55-asset, 14-edition QA pass — zero redos',
+            'Renders turned into factory production sheets',
+            '55 assets across 14 editions, checked. Zero redos',
             'Solo-built Next.js + Supabase storefront with PayPal checkout',
-            'Campaign closed out with the tournament in 2026',
+            'Closed out with the tournament in 2026',
           ],
         },
       ],
@@ -432,7 +432,7 @@ export const retroReleases: Release[] = [
     subtitle: 'Minimal Streetwear',
     tag: 'Concept brand · a design exercise in restraint',
     short:
-      'A minimal streetwear label, built as a design exercise. No manifesto, no lifestyle shoot — just five hero pieces shot and priced like a real drop. The point was restraint: prove a clean, product-first e-commerce grid without leaning on lore or campaign photography to carry it.',
+      'A minimal streetwear label I built as an exercise. No manifesto, no lifestyle shoot. Five pieces, shot and priced like a real drop, and a grid that has to carry them on its own.',
     tracklist: ['01 — Five Pieces', '02 — No Manifesto', '03 — Product-First Grid', '04 — Restraint'],
     badge: '5 hero pieces · $89–$249',
     // the brand declares exactly two colors: #0D0D0D ink on #FFFFFF paper
@@ -445,30 +445,30 @@ export const retroReleases: Release[] = [
     links: [{ label: 'Brand assets', href: 'https://drive.google.com/drive/folders/1u-UNW_YvpI0KB_-1Q5qtutXyOYDUkjdf' }],
     detail: {
       overview:
-        'Every brand I had built up to this point leaned on story — a manifesto, a campaign, a world. I wanted to know whether I could hold a page together without any of that. Too Easy is the control experiment: five pieces, real prices, shot clean on white, and nothing else to hide behind. If the grid does not carry it, nothing does.',
+        'Every brand I’d built before this one leaned on a story. A manifesto, a campaign, a whole world to sell you. I wanted to know if I could hold a page together without any of it. So: five pieces, real prices, shot on white, nothing behind them. If the grid doesn’t carry it, nothing does.',
       stats: [
-        { value: '5', label: 'Hero pieces — the entire catalogue' },
+        { value: '5', label: 'Hero pieces. That is the whole catalogue' },
         { value: '2', label: 'Colours declared in the whole stylesheet' },
         { value: '0', label: 'Words of manifesto, lore, or campaign copy' },
-        { value: '$89', label: 'Entry price — a real drop, priced like one' },
+        { value: '$89', label: 'Entry price. Priced like a real drop' },
       ],
       flow: [
         {
           label: 'the exercise',
-          headline: 'Take away the story and see what holds',
+          headline: 'Take the story away and see what holds',
           points: [
             'No manifesto, no lifestyle shoot, no founder letter',
             'The product grid is the only thing selling',
-            'A deliberate control against my louder brand work',
+            'A control against my louder brand work',
           ],
         },
         {
           label: 'the five',
           headline: 'Priced and shot like a real drop',
           points: [
-            'Oversized Jersey — $89',
-            'Parachute Track Pants — $129 · Trail Sneakers — $139',
-            'Shield Sunglasses — $159 · Puffer Jacket — $249',
+            'Oversized Jersey, $89',
+            'Parachute Track Pants $129 · Trail Sneakers $139',
+            'Shield Sunglasses $159 · Puffer Jacket $249',
           ],
         },
         {
@@ -477,14 +477,14 @@ export const retroReleases: Release[] = [
           points: [
             'Two declared colours in the entire stylesheet',
             'One typeface, one weight step, one grid',
-            'Every product isolated on white — no set, no model, no mood',
+            'Every product isolated on white. No set, no model, no mood',
           ],
         },
         {
           label: 'the read',
-          headline: 'The quietest record in the catalogue, on purpose',
+          headline: 'The quietest record here, on purpose',
           points: [
-            'Restraint is a position, not an absence of ideas',
+            'Restraint is a position, not a lack of ideas',
             'The hardest brief is the one with nothing to decorate',
           ],
         },
@@ -501,9 +501,9 @@ export const retroReleases: Release[] = [
     subtitle: 'Every step eats plastic.',
     tag: 'Concept brand · AD WARS marketing simulation, APU',
     short:
-      'A concept brand built for a marketing simulation, not a real product. The pitch: microplastics are in your blood, your rain, your floor — so instead of another recycling campaign, build a shoe that eats them. BioSole™ is presented as a four-layer enzyme membrane (grounded in PETase, the real plastic-digesting enzyme discovered in 2016), sold across three colorways — Origin, Reef, Deep Sea — with the whole site pitched in an investor-deck register rather than a product page. Fictional science, real design and copywriting discipline.',
+      'A concept brand for a marketing simulation, not a real product. Microplastics are in your blood and your rain and your floor, so instead of another recycling campaign I built a shoe that eats them. BioSole™ is a four-layer enzyme membrane, built on PETase, which is a real enzyme somebody found in 2016. Three colorways. The whole site reads like an investor deck rather than a product page.',
     tracklist: ['01 — Microplastics', '02 — BioSole™', '03 — Three Colorways', '04 — The Ask'],
-    badge: 'Concept brand — the science is fictional',
+    badge: 'Concept brand. The science is made up',
     // straight from the site's own CSS custom properties
     accent: '#9eff00',
     accents: ['#9eff00', '#00e0c6', '#5aa9ff'],
@@ -513,10 +513,10 @@ export const retroReleases: Release[] = [
     href: 'https://plastivore-plum.vercel.app/',
     detail: {
       overview:
-        'Built for APU’s AD WARS marketing simulation. The obvious move was another recycling campaign — asking people to try harder at a problem they are already losing. I went the other way: if microplastics are already in your blood, your rain and your floor, stop asking anyone to clean up and sell them a shoe that eats it instead. The science is fictional and the site says so outright. The design discipline is not.',
+        'Built for AD WARS, the marketing simulation at APU. Everyone else was going to run a recycling campaign, which means asking people to try harder at something they’re already losing. I’d rather sell them a shoe that eats it. The plastic is already in your blood and your rain and the floor you’re standing on, so stop cleaning and start digesting. The science is made up. The footer says so. The rest of it isn’t.',
       stats: [
         { value: '4', label: 'Layers in the BioSole™ membrane' },
-        { value: '3', label: 'Named colorways — Origin, Reef, Deep Sea' },
+        { value: '3', label: 'Named colorways: Origin, Reef, Deep Sea' },
         { value: '2016', label: 'The year PETase, the real enzyme, was discovered' },
         { value: '2', label: 'Scroll-scrubbed film sequences, 179 frames each' },
       ],
@@ -532,24 +532,24 @@ export const retroReleases: Release[] = [
         },
         {
           label: 'the sole',
-          headline: 'BioSole™ — four layers, one living membrane',
+          headline: 'BioSole™. Four layers, one living membrane',
           points: [
-            '01 Membrane — a PETase enzyme layer. The part that is hungry',
-            '02 Capillary Mesh — lifts microplastics off the floor',
-            '03 Digestion Chamber — breaks them into harmless minerals',
-            '04 Comfort Deck — you barely feel the planet healing',
+            '01 Membrane: a PETase enzyme layer. The hungry part',
+            '02 Capillary Mesh: lifts microplastics off the floor',
+            '03 Digestion Chamber: breaks them into harmless minerals',
+            '04 Comfort Deck: you barely feel the planet healing',
           ],
         },
         {
           label: 'the colorways',
           headline: 'Three appetites',
-          points: ['Origin — Enzyme Green', 'Reef — Microplastic Teal', 'Deep Sea — Abyssal Blue'],
+          points: ['Origin: Enzyme Green', 'Reef: Microplastic Teal', 'Deep Sea: Abyssal Blue'],
         },
         {
           label: 'the ask',
           headline: 'Pitched as an investor deck, not a product page',
           points: [
-            '"Be the reason the Earth heals" — the register is a raise, not a sale',
+            '"Be the reason the Earth heals." That is a raise, not a sale',
             'Cinematic scroll-scrub film carries the argument',
             'Fictional science, stated plainly in the footer',
           ],
@@ -564,7 +564,7 @@ export const retroReleases: Release[] = [
     subtitle: 'Seat Reservation · Millennium Hall, APU',
     tag: 'Event site & booking flow · 26 June 2026 · Millennium Hall, APU',
     short:
-      'A ticketing site, not a poster. Afro Week 2026 stages “The Lines They Drew” — a theatrical journey through Africa’s past told between a grandfather and a grandchild, carried by drama, music, dance, choir and traditional fashion. The build had to do the unglamorous half too: 732 seats held in live availability, a seat picker, free admission down to a name and an email, and a QR e-ticket that lands instantly. The pan-African red-gold-green runs as a structural rule through every band and divider rather than sitting on top as decoration.',
+      'A ticketing site, not a poster. The show is The Lines They Drew, a grandfather and a grandchild walking back through Africa’s past, carried by drama, music, dance, choir and traditional dress. Then the unglamorous half: 732 seats in live availability, a seat picker, free entry down to a name and an email, and a QR ticket that lands straight away. Red, gold and green run through every band and divider as structure rather than decoration.',
     tracklist: ['01 — The Lines They Drew', '02 — 732 Seats', '03 — Pick Your Seat', '04 — QR At The Door'],
     badge: '732 seats · free admission · QR entry',
     // the flag bar the site draws across every section edge
@@ -576,10 +576,10 @@ export const retroReleases: Release[] = [
     href: 'https://millennium-hall.vercel.app/',
     detail: {
       overview:
-        'Afro Week needed a door, not a poster. The show — "The Lines They Drew" — is a theatrical journey through Africa’s past told between a grandfather and a grandchild, and Millennium Hall holds 732 people. A flyer cannot hold a seat. So the brief split in two: give the production a stage worthy of it, and quietly solve the logistics of getting 732 people into the right chairs for free, with something scannable at the door.',
+        'Afro Week needed a door, not a poster. The show is The Lines They Drew, a grandfather and a grandchild walking back through Africa’s past, and Millennium Hall seats 732. A flyer can’t hold a seat for anybody. So it was two jobs really: build the show something it deserved, then work out how 732 people get into the right chairs for free and have something to scan on the way in.',
       stats: [
         { value: '732', label: 'Seats held in live availability' },
-        { value: 'FREE', label: 'Admission — a name and an email is the whole checkout' },
+        { value: 'FREE', label: 'Admission. A name and an email is the whole checkout' },
         { value: 'QR', label: 'E-ticket, issued instantly on reservation' },
         { value: '3', label: 'Flag colours, used as structure rather than decoration' },
       ],
@@ -597,18 +597,18 @@ export const retroReleases: Release[] = [
           label: 'the hall',
           headline: '732 seats, and every one of them has to be findable',
           points: [
-            'Millennium Hall, APU — 26 June 2026, 6th period',
+            'Millennium Hall, APU. 26 June 2026, 6th period',
             'Live seat availability rather than a static count',
             'A seat picker, not a form',
           ],
         },
         {
           label: 'the door',
-          headline: 'Free admission still needs a ticket',
+          headline: 'Free still needs a ticket',
           points: [
             'Name and email is the entire checkout',
             'QR e-ticket arrives instantly',
-            'Scannable at the door — no list, no queue at a table',
+            'Scannable at the door. No list, no queue at a table',
           ],
         },
         {
@@ -617,7 +617,7 @@ export const retroReleases: Release[] = [
           points: [
             'The pan-African bar rules every section edge and divider',
             'Bebas Neue at display scale, black ground, warm crew photography',
-            'Colour carries meaning here — it is not a skin on top',
+            'The colour means something here. It isn’t a skin on top',
           ],
         },
       ],
@@ -633,7 +633,7 @@ export const retroReleases: Release[] = [
     subtitle: 'A Netflix Built For One Person',
     tag: 'Personal build · a birthday release for Dan',
     short:
-      'A birthday gift dressed as a streaming service. It opens on a real “Who’s watching?” profile gate, plays a wordmark ident with its own audio sting, then hands you a browse page of ten titles — a limited series, a nature strand, a deadpan park-ranger documentary, a finale called The Bench — each with its own poster, hover preview, detail modal and full-screen player with subtitles. Every title is footage of one person, cut and graded to Netflix’s own design tokens. Not a product: a gift with a build behind it, made for one person and one occasion.',
+      'A birthday gift dressed up as a streaming service. Profile gate, wordmark ident with its own sting, then ten titles you can browse. A limited series, a nature strand, a deadpan park-ranger documentary, a finale called The Bench. Posters, hover previews, detail modals, a player with subtitles. All of it footage of one person, cut and graded on Netflix’s own tokens.',
     tracklist: ['01 — Who’s Watching?', '02 — The Ident', '03 — Ten Titles', '04 — The Bench'],
     badge: 'Made for Dan',
     // lifted from netflix.com's live DOM by the project itself, in css/tokens.css
@@ -644,12 +644,12 @@ export const retroReleases: Release[] = [
     href: 'https://danflix-murex.vercel.app/',
     detail: {
       overview:
-        'A birthday present for Dan, built as a streaming service. The idea was simple and stupid in the best way: take the clips that already exist of one person, and give them the full Netflix treatment — posters, a match percentage, hover previews, a detail modal, an ident with its own audio sting. The joke only lands if the craft is real, so the whole thing is built against Netflix’s own design tokens rather than an approximation of them.',
+        'A birthday present for Dan, built as a streaming service. Stupid idea and I liked it. Take the clips that already exist of one person, give them the full Netflix treatment, posters and match percentages and hover previews and an ident with its own sting. A joke like this only lands if the craft underneath it is real, so I pulled Netflix’s actual design tokens rather than guessing at them.',
       stats: [
         { value: '10', label: 'Titles, each with poster, preview and detail modal' },
         { value: '6', label: 'Subsystems: gate, ident, browse, modal, player, ending' },
         { value: '1', label: 'Person in the entire catalogue' },
-        { value: '#E50914', label: 'Netflix red, lifted from the live DOM, not eyeballed' },
+        { value: '#E50914', label: 'Netflix red, lifted from the live DOM rather than eyeballed' },
       ],
       flow: [
         {
@@ -657,14 +657,14 @@ export const retroReleases: Release[] = [
           headline: '“Who’s watching?”',
           points: [
             'The real profile gate, rebuilt',
-            'Doubles as the click that unlocks audio for everything downstream',
+            'Doubles as the click that unlocks audio for everything after it',
           ],
         },
         {
           label: 'the ident',
-          headline: 'A wordmark, a sting, then a cold open',
+          headline: 'Wordmark, sting, cold open',
           points: [
-            'DANFLIX wordmark with its own sweep and audio sting',
+            'The wordmark gets its own sweep and its own sting',
             'Skip Intro, because of course there is a Skip Intro',
           ],
         },
@@ -679,10 +679,10 @@ export const retroReleases: Release[] = [
         },
         {
           label: 'the ending',
-          headline: 'The Bench — the only title that matters',
+          headline: 'The Bench, the only title that matters',
           points: [
-            'A finale that stops being a joke about Netflix',
-            'The craft is the gift; the format is just the wrapping',
+            'The finale stops being a joke about Netflix',
+            'The build is the gift. Netflix is just the wrapping',
           ],
         },
       ],
@@ -695,7 +695,7 @@ export const retroReleases: Release[] = [
     subtitle: 'Photo Culling, As A Gift',
     tag: 'Secret Santa build · made for one person',
     short:
-      'A photo-culling tool built as a gift, not a product. Point it at a shoot — 1,847 frames from a wedding, in the real example — describe what you want in plain English (“20 lovely candid photos, eyes open, nothing repeated”), and it hands back a ranked shortlist with a one-line reason for every pick, duplicates of the same moment collapsed to the sharpest one. The whole site is designed around that specific, personal use case rather than generic SaaS landing-page language, with an explicit local-first privacy story: nothing full-size ever leaves your computer.',
+      'A photo-culling tool built as a gift rather than a product. Point it at a shoot, 1,847 frames from a wedding in the real example, and say what you want in plain English. It hands back a ranked shortlist with a line of reasoning on every pick, and collapses fourteen versions of one moment down to the sharpest. Nothing full size ever leaves your computer.',
     tracklist: ['01 — 1,847 Photos', '02 — Plain English', '03 — One Line, One Reason', '04 — Stays Local'],
     badge: '1,847 photos → a shortlist',
     // the site's own declared theme-color
@@ -706,12 +706,12 @@ export const retroReleases: Release[] = [
     href: 'https://first-light-alpha.vercel.app/',
     detail: {
       overview:
-        'A Secret Santa gift for Ha, who shoots. The problem I actually wanted to solve was not "build an AI photo tool" — it was that she comes back from a wedding with 1,847 frames and an evening disappears choosing between fourteen near-identical versions of the same moment. So: point it at the shoot, say what you want in plain English, get a ranked shortlist back with a reason attached to every pick. Built for one person and one specific evening, which is why it does not read like SaaS.',
+        'Secret Santa for Ha, who shoots. She gets home from a wedding with 1,847 frames and loses an entire evening picking between fourteen versions of the same moment, so I built her something that does the picking. Point it at the shoot, say what you want in plain English, get a shortlist back with a reason on every pick. It only ever had to work for one person.',
       stats: [
         { value: '1,847', label: 'Frames in the real example shoot' },
         { value: '1', label: 'Line of reasoning attached to every pick' },
         { value: '0', label: 'Full-size photos that ever leave your computer' },
-        { value: '#F8F3EA', label: 'Warm cream — the site’s own declared theme' },
+        { value: '#F8F3EA', label: 'Warm cream, the theme the site declares itself' },
       ],
       flow: [
         {
@@ -719,7 +719,7 @@ export const retroReleases: Release[] = [
           headline: '1,847 photos and an evening gone',
           points: [
             'A folder of near-duplicates from one wedding',
-            'The work is not editing, it is choosing',
+            'The work isn’t editing. It’s choosing',
             'Fourteen versions of the same moment, one of them sharp',
           ],
         },
@@ -728,7 +728,7 @@ export const retroReleases: Release[] = [
           headline: 'Describe the edit in plain English',
           points: [
             '“20 lovely candid photos, eyes open, nothing repeated”',
-            'No sliders, no filters, no tag taxonomy to learn',
+            'No sliders, no filters, nothing to learn',
           ],
         },
         {
@@ -736,16 +736,16 @@ export const retroReleases: Release[] = [
           headline: 'A ranked cut, and why each frame made it',
           points: [
             'One line of reasoning per pick',
-            'Near-duplicates collapsed to the sharpest of the set',
+            'Near-duplicates collapse to the sharpest of the set',
             'Ranked, not just filtered',
           ],
         },
         {
           label: 'the promise',
-          headline: 'Nothing full-size leaves the machine',
+          headline: 'Nothing full size leaves the machine',
           points: [
-            'Photos stay local; only small copies go out for analysis, then are discarded',
-            'Sold in warm editorial photography rather than UI screenshots',
+            'Photos stay local. Small copies go out for analysis and get thrown away',
+            'Sold with warm editorial photography instead of UI screenshots',
             'A keepsake, not a landing page',
           ],
         },
@@ -761,9 +761,9 @@ export const retroReleases: Release[] = [
     subtitle: 'The Studio Folder',
     tag: 'Retro Studios · working archive · view only',
     short:
-      'The studio’s working folder, opened up. Not a case study and not a cut reel — Retro Studios’ own project Drive, shared read only. Click through and look around.',
+      'The studio’s working folder, opened up. Not a case study and not a cut reel. Just the project Drive, shared read only. Click through and have a look.',
     tracklist: ['01 — The Archive', '02 — Open Folder', '03 — Shared Drive', '04 — Have A Look'],
-    badge: 'Google Drive — view only',
+    badge: 'Google Drive, view only',
     accent: '#f5f5f2',
     font: 'var(--font-display)',
     cover: '/scenes/retro-raven.webp',
@@ -771,17 +771,17 @@ export const retroReleases: Release[] = [
     href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV',
     detail: {
       overview:
-        'Everything above is the cut. This is the folder it was cut from. Retro Studios’ working Drive, shared read only — no case study, no sequencing, no reel. It is here because a portfolio that only ever shows finished work is a portfolio that hides how the work actually happens.',
+        'Everything above is the cut. This is the folder it got cut from, open to anyone with the link. Nothing in there is sequenced or tidied up.',
       flow: [
         {
           label: 'the archive',
           headline: 'The folder, not the edit',
-          points: ['Working files rather than finished pieces', 'No sequencing and no curation'],
+          points: ['Working files, not finished pieces', 'No sequencing and no curation'],
         },
         {
           label: 'the access',
           headline: 'Shared read only',
-          points: ['Open to anyone with the link', 'Nothing to request, nothing to sign'],
+          points: ['Open to anyone with the link', 'Nothing to request and nothing to sign'],
         },
       ],
       links: [
