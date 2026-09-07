@@ -33,7 +33,7 @@ function RetroBlock() {
           <h4 className="font-display text-2xl text-white leading-tight">the studio</h4>
           <p className="font-body text-sm leading-relaxed mt-3" style={{ color: 'rgba(245,245,242,0.62)' }}>
             One person, an AI-native stack, and the thesis that it can outproduce a full agency.
-            Cinematic brand content, shipped daily.
+            Cinematic brand content — a 12-country World Cup campaign delivered end to end.
           </p>
           <a
             href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
@@ -262,7 +262,7 @@ function ContactBlock() {
           full-time · contract · internship — remote worldwide or Japan
         </p>
         <p className="font-body text-[12px] mt-3" style={{ color: 'rgba(245,245,242,0.6)' }}>
-          brands &amp; founders: Retro Studios is taking briefs — cinematic AI content, directed and delivered by one person.{' '}
+          brands &amp; founders: Retro Studios is taking new briefs — cinematic AI content, directed and delivered by one person.{' '}
           <a
             href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
             target="_blank"

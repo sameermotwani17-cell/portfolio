@@ -94,10 +94,12 @@ export type Release = {
   cover: string | null
   coverContain?: boolean
   coverBg?: string
-  /** the live project — every release opens externally */
+  /** the live project — the case study links out to it */
   href: string
   /** optional secondary links (socials, asset folders) shown as small chips */
   links?: ProjectLink[]
+  /** the story: why it exists, how it was made, what it cost */
+  detail: ProjectDetail
 }
 
 // ─── The four featured albums ─────────────────────────────────────────────────
@@ -295,17 +297,17 @@ export const albums: Album[] = [
     subtitle: 'AI Cinematic Production · StarLabs',
     tag: 'Founder & Creative Director · Founded April 2026',
     short:
-      'One-person AI creative studio producing agency-grade cinematic brand content — running a paid 12-country campaign.',
+      'One-person AI creative studio producing agency-grade cinematic brand content — delivered a paid 12-country World Cup campaign end to end.',
     tracklist: ["01 — Director's Brief", '02 — Anti-Perfection', '03 — 12 Editions', '04 — One Person'],
     tech: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Seedance 2.0', 'Suno', 'CapCut', 'Next.js 14', 'Supabase', 'Vercel'],
-    badge: 'Live paid client campaign',
+    badge: 'Paid client campaign — delivered',
     accent: '#f5f5f2',
     cover: '/scenes/retro-raven.webp',
     mono: true,
     world: 'retro',
     detail: {
       overview:
-        'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Currently running full creative direction and technical production for DK2R Football Wear — a premium 12-country jersey brand tied to the 2026 FIFA World Cup.',
+        'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Ran full creative direction and technical production for DK2R Football Wear — a premium 12-country jersey brand built for the 2026 FIFA World Cup. The campaign ran its course with the tournament and closed out in 2026; the studio is open for the next brief.',
       stats: [
         { value: '12', label: 'Country editions art-directed' },
         { value: '36', label: 'SKU variants (3 silhouettes × 12)' },
@@ -316,12 +318,12 @@ export const albums: Album[] = [
         {
           label: 'the thesis',
           headline: 'One operator outproduces an agency',
-          points: ['Founded April 2026 under StarLabs', 'Statics, reels, commercial ads — no crew'],
+          points: ['Founded April 2026 under StarLabs', 'Statics, reels, commercial ads — no crew', 'Open for the next brief'],
         },
         {
           label: 'the client',
-          headline: 'DK2R — 2026 World Cup capsule',
-          points: ['12 editions · 36 SKUs · 300 numbered pieces each', '60-image campaigns: Mexico, Brazil, USA, England, Argentina', 'Solo-built Next.js + Supabase store, live PayPal'],
+          headline: 'DK2R — the 2026 World Cup capsule',
+          points: ['12 editions · 36 SKUs · 300 numbered pieces each', '60-image campaigns: Mexico, Brazil, USA, England, Argentina', 'Solo-built Next.js + Supabase store with PayPal checkout'],
         },
         {
           label: 'the system',
@@ -360,15 +362,69 @@ export const retroReleases: Release[] = [
       'A 12-country, 300-piece-per-edition limited jersey line for the 2026 World Cup, run solo. Morocco’s Zellige tiles, Japan’s kintsugi-slashed sakura, Brazil’s rhinestone crest — each edition got its own visual language, translated into AI campaign photography and video across three silhouettes. Built on an 8-layer prompt architecture with a dedicated anti-perfection layer to kill the tells of synthetic imagery, locked to ARRI Alexa / Kodak 2383 colour science across every asset. Shipped alongside the live store it sells on.',
     tracklist: ['01 — Director’s Brief', '02 — 12 Editions', '03 — Anti-Perfection', '04 — The Drop'],
     badge: '300 numbered pieces · no restocks',
-    // the brand's locked Visual DNA — cold, institutional, deliberately at odds
-    // with the warm mercado photography it grades
-    accent: '#8fa3b8',
+    // the brand's own declared theme-color on dkai2ray.company
+    accent: '#c9a84c',
     // closest to the site's own display face: DK2R is the most on-brand-for-Retro release
     font: 'var(--font-display)',
     cover: '/dk2r/dk2r-mercado-jersey.webp',
     coverBg: '#0b0b0b',
     href: 'https://dkai2ray.company/',
     links: [{ label: '@dk2rwear', href: 'https://www.instagram.com/dk2rwear' }],
+    detail: {
+      overview:
+        'The studio’s first paid engagement, and the one that had to prove the thesis. Hassan Kai Turay had a brand and a deadline that could not move: a limited jersey line tied to the 2026 World Cup, twelve country editions, 300 numbered pieces each, no restocks. An agency quote for that much campaign photography was never going to clear. I took the whole pipeline solo — creative direction, prompt engineering, technical production — and delivered it against the tournament calendar. It ran its course when the World Cup ended.',
+      stats: [
+        { value: '12', label: 'Country editions, each with its own visual language' },
+        { value: '300', label: 'Numbered pieces per edition — no restocks, ever' },
+        { value: '8', label: 'Prompt layers, reference-locked across every asset' },
+        { value: '150+', label: 'Hero images delivered, zero manufacturing redos' },
+      ],
+      flow: [
+        {
+          label: 'the brief',
+          headline: 'Twelve countries, one deadline that cannot move',
+          points: [
+            'A World Cup capsule only has value while the tournament is on',
+            'Agency-rate campaign photography for 12 markets was never in budget',
+            'One operator, an AI-native stack, and the whole pipeline to own',
+          ],
+        },
+        {
+          label: 'the editions',
+          headline: 'Each country gets its own language, not a recolour',
+          points: [
+            'Morocco — Zellige tilework',
+            'Japan — kintsugi-slashed sakura',
+            'Brazil — the rhinestone crest',
+            'Three silhouettes per edition, 36 SKUs in total',
+          ],
+        },
+        {
+          label: 'anti-perfection',
+          headline: 'The layer that hides the machine',
+          points: [
+            'AI imagery tells on itself: sourceless light, static fabric, flawless skin',
+            'A dedicated layer in the stack exists purely to break those tells',
+            'ARRI Alexa / Kodak 2383 colour science locked across all 12 markets',
+            'A director’s brief written before a single generation',
+          ],
+        },
+        {
+          label: 'the drop',
+          headline: 'Renders on one side, a factory and a checkout on the other',
+          points: [
+            'AI renders bridged into factory production sheets',
+            '55-asset, 14-edition QA pass — zero redos',
+            'Solo-built Next.js + Supabase storefront with PayPal checkout',
+            'Campaign closed out with the tournament in 2026',
+          ],
+        },
+      ],
+      links: [
+        { label: 'Visit the store', href: 'https://dkai2ray.company/' },
+        { label: '@dk2rwear', href: 'https://www.instagram.com/dk2rwear' },
+      ],
+    },
   },
   {
     id: 'too-easy',
@@ -387,6 +443,57 @@ export const retroReleases: Release[] = [
     coverBg: '#ffffff',
     href: 'https://too-easy-seven.vercel.app/',
     links: [{ label: 'Brand assets', href: 'https://drive.google.com/drive/folders/1u-UNW_YvpI0KB_-1Q5qtutXyOYDUkjdf' }],
+    detail: {
+      overview:
+        'Every brand I had built up to this point leaned on story — a manifesto, a campaign, a world. I wanted to know whether I could hold a page together without any of that. Too Easy is the control experiment: five pieces, real prices, shot clean on white, and nothing else to hide behind. If the grid does not carry it, nothing does.',
+      stats: [
+        { value: '5', label: 'Hero pieces — the entire catalogue' },
+        { value: '2', label: 'Colours declared in the whole stylesheet' },
+        { value: '0', label: 'Words of manifesto, lore, or campaign copy' },
+        { value: '$89', label: 'Entry price — a real drop, priced like one' },
+      ],
+      flow: [
+        {
+          label: 'the exercise',
+          headline: 'Take away the story and see what holds',
+          points: [
+            'No manifesto, no lifestyle shoot, no founder letter',
+            'The product grid is the only thing selling',
+            'A deliberate control against my louder brand work',
+          ],
+        },
+        {
+          label: 'the five',
+          headline: 'Priced and shot like a real drop',
+          points: [
+            'Oversized Jersey — $89',
+            'Parachute Track Pants — $129 · Trail Sneakers — $139',
+            'Shield Sunglasses — $159 · Puffer Jacket — $249',
+          ],
+        },
+        {
+          label: 'the restraint',
+          headline: '#0D0D0D on #FFFFFF, and nothing else',
+          points: [
+            'Two declared colours in the entire stylesheet',
+            'One typeface, one weight step, one grid',
+            'Every product isolated on white — no set, no model, no mood',
+          ],
+        },
+        {
+          label: 'the read',
+          headline: 'The quietest record in the catalogue, on purpose',
+          points: [
+            'Restraint is a position, not an absence of ideas',
+            'The hardest brief is the one with nothing to decorate',
+          ],
+        },
+      ],
+      links: [
+        { label: 'Visit the site', href: 'https://too-easy-seven.vercel.app/' },
+        { label: 'Brand assets', href: 'https://drive.google.com/drive/folders/1u-UNW_YvpI0KB_-1Q5qtutXyOYDUkjdf' },
+      ],
+    },
   },
   {
     id: 'plastivore',
@@ -404,6 +511,52 @@ export const retroReleases: Release[] = [
     cover: 'https://plastivore-plum.vercel.app/assets/colorway_origin.png',
     coverBg: '#07090a',
     href: 'https://plastivore-plum.vercel.app/',
+    detail: {
+      overview:
+        'Built for APU’s AD WARS marketing simulation. The obvious move was another recycling campaign — asking people to try harder at a problem they are already losing. I went the other way: if microplastics are already in your blood, your rain and your floor, stop asking anyone to clean up and sell them a shoe that eats it instead. The science is fictional and the site says so outright. The design discipline is not.',
+      stats: [
+        { value: '4', label: 'Layers in the BioSole™ membrane' },
+        { value: '3', label: 'Named colorways — Origin, Reef, Deep Sea' },
+        { value: '2016', label: 'The year PETase, the real enzyme, was discovered' },
+        { value: '2', label: 'Scroll-scrubbed film sequences, 179 frames each' },
+      ],
+      flow: [
+        {
+          label: 'the problem',
+          headline: 'There are microplastics in your blood',
+          points: [
+            'In the rain, in the salt, in the floor you are standing on',
+            'We tried recycling. We tried banning straws',
+            'So stop cleaning plastic and build something that eats it',
+          ],
+        },
+        {
+          label: 'the sole',
+          headline: 'BioSole™ — four layers, one living membrane',
+          points: [
+            '01 Membrane — a PETase enzyme layer. The part that is hungry',
+            '02 Capillary Mesh — lifts microplastics off the floor',
+            '03 Digestion Chamber — breaks them into harmless minerals',
+            '04 Comfort Deck — you barely feel the planet healing',
+          ],
+        },
+        {
+          label: 'the colorways',
+          headline: 'Three appetites',
+          points: ['Origin — Enzyme Green', 'Reef — Microplastic Teal', 'Deep Sea — Abyssal Blue'],
+        },
+        {
+          label: 'the ask',
+          headline: 'Pitched as an investor deck, not a product page',
+          points: [
+            '"Be the reason the Earth heals" — the register is a raise, not a sale',
+            'Cinematic scroll-scrub film carries the argument',
+            'Fictional science, stated plainly in the footer',
+          ],
+        },
+      ],
+      links: [{ label: 'Visit the site', href: 'https://plastivore-plum.vercel.app/' }],
+    },
   },
   {
     id: 'afro-week',
@@ -421,6 +574,58 @@ export const retroReleases: Release[] = [
     cover: 'https://millennium-hall.vercel.app/afrifest-crew3.jpg',
     coverBg: '#0a0a0a',
     href: 'https://millennium-hall.vercel.app/',
+    detail: {
+      overview:
+        'Afro Week needed a door, not a poster. The show — "The Lines They Drew" — is a theatrical journey through Africa’s past told between a grandfather and a grandchild, and Millennium Hall holds 732 people. A flyer cannot hold a seat. So the brief split in two: give the production a stage worthy of it, and quietly solve the logistics of getting 732 people into the right chairs for free, with something scannable at the door.',
+      stats: [
+        { value: '732', label: 'Seats held in live availability' },
+        { value: 'FREE', label: 'Admission — a name and an email is the whole checkout' },
+        { value: 'QR', label: 'E-ticket, issued instantly on reservation' },
+        { value: '3', label: 'Flag colours, used as structure rather than decoration' },
+      ],
+      flow: [
+        {
+          label: 'the show',
+          headline: 'The Lines They Drew',
+          points: [
+            'Africa’s great empires, colonisation, liberation, identity',
+            'Drama · Music · Dance · Choir · Traditional fashion',
+            'Told between a grandfather and a grandchild',
+          ],
+        },
+        {
+          label: 'the hall',
+          headline: '732 seats, and every one of them has to be findable',
+          points: [
+            'Millennium Hall, APU — 26 June 2026, 6th period',
+            'Live seat availability rather than a static count',
+            'A seat picker, not a form',
+          ],
+        },
+        {
+          label: 'the door',
+          headline: 'Free admission still needs a ticket',
+          points: [
+            'Name and email is the entire checkout',
+            'QR e-ticket arrives instantly',
+            'Scannable at the door — no list, no queue at a table',
+          ],
+        },
+        {
+          label: 'the palette',
+          headline: 'Red, gold and green as structure',
+          points: [
+            'The pan-African bar rules every section edge and divider',
+            'Bebas Neue at display scale, black ground, warm crew photography',
+            'Colour carries meaning here — it is not a skin on top',
+          ],
+        },
+      ],
+      links: [
+        { label: 'Reserve a seat', href: 'https://millennium-hall.vercel.app/' },
+        { label: '@afroweekapu', href: 'https://www.instagram.com/afroweekapu' },
+      ],
+    },
   },
   {
     id: 'danflix',
@@ -437,6 +642,52 @@ export const retroReleases: Release[] = [
     cover: 'https://danflix-murex.vercel.app/assets/poster/igotyou-card.jpg',
     coverBg: '#141414',
     href: 'https://danflix-murex.vercel.app/',
+    detail: {
+      overview:
+        'A birthday present for Dan, built as a streaming service. The idea was simple and stupid in the best way: take the clips that already exist of one person, and give them the full Netflix treatment — posters, a match percentage, hover previews, a detail modal, an ident with its own audio sting. The joke only lands if the craft is real, so the whole thing is built against Netflix’s own design tokens rather than an approximation of them.',
+      stats: [
+        { value: '10', label: 'Titles, each with poster, preview and detail modal' },
+        { value: '6', label: 'Subsystems: gate, ident, browse, modal, player, ending' },
+        { value: '1', label: 'Person in the entire catalogue' },
+        { value: '#E50914', label: 'Netflix red, lifted from the live DOM, not eyeballed' },
+      ],
+      flow: [
+        {
+          label: 'the gate',
+          headline: '“Who’s watching?”',
+          points: [
+            'The real profile gate, rebuilt',
+            'Doubles as the click that unlocks audio for everything downstream',
+          ],
+        },
+        {
+          label: 'the ident',
+          headline: 'A wordmark, a sting, then a cold open',
+          points: [
+            'DANFLIX wordmark with its own sweep and audio sting',
+            'Skip Intro, because of course there is a Skip Intro',
+          ],
+        },
+        {
+          label: 'the catalogue',
+          headline: 'Ten titles, one cast member',
+          points: [
+            'A limited series, a nature strand, a deadpan park-ranger documentary',
+            'Hover previews, match percentages, genres, runtimes',
+            'Full-screen player with subtitles',
+          ],
+        },
+        {
+          label: 'the ending',
+          headline: 'The Bench — the only title that matters',
+          points: [
+            'A finale that stops being a joke about Netflix',
+            'The craft is the gift; the format is just the wrapping',
+          ],
+        },
+      ],
+      links: [{ label: 'Open Danflix', href: 'https://danflix-murex.vercel.app/' }],
+    },
   },
   {
     id: 'first-light',
@@ -453,6 +704,54 @@ export const retroReleases: Release[] = [
     cover: 'https://first-light-alpha.vercel.app/_next/static/immutable/media/ha-window.3ukoirfs21_b2.jpg',
     coverBg: '#f8f3ea',
     href: 'https://first-light-alpha.vercel.app/',
+    detail: {
+      overview:
+        'A Secret Santa gift for Ha, who shoots. The problem I actually wanted to solve was not "build an AI photo tool" — it was that she comes back from a wedding with 1,847 frames and an evening disappears choosing between fourteen near-identical versions of the same moment. So: point it at the shoot, say what you want in plain English, get a ranked shortlist back with a reason attached to every pick. Built for one person and one specific evening, which is why it does not read like SaaS.',
+      stats: [
+        { value: '1,847', label: 'Frames in the real example shoot' },
+        { value: '1', label: 'Line of reasoning attached to every pick' },
+        { value: '0', label: 'Full-size photos that ever leave your computer' },
+        { value: '#F8F3EA', label: 'Warm cream — the site’s own declared theme' },
+      ],
+      flow: [
+        {
+          label: 'the shoot',
+          headline: '1,847 photos and an evening gone',
+          points: [
+            'A folder of near-duplicates from one wedding',
+            'The work is not editing, it is choosing',
+            'Fourteen versions of the same moment, one of them sharp',
+          ],
+        },
+        {
+          label: 'the ask',
+          headline: 'Describe the edit in plain English',
+          points: [
+            '“20 lovely candid photos, eyes open, nothing repeated”',
+            'No sliders, no filters, no tag taxonomy to learn',
+          ],
+        },
+        {
+          label: 'the shortlist',
+          headline: 'A ranked cut, and why each frame made it',
+          points: [
+            'One line of reasoning per pick',
+            'Near-duplicates collapsed to the sharpest of the set',
+            'Ranked, not just filtered',
+          ],
+        },
+        {
+          label: 'the promise',
+          headline: 'Nothing full-size leaves the machine',
+          points: [
+            'Photos stay local; only small copies go out for analysis, then are discarded',
+            'Sold in warm editorial photography rather than UI screenshots',
+            'A keepsake, not a landing page',
+          ],
+        },
+      ],
+      links: [{ label: 'Open First Light', href: 'https://first-light-alpha.vercel.app/' }],
+    },
   },
   {
     // the closing track: the studio's own folder rather than a shipped project,
@@ -470,6 +769,25 @@ export const retroReleases: Release[] = [
     cover: '/scenes/retro-raven.webp',
     coverBg: '#000000',
     href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV',
+    detail: {
+      overview:
+        'Everything above is the cut. This is the folder it was cut from. Retro Studios’ working Drive, shared read only — no case study, no sequencing, no reel. It is here because a portfolio that only ever shows finished work is a portfolio that hides how the work actually happens.',
+      flow: [
+        {
+          label: 'the archive',
+          headline: 'The folder, not the edit',
+          points: ['Working files rather than finished pieces', 'No sequencing and no curation'],
+        },
+        {
+          label: 'the access',
+          headline: 'Shared read only',
+          points: ['Open to anyone with the link', 'Nothing to request, nothing to sign'],
+        },
+      ],
+      links: [
+        { label: 'Open the Drive folder', href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV' },
+      ],
+    },
   },
 ]
 

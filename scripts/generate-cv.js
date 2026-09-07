@@ -125,7 +125,7 @@ async function main() {
   // ── profile ──
   section('Profile')
   bullet(
-    'Creative director who ships the whole pipeline: brand identity and art direction through campaign photography, motion, copy, and the production-grade site the work sells on. Currently running a paid 12-country World Cup apparel campaign solo, as director, prompt engineer, and technical producer.'
+    'Creative director who ships the whole pipeline: brand identity and art direction through campaign photography, motion, copy, and the production-grade site the work sells on. Ran a paid 12-country World Cup apparel campaign solo, as director, prompt engineer and technical producer, from first brief to delivered assets and a live storefront.'
   )
   gap(6)
 
@@ -144,7 +144,7 @@ async function main() {
   )
   gap()
   entry('DK2R Football Wear', 'Client engagement')
-  subline('Creative Director, Prompt Engineer & Technical Producer - for founder Hassan Kai Turay', '2026')
+  subline('Creative Director, Prompt Engineer & Technical Producer - for founder Hassan Kai Turay', 'Apr - Jul 2026')
   bullet(
     'Art-directed 12 country editions for a 2026 World Cup capsule - Morocco Zellige tilework, Japan kintsugi-slashed sakura, Brazil rhinestone crest - each with its own visual language across three silhouettes, 300 numbered pieces per edition, no restocks.'
   )
@@ -161,7 +161,7 @@ async function main() {
   work(
     'DK2R - dkai2ray.company',
     'Creative direction, campaign, storefront',
-    'A 12-country limited jersey line and the live shop it sells from. Football, identity, prestige.'
+    'A 12-country limited jersey line and the shop it sold from, built for the 2026 World Cup and closed out with the tournament. Football, identity, prestige.'
   )
   work(
     'Afro Week 2026 - millennium-hall.vercel.app',

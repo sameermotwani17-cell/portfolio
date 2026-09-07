@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
-import type { Album, VaultItem } from '@/lib/projects'
+import { useEffect, useRef, useState } from 'react'
+import type { Album, Release, VaultItem } from '@/lib/projects'
 import StickemCinema from './StickemCinema'
 import ScrapyardWorld from './ScrapyardWorld'
 import RetroWorld from './RetroWorld'
@@ -11,7 +11,7 @@ import GomiWorld from './GomiWorld'
 import AihackWorld from './AihackWorld'
 import MiruWorld from './MiruWorld'
 
-type OverlayItem = (Album | VaultItem) & {
+type OverlayItem = (Album | VaultItem | Release) & {
   cover?: string | null
   coverContain?: boolean
   coverBg?: string
@@ -19,16 +19,25 @@ type OverlayItem = (Album | VaultItem) & {
   mono?: boolean
   world?: 'stickem' | 'scrapyard' | 'retro' | 'gomi' | 'aihack' | 'miru'
   logo?: string
+  /** a RETRO release brings its own typeface and signature palette */
+  font?: string
+  accents?: string[]
+  tech?: string[]
 }
 
-const WORLDS: Record<string, React.ComponentType<{ item: OverlayItem }>> = {
+/**
+ * Bespoke worlds belong to featured albums and vault items, which is the only
+ * kind of item that carries a `world` key — a RETRO release never reaches this
+ * map, so the widened OverlayItem is safe to assert here.
+ */
+const WORLDS = {
   stickem: StickemCinema,
   scrapyard: ScrapyardWorld,
   retro: RetroWorld,
   gomi: GomiWorld,
   aihack: AihackWorld,
   miru: MiruWorld,
-}
+} as unknown as Record<string, React.ComponentType<{ item: OverlayItem }>>
 
 /**
  * Full-screen case study, themed per project (accent color; RETRO gets the
@@ -44,6 +53,9 @@ export default function CaseStudyOverlay({
   onClose: () => void
 }) {
   const panelRef = useRef<HTMLDivElement>(null)
+  // release covers come from each project's own deployment; hold the record's
+  // base colour rather than a broken image if one is ever unreachable
+  const [coverFailed, setCoverFailed] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
   const prevFocus = useRef<Element | null>(null)
 
@@ -92,7 +104,8 @@ export default function CaseStudyOverlay({
 
   const accent = item.accent
   const mono = !!item.mono
-  const displayFont = item.stencil ? 'var(--font-stencil)' : 'var(--font-display)'
+  // a release carries the typeface of the brand it belongs to
+  const displayFont = item.font || (item.stencil ? 'var(--font-stencil)' : 'var(--font-display)')
   const panelBg = mono
     ? '#000'
     : `radial-gradient(ellipse 90% 40% at 50% 0%, ${accent}1f, transparent 60%), radial-gradient(ellipse 70% 30% at 50% 100%, ${accent}0d, transparent 60%), #0c0c0c`
@@ -155,18 +168,36 @@ export default function CaseStudyOverlay({
         ) : (
           <>
         {/* hero art */}
-        <div className="relative h-52 md:h-64 overflow-hidden">
-          {item.cover ? (
+        <div className="relative h-52 md:h-64 overflow-hidden" style={{ background: item.coverBg || 'transparent' }}>
+          {item.cover && !coverFailed ? (
             item.coverContain ? (
               <div className="absolute inset-0 py-6" style={{ background: item.coverBg || '#0b0b0b' }}>
                 <div className="relative w-full h-full">
-                  <Image src={item.cover} alt="" fill className="object-contain" sizes="768px" />
+                  <Image
+                    src={item.cover}
+                    alt=""
+                    aria-hidden
+                    fill
+                    className="object-contain"
+                    sizes="768px"
+                    unoptimized={item.cover.startsWith('http')}
+                    onError={() => setCoverFailed(true)}
+                  />
                 </div>
               </div>
             ) : (
-              <Image src={item.cover} alt="" fill className="object-cover" sizes="768px" unoptimized={item.cover.startsWith('http')} />
+              <Image
+                src={item.cover}
+                alt=""
+                aria-hidden
+                fill
+                className="object-cover"
+                sizes="768px"
+                unoptimized={item.cover.startsWith('http')}
+                onError={() => setCoverFailed(true)}
+              />
             )
-          ) : (
+          ) : item.cover ? null : (
             <CodeCover accent={accent} title={item.title} />
           )}
           <div
@@ -317,6 +348,7 @@ export default function CaseStudyOverlay({
           </div>
 
           {/* tech */}
+          {item.tech && item.tech.length > 0 && (
           <div className="mt-10 pt-6" style={{ borderTop: `1px solid ${mono ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.07)'}` }}>
             <div className="font-body text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: 'rgba(245,245,242,0.35)' }}>
               Stack
@@ -337,6 +369,21 @@ export default function CaseStudyOverlay({
               ))}
             </div>
           </div>
+          )}
+
+          {/* signature palette — a release's own colours, named */}
+          {item.accents && item.accents.length > 1 && (
+            <div className="mt-8 flex items-center gap-3">
+              <span className="font-body text-[10px] tracking-[0.22em] uppercase" style={{ color: 'rgba(245,245,242,0.35)' }}>
+                Palette
+              </span>
+              <div className="flex h-2 flex-1 max-w-[220px] rounded-full overflow-hidden" aria-hidden>
+                {item.accents.map((c) => (
+                  <span key={c} className="flex-1" style={{ background: c }} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
           </>
         )}

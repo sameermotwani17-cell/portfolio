@@ -228,37 +228,47 @@ function AlbumCard({ album, index, onOpen }: { album: Album; index: number; onOp
   )
 }
 
-/** A RETRO Studios release — same sleeve, but "▶ open" leaves for the live site. */
-function ReleaseCard({ release, index }: { release: Release; index: number }) {
+/**
+ * A RETRO Studios release. Same sleeve as a featured album, and the same
+ * behaviour: "▶ open" opens the case study — the story, why it was made, in
+ * that brand's own colour and typeface — and the live project is linked from
+ * inside it rather than swallowing the click.
+ */
+function ReleaseCard({ release, index, onOpen }: { release: Release; index: number; onOpen: () => void }) {
   const { ref, hovered, motionProps } = useSleeveState(index)
   return (
     <motion.div ref={ref} {...motionProps} className="relative">
-      <a
-        href={release.href}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={onOpen}
         className="relative block w-full text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-xl"
-        aria-label={`Open ${release.title} — opens in a new tab`}
+        aria-label={`Open ${release.title} case study`}
       >
         <RecordSleeve item={release} hovered={hovered} />
-      </a>
-      {/* secondary links sit outside the anchor so they stay independently clickable */}
-      {release.links && release.links.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-3">
-          {release.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-body text-[10px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-md transition-colors hover:text-white"
-              style={{ color: release.accent, border: `1px solid ${release.accent}40`, background: `${release.accent}0d` }}
-            >
-              {link.label} ↗
-            </a>
-          ))}
-        </div>
-      )}
+      </button>
+      {/* the live project stays one click away without hijacking the card */}
+      <div className="flex flex-wrap gap-2 mt-3">
+        <a
+          href={release.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-body text-[10px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-md transition-colors hover:text-white"
+          style={{ color: release.accent, border: `1px solid ${release.accent}40`, background: `${release.accent}0d` }}
+        >
+          visit live ↗
+        </a>
+        {release.links?.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body text-[10px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-md transition-colors hover:text-white"
+            style={{ color: 'rgba(245,245,242,0.55)', border: '1px solid rgba(255,255,255,0.14)' }}
+          >
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
     </motion.div>
   )
 }
@@ -280,11 +290,17 @@ export default function AlbumGrid({
 }
 
 /** The RETRO Studios discography grid. */
-export function ReleaseGrid({ releases }: { releases: Release[] }) {
+export function ReleaseGrid({
+  releases,
+  onOpen,
+}: {
+  releases: Release[]
+  onOpen: (release: Release) => void
+}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {releases.map((release, i) => (
-        <ReleaseCard key={release.id} release={release} index={i} />
+        <ReleaseCard key={release.id} release={release} index={i} onOpen={() => onOpen(release)} />
       ))}
     </div>
   )
