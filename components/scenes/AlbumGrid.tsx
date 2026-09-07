@@ -65,7 +65,6 @@ function RecordSleeve({ item, hovered }: { item: RecordItem; hovered: boolean })
                 fill
                 className="object-contain transition-transform duration-700 group-hover:scale-[1.04]"
                 sizes="(max-width: 768px) 92vw, 520px"
-                unoptimized={cover.startsWith('http')}
                 onError={() => setCoverFailed(true)}
               />
             </div>
@@ -78,7 +77,6 @@ function RecordSleeve({ item, hovered }: { item: RecordItem; hovered: boolean })
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
             sizes="(max-width: 768px) 92vw, 520px"
-            unoptimized={cover.startsWith('http')}
             onError={() => setCoverFailed(true)}
           />
         )
