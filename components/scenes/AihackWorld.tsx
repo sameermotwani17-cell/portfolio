@@ -79,7 +79,7 @@ function Leaderboard() {
   return (
     <div className="rounded-lg overflow-hidden" style={{ border: `1px solid ${RED}40` }}>
       <div className="px-4 py-2 flex justify-between font-body text-[9px] tracking-[0.25em] uppercase" style={{ background: `${RED}18`, color: 'rgba(255,255,255,0.6)' }}>
-        <span>public leaderboard — mid-competition</span>
+        <span>public leaderboard · mid-competition</span>
         <span>auc</span>
       </div>
       {rows.map((r) => (
@@ -99,7 +99,7 @@ function Leaderboard() {
         </div>
       ))}
       <p className="px-4 py-2 font-body text-[10px]" style={{ color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.02)' }}>
-        illustrative board — StarLabs peak 0.7635, briefly #2 · finished prelims 4th
+        illustrative board · StarLabs peak 0.7635, briefly #2 · finished prelims 4th
       </p>
     </div>
   )
@@ -117,7 +117,7 @@ function RecoveryEquation() {
       </p>
       <p className="font-body text-[11px] mt-3 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
         the code was gone. the outputs weren&apos;t. blend weights recovered by solving
-        linear systems over submitted rank arrays — the pipeline rebuilt from its own fingerprint.
+        linear systems over submitted rank arrays. The pipeline rebuilt from its own fingerprint.
       </p>
     </div>
   )
@@ -243,7 +243,7 @@ export default function AihackWorld({ item }: { item: WorldItem }) {
       <div className="px-6 md:px-10 py-8">
         <div className="pt-5" style={{ borderTop: `1px solid ${RED}35` }}>
           <p className="font-body text-[12px] leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.55)' }}>
-            Team StarLabs — Sameer (lead modeler, validation design, bilingual documentation) ·
+            Team StarLabs · Sameer (lead modeler, validation design, bilingual documentation) ·
             Ken (co-modeler) · Momoka (Japanese-language final presentation, Kyoto).
           </p>
           <div className="flex flex-wrap gap-2">
@@ -255,7 +255,7 @@ export default function AihackWorld({ item }: { item: WorldItem }) {
           </div>
         </div>
         <p className="font-body text-[10px] tracking-[0.35em] uppercase text-center mt-6" style={{ color: 'rgba(255,255,255,0.3)' }}>
-          the gap to close is experience — not fundamentals.
+          the gap to close is experience, not fundamentals.
         </p>
       </div>
     </div>

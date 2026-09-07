@@ -60,9 +60,9 @@ const cormorant = Cormorant({
 })
 
 const SITE_URL = 'https://portfolio-gamma-two-d8j6b2mgkq.vercel.app'
-const TITLE = 'Sameer Motwani — Engineer · Creative Director · Builder'
+const TITLE = 'Sameer Motwani · Engineer · Creative Director · Builder'
 const DESCRIPTION =
-  'Engineer and creative director in Beppu, Japan. Production infrastructure rebuilds, AI systems and agent pipelines — and Retro Studios, a one-person creative studio that delivered a paid 12-country World Cup campaign end to end.'
+  'Engineer and creative director in Beppu, Japan. Production infrastructure rebuilds, AI systems and agent pipelines. Plus Retro Studios, a one-person creative studio that delivered a paid 12-country World Cup campaign end to end.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: 'Sameer Motwani',
     images: [
-      { url: '/og.jpg', width: 1200, height: 630, alt: 'Sameer Motwani at dusk — engineer, creative director, builder' },
+      { url: '/og.jpg', width: 1200, height: 630, alt: 'Sameer Motwani at dusk: engineer, creative director, builder' },
     ],
     locale: 'en_US',
     type: 'website',

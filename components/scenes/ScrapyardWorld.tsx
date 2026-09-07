@@ -236,7 +236,7 @@ export default function ScrapyardWorld({ item }: { item: WorldItem }) {
                   style={{ backgroundImage: 'url(/scenes/splatter-burst.webp)', backgroundSize: 'cover', filter: 'hue-rotate(15deg) saturate(1.3)' }}
                 />
                 <p className="font-stencil text-[11px] tracking-[0.25em] mb-3" style={{ color: YELLOW }}>
-                  ZONE {String(i + 1).padStart(2, '0')} — {stage.label.toUpperCase()}
+                  ZONE {String(i + 1).padStart(2, '0')} · {stage.label.toUpperCase()}
                 </p>
                 <Icon size={56} />
                 <h4 className="font-stencil text-white leading-tight mt-3" style={{ fontSize: 'clamp(1rem, 2.2vw, 1.25rem)' }}>
@@ -262,7 +262,7 @@ export default function ScrapyardWorld({ item }: { item: WorldItem }) {
       <div className="px-6 md:px-10 py-7">
         <div className="pt-5" style={{ borderTop: `1px solid ${YELLOW}25` }}>
           <div className="font-stencil text-[11px] tracking-[0.25em] mb-3" style={{ color: 'rgba(245,245,242,0.4)' }}>
-            LOADOUT — THE STACK
+            LOADOUT · THE STACK
           </div>
           <div className="flex flex-wrap gap-2">
             {item.tech.map((t) => (
@@ -277,7 +277,7 @@ export default function ScrapyardWorld({ item }: { item: WorldItem }) {
       {/* ── match over ── */}
       <div className="bg-black px-6 py-3 text-center">
         <span className="font-stencil text-[11px] tracking-[0.4em]" style={{ color: YELLOW }}>
-          MATCH OVER — VICTORY
+          MATCH OVER · VICTORY
         </span>
       </div>
     </div>

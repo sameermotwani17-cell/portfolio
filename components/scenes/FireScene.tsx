@@ -188,7 +188,7 @@ export default function FireScene() {
         {reduced && (
           <div className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center">
             <p className="text-lg md:text-xl mb-4" style={{ fontFamily: 'var(--font-scrawl), cursive', color: 'rgba(249,115,22,0.9)' }}>
-              allow me to re-introduce myself —
+              allow me to re-introduce myself...
             </p>
             <LayeredTitle
               text="MY NAME IS RETRO"
@@ -198,7 +198,7 @@ export default function FireScene() {
               style={{ fontSize: 'clamp(2.6rem, 9vw, 7.5rem)' }}
             />
             <p className="font-body text-sm md:text-base max-w-md leading-relaxed mt-8" style={{ color: 'rgba(245,245,242,0.65)' }}>
-              retro is the creative part of sameer — the half that directs the camera,
+              retro is the creative part of sameer. the half that directs the camera,
               cuts the film, and makes the music. the engineer ships. retro makes it cinematic.
             </p>
           </div>
@@ -278,7 +278,7 @@ export default function FireScene() {
               className="font-body text-[10px] tracking-[0.35em] uppercase mt-6"
               style={{ color: 'rgba(245,245,242,0.45)' }}
             >
-              — the mentality
+              the mentality
             </footer>
           </motion.blockquote>
         </div>
@@ -300,7 +300,7 @@ export default function FireScene() {
                 className="font-body text-[11px] tracking-mega uppercase mb-5 text-center"
                 style={{ color: 'rgba(245,245,242,0.5)' }}
               >
-                scene 02b — the discography
+                scene 02b · the discography
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -325,8 +325,8 @@ export default function FireScene() {
                 className="font-body text-sm text-center mt-10 mb-14 max-w-lg mx-auto leading-relaxed"
                 style={{ color: 'rgba(245,245,242,0.6)' }}
               >
-                Seven releases under one studio. Each one opens its own story — why it exists
-                and what it cost — in the colour and typeface of the brand it belongs to, not
+                Seven releases under one studio. Each one opens its own story: why it exists
+                and what it cost, in the colour and typeface of the brand it belongs to, not
                 this site&apos;s. The live work is one click further in.
               </motion.p>
               <ReleaseGrid releases={retroReleases} onOpen={open} />

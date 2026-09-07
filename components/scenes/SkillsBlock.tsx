@@ -28,7 +28,7 @@ const skillGroups = [
     ],
   },
   {
-    category: 'Creative & Social — Retro Studios',
+    category: 'Creative & Social · Retro Studios',
     color: '#fbbf24',
     skills: [
       'Creative Direction',

@@ -10,12 +10,12 @@ import type { Album, VaultItem } from '@/lib/projects'
  */
 
 const LOOKS = [
-  { src: '/dk2r/dk2r-1.webp', label: 'México — mercado still life' },
-  { src: '/dk2r/dk2r-3.webp', label: 'México — the luchador' },
-  { src: '/dk2r/dk2r-6.webp', label: 'México — matchday editorial' },
-  { src: '/dk2r/dk2r-4.webp', label: 'Morocco — red edition at sundown' },
-  { src: '/dk2r/dk2r-2.webp', label: 'México — gloves up' },
-  { src: '/dk2r/dk2r-5.webp', label: 'the worldwide drop — one master system' },
+  { src: '/dk2r/dk2r-1.webp', label: 'México · mercado still life' },
+  { src: '/dk2r/dk2r-3.webp', label: 'México · the luchador' },
+  { src: '/dk2r/dk2r-6.webp', label: 'México · matchday editorial' },
+  { src: '/dk2r/dk2r-4.webp', label: 'Morocco · red edition at sundown' },
+  { src: '/dk2r/dk2r-2.webp', label: 'México · gloves up' },
+  { src: '/dk2r/dk2r-5.webp', label: 'the worldwide drop · one master system' },
 ]
 
 /* small raven silhouette */
@@ -82,7 +82,7 @@ export default function RetroWorld({ item }: { item: WorldItem }) {
         <Flock />
         <Image src="/scenes/retro-raven.webp" alt="Retro Studios raven" width={190} height={190} className="mx-auto w-36 md:w-44 h-auto" />
         <p className="text-lg md:text-xl mt-2 text-white/85" style={{ fontFamily: 'var(--font-scrawl), cursive', transform: 'rotate(-2deg)' }}>
-          movement i — the graveyard
+          movement i · the graveyard
         </p>
         <h2 className="font-display text-white leading-none mt-4" style={{ fontSize: 'clamp(2rem, 5.5vw, 4rem)' }}>
           {item.title.toUpperCase()}
@@ -107,7 +107,7 @@ export default function RetroWorld({ item }: { item: WorldItem }) {
       <div className="relative px-6 md:px-12 py-12 md:py-14 overflow-hidden" style={{ background: '#f5f5f2' }}>
         <Flock light />
         <p className="text-lg md:text-xl" style={{ fontFamily: 'var(--font-scrawl), cursive', color: '#0a0a0a', transform: 'rotate(-1.5deg)' }}>
-          movement ii — then the light.
+          movement ii · then the light.
         </p>
         <h3 className="font-display leading-none mt-3" style={{ color: '#0a0a0a', fontSize: 'clamp(1.6rem, 4vw, 2.6rem)' }}>
           {flow[2]?.headline.toUpperCase()}
@@ -128,12 +128,12 @@ export default function RetroWorld({ item }: { item: WorldItem }) {
       <div className="pt-12">
         <div className="px-6 md:px-12 flex items-baseline justify-between">
           <p className="text-lg md:text-xl text-white/90" style={{ fontFamily: 'var(--font-scrawl), cursive', transform: 'rotate(-1.5deg)' }}>
-            movement iii — the world cup.
+            movement iii · the world cup.
           </p>
           <span className="font-body text-[10px] tracking-[0.25em] uppercase text-white/40">scroll →</span>
         </div>
         <p className="px-6 md:px-12 font-body text-sm text-white/60 max-w-xl mt-3">
-          Real frames from the DK2R campaign — every image AI-generated, art-directed, and
+          Real frames from the DK2R campaign. Every image AI-generated, art-directed, and
           production-locked by one person. {flow[1]?.points?.[0]}.
         </p>
         <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 py-8" style={{ scrollbarWidth: 'thin' }}>
@@ -185,7 +185,7 @@ export default function RetroWorld({ item }: { item: WorldItem }) {
             </a>
           ))}
         </div>
-        <p className="font-body text-[10px] tracking-[0.35em] uppercase text-white/30 text-center mt-6">fin — shot by no one. directed by retro.</p>
+        <p className="font-body text-[10px] tracking-[0.35em] uppercase text-white/30 text-center mt-6">fin · shot by no one. directed by retro.</p>
       </div>
     </div>
   )

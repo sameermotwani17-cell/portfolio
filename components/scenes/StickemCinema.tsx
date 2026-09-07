@@ -260,7 +260,7 @@ export default function StickemCinema({ item }: { item: CinemaItem }) {
       <div className="px-6 md:px-10 pb-2">
         <div className="flex items-baseline justify-between mb-4">
           <p className="text-base" style={{ fontFamily: 'var(--font-scrawl), cursive', color: PURPLE }}>
-            the journey — act by act
+            the journey · act by act
           </p>
           <span className="font-body text-[10px] tracking-[0.25em] uppercase" style={{ color: 'rgba(245,245,242,0.35)' }}>
             scroll →
@@ -285,7 +285,7 @@ export default function StickemCinema({ item }: { item: CinemaItem }) {
                 {ROMAN[i]}
               </span>
               <p className="font-body text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: PURPLE }}>
-                act {ROMAN[i].toLowerCase()} — {stage.label}
+                act {ROMAN[i].toLowerCase()} · {stage.label}
               </p>
               <Icon />
               {/* chopstick shelf */}
@@ -315,7 +315,7 @@ export default function StickemCinema({ item }: { item: CinemaItem }) {
       <div className="px-6 md:px-10 pb-7">
         <div className="pt-5" style={{ borderTop: `1px solid ${PURPLE}22` }}>
           <div className="font-body text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: 'rgba(245,245,242,0.35)' }}>
-            credits — the stack
+            credits · the stack
           </div>
           <div className="flex flex-wrap gap-2">
             {item.tech.map((t) => (

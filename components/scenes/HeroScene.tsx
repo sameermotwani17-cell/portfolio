@@ -350,7 +350,7 @@ export default function HeroScene() {
               textShadow: '0 3px 20px rgba(0,0,0,0.7)',
             }}
           >
-            allow me to re-introduce myself —
+            allow me to re-introduce myself...
           </p>
           <LayeredTitle
             text="MY NAME IS RETRO"
@@ -363,7 +363,7 @@ export default function HeroScene() {
             className="font-body text-sm md:text-base max-w-md leading-relaxed mt-9"
             style={{ color: 'rgba(245,245,242,0.7)', textShadow: '0 2px 14px rgba(0,0,0,0.6)' }}
           >
-            retro is the creative part of sameer — the half that directs the camera,
+            retro is the creative part of sameer. the half that directs the camera,
             cuts the film, and makes the music. the engineer ships. retro makes it cinematic.
           </p>
         </motion.div>

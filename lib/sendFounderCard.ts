@@ -13,7 +13,7 @@ export async function sendFounderCard({ toEmail, pdfBytes }: SendOptions) {
   const { data, error } = await resend.emails.send({
     from: 'Sameer Motwani <onboarding@resend.dev>', // Replace with your verified domain sender
     to: [toEmail],
-    subject: '🎁 Your Retro Founder Card — From Sameer',
+    subject: '🎁 Your Retro Founder Card from Sameer',
     html: `
       <div style="font-family: monospace; background: #0a0a0a; color: #f5f5f5; padding: 40px; max-width: 500px; margin: 0 auto; border-radius: 12px;">
         <p style="color: #f97316; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px;">Birthday Gift</p>
@@ -21,10 +21,10 @@ export async function sendFounderCard({ toEmail, pdfBytes }: SendOptions) {
           Your Retro<br/>Founder Card
         </h1>
         <p style="color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.7; margin-bottom: 24px;">
-          Thank you for the birthday gift! Attached is your exclusive Retro Founder Card — a FIFA-style collector's card featuring Sameer Motwani, Founder Edition.
+          Thank you for the birthday gift! Attached is your exclusive Retro Founder Card, a FIFA-style collector's card featuring Sameer Motwani, Founder Edition.
         </p>
         <p style="color: rgba(255,255,255,0.3); font-size: 11px;">
-          — sameermotwani17@gmail.com
+          sameermotwani17@gmail.com
         </p>
       </div>
     `,

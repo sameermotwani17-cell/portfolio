@@ -113,7 +113,7 @@ export const albums: Album[] = [
     tag: "Software Engineer · Stick'Em Pte Ltd · May–Aug 2026",
     short:
       'Rebuilt slide delivery for a live EdTech platform serving teachers in Brunei and the Philippines. Slides that took 10s+ now load in roughly 0.7s.',
-    tracklist: ['01 — The Black Screen', '02 — 0.7 Seconds', '03 — The Fallback', '04 — The Handover'],
+    tracklist: ['01 · The Black Screen', '02 · 0.7 Seconds', '03 · The Fallback', '04 · The Handover'],
     tech: ['Next.js', 'Supabase (Postgres + Storage)', 'Google Slides API', 'Google Drive API', 'Sharp', 'WebP'],
     badge: '2025 Hult Prize Global Winner · US$1M seed',
     accent: '#a855f7',
@@ -192,17 +192,17 @@ export const albums: Album[] = [
     subtitle: '3D Multiplayer Browser FPS',
     tag: 'One-day build · Spec-driven with Claude Fable 5 · 2026',
     short:
-      'A CoD-inspired 3D multiplayer browser FPS built in one day from a ~200-line spec — zero code written by hand.',
-    tracklist: ['01 — 200-Line Spec', '02 — Container Yard', '03 — 30Hz Tick', '04 — Contact!'],
+      'A CoD-inspired 3D multiplayer browser FPS built in one day from a ~200-line spec. Zero code written by hand.',
+    tracklist: ['01 · 200-Line Spec', '02 · Container Yard', '03 · 30Hz Tick', '04 · Contact!'],
     tech: ['Three.js', 'Cloudflare Durable Objects', 'WebSockets', 'Client-side Prediction', 'FSM AI Bots', 'Claude Fable 5'],
-    badge: 'Live — playable in browser',
+    badge: 'Live · playable in browser',
     accent: '#eab308',
     cover: '/scenes/scrapyard.webp',
     stencil: true,
     world: 'scrapyard',
     detail: {
       overview:
-        'A one-day experiment: author a ~200-line spec, let Claude Code execute it milestone-by-milestone with proof-of-run gates and 91 automated tests. Free-for-all deathmatch in a salvage yard, live on the open web. The transferable asset is the spec — the game is the receipt.',
+        'A one-day experiment: author a ~200-line spec, let Claude Code execute it milestone-by-milestone with proof-of-run gates and 91 automated tests. Free-for-all deathmatch in a salvage yard, live on the open web. The transferable asset is the spec. The game is the receipt.',
       stats: [
         { value: '1 day', label: 'Blank prompt to deployed multiplayer FPS' },
         { value: '0', label: 'Lines of code written by hand' },
@@ -228,7 +228,7 @@ export const albums: Album[] = [
         {
           label: 'the point',
           headline: 'Build-in-public for Retro Studios',
-          points: ['No product, no monetization — on purpose', 'The spec-writing skill is the reusable asset'],
+          points: ['No product, no monetization, on purpose', 'The spec-writing skill is the reusable asset'],
         },
       ],
       links: [{ label: 'Play SCRAPYARD', href: 'https://scrapyard-lake.vercel.app' }],
@@ -238,12 +238,12 @@ export const albums: Album[] = [
     id: 'gomi-snap',
     track: 'tech',
     title: 'GOMI Snap',
-    subtitle: 'AI Civic-Tech — a Completed Chapter',
+    subtitle: 'AI Civic-Tech · a Completed Chapter',
     tag: 'Founder & CTO · Nov 2025 – 2026 · folded into StarLabs',
     short: 'AI waste-classification PWA for Japanese municipalities. Wound down and folded into StarLabs.',
-    tracklist: ['01 — 20 Categories', '02 — 520 Users', '03 — City Hall', '04 — StarLabs'],
+    tracklist: ['01 · 20 Categories', '02 · 520 Users', '03 · City Hall', '04 · StarLabs'],
     tech: ['React', 'TypeScript', 'Express.js', 'OpenAI Vision API', 'PWA'],
-    badge: '1st Place — APU Hackathon 2025',
+    badge: '1st Place · APU Hackathon 2025',
     accent: '#3f9142',
     cover: '/gomi-logo.png',
     coverContain: true,
@@ -252,7 +252,7 @@ export const albums: Album[] = [
     world: 'gomi',
     detail: {
       overview:
-        'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city — then honestly wound down and folded into StarLabs.',
+        'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city, then honestly wound down and folded into StarLabs.',
       stats: [
         { value: '95.3%', label: 'Survey adoption intent (n=400)' },
         { value: '520+', label: 'Organic users · zero paid acquisition' },
@@ -268,7 +268,7 @@ export const albums: Album[] = [
         {
           label: 'the build',
           headline: 'Photo in → disposal instructions out',
-          points: ['GPT-4V vision layer, tuned for bad lighting', 'Rule engine reverse-engineered from municipal PDFs', 'QR stickers at waste stations — no install'],
+          points: ['GPT-4V vision layer, tuned for bad lighting', 'Rule engine reverse-engineered from municipal PDFs', 'QR stickers at waste stations, no install'],
         },
         {
           label: 'the traction',
@@ -297,17 +297,17 @@ export const albums: Album[] = [
     subtitle: 'AI Cinematic Production · StarLabs',
     tag: 'Founder & Creative Director · Founded April 2026',
     short:
-      'One-person AI creative studio producing agency-grade cinematic brand content — delivered a paid 12-country World Cup campaign end to end.',
-    tracklist: ["01 — Director's Brief", '02 — Anti-Perfection', '03 — 12 Editions', '04 — One Person'],
+      'One-person AI creative studio producing agency-grade cinematic brand content. Delivered a paid 12-country World Cup campaign end to end.',
+    tracklist: ["01 · Director's Brief", '02 · Anti-Perfection', '03 · 12 Editions', '04 · One Person'],
     tech: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Seedance 2.0', 'Suno', 'CapCut', 'Next.js 14', 'Supabase', 'Vercel'],
-    badge: 'Paid client campaign — delivered',
+    badge: 'Paid client campaign · delivered',
     accent: '#f5f5f2',
     cover: '/scenes/retro-raven.webp',
     mono: true,
     world: 'retro',
     detail: {
       overview:
-        'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Ran full creative direction and technical production for DK2R Football Wear — a premium 12-country jersey brand built for the 2026 FIFA World Cup. The campaign ran its course with the tournament and closed out in 2026; the studio is open for the next brief.',
+        'One person, an AI-native stack, and the thesis that it can outproduce a full creative agency. Ran full creative direction and technical production for DK2R Football Wear, a premium 12-country jersey brand built for the 2026 FIFA World Cup. The campaign ran its course with the tournament and closed out in 2026; the studio is open for the next brief.',
       stats: [
         { value: '12', label: 'Country editions art-directed' },
         { value: '36', label: 'SKU variants (3 silhouettes × 12)' },
@@ -318,11 +318,11 @@ export const albums: Album[] = [
         {
           label: 'the thesis',
           headline: 'One operator outproduces an agency',
-          points: ['Founded April 2026 under StarLabs', 'Statics, reels, commercial ads — no crew', 'Open for the next brief'],
+          points: ['Founded April 2026 under StarLabs', 'Statics, reels, commercial ads, no crew', 'Open for the next brief'],
         },
         {
           label: 'the client',
-          headline: 'DK2R — the 2026 World Cup capsule',
+          headline: 'DK2R · the 2026 World Cup capsule',
           points: ['12 editions · 36 SKUs · 300 numbered pieces each', '60-image campaigns: Mexico, Brazil, USA, England, Argentina', 'Solo-built Next.js + Supabase store with PayPal checkout'],
         },
         {
@@ -360,7 +360,7 @@ export const retroReleases: Release[] = [
     tag: 'Creative Director · Prompt Engineer · Technical Producer · for founder Hassan Kai Turay',
     short:
       'Twelve country editions for the 2026 World Cup, 300 numbered pieces each, run solo. Morocco got Zellige tiles, Japan got kintsugi through the sakura, Brazil got the rhinestone crest. Every edition its own language, shot across three silhouettes. Eight prompt layers underneath it, one of them there purely to kill the tells that give AI imagery away. Same colour science on all of it. I built the store it sold from too.',
-    tracklist: ['01 — Director’s Brief', '02 — 12 Editions', '03 — Anti-Perfection', '04 — The Drop'],
+    tracklist: ['01 · Director’s Brief', '02 · 12 Editions', '03 · Anti-Perfection', '04 · The Drop'],
     badge: '300 numbered pieces · no restocks',
     // the brand's own declared theme-color on dkai2ray.company
     accent: '#c9a84c',
@@ -433,7 +433,7 @@ export const retroReleases: Release[] = [
     tag: 'Concept brand · a design exercise in restraint',
     short:
       'A minimal streetwear label I built as an exercise. No manifesto, no lifestyle shoot. Five pieces, shot and priced like a real drop, and a grid that has to carry them on its own.',
-    tracklist: ['01 — Five Pieces', '02 — No Manifesto', '03 — Product-First Grid', '04 — Restraint'],
+    tracklist: ['01 · Five Pieces', '02 · No Manifesto', '03 · Product-First Grid', '04 · Restraint'],
     badge: '5 hero pieces · $89–$249',
     // the brand declares exactly two colors: #0D0D0D ink on #FFFFFF paper
     accent: '#ededed',
@@ -502,7 +502,7 @@ export const retroReleases: Release[] = [
     tag: 'Concept brand · AD WARS marketing simulation, APU',
     short:
       'A concept brand for a marketing simulation, not a real product. Microplastics are in your blood and your rain and your floor, so instead of another recycling campaign I built a shoe that eats them. BioSole™ is a four-layer enzyme membrane, built on PETase, which is a real enzyme somebody found in 2016. Three colorways. The whole site reads like an investor deck rather than a product page.',
-    tracklist: ['01 — Microplastics', '02 — BioSole™', '03 — Three Colorways', '04 — The Ask'],
+    tracklist: ['01 · Microplastics', '02 · BioSole™', '03 · Three Colorways', '04 · The Ask'],
     badge: 'Concept brand. The science is made up',
     // straight from the site's own CSS custom properties
     accent: '#9eff00',
@@ -565,7 +565,7 @@ export const retroReleases: Release[] = [
     tag: 'Event site & booking flow · 26 June 2026 · Millennium Hall, APU',
     short:
       'A ticketing site, not a poster. The show is The Lines They Drew, a grandfather and a grandchild walking back through Africa’s past, carried by drama, music, dance, choir and traditional dress. Then the unglamorous half: 732 seats in live availability, a seat picker, free entry down to a name and an email, and a QR ticket that lands straight away. Red, gold and green run through every band and divider as structure rather than decoration.',
-    tracklist: ['01 — The Lines They Drew', '02 — 732 Seats', '03 — Pick Your Seat', '04 — QR At The Door'],
+    tracklist: ['01 · The Lines They Drew', '02 · 732 Seats', '03 · Pick Your Seat', '04 · QR At The Door'],
     badge: '732 seats · free admission · QR entry',
     // the flag bar the site draws across every section edge
     accent: '#fcd116',
@@ -634,7 +634,7 @@ export const retroReleases: Release[] = [
     tag: 'Personal build · a birthday release for Dan',
     short:
       'A birthday gift dressed up as a streaming service. Profile gate, wordmark ident with its own sting, then ten titles you can browse. A limited series, a nature strand, a deadpan park-ranger documentary, a finale called The Bench. Posters, hover previews, detail modals, a player with subtitles. All of it footage of one person, cut and graded on Netflix’s own tokens.',
-    tracklist: ['01 — Who’s Watching?', '02 — The Ident', '03 — Ten Titles', '04 — The Bench'],
+    tracklist: ['01 · Who’s Watching?', '02 · The Ident', '03 · Ten Titles', '04 · The Bench'],
     badge: 'Made for Dan',
     // lifted from netflix.com's live DOM by the project itself, in css/tokens.css
     accent: '#e50914',
@@ -696,7 +696,7 @@ export const retroReleases: Release[] = [
     tag: 'Secret Santa build · made for one person',
     short:
       'A photo-culling tool built as a gift rather than a product. Point it at a shoot, 1,847 frames from a wedding in the real example, and say what you want in plain English. It hands back a ranked shortlist with a line of reasoning on every pick, and collapses fourteen versions of one moment down to the sharpest. Nothing full size ever leaves your computer.',
-    tracklist: ['01 — 1,847 Photos', '02 — Plain English', '03 — One Line, One Reason', '04 — Stays Local'],
+    tracklist: ['01 · 1,847 Photos', '02 · Plain English', '03 · One Line, One Reason', '04 · Stays Local'],
     badge: '1,847 photos → a shortlist',
     // the site's own declared theme-color
     accent: '#f8f3ea',
@@ -762,7 +762,7 @@ export const retroReleases: Release[] = [
     tag: 'Retro Studios · working archive · view only',
     short:
       'The studio’s working folder, opened up. Not a case study and not a cut reel. Just the project Drive, shared read only. Click through and have a look.',
-    tracklist: ['01 — The Archive', '02 — Open Folder', '03 — Shared Drive', '04 — Have A Look'],
+    tracklist: ['01 · The Archive', '02 · Open Folder', '03 · Shared Drive', '04 · Have A Look'],
     badge: 'Google Drive, view only',
     accent: '#f5f5f2',
     font: 'var(--font-display)',
@@ -807,7 +807,7 @@ export const vault: VaultItem[] = [
     world: 'stickem',
     detail: {
       overview:
-        'Maps STEM lessons to official government curriculum standards across the UK, India, and USA — killing hours of manual planning per teacher per term, and unblocking the procurement requirement in institutional sales.',
+        'Maps STEM lessons to official government curriculum standards across the UK, India, and USA, killing hours of manual planning per teacher per term, and unblocking the procurement requirement in institutional sales.',
       stats: [
         { value: '13', label: 'Curriculum standards (UK, India, USA)' },
         { value: '72+', label: 'Lessons served from Airtable' },
@@ -822,7 +822,7 @@ export const vault: VaultItem[] = [
         },
         {
           label: 'the engine',
-          headline: 'LLM picks indices — it never writes standards',
+          headline: 'LLM picks indices. It never writes standards',
           points: ['Index-only selection kills fabricated codes', 'Six-step reasoning, step 1 internal-only', 'Two-tier validation with one auto-retry'],
         },
         {
@@ -839,17 +839,17 @@ export const vault: VaultItem[] = [
     title: 'AI Hack 2026',
     subtitle: 'Credit Default Risk Prediction',
     tag: 'Lead Modeler & Technical Documentation · Team StarLabs · March 2026',
-    short: 'Credit default prediction on real AIFUL data — Kyoto finalist, the only all-freshman team in the field.',
+    short: 'Credit default prediction on real AIFUL data. Kyoto finalist, the only all-freshman team in the field.',
     tech: ['Python', 'LightGBM', 'CatBoost', 'XGBoost', 'Optuna', 'scikit-learn', 'Google Colab'],
-    badge: 'Kyoto Finalist — top 8 nationwide',
+    badge: 'Kyoto Finalist · top 8 nationwide',
     accent: '#e0242c',
     logo: '/aiful-logo.png',
     world: 'aihack',
     detail: {
       overview:
-        'AIFUL AI Hackathon 2026: predict 12-month credit default from real anonymized Japanese consumer-finance data. As lead modeler for StarLabs, I took the team from a 4th-place preliminary finish (peak public AUC 0.7635, briefly 2nd) to the live Kyoto final — the only all-freshman team in a top-8 field dominated by Master’s and PhD candidates in math and quantitative finance.',
+        'AIFUL AI Hackathon 2026: predict 12-month credit default from real anonymized Japanese consumer-finance data. As lead modeler for StarLabs, I took the team from a 4th-place preliminary finish (peak public AUC 0.7635, briefly 2nd) to the live Kyoto final, the only all-freshman team in a top-8 field dominated by Master’s and PhD candidates in math and quantitative finance.',
       stats: [
-        { value: '0.7635', label: 'Peak public AUC — briefly 2nd place' },
+        { value: '0.7635', label: 'Peak public AUC · briefly 2nd place' },
         { value: '4th', label: 'Preliminary round finish' },
         { value: 'top 8', label: 'Kyoto finalist, nationwide field (finished 8th)' },
         { value: 'only', label: 'All-freshman team to reach the final' },
@@ -872,13 +872,13 @@ export const vault: VaultItem[] = [
         },
         {
           label: 'the crisis',
-          headline: 'Lost the codebase mid-competition — rebuilt it from math',
+          headline: 'Lost the codebase mid-competition, rebuilt it from math',
           points: ['Reverse-engineered the pipeline from submitted CSVs', 'Solved linear systems over rank arrays to recover blend weights', 'Proof that a good pipeline is auditable from its outputs'],
         },
         {
           label: 'kyoto',
           headline: 'The only freshmen in a room of Master’s and PhDs',
-          points: ['Live judged final, March 18–19, Kyoto', 'Bilingual EN/JP decks; Momoka presented, I built the narrative', 'Finished 8th of 8 — in a field we weren’t supposed to reach'],
+          points: ['Live judged final, March 18–19, Kyoto', 'Bilingual EN/JP decks; Momoka presented, I built the narrative', 'Finished 8th of 8, in a field we weren’t supposed to reach'],
         },
       ],
       links: [],
@@ -889,9 +889,9 @@ export const vault: VaultItem[] = [
     title: 'MIRU',
     subtitle: 'AI Interview Simulation & Evaluation System',
     tag: 'Developer · Team MIRU · 72-Hour Build · March 2026',
-    short: 'AI interview coach for foreigners job-hunting in Japan. Bronze — the only APU team on the podium.',
+    short: 'AI interview coach for foreigners job-hunting in Japan. Bronze. The only APU team on the podium.',
     tech: ['Next.js', 'FastAPI', 'Python', 'TypeScript', 'Claude', 'ElevenLabs'],
-    badge: '銅賞 Bronze — Kyutech × Science Tokyo × APU Hackathon 2026',
+    badge: '銅賞 Bronze · Kyutech × Science Tokyo × APU Hackathon 2026',
     accent: '#2ec4b6',
     cover: '/miru-logo.svg',
     coverContain: true,
@@ -900,7 +900,7 @@ export const vault: VaultItem[] = [
     world: 'miru',
     detail: {
       overview:
-        'MIRU (見る — to see) is an AI interview coach for foreigners job-hunting in Japan, built in 72 nearly sleepless hours at the Kyutech × Science Tokyo × APU Joint Hackathon 2026. A simulated Japanese HR interviewer runs a formal, low-affect voice interview, quietly scores it on the dimensions Japanese companies actually weigh, then switches to English and tells you what the interviewer was really thinking. Bronze prize — the only APU team on a podium otherwise owned by Japan’s top STEM schools.',
+        'MIRU (見る, to see) is an AI interview coach for foreigners job-hunting in Japan, built in 72 nearly sleepless hours at the Kyutech × Science Tokyo × APU Joint Hackathon 2026. A simulated Japanese HR interviewer runs a formal, low-affect voice interview, quietly scores it on the dimensions Japanese companies actually weigh, then switches to English and tells you what the interviewer was really thinking. Bronze prize, and the only APU team on a podium otherwise owned by Japan’s top STEM schools.',
       flow: [
         {
           label: 'the arena',
@@ -924,13 +924,13 @@ export const vault: VaultItem[] = [
         },
         {
           label: 'the podium',
-          headline: '銅賞 — the only APU team up there',
-          points: ['I coded near-nonstop: technical design, the working voice product', 'Siddik — research & systems · Jeana — strategy · Takako — the Japanese presentation', 'A business team on an engineering podium'],
+          headline: '銅賞 · the only APU team up there',
+          points: ['I coded near-nonstop: technical design, the working voice product', 'Siddik: research & systems · Jeana: strategy · Takako: the Japanese presentation', 'A business team on an engineering podium'],
         },
       ],
       links: [
-        { label: 'GitHub — Frontend', href: 'https://github.com/sameermotwani17-cell/miru-frontend' },
-        { label: 'GitHub — Backend', href: 'https://github.com/sameermotwani17-cell/miru-backend' },
+        { label: 'GitHub · Frontend', href: 'https://github.com/sameermotwani17-cell/miru-frontend' },
+        { label: 'GitHub · Backend', href: 'https://github.com/sameermotwani17-cell/miru-backend' },
         { label: 'APU Feature', href: 'https://www.apu.ac.jp/home/blog/article/?storyid=273' },
       ],
     },

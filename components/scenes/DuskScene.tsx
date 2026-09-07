@@ -33,7 +33,7 @@ function RetroBlock() {
           <h4 className="font-display text-2xl text-white leading-tight">the studio</h4>
           <p className="font-body text-sm leading-relaxed mt-3" style={{ color: 'rgba(245,245,242,0.62)' }}>
             One person, an AI-native stack, and the thesis that it can outproduce a full agency.
-            Cinematic brand content — a 12-country World Cup campaign delivered end to end.
+            Cinematic brand content. A 12-country World Cup campaign delivered end to end.
           </p>
           <a
             href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
@@ -87,7 +87,7 @@ function GymBlock() {
           <h4 className="font-display text-2xl text-white leading-tight">training &amp; hooping</h4>
           <p className="font-body text-sm leading-relaxed mt-3" style={{ color: 'rgba(245,245,242,0.62)' }}>
             Lifting most mornings, point guard whenever there&apos;s a run. Reading the play before it
-            happens is the same skill as reading a codebase — you just sweat more. That burning hoop
+            happens is the same skill as reading a codebase. You just sweat more. That burning hoop
             back there? Still my favorite frame on this site.
           </p>
         </div>
@@ -112,7 +112,7 @@ function MusicBlock() {
           </p>
           <h4 className="font-display text-2xl text-white leading-tight">the j. cole thread</h4>
           <p className="font-body text-sm leading-relaxed mt-3" style={{ color: 'rgba(245,245,242,0.62)' }}>
-            Original production — writing lyrics before writing code was ever a thing. This whole
+            Original production, writing lyrics before writing code was ever a thing. This whole
             site is sequenced like an album because that&apos;s how Cole taught me stories are told:
             light, fire, then dusk.
           </p>
@@ -164,10 +164,10 @@ function ChessBlock() {
 // ─── Awards (migrated, restyled quieter) ──────────────────────────────────────
 
 const awards = [
-  { title: 'AIHack 2026 — Top 4, Final Round', subtitle: 'Aiful Corporation · ¥1,000,000 prize competition', year: '2026' },
-  { title: 'APU Annual Hackathon 2025 — 1st Place', subtitle: 'GOMI Snap · AI Waste Classification Platform', year: '2025' },
+  { title: 'AIHack 2026 · Top 4, Final Round', subtitle: 'Aiful Corporation · ¥1,000,000 prize competition', year: '2026' },
+  { title: 'APU Annual Hackathon 2025 · 1st Place', subtitle: 'GOMI Snap · AI Waste Classification Platform', year: '2025' },
   { title: 'Hult Prize APU Campus Round 2026', subtitle: '1st Runner-Up · Best Speaker Award · Global STEAM Initiative', year: '2026' },
-  { title: 'Next Einstein Forum — 1st Place', subtitle: 'Africa Science Week · Educate the Next Generation', year: '2023' },
+  { title: 'Next Einstein Forum · 1st Place', subtitle: 'Africa Science Week · Educate the Next Generation', year: '2023' },
   { title: 'Best High School Short Story Writer', subtitle: 'Educate the Next Generation 2023', year: '2023' },
 ]
 
@@ -213,7 +213,7 @@ function ContactBlock() {
     <div id="contact" className="mt-32 text-center">
       <motion.p {...fadeUp} transition={{ duration: 1, ease: EXHALE }}
         className="font-body text-[11px] tracking-mega uppercase mb-6" style={{ color: 'rgba(139,147,201,0.8)' }}>
-        scene 03 — after hours
+        scene 03 · after hours
       </motion.p>
       <motion.h2
         {...fadeUp}
@@ -238,7 +238,7 @@ function ContactBlock() {
       <motion.p {...fadeUp} transition={{ duration: 1, delay: 0.3, ease: EXHALE }}
         className="font-body text-[11px] tracking-[0.14em] uppercase mt-5 max-w-xl mx-auto leading-loose"
         style={{ color: 'rgba(139,147,201,0.75)' }}>
-        currently — rebuilding production slide infrastructure for Stick&apos;Em (contract) ·
+        currently: rebuilding production slide infrastructure for Stick&apos;Em (contract) ·
         running Retro Studios under StarLabs · BBA at APU, Beppu
       </motion.p>
 
@@ -259,10 +259,10 @@ function ContactBlock() {
           ))}
         </div>
         <p className="font-body text-[11px] tracking-[0.16em] uppercase mt-4" style={{ color: 'rgba(245,245,242,0.55)' }}>
-          full-time · contract · internship — remote worldwide or Japan
+          full-time · contract · internship · remote worldwide or Japan
         </p>
         <p className="font-body text-[12px] mt-3" style={{ color: 'rgba(245,245,242,0.6)' }}>
-          brands &amp; founders: Retro Studios is taking new briefs — cinematic AI content, directed and delivered by one person.{' '}
+          brands &amp; founders: Retro Studios is taking new briefs. Cinematic AI content, directed and delivered by one person.{' '}
           <a
             href="https://www.instagram.com/retro.studios_?igsh=MTRnc2x1NXZ6YmJhNQ%3D%3D&utm_source=qr"
             target="_blank"
@@ -305,7 +305,7 @@ function ContactBlock() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" />
           </svg>
-          CV — Creative
+          Creative CV
         </a>
         <a href="/cv.pdf" download="Sameer_Motwani_CV.pdf"
           className="px-9 py-4 rounded-full font-body text-xs tracking-[0.2em] uppercase flex items-center gap-2.5 transition-colors duration-300 hover:text-white hover:border-white/40"
@@ -360,7 +360,7 @@ function ContactBlock() {
           </span>
         </div>
         <p className="font-body text-[11px] tracking-widest" style={{ color: 'rgba(245,245,242,0.42)' }}>
-          © 2026 Sameer Motwani — one continuous take, light to dusk.
+          © 2026 Sameer Motwani · one continuous take, light to dusk.
         </p>
         <a
           href="https://github.com/sameermotwani17-cell/portfolio"
