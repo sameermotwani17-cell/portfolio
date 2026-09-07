@@ -33,7 +33,16 @@ from [`lib/projects.ts`](lib/projects.ts).
   study opens. Static prerender. Animation is transform/opacity only: the
   fire dying is a pre-graded copy of the frame cross-faded on opacity, not a
   `filter` animated per frame, which measured 27.8ms -> 18ms median frame
-  time in that scene at 4x CPU throttle.
+  time in that scene at 4x CPU throttle. For the same reason the capabilities
+  cards carry no `backdrop-filter`: six of them share the screen, and a
+  backdrop blur re-samples what is behind it every frame the page scrolls.
+  Dropping it took that band from ~52% of frames over 32ms to ~28% at 4x
+  throttle (three runs each). The frosted panels elsewhere keep their blur;
+  they do not appear six at a time.
+- **Fonts:** seven families, four preloaded. The three a release borrows for
+  its own case study (Bebas Neue, Inter, Cormorant) are `preload: false`,
+  so they load off the critical path, and ship weight 400 only, which is the
+  only weight anything renders them at: 176KB -> 139KB of font at first load.
 - **Images:** sources neural-upscaled 4x (OpenCV EDSR) and served as
   right-sized WebP; `Cache-Control` with stale-while-revalidate on all
   static imagery. Next image optimization is on so remote release covers,

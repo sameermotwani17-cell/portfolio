@@ -65,8 +65,15 @@ function SkillGroup({ group, index }: { group: (typeof skillGroups)[0]; index: n
       transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="rounded-xl p-5 md:p-6"
       style={{
-        background: 'rgba(8,8,8,0.66)',
-        backdropFilter: 'blur(8px)',
+        // No backdrop-filter here, unlike the other frosted panels on the site.
+        // Six of these sit on screen at once, and a backdrop blur has to
+        // re-sample everything behind it every frame while the page scrolls, so
+        // six of them made this the worst band on the page: ~52% of frames over
+        // 32ms at 4x CPU, against ~32% with the blur gone (three runs each).
+        // The panel is 66% opaque over a dusk photo, so the blur was only
+        // softening the little that showed through. Taking it to 82% hides the
+        // same detail for nothing.
+        background: 'rgba(8,8,8,0.82)',
         border: '1px solid rgba(255,255,255,0.07)',
       }}
     >
