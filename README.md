@@ -50,6 +50,12 @@ from [`lib/projects.ts`](lib/projects.ts).
   same verified project data via [`scripts/generate-cv.js`](scripts/generate-cv.js)
   (pdf-lib). Regenerate the latter with `npm run generate-cv`.
 
+- **Self-introduction page:** [`public/about-me.html`](public/about-me.html)
+  (served at `/about-me`) is a standalone, single-file page built for a
+  hands-on brief: name tag hero, flippable rookie card, a hobbies tracklist,
+  two truths and a lie, and a scene dock (light / fire / dusk / remix). No
+  framework, images inlined, so it opens straight from disk.
+
 ## Stack
 
 Next.js 14 (App Router) · TypeScript · Tailwind · framer-motion · Lenis ·

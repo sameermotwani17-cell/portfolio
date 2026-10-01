@@ -14,6 +14,11 @@ const nextConfig = {
       { protocol: 'https', hostname: 'first-light-alpha.vercel.app' },
     ],
   },
+  // the hands-on self-introduction page: one standalone HTML file in public/,
+  // served at a clean URL as well as at /about-me.html
+  async rewrites() {
+    return [{ source: '/about-me', destination: '/about-me.html' }]
+  },
   async headers() {
     return [
       {
