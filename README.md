@@ -52,8 +52,9 @@ from [`lib/projects.ts`](lib/projects.ts).
 
 - **Self-introduction page:** [`public/about-me.html`](public/about-me.html)
   (served at `/about-me`) is a standalone, single-file page built for a
-  hands-on brief: name tag hero, flippable rookie card, a hobbies tracklist,
-  two truths and a lie, and a scene dock (light / fire / dusk / remix). No
+  hands-on brief: a self-introduction shot as "one take" in three acts
+  (light, fire, dusk) on the main site's own photography, with a color-grade
+  switcher (light / fire / dusk / remix) and a two-truths-and-a-lie quiz. No
   framework, images inlined, so it opens straight from disk.
 
 ## Stack
