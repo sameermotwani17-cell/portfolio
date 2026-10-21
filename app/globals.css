@@ -821,12 +821,13 @@ html:not([data-intro='play']) .hero-foot {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 10px;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-weight: 500;
-  font-size: clamp(10px, 0.85vw, 13px);
-  letter-spacing: 0.32em;
-  color: var(--bone-dim);
+  margin-top: 12px;
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 2vw, 34px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--paper);
 }
 .hero-root[data-seen] .hero-role {
   animation: heroFade 0.6s ease-out both;
@@ -974,8 +975,9 @@ html:not([data-intro='play']) .hero-foot {
   .hero-role {
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 4px 14px;
-    letter-spacing: 0.2em;
+    gap: 6px 16px;
+    font-size: clamp(16px, 4.6vw, 24px);
+    letter-spacing: 0.02em;
   }
   /* in flow under the poster on phones */
   .hero-scroll {
