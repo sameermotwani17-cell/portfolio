@@ -6,11 +6,12 @@ import { useEffect, useRef } from 'react'
  * The DNA helix that lives inside the hero frame.
  *
  * A canvas behind the hero's content covering the whole frame. One wide
- * double-helix ribbon runs across the page, and a thin field of dust fills
- * the rest, so there is something to disturb wherever the cursor goes. On
- * the hero's first reveal the dots gather out of scatter onto the ribbon;
- * after that the helix turns slowly on its own and every dot is pushed away
- * by the cursor and springs back. Hover only, never captures input
+ * double-helix ribbon runs diagonally from the bottom-left to the top-right
+ * and flows upward along that line, turning as it goes; a thin field of
+ * dust drifts upward through the rest of the frame, so there is something
+ * to disturb wherever the cursor goes. On the hero's first reveal the dots
+ * gather out of scatter onto the ribbon; after that every dot is pushed
+ * away by the cursor and springs back. Hover only, never captures input
  * (pointer-events: none). Runs only while the hero is on screen.
  * Reduced motion: drawn once, static.
  */
@@ -18,7 +19,7 @@ import { useEffect, useRef } from 'react'
 type P = {
   sx: number // scatter position (0..1 of width / height)
   sy: number
-  t: number // position along the ribbon, 0 left -> 1 right (dust: -1)
+  t: number // position along the ribbon, 0 -> 1 (dust: -1)
   u: number // position across the ribbon, -1 .. 1
   d: number // formation delay
   a: number // base alpha
@@ -29,9 +30,10 @@ type P = {
   vy: number
 }
 
-const TURNS = 3.2 // full twists across the frame
 const FORM_SECONDS = 2.2
-const SPIN = 0.2 // rad / s
+const FLOW = 0.028 // ribbon lengths per second, upward along the diagonal
+const SPIN = 0.25 // rad / s
+const DUST_RISE = 14 // px / s
 const PUSH_RADIUS = 170
 const PUSH = 2.2
 const SPRING = 0.07
@@ -65,7 +67,15 @@ export default function HeroHelix() {
 
     let W = 0
     let H = 0
-    let R = 0 // ribbon half height
+    let R = 0 // ribbon half width
+    // diagonal axis A (bottom-left, off frame) -> B (top-right, off frame)
+    let ax = 0
+    let ay = 0
+    let bx = 0
+    let by = 0
+    let nx = 0 // unit normal to the axis
+    let ny = 0
+    let turns = 3
     let particles: P[] = []
     let frame = 0
     let running = false
@@ -83,17 +93,27 @@ export default function HeroHelix() {
       canvas.width = Math.round(W * dpr)
       canvas.height = Math.round(H * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      R = Math.min(H * 0.24, 260)
+
+      R = Math.min(Math.min(W, H) * 0.22, 240)
+      ax = -W * 0.12
+      ay = H * 1.12
+      bx = W * 1.12
+      by = -H * 0.12
+      const dx = bx - ax
+      const dy = by - ay
+      const len = Math.hypot(dx, dy)
+      nx = -dy / len
+      ny = dx / len
+      turns = Math.max(2.2, len / (Math.min(W, H) * 1.05))
     }
 
     const build = () => {
       const r = mulberry32(11)
-      // coarser grid on small screens: keep the particle count sane
       const small = W < 1024
       const rungPx = small ? 10 : 8
       const dotPx = small ? 7 : 5
-      const span = W * 1.1
-      const rungs = Math.floor(span / rungPx)
+      const len = Math.hypot(bx - ax, by - ay)
+      const rungs = Math.floor(len / rungPx)
       const perRung = Math.max(8, Math.floor((R * 2) / dotPx))
       particles = []
       for (let i = 0; i < rungs; i++) {
@@ -140,13 +160,14 @@ export default function HeroHelix() {
       ctx.clearRect(0, 0, W, H)
       ctx.fillStyle = '#f2f0ec'
 
+      const sec = now / 1000
       const T = formedAt < 0 ? 1 : Math.min(1, (now - formedAt) / 1000 / FORM_SECONDS)
-      const phase = reduced ? 0.6 : (now / 1000) * SPIN
-      const span = W * 1.1
-      const xLeft = -W * 0.05
-      const cy0 = H * 0.56
-      const sway = H * 0.1
+      const phase = reduced ? 0.6 : sec * SPIN
+      const flow = reduced ? 0 : sec * FLOW
+      const rise = reduced ? 0 : sec * DUST_RISE
       const step = dt * 60
+      const axl = bx - ax
+      const ayl = by - ay
 
       for (const q of particles) {
         let hx: number
@@ -154,12 +175,14 @@ export default function HeroHelix() {
         let depth = 0.5
         if (q.t < 0) {
           hx = q.sx * W
-          hy = q.sy * H
+          hy = (((q.sy * H - rise) % H) + H) % H
         } else {
-          const theta = q.t * TURNS * Math.PI * 2 + phase
-          const cy = cy0 + Math.sin(q.t * Math.PI * 1.7 + phase * 0.6) * sway
-          hx = xLeft + q.t * span
-          hy = cy + q.u * R * Math.cos(theta)
+          // the ribbon flows up the diagonal: wrap the parameter off-frame
+          const t = (q.t + flow) % 1
+          const theta = t * turns * Math.PI * 2 + phase
+          const off = q.u * R * Math.cos(theta)
+          hx = ax + t * axl + nx * off
+          hy = ay + t * ayl + ny * off
           depth = (q.u * Math.sin(theta) + 1) / 2
         }
         const f = reduced ? 1 : easeOutCubic(Math.min(1, Math.max(0, (T * 1.25 - q.d) / 0.5)))
