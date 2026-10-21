@@ -21,8 +21,12 @@ function ensure(): AudioContext | null {
   return ctx
 }
 
+let initialised = false
+
 export function initSound() {
   ensure()
+  if (initialised) return
+  initialised = true
   // an AudioContext can only start after a gesture: unlock it on the first one
   const unlock = () => {
     window.removeEventListener('pointerdown', unlock)
@@ -33,6 +37,17 @@ export function initSound() {
   window.addEventListener('pointerdown', unlock)
   window.addEventListener('keydown', unlock)
   window.addEventListener('touchend', unlock)
+}
+
+/** Call from inside a user gesture (click, key, tap): starts the audio engine. */
+export function unlockSound() {
+  ensure()
+  void ctx?.resume()
+}
+
+/** True once the browser lets us make noise (a gesture happened, or it allows autoplay). */
+export function audioRunning() {
+  return !!ctx && ctx.state === 'running'
 }
 
 const live = () => !!ctx && !!master && ctx.state === 'running'

@@ -7,15 +7,16 @@ import IntroVideo from './IntroVideo'
 import CreateWordmark from './CreateWordmark'
 import EnterPulse from './EnterPulse'
 import SkipControl from './SkipControl'
+import IntroGate from './IntroGate'
 import { CUES, CANPLAY_TIMEOUT_MS, CROSSFADE_MS, beatAt, type Beat } from '@/lib/intro/cues'
 import { useIntroClock } from '@/hooks/useIntroClock'
 import { usePlayOncePerSession } from '@/hooks/usePlayOncePerSession'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { click as keyClick, swoosh, typeKey } from '@/lib/sound'
+import { audioRunning, click as keyClick, initSound, swoosh, typeKey, unlockSound } from '@/lib/sound'
 
 export const REPLAY_EVENT = 'retro:replay-intro'
 
-type Phase = 'idle' | 'playing'
+type Phase = 'idle' | 'gate' | 'playing'
 
 /* Keys that must not skip: Tab (reaching the skip button) and bare modifiers. */
 const PASSTHROUGH_KEYS = new Set(['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'CapsLock'])
@@ -39,6 +40,8 @@ export default function OpeningSequence() {
   const [phase, setPhase] = useState<Phase>('idle')
   const [run, setRun] = useState(0)
   const [beat, setBeat] = useState<Beat>('typing')
+  // the "press any key" prompt, shown only if the browser still blocks audio
+  const [gateVisible, setGateVisible] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const phaseRef = useRef<Phase>('idle')
@@ -46,6 +49,8 @@ export default function OpeningSequence() {
   // how many letters of CREATE have printed (and sounded) so far
   const typedRef = useRef(0)
   const readyRef = useRef(false)
+  // the gesture that starts the intro must not also skip it
+  const startedAtRef = useRef(0)
 
   /* ── hand-over ───────────────────────────────────────────────────────── */
   const finish = useCallback(() => {
@@ -64,6 +69,15 @@ export default function OpeningSequence() {
     }
   }, [finish])
 
+  const startPlaying = useCallback((gesture = false) => {
+    if (phaseRef.current === 'playing') return
+    // only a gesture that started the intro needs protecting from also skipping it
+    startedAtRef.current = gesture ? performance.now() : 0
+    phaseRef.current = 'playing'
+    setGateVisible(false)
+    setPhase('playing')
+  }, [])
+
   /* ── boot: play once per session, never with reduced motion ──────────── */
   useEffect(() => {
     if (reduced) {
@@ -71,8 +85,9 @@ export default function OpeningSequence() {
       return
     }
     if (shouldPlay()) {
-      phaseRef.current = 'playing'
-      setPhase('playing')
+      initSound()
+      phaseRef.current = 'gate'
+      setPhase('gate')
     }
     // Boot decision only; later `reduced` changes are handled by the skip path.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,6 +97,7 @@ export default function OpeningSequence() {
   useEffect(() => {
     const onReplay = () => {
       if (reduced || phaseRef.current === 'playing') return
+      unlockSound()
       armReplay()
       window.scrollTo(0, 0)
       beatRef.current = 'typing'
@@ -89,12 +105,53 @@ export default function OpeningSequence() {
       readyRef.current = false
       setBeat('typing')
       setRun((r) => r + 1)
+      startedAtRef.current = performance.now()
       phaseRef.current = 'playing'
       setPhase('playing')
     }
     window.addEventListener(REPLAY_EVENT, onReplay)
     return () => window.removeEventListener(REPLAY_EVENT, onReplay)
   }, [armReplay, reduced])
+
+  /* ── gate: wait for the gesture that unlocks sound ───────────────────── */
+  useEffect(() => {
+    if (phase !== 'gate') return
+    const body = document.body
+    const prevOverflow = body.style.overflow
+    body.style.overflow = 'hidden'
+    window.__lenis?.stop()
+
+    // browsers that already allow audio (or a returning visitor) never see the prompt
+    const check = window.setTimeout(() => {
+      if (audioRunning()) startPlaying()
+      else setGateVisible(true)
+    }, 250)
+    // nobody there (or a crawler): play silently rather than wait forever
+    const giveUp = window.setTimeout(() => startPlaying(), 8000)
+
+    const go = () => {
+      unlockSound()
+      startPlaying(true)
+    }
+    const onPointer = () => go()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab' || PASSTHROUGH_KEYS.has(e.key) || e.repeat) return
+      go()
+    }
+    window.addEventListener('pointerdown', onPointer)
+    window.addEventListener('touchend', onPointer)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.clearTimeout(check)
+      window.clearTimeout(giveUp)
+      window.removeEventListener('pointerdown', onPointer)
+      window.removeEventListener('touchend', onPointer)
+      window.removeEventListener('keydown', onKey)
+      // always hand the page back; the playing phase re-locks it in the same commit
+      body.style.overflow = prevOverflow
+      window.__lenis?.start()
+    }
+  }, [phase, startPlaying])
 
   /* ── master clock ────────────────────────────────────────────────────── */
   useIntroClock(videoRef, phase === 'playing', (t) => {
@@ -140,6 +197,8 @@ export default function OpeningSequence() {
     }
     const onKey = (e: KeyboardEvent) => {
       if (PASSTHROUGH_KEYS.has(e.key)) return
+      // the key that started the intro (or its auto-repeat) must not skip it
+      if (e.repeat || performance.now() - startedAtRef.current < 500) return
       if (e.key === 'Enter') {
         // Enter on the skip button is a click: let it skip.
         if ((e.target as HTMLElement | null)?.closest?.('[data-skip]')) return
@@ -185,6 +244,8 @@ export default function OpeningSequence() {
   const onVideoEnded = useCallback(() => finish(), [finish])
 
   return (
+    <>
+    {phase === 'gate' && gateVisible && <IntroGate />}
     <AnimatePresence>
       {phase === 'playing' && (
         <motion.div
@@ -194,7 +255,9 @@ export default function OpeningSequence() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: CROSSFADE_MS / 1000, ease: 'linear' }}
-          onClick={finish}
+          onClick={() => {
+            if (performance.now() - startedAtRef.current > 500) finish()
+          }}
         >
           <IntroStage>
             <IntroVideo
@@ -219,5 +282,6 @@ export default function OpeningSequence() {
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   )
 }

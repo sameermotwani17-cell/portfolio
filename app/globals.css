@@ -244,6 +244,33 @@ html[data-intro='static'] body {
   cursor: pointer;
 }
 
+/* "Press any key": over the poster while the browser still blocks audio. The
+   first key or tap unlocks sound and starts the intro. */
+.intro-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: clamp(48px, 12vh, 120px);
+  background: linear-gradient(to top, rgba(5, 3, 2, 0.72), rgba(5, 3, 2, 0) 45%);
+  cursor: pointer;
+  animation: gateIn 0.5s ease-out both;
+}
+.intro-gate__line {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(11px, 1.1vw, 13px);
+  letter-spacing: 0.32em;
+  color: #f2f0ec;
+  text-align: center;
+  padding: 0 16px;
+}
+.intro-gate__line i { font-style: normal; opacity: 0.45; margin: 0 0.4em; }
+.intro-gate__cursor { margin-left: 0.5em; animation: heroCursorBlink 0.9s steps(1, end) infinite; }
+@keyframes gateIn { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 600px) { .intro-gate__line { letter-spacing: 0.16em; font-size: 11px; } }
+
 /* Server-rendered poster under the intro: visible only while the intro is
    pending or playing, so the first paint already shows frame one. */
 .intro-cover {
