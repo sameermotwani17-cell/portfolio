@@ -1,6 +1,7 @@
 /**
- * Section 02 · "My Story". All copy is Sameer's own: store it, never rewrite
- * the meaning, never add facts, dates, names or quotes. Typos only.
+ * Section 02 · "My Story". All copy is Sameer's own. Labels are categories (what
+ * the chapter is about, readable at a glance by a recruiter); the prose keeps
+ * every fact, date, name and quote and only drops filler. Never add facts.
  *
  * Order here is chronological and is the order of the tour, the tabs, the
  * server HTML and the reduced-motion cards.
@@ -59,34 +60,34 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'two-worlds',
     era: 'monrovia',
-    label: 'Two Worlds',
+    label: 'Identity',
     doodle: 'two-circles',
     place: 'Monrovia, Liberia',
     when: 'childhood',
-    text: "Born in Monrovia, Liberia. Liberian roots, Indian roots. I grew up celebrating Liberia's Independence Day and keeping the holy month of Sawan. For a long time I thought I had to pick one. I don't.",
+    text: "I was born in Monrovia, Liberia, with Liberian and Indian roots. Growing up I celebrated Liberia's Independence Day and kept the holy month of Sawan. For a long time I thought I had to pick one. I don't.",
   },
   {
     id: 'stutter',
     era: 'monrovia',
-    label: 'The Stutter',
+    label: 'Communication',
     doodle: 'speech-bubble',
     place: 'Monrovia',
     when: 'kid',
-    text: 'As a kid, saying "Hello, my name is Sameer" felt impossible. My thoughts moved faster than my mouth. My dad was providing for three kids and still found time. We ran together at dawn, then he\'d hand me books. I read *Tales of the Navajo Code Talkers* out loud, first with him, then alone, until one day I got through a whole page without tripping once.',
+    text: 'As a kid I couldn\'t say "Hello, my name is Sameer" without stumbling. My thoughts moved faster than my mouth. My dad was providing for three kids and still found time: we ran together at dawn, then he\'d hand me books. I read *Tales of the Navajo Code Talkers* out loud, first with him, then alone, until one day I got through a whole page without tripping.',
   },
   {
     id: 'thirteen',
     era: 'monrovia',
-    label: 'Thirteen',
+    label: 'Responsibility',
     doodle: 'pot-flames',
     place: 'Monrovia',
     when: '13',
-    text: "When my parents separated, I became the one who kept the mornings running. At thirteen I woke up early to light the coal fire, make breakfast and pack my little brother's lunch before school. That's where I learned what responsibility actually means.",
+    text: "When my parents separated, I took over the mornings. At thirteen I got up early to light the coal fire, make breakfast and pack my little brother's lunch before school.",
   },
   {
     id: 'the-no',
     era: 'monrovia',
-    label: 'The No',
+    label: 'Setback',
     doodle: 'envelope-x',
     place: 'Monrovia',
     when: '15–16',
@@ -97,16 +98,16 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'the-yes',
     era: 'leaving',
-    label: 'The Yes',
+    label: 'Scholarship',
     doodle: 'envelope-check',
     place: 'Monrovia',
     when: '16',
-    text: 'I reapplied the next year, more open and more determined. This time I got it: a scholarship to study the IB in Israel.',
+    text: 'I reapplied the next year. This time I got it: a scholarship to study the IB in Israel.',
   },
   {
     id: 'airport',
     era: 'leaving',
-    label: 'The Airport',
+    label: 'Relocation',
     doodle: 'suitcase-tear',
     place: 'Monrovia → Israel',
     when: '2023, 17',
@@ -117,7 +118,7 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'host-dad',
     era: 'israel',
-    label: 'Host Dad',
+    label: 'Belonging',
     doodle: 'stick-pair',
     place: 'Israel',
     when: '17',
@@ -126,16 +127,16 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'october-7',
     era: 'israel',
-    label: 'October 7th',
+    label: 'Resilience',
     doodle: 'candle',
     place: 'Israel',
     when: '2023',
-    text: 'Experiencing October 7th was hard. I was seventeen, far from home, and I learned what it means to keep going when the world around you stops making sense.',
+    text: 'I was in Israel on October 7th. I was seventeen and far from home. It was hard, and I kept going.',
   },
   {
     id: 'hapoel',
     era: 'israel',
-    label: 'Hapoel Menashe',
+    label: 'Teamwork',
     doodle: 'basketball',
     place: 'Menashe, Israel',
     when: '17–18',
@@ -144,65 +145,65 @@ export const CHAPTERS: Chapter[] = [
   {
     id: 'the-stage',
     era: 'israel',
-    label: 'Oberon',
+    label: 'Theatre',
     doodle: 'masks-crown',
     place: 'Israel',
     when: '18',
-    text: "I found theatre. In *A Midsummer Night's Dream* I played the villain, Oberon. I love acting. It's the reason I make content on Instagram today.",
+    text: "I found theatre. In *A Midsummer Night's Dream* I played Oberon, the villain. I love acting, and it's the reason I make content on Instagram today.",
   },
   {
     id: 'heartbreak',
     era: 'israel',
-    label: 'Heartbreak',
+    label: 'Songwriting',
     doodle: 'cracked-heart',
     place: 'Israel',
     when: '18',
-    text: "Then I got my heart broken. That's when the music started. I'm not alone in making songs out of pain, but these ones were mine.",
+    text: "Then I got my heart broken, and I started making music. Plenty of people turn pain into songs. These were mine.",
   },
 
   // ── Era 4: JAPAN ───────────────────────────────────────────────────────
   {
     id: 'beppu',
     era: 'japan',
-    label: 'Beppu',
+    label: 'Independence',
     doodle: 'trash-bag',
     place: 'Beppu, Japan',
     when: '19',
-    text: "A year and a half after Israel: Japan. Living alone taught me to be accountable for everything. I didn't even know how to throw out the trash. My RA sent me back with my garbage, and one of my bags got a warning sticker at the collection point.",
+    text: "A year and a half after Israel: Japan. Living alone, I had to be accountable for everything. I didn't even know how to throw out the trash. My RA sent me back with my garbage, and one of my bags got a warning sticker at the collection point.",
   },
   {
     id: 'closed-doors',
     era: 'japan',
-    label: 'Closed Doors',
+    label: 'Career',
     doodle: 'door-window',
     place: 'Beppu',
     when: '19–20',
-    text: "My lowest point: tech companies wouldn't hire me because I didn't speak enough Japanese. Door after door. Then one opened, and I landed a good-paying role anyway.",
+    text: "My lowest point: tech companies wouldn't hire me because I didn't speak enough Japanese. Then one door opened, and I landed a good-paying role anyway.",
   },
 
   // ── Era 5: NOW ─────────────────────────────────────────────────────────
   {
     id: 'weekly-calls',
     era: 'now',
-    label: 'Weekly Calls',
+    label: 'Family',
     doodle: 'phone-signal',
     place: 'Liberia · Germany · Japan',
     when: 'now',
-    text: 'My dad is back in Liberia, and we talk every week. My mom is in Germany. Three countries, one family.',
+    text: "My dad is back in Liberia and we talk every week. My mom is in Germany, and I'm in Japan.",
   },
   {
     id: 'retro',
     era: 'now',
-    label: 'RETRO',
+    label: 'Music',
     doodle: 'vinyl',
     place: 'Beppu',
     when: '20',
-    text: "I release music as RETRO. I make it about life: the chapters, the things I've lived through. This map is basically my tracklist.",
+    text: "I release music as RETRO. I make it about my life, the chapters and the things I've lived through. This map is basically my tracklist.",
   },
 ]
 
 /** Handwritten at the bottom of the map: the last thing to draw. */
-export const OUTRO = "This guy doesn't give up. The doors closed, and he still made a way."
+export const OUTRO = "The doors closed. I made a way anyway."
 
 export const eraIndex = (id: EraId) => ERAS.findIndex((e) => e.id === id)
 export const chaptersOfEra = (id: EraId) => CHAPTERS.filter((c) => c.era === id)
