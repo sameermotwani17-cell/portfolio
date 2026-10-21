@@ -27,8 +27,8 @@ function useBeppuTime() {
 }
 
 function goToWork() {
-  // the next section on the page: the story
-  const el = document.getElementById('story')
+  // the next section on the page: about this guy
+  const el = document.getElementById('about')
   if (!el) return
   if (window.__lenis) window.__lenis.scrollTo(el, { duration: 1.4 })
   else el.scrollIntoView({ behavior: 'smooth' })

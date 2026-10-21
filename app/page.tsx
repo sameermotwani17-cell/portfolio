@@ -1,6 +1,6 @@
 import { preload } from 'react-dom'
 import HeroEndFrame from '@/components/intro/HeroEndFrame'
-import MyStory from '@/components/story/MyStory'
+import AboutThisGuy from '@/components/about/AboutThisGuy'
 import UniverseSplit from '@/components/universe/UniverseSplit'
 import DeferReveal from '@/components/DeferReveal'
 import IntroLoader from '@/components/intro/IntroLoader'
@@ -35,8 +35,9 @@ export default function Home() {
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <HeroEndFrame />
-      {/* Section 02: the life map. The hero's scroll cue and Enter go here. */}
-      <MyStory id="story" />
+      {/* A short "about this guy" beat. The hero's scroll cue and Enter go here.
+          (The long story map in components/story is unmounted, not deleted.) */}
+      <AboutThisGuy id="about" />
       {/* Section 03: choose a universe. This is the work: the split is the way into it, so nothing sits under it. */}
       <UniverseSplit id="universe" />
       <DeferReveal />
