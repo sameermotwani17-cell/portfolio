@@ -8,9 +8,10 @@
  */
 /*
  * Timed against the generated footage (clip 1 from 1.2s, clip 2 from 0.6s,
- * straight cut at 3.842s; master runs 6.28s at 30fps):
+ * straight cut at 3.842s; master runs 6.23s at 30fps):
  *   hands lift ~1.4s, backlight fully off ~2.8s, hand enters ~4.24s,
- *   fingertip contact on Enter at 4.66s (clip 2 @ 1.417s).
+ *   fingertip lands on Enter at 4.80s (clip 2 @ 1.558s). It enters the frame
+ *   at 4.1s and is still sliding up the key at 4.66s.
  */
 export const CUES = {
   /** Beat A -> B: hands lift, keyboard backlight starts switching off. */
@@ -18,7 +19,7 @@ export const CUES = {
   /** Beat C: `CREATE` starts typing in on the home row. */
   WORD_START: 2.85,
   /** Beat D: the frame the Enter key is fully depressed. Glow pulse fires here. */
-  ENTER_PRESS: 4.66,
+  ENTER_PRESS: 4.8,
   /** Beat E: video pushes in, wordmark spreads, bloom expands from the key. */
   TRANSITION_START: 5.1,
   /** The bloom has settled into paper; the hero takes over and the video unmounts. */

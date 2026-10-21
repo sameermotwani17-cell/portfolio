@@ -4,9 +4,9 @@
  * The stage box scales as one unit, so these keep `CREATE` on the home row
  * and the Enter glow on the Enter key at every screen size.
  *
- * Measured on the generated footage (keyboard spans 20-80% of the frame
- * width; home row at 35.3% of the height; Enter is the wide key at the
- * right end of the home row). Re-measure on `public/intro/endframe.jpg`
+ * Measured on the generated footage (keys span 19.5-80% of the frame
+ * width; home row centre at 35.6% of the height; Enter is the wide key at the
+ * right end of the home row, x 72.7-79.7%). Re-measure on `public/intro/endframe.jpg`
  * if the footage changes.
  */
 export type StagePoint = { x: number; y: number }
@@ -15,7 +15,7 @@ export type StagePoint = { x: number; y: number }
 export const WORDMARK: StagePoint = { x: 50, y: 35.5 }
 
 /** Centre of the Enter / Return key. */
-export const ENTER_KEY: StagePoint = { x: 74.7, y: 35.3 }
+export const ENTER_KEY: StagePoint = { x: 76.2, y: 35.6 }
 
 /** Width of one key, as a percentage of the stage width. Sizes the glow. */
 export const KEY_SIZE = 4.2
