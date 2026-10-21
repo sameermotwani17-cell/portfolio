@@ -852,8 +852,7 @@ html:not([data-intro='play']) .hero-foot {
   opacity: 1;
 }
 
-.hero-clock,
-.hero-sound {
+.hero-clock {
   position: absolute;
   top: 20px;
   z-index: 3;
@@ -880,22 +879,6 @@ html:not([data-intro='play']) .hero-foot {
 @keyframes clockPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
-}
-.hero-sound {
-  right: 24px;
-  background: none;
-  border: 0;
-  padding: 0;
-  transition: color 0.2s;
-}
-.hero-sound:hover,
-.hero-sound:focus-visible,
-.hero-sound[aria-pressed='true'] {
-  color: var(--paper);
-  outline: none;
-}
-.hero-sound[aria-pressed='true'] span {
-  color: var(--signal-bright);
 }
 
 /* Scroll cue: a line that keeps drawing itself, and the Enter motif. */
@@ -944,17 +927,13 @@ html:not([data-intro='play']) .hero-foot {
 }
 
 @media (max-width: 1023px) {
-  .hero-clock,
-  .hero-sound {
+  .hero-clock {
     top: 16px;
     font-size: 10px;
     letter-spacing: 0.08em;
   }
   .hero-clock {
     left: 16px;
-  }
-  .hero-sound {
-    right: 16px;
   }
   .hero-role {
     flex-wrap: wrap;

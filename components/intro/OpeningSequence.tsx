@@ -11,7 +11,7 @@ import { CUES, CANPLAY_TIMEOUT_MS, CROSSFADE_MS, beatAt, type Beat } from '@/lib
 import { useIntroClock } from '@/hooks/useIntroClock'
 import { usePlayOncePerSession } from '@/hooks/usePlayOncePerSession'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { click as keyClick, typeKey } from '@/lib/sound'
+import { click as keyClick, swoosh, typeKey } from '@/lib/sound'
 
 export const REPLAY_EVENT = 'retro:replay-intro'
 
@@ -111,6 +111,8 @@ export default function OpeningSequence() {
     if (b !== beatRef.current) {
       const prev = beatRef.current
       if ((b === 'enter' || b === 'transition') && (prev === 'word' || prev === 'blackout')) keyClick()
+      // the frame opens out into the hero: the whoosh follows the click
+      if (b === 'transition' && prev !== 'transition') swoosh()
       beatRef.current = b
       setBeat(b)
     }
