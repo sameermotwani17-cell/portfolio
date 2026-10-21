@@ -10,8 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#050505',
-        paper: '#f5f5f2',
+        ink: '#0E0E0E',
+        paper: '#F2F0EC',
+        signal: '#B3060F',
         // legacy aliases still used by carried-over components
         background: '#050505',
         primary: '#f97316',
@@ -35,6 +36,8 @@ const config: Config = {
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
         stencil: ['var(--font-stencil)', 'Impact', 'sans-serif'],
         scrawl: ['var(--font-scrawl)', 'cursive'],
+        poster: ['var(--font-poster)', 'Impact', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       letterSpacing: {
         mega: '0.35em',

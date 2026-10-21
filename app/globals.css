@@ -208,3 +208,577 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION 01 · OPENING SEQUENCE + HERO END FRAME
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --paper: #f2f0ec;
+  --ink: #0e0e0e;
+  --signal: #b3060f;
+}
+
+/* Once the intro is over (or never ran) the document itself is paper, so
+   overscroll and the space below the hero never flash dark. */
+html[data-intro='done'],
+html[data-intro='static'],
+html[data-intro='done'] body,
+html[data-intro='static'] body {
+  background-color: var(--paper);
+}
+
+/* ── Intro root: fixed, opaque, above everything but the cursor ─────────── */
+.intro-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #050302;
+  overflow: hidden;
+  touch-action: none;
+  /* A tap anywhere skips. */
+  cursor: pointer;
+}
+
+/* The 16:9 stage holds the video and every overlay in ONE coordinate space.
+   Overlays are positioned in % of the stage, so they ride with the keyboard.
+   Landscape: cover the viewport, centred. */
+.intro-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100vw, 177.7778vh);
+  aspect-ratio: 16 / 9;
+  container-type: inline-size;
+  overflow: hidden;
+}
+
+/* Portrait: fit, don't crop. The whole keyboard stays visible. */
+@media (max-aspect-ratio: 1/1) {
+  .intro-stage {
+    width: 100vw;
+  }
+}
+
+.intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 18%;
+  will-change: transform;
+}
+
+/* Ambient fill above and below the stage on phones: the same footage,
+   blurred and dimmed, so there are no black bars. Only mounted in portrait. */
+.intro-ambient {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(40px) brightness(0.35);
+  transform: scale(1.2);
+  pointer-events: none;
+}
+
+/* Paper plate: the colour the bloom settles into. Covers the whole root. */
+.intro-plate {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  pointer-events: none;
+}
+
+/* ── CREATE wordmark ──────────────────────────────────────────────────────── */
+.wm {
+  position: absolute;
+  left: var(--wm-x);
+  top: var(--wm-y);
+  transform: translate(-50%, -50%);
+  /* letter-spacing trails the last glyph; pad the start to keep it centred */
+  padding-left: 1.6em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: clamp(9px, 0.95cqw, 15px);
+  line-height: 1;
+  letter-spacing: 1.6em;
+  color: rgba(245, 241, 234, 0.9);
+  text-shadow:
+    0 0 6px rgba(255, 196, 140, 0.55),
+    0 0 18px rgba(255, 160, 80, 0.3);
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+}
+
+.wm__l {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateX(0);
+  will-change: opacity, filter, transform;
+  transition:
+    opacity 0.22s ease-out,
+    filter 0.22s ease-out;
+}
+
+/* Beat C: letters print one by one (110ms stagger). */
+.wm[data-beat='word'] .wm__l,
+.wm[data-beat='enter'] .wm__l {
+  opacity: 1;
+  filter: blur(0);
+}
+.wm[data-beat='word'] .wm__l {
+  transition-delay: calc(var(--i) * 110ms);
+}
+
+/* Beat E: tracking widens (1.6em -> 3em, done with transforms) and fades. */
+.wm[data-beat='transition'] .wm__l,
+.wm[data-beat='hero'] .wm__l {
+  opacity: 0;
+  filter: blur(0);
+  transform: translateX(calc((var(--i) - 2.5) * 1.4em));
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Blinking cursor: appears after the last letter, gone once Enter is pressed. */
+.wm__cursor {
+  display: inline-block;
+  margin-left: -1.2em;
+  opacity: 0;
+}
+.wm[data-beat='word'] .wm__cursor {
+  animation: wmBlink 0.9s steps(1, end) infinite;
+  animation-delay: 660ms;
+}
+@keyframes wmBlink {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0; }
+}
+
+/* `press ⏎` hint under the word, from WORD_START until the key is pressed. */
+.wm__hint {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 1.6em);
+  padding-left: 0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-shadow: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.wm[data-beat='word'] .wm__hint {
+  opacity: 0.4;
+  transition-delay: 700ms;
+}
+
+/* ── Enter pulse ──────────────────────────────────────────────────────────── */
+.enter-glow,
+.enter-bloom {
+  position: absolute;
+  left: var(--key-x);
+  top: var(--key-y);
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.enter-glow {
+  width: calc(var(--key-size) * 1cqw);
+  height: calc(var(--key-size) * 1cqw);
+  margin: calc(var(--key-size) * -0.5cqw) 0 0 calc(var(--key-size) * -0.5cqw);
+  background: radial-gradient(circle, rgba(255, 200, 140, 0.6) 0%, rgba(255, 200, 140, 0.25) 45%, rgba(255, 200, 140, 0) 70%);
+  filter: blur(1px);
+}
+.enter-bloom {
+  width: calc(var(--key-size) * 1.6cqw);
+  height: calc(var(--key-size) * 1.6cqw);
+  margin: calc(var(--key-size) * -0.8cqw) 0 0 calc(var(--key-size) * -0.8cqw);
+  background: radial-gradient(circle, rgba(255, 214, 170, 0.95) 0%, rgba(248, 236, 220, 0.9) 40%, rgba(242, 240, 236, 0) 72%);
+}
+
+/* ── Skip control ─────────────────────────────────────────────────────────── */
+.intro-skip {
+  position: fixed;
+  right: 24px;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 2;
+  padding: 10px 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 241, 234, 0.72);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(245, 241, 234, 0.18);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transition: color 0.2s, border-color 0.2s;
+}
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  color: #fff;
+  border-color: rgba(245, 241, 234, 0.6);
+  outline: none;
+}
+@media (max-aspect-ratio: 1/1) {
+  .intro-skip {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO END FRAME · Swiss poster
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.hero-root {
+  position: relative;
+  min-height: 100svh;
+  padding: 20px 24px;
+  background: var(--paper);
+  color: var(--signal);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* While the intro owns the screen the hero stays hidden underneath; a 0s
+   animation with a 4s delay reveals it even if the intro never mounts. */
+html[data-intro='play'] .hero-root {
+  visibility: hidden;
+  animation: heroFailsafe 0s 4s forwards;
+}
+@keyframes heroFailsafe {
+  to { visibility: visible; }
+}
+
+.hero-grunge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.hero-super {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  text-align: center;
+  line-height: 1;
+}
+
+/* SAMEER spans the full width: the letters are justified across the line. */
+.hero-name {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(96px, 14vw, 240px);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  /* negative tracking trails the last glyph: keep the R off the edge */
+  margin-right: 0.03em;
+  transform-origin: 50% 100%;
+}
+
+.hero-main {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  margin-top: 14px;
+}
+
+.hero-stack {
+  grid-column: 1 / span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 6.6vw, 112px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+}
+.hero-stack__row {
+  display: block;
+}
+/* The middle row pushes right into the empty cell of the grid, like the
+   reference's O overlapping the tile column. */
+.hero-stack__row--mid {
+  align-self: flex-end;
+  margin-right: -30%;
+}
+
+.hero-tiles {
+  --g: 10px;
+  --px: 0px;
+  --py: 0px;
+  grid-column: 4 / -1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: var(--g);
+  min-height: 0;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+.tile--filled {
+  transform: translate(calc(var(--px) * var(--d)), calc(var(--py) * var(--d)));
+  /* A fine dot screen behind the portrait so each tile reads as a printed
+     panel even where the portrait is empty. Generated in CSS, no file. */
+  background-image: radial-gradient(circle, var(--tile-dot) 0.75px, transparent 1.05px);
+  background-size: 6px 6px;
+  background-position: 3px 3px;
+}
+.hero-root[data-halftone='thermal'] .tile--filled {
+  --tile-dot: rgba(120, 60, 160, 0.26);
+}
+.hero-root[data-halftone='mono'] .tile--filled {
+  --tile-dot: rgba(14, 14, 14, 0.2);
+}
+/* Every tile shows a slice of the SAME image: the img is the size of the
+   whole grid and shifted by one cell + one gutter per row/column, so the
+   gutters cut through one continuous portrait. */
+.tile__img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(300% + 2 * var(--g));
+  height: calc(300% + 2 * var(--g));
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% var(--portrait-y, 50%);
+  transform: translate(
+    calc(var(--c) * (-33.3333% - var(--g) / 3)),
+    calc(var(--r) * (-33.3333% - var(--g) / 3))
+  );
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.tile--statement {
+  overflow: visible;
+}
+.tile--statement {
+  overflow: visible;
+}
+.hero-statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 4px 0 0 6px;
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.hero-statement__line {
+  display: block;
+  white-space: nowrap;
+}
+.hero-cursor {
+  display: inline-block;
+  margin-left: 0.08em;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  opacity: 0;
+}
+
+.hero-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-top: 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.hero-body {
+  max-width: 58ch;
+  margin: 0;
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  justify-content: flex-end;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.hero-ctas a {
+  color: var(--signal);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.hero-ctas a:hover,
+.hero-ctas a:focus-visible {
+  border-bottom-color: currentColor;
+  outline: none;
+}
+.hero-replay {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--signal);
+  opacity: 0.55;
+  background: none;
+  border: 0;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+.hero-replay:hover,
+.hero-replay:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+/* ── Tablet / phone: the reference's native portrait poster ──────────────── */
+@media (max-width: 1023px) {
+  .hero-root {
+    padding: 16px 16px 24px;
+  }
+  .hero-name {
+    font-size: clamp(56px, 18vw, 120px);
+  }
+  .hero-main {
+    display: block;
+    margin-top: 10px;
+    flex: none;
+  }
+  .hero-tiles {
+    width: 100%;
+    aspect-ratio: 1;
+    --g: 8px;
+  }
+  .hero-stack {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 33.333%;
+    height: 100%;
+    justify-content: space-around;
+    font-size: clamp(44px, 13vw, 96px);
+    z-index: 2;
+    padding-left: 4px;
+  }
+  .hero-stack__row--mid {
+    align-self: flex-start;
+    margin-right: 0;
+  }
+  .hero-statement {
+    font-size: clamp(20px, 5.4vw, 44px);
+    padding-left: 4px;
+  }
+  .hero-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 18px;
+    font-size: 12px;
+  }
+  .hero-ctas {
+    justify-content: flex-start;
+  }
+}
+
+/* ── Entrance (runs when the intro hands over, or on load without one) ─── */
+html:not([data-intro='play']) .hero-name {
+  animation: heroSlam 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html:not([data-intro='play']) .tile--filled {
+  animation: heroPrint 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(150ms + var(--i) * 70ms);
+}
+html:not([data-intro='play']) .hero-stack__row {
+  animation: heroDrop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(600ms + var(--i) * 50ms);
+}
+html:not([data-intro='play']) .hero-statement__line {
+  animation: heroType 0.32s steps(7, end) both;
+  animation-delay: calc(900ms + var(--i) * 230ms);
+}
+html:not([data-intro='play']) .hero-cursor {
+  animation: heroCursorBlink 0.9s steps(1, end) infinite;
+  animation-delay: 1650ms;
+}
+html:not([data-intro='play']) .hero-foot {
+  animation: heroFade 0.5s ease-out both;
+  animation-delay: 1100ms;
+}
+
+@keyframes heroSlam {
+  from { opacity: 0; transform: translateY(40px) scaleY(1.15); }
+  to { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+@keyframes heroPrint {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes heroDrop {
+  from { opacity: 0; transform: translateY(-0.35em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroType {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes heroCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes heroFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Reduced motion: everything visible immediately, nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-name,
+  .tile--filled,
+  .hero-stack__row,
+  .hero-statement__line,
+  .hero-foot {
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}

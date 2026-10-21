@@ -1,5 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { Anton, Space_Grotesk, Black_Ops_One, Permanent_Marker, Bebas_Neue, Inter, Cormorant } from 'next/font/google'
+import {
+  Anton,
+  Space_Grotesk,
+  Black_Ops_One,
+  Permanent_Marker,
+  Bebas_Neue,
+  Inter,
+  Cormorant,
+  Poppins,
+  JetBrains_Mono,
+} from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -9,6 +19,7 @@ const anton = Anton({
   weight: '400',
   variable: '--font-display',
   display: 'swap',
+  preload: false,
 })
 
 const spaceGrotesk = Space_Grotesk({
@@ -16,6 +27,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
+  preload: false,
 })
 
 const blackOps = Black_Ops_One({
@@ -23,6 +35,7 @@ const blackOps = Black_Ops_One({
   weight: '400',
   variable: '--font-stencil',
   display: 'swap',
+  preload: false,
 })
 
 const marker = Permanent_Marker({
@@ -30,6 +43,7 @@ const marker = Permanent_Marker({
   weight: '400',
   variable: '--font-scrawl',
   display: 'swap',
+  preload: false,
 })
 
 /* ── Retro Studios discography: each release borrows the real typeface its own
@@ -41,6 +55,7 @@ const bebas = Bebas_Neue({
   weight: '400',
   variable: '--font-bebas',
   display: 'swap',
+  preload: false,
 })
 
 // Too Easy loads Inter and nothing else — the quietest record in the set
@@ -49,6 +64,7 @@ const inter = Inter({
   weight: ['400', '600'],
   variable: '--font-grid',
   display: 'swap',
+  preload: false,
 })
 
 // First Light pairs Cormorant with Inter for its warm, editorial keepsake feel
@@ -56,6 +72,24 @@ const cormorant = Cormorant({
   subsets: ['latin'],
   weight: ['400', '600'],
   variable: '--font-editorial',
+  display: 'swap',
+  preload: false,
+})
+
+/* ── Section 01 poster fonts: the only two preloaded ──
+   Poppins 800 is the heavy geometric display face of the Swiss-poster hero;
+   JetBrains Mono sets `CREATE`, the hints, body line and CTAs. */
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: '800',
+  variable: '--font-poster',
+  display: 'swap',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
@@ -123,7 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable} ${marker.variable} ${bebas.variable} ${inter.variable} ${cormorant.variable}`}
+      className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable} ${marker.variable} ${bebas.variable} ${inter.variable} ${cormorant.variable} ${poppins.variable} ${jetbrains.variable}`}
     >
       <body className="bg-ink text-paper antialiased">
         <script

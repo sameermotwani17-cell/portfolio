@@ -35,3 +35,7 @@ next-env.d.ts
 # private work list
 TODO-HIRABILITY.md
 AI-GAPS.md
+
+# reference material and raw generated footage (never shipped)
+assets-src/ref/
+assets-src/intro/
