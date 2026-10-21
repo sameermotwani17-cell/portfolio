@@ -41,7 +41,7 @@ const scene = (w, h) => `
 </svg>`
 
 async function build(srcBuf, name, width, maxKB) {
-  const base = sharp(srcBuf).resize({ width, withoutEnlargement: false })
+  const base = sharp(srcBuf).resize({ width, withoutEnlargement: true })
   for (const [suffix, tech] of [['', false], ['-tech', true]]) {
     let img = base.clone()
     if (tech) {

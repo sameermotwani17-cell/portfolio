@@ -14,6 +14,10 @@ The split (`components/universe/`) ships with a synthetic placeholder in
    `backview-{desktop,mobile}-tech.webp` (graphite grade), sized to the 350 KB / 250 KB budgets.
 3. Commit the four `.webp` files. Nothing else changes.
 
+## Generated picks (shipped)
+
+The shipped `public/universe/*.webp` are built from these. Desktop is the 16:9 pick (2000px wide as attached; regenerate from the 3840px original for a sharper 2400px file), mobile is the second 4:5 render.
+
 ## Generated picks (already made, 4k)
 
 | | Higgsfield job id | Size |
