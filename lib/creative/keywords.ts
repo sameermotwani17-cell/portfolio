@@ -26,6 +26,14 @@ export const KEYWORDS = [
 
 export const isRetro = (w: string) => w.startsWith('RETRO')
 
+/** Newspaper headline rows for Act 2, from the real work. */
+export const HEADLINES = [
+  'DK2R DROPS TWELVE EDITIONS FOR THE WORLD CUP',
+  'A STUDIO OF ONE, AND AN AI-NATIVE STACK',
+  'EVERY STEP EATS PLASTIC',
+  'SEVEN HUNDRED SEATS AT MILLENNIUM HALL',
+] as const
+
 /**
  * Filler prose for the blurred lines. My own copy from the audit, never the
  * reference reel's book text.

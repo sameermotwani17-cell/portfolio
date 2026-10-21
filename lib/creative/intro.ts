@@ -18,17 +18,21 @@ export const SHOT = {
     [170, 230],
     [270, 330],
   ] as const,
-  /** 350–1350: the bullet in slow motion. */
-  BULLET_END: 1350,
-  RING_EVERY: 120,
-  /** 1350–1450: white flash (80ms) and an 8px, 3-cycle shake. */
-  IMPACT_END: 1450,
-  FLASH_MS: 80,
-  SHAKE_PX: 8,
+  /** 350–1250: the bullet in slow motion, camera tracking it in close-up. */
+  CLOSE_ZOOM: 2.3,
+  CONTACT: 1250,
+  RING_EVERY: 170,
+  /** The cut: one white frame, then black, then the wide aftermath. */
+  CUT_WHITE_MS: 20,
+  CUT_BLACK_MS: 90,
+  /** Wide shot: the head is knocked back and comes apart into paint. */
+  AFTER_ZOOM: 1.06,
+  KNOCK_MS: 140,
+  SHAKE_PX: 10,
+  SHAKE_MS: 160,
   SHAKE_CYCLES: 3,
-  /** 1450–2000: the head bursts into paint. */
-  BURST_END: 2000,
-  /** 2000–2250: particles stream to centre while the frame goes black. */
+  BURST_END: 2050,
+  /** then the frame dissolves to black into Act 2 */
   DISSOLVE_MS: 250,
 } as const
 
