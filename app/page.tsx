@@ -1,6 +1,8 @@
 import { preload } from 'react-dom'
 import HeroEndFrame from '@/components/intro/HeroEndFrame'
 import IntroLoader from '@/components/intro/IntroLoader'
+import IntroPosterCover from '@/components/intro/IntroPosterCover'
+import { INTRO_SRC } from '@/lib/intro/assets'
 
 /*
  * Section 01: the opening sequence and the hero frame it lands on.
@@ -24,12 +26,13 @@ const BOOT = `(function(){try{var r=window.matchMedia('(prefers-reduced-motion: 
 
 export default function Home() {
   // The LCP element is this poster (or the h1), never the video.
-  preload('/intro/poster.jpg', { as: 'image' })
+  preload(INTRO_SRC.poster, { as: 'image', fetchPriority: 'high' })
 
   return (
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <HeroEndFrame />
+      <IntroPosterCover />
       <IntroLoader />
     </main>
   )

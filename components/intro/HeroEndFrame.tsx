@@ -93,7 +93,10 @@ export default function HeroEndFrame() {
                       alt=""
                       draggable={false}
                       decoding="async"
-                      fetchPriority={i === 0 ? 'high' : 'auto'}
+                      /* the poster (LCP) goes first; the portrait follows
+                         after layout, not from the preload scanner */
+                      loading="lazy"
+                      fetchPriority="low"
                     />
                   </div>
                 )

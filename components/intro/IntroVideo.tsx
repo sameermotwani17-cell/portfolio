@@ -3,12 +3,7 @@
 import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 import { CUES } from '@/lib/intro/cues'
-
-export const INTRO_SRC = {
-  webm: '/intro/intro.webm',
-  mp4: '/intro/intro.mp4',
-  poster: '/intro/poster.jpg',
-} as const
+import { INTRO_SRC } from '@/lib/intro/assets'
 
 type Props = {
   /** Beat E: push in (scale 1 -> 1.15) toward the screen glow. */

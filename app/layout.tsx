@@ -91,6 +91,8 @@ const jetbrains = JetBrains_Mono({
   weight: ['400', '500'],
   variable: '--font-mono',
   display: 'swap',
+  // small text only; it must not queue ahead of the poster (LCP)
+  preload: false,
 })
 
 const SITE_URL = 'https://portfolio-gamma-two-d8j6b2mgkq.vercel.app'

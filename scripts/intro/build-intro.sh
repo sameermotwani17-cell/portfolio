@@ -87,8 +87,10 @@ ffmpeg -v error -y -i "$WORK/cut.mp4" \
   -pix_fmt yuv420p -an "$OUT/intro.webm"
 
 # ── 3. poster + endframe ──────────────────────────────────────────────────────
-ffmpeg -v error -y -i "$WORK/cut.mp4" -frames:v 1 -q:v 7 "$OUT/poster.jpg"
-ffmpeg -v error -y -sseof -0.1 -i "$WORK/cut.mp4" -update 1 -frames:v 1 -q:v 7 "$OUT/endframe.jpg"
+# The poster is the LCP element: keep it light (1280 wide is plenty for a
+# frame that is on screen for a few hundred ms before the video takes over).
+ffmpeg -v error -y -i "$WORK/cut.mp4" -frames:v 1 -vf "scale=1280:-2" -q:v 9 "$OUT/poster.jpg"
+ffmpeg -v error -y -sseof -0.1 -i "$WORK/cut.mp4" -update 1 -frames:v 1 -q:v 5 "$OUT/endframe.jpg"
 
 # ── report ────────────────────────────────────────────────────────────────────
 echo "built:"

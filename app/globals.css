@@ -240,6 +240,17 @@ html[data-intro='static'] body {
   cursor: pointer;
 }
 
+/* Server-rendered poster under the intro: visible only while the intro is
+   pending or playing, so the first paint already shows frame one. */
+.intro-cover {
+  display: none;
+  z-index: 8999;
+  cursor: default;
+}
+html[data-intro='play'] .intro-cover {
+  display: block;
+}
+
 /* The 16:9 stage holds the video and every overlay in ONE coordinate space.
    Overlays are positioned in % of the stage, so they ride with the keyboard.
    Landscape: cover the viewport, centred. */
@@ -652,8 +663,8 @@ html[data-intro='play'] .hero-root {
   display: inline-block;
   margin-top: 8px;
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   color: var(--signal);
   opacity: 0.55;
   background: none;
