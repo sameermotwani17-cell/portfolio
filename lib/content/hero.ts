@@ -20,8 +20,7 @@ export const SOCIAL = {
   github: 'https://github.com/sameermotwani17-cell',
   linkedin: 'https://www.linkedin.com/in/sameer-motwani-2625a62b5/',
   instagram: 'https://www.instagram.com/retro.studios_',
-  // TODO: confirm the TikTok handle. Placeholder mirrors the Instagram handle.
-  tiktok: 'https://www.tiktok.com/@retro.studios_',
+  tiktok: 'https://www.tiktok.com/@retro.studios',
 } as const
 
 export const HERO = {
