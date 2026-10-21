@@ -3,6 +3,7 @@ import { HERO, HALFTONE_MODE, HALFTONE_SRC, TILE_PATTERN } from '@/lib/content/h
 import ReplayIntro from './ReplayIntro'
 import TileParallax from './TileParallax'
 import HeroReveal from './HeroReveal'
+import HeroHelix from './HeroHelix'
 
 const TILES_ID = 'hero-tiles'
 
@@ -26,6 +27,7 @@ export default function HeroEndFrame() {
     <section className="hero-root" data-halftone={HALFTONE_MODE}>
       <Grunge />
       <HeroReveal />
+      <HeroHelix tilesId={TILES_ID} />
       <h1 className="sr-only">{HERO.h1}</h1>
 
       <div className="hero-inner" aria-hidden="true">

@@ -801,24 +801,12 @@ html:not([data-intro='play']) .hero-foot {
   }
 }
 
-/* ── Intro -> Section 01: the helix transition ──────────────────────────── */
-.helix-section {
-  position: relative;
-  height: 260vh;
-  height: 260svh;
-  background: #050302;
-}
-.helix-stage {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  overflow: hidden;
-}
-.helix-canvas {
+/* ── The helix inside the hero: a canvas behind the content ─────────────── */
+.hero-helix {
   position: absolute;
   inset: 0;
-  display: block;
   width: 100%;
   height: 100%;
+  display: block;
+  pointer-events: none;
 }
