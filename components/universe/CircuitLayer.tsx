@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useMemo, useRef, type RefObject } from 'react'
-import { useSharedTicker } from '@/hooks/useSharedTicker'
+import { createIdleThrottle, useSharedTicker } from '@/hooks/useSharedTicker'
 import type { PointerField } from '@/hooks/usePointerField'
 import { makeBoard, distToTrace } from '@/lib/universe/circuit'
 import { TECH } from '@/lib/universe/palette'
-import type { StageState } from './types'
+import { isBusy, type StageState } from './types'
 
 /**
  * Tech half: a seeded circuit board (same board every render) with signal
@@ -51,10 +51,13 @@ export default function CircuitLayer({ field, state, enabled, reduced }: Props) 
     pulseEls.current = pulses.map((_, i) => Array.from(svg.querySelectorAll<SVGPathElement>(`[data-pulse="${i}"]`)))
   }, [pulses])
 
-  useSharedTicker((dt) => {
+  const throttle = useRef(createIdleThrottle()).current
+  useSharedTicker((rawDt) => {
     const st = state.current
     const f = field.current
     if (!st || !f) return
+    const dt = throttle(rawDt, isBusy(f, st))
+    if (!dt) return
     const sp = st.speedL
     pulses.forEach((t, i) => {
       phase.current[i] = (phase.current[i] + (SPEED * dt * sp) / (t.len + SEG)) % 1

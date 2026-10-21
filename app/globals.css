@@ -943,19 +943,6 @@ html:not([data-intro='play']) .hero-foot {
   100% { transform: scaleY(1); opacity: 0; }
 }
 
-.work-stub {
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--void);
-  border-top: 1px solid rgba(242, 240, 236, 0.08);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.4em;
-  color: var(--bone-dim);
-}
-
 @media (max-width: 1023px) {
   .hero-clock,
   .hero-sound {
@@ -1694,7 +1681,7 @@ html[data-story='pinned'] .story-text {
 
 @media (max-width: 767px) {
   .uni-label__title { font-size: clamp(26px, 7.2vw, 60px); }
-  .uni-label__sub { font-size: 10px; letter-spacing: 0.04em; }
+  .uni-label__sub { font-size: 11px; letter-spacing: 0.02em; }
   .uni-hit { padding-left: 14px; padding-right: 14px; }
 }
 
@@ -1735,7 +1722,7 @@ html[data-story='pinned'] .story-text {
 .uni-shell__sub, .uni-shell__soon {
   margin: 0; font-family: var(--font-mono), ui-monospace, monospace; letter-spacing: 0.12em;
 }
-.uni-shell__sub { font-size: clamp(11px, 1.2vw, 14px); opacity: 0.85; }
+.uni-shell__sub { font-size: clamp(12px, 1.2vw, 14px); opacity: 0.85; }
 .uni-shell__soon { margin-top: 18px; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.6; }
 
 ::view-transition-group(universe-bg) {
@@ -1746,4 +1733,11 @@ html[data-story='pinned'] .story-text {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 0.3s !important; }
   .uni-blob { animation: none; }
   .uni-label__enter, .uni-label__enter i, .uni-half::after { transition: none; }
+}
+
+/* Skip style/layout/paint of the two below-the-fold sections until DeferReveal
+   clears the flag after the hero's first paint. Their boxes keep their size. */
+html[data-defer] .story-stage,
+html[data-defer] .uni-stage {
+  content-visibility: hidden;
 }

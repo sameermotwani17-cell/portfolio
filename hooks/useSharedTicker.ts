@@ -37,3 +37,19 @@ export function useSharedTicker(cb: Tick, enabled: boolean) {
     }
   }, [enabled])
 }
+
+/**
+ * Idle frame-rate cap: gentle ambient motion does not need 60fps, so while
+ * nothing is interacting a layer runs every `idleMs` (about 30fps) and halves
+ * its cost. Returns the elapsed ms to simulate this frame, or 0 to skip it.
+ */
+export function createIdleThrottle(idleMs = 32) {
+  let acc = 0
+  return (dt: number, busy: boolean): number => {
+    acc += dt
+    if (!busy && acc < idleMs - 2) return 0
+    const step = acc
+    acc = 0
+    return step
+  }
+}

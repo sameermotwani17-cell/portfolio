@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useRef, type RefObject } from 'react'
-import { useSharedTicker } from '@/hooks/useSharedTicker'
+import { createIdleThrottle, useSharedTicker } from '@/hooks/useSharedTicker'
 import type { PointerField } from '@/hooks/usePointerField'
 import { createNoise3D } from '@/lib/universe/noise'
 import { TECH, CREATIVE } from '@/lib/universe/palette'
-import type { StageState } from './types'
+import { isBusy, type StageState } from './types'
 
 /**
  * Interactive wireframe: a grid of damped springs on top of a drifting simplex
@@ -136,11 +136,14 @@ export default function WarpGrid({ field, state, enabled, reduced, mobile, mode 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mobile, reduced])
 
-  useSharedTicker((dt, now) => {
+  const throttle = useRef(createIdleThrottle()).current
+  useSharedTicker((rawDt, now) => {
     const s = sim.current
     const f = field.current
     const st = state.current
     if (!s || !f || !st) return
+    const dt = throttle(rawDt, isBusy(f, st))
+    if (!dt) return
     const k = dt / 16.7
     const seamPx = st.seam * s.w
     s.tL += 0.15 * 0.001 * dt * st.speedL

@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useRef, type RefObject } from 'react'
-import { useSharedTicker } from '@/hooks/useSharedTicker'
+import { createIdleThrottle, useSharedTicker } from '@/hooks/useSharedTicker'
 import type { PointerField } from '@/hooks/usePointerField'
 import { createNoise3D, mulberry32 } from '@/lib/universe/noise'
 import { thermalRamp } from '@/lib/universe/palette'
-import type { StageState } from './types'
+import { isBusy, type StageState } from './types'
 
 /**
  * Generative motion art: curl-noise particle trails in the thermal palette over
@@ -61,7 +61,8 @@ export default function CreativeLayer({ field, state, enabled, reduced, mobile, 
       const off = cropped ? w * 0.36 : 0
       canvas.width = Math.round((w - off) * dpr)
       canvas.height = Math.round(h * dpr)
-      const n = mobile ? 400 : 900
+      // the split keeps the full count; the universe page is only a backdrop, so it runs lighter
+      const n = region === 'full' ? (mobile ? 240 : 600) : mobile ? 400 : 900
       const prev = sim.current
       const s = {
         n, w, h, dpr, off,
@@ -85,12 +86,15 @@ export default function CreativeLayer({ field, state, enabled, reduced, mobile, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mobile, reduced, region])
 
-  useSharedTicker((dt) => {
+  const throttle = useRef(createIdleThrottle()).current
+  useSharedTicker((rawDt) => {
     const s = sim.current
     const f = field.current
     const st = state.current
     const canvas = canvasRef.current
     if (!s || !f || !st || !canvas) return
+    const dt = throttle(rawDt, isBusy(f, st))
+    if (!dt) return
     const ctx = canvas.getContext('2d')!
     const k = dt / 16.7
     const speed = region === 'right' ? st.speedR : st.speedL
