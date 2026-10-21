@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const glyphRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const dot = dotRef.current
@@ -40,6 +41,17 @@ export default function CustomCursor() {
       ring.style.opacity = '0'
     }
 
+    // The intro's Enter key as a site-wide motif: over anything clickable the
+    // ring grows and shows a return glyph.
+    const glyph = glyphRef.current
+    const onOver = (e: MouseEvent) => {
+      const hit = !!(e.target as HTMLElement | null)?.closest?.('a, button, [role="button"]')
+      ring.style.width = hit ? '44px' : ''
+      ring.style.height = hit ? '44px' : ''
+      if (glyph) glyph.style.opacity = hit ? '1' : '0'
+    }
+    document.addEventListener('mouseover', onOver)
+
     window.addEventListener('mousemove', onMouseMove)
     document.addEventListener('mouseenter', onMouseEnter)
     document.addEventListener('mouseleave', onMouseLeave)
@@ -48,6 +60,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseenter', onMouseEnter)
       document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseover', onOver)
       cancelAnimationFrame(frame)
     }
   }, [])
@@ -67,12 +80,20 @@ export default function CustomCursor() {
       {/* Outer ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[10009] w-8 h-8 rounded-full border border-white/30 mix-blend-difference will-change-transform"
+        className="fixed top-0 left-0 pointer-events-none z-[10009] w-8 h-8 rounded-full border border-white/30 mix-blend-difference will-change-transform flex items-center justify-center"
         style={{
           opacity: 0,
-          transition: 'opacity 0.3s ease',
+          transition: 'opacity 0.3s ease, width 0.25s ease, height 0.25s ease',
         }}
-      />
+      >
+        <span
+          ref={glyphRef}
+          className="text-white font-mono text-[13px] leading-none"
+          style={{ opacity: 0, transition: 'opacity 0.2s ease' }}
+        >
+          ⏎
+        </span>
+      </div>
     </>
   )
 }
