@@ -643,8 +643,10 @@ html[data-intro='play'] .hero-root {
   line-height: 1.55;
 }
 .hero-body {
-  max-width: 58ch;
-  margin: 0;
+  max-width: 52ch;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.5;
+  margin: 0 0 2px;
   color: var(--bone-dim);
 }
 .hero-ctas {
@@ -727,6 +729,9 @@ html[data-intro='play'] .hero-root {
     align-items: flex-start;
     margin-top: 18px;
     font-size: 12px;
+  }
+  .hero-body {
+    font-size: 15px;
   }
   .hero-ctas {
     justify-content: flex-start;
