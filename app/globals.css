@@ -528,24 +528,26 @@ html[data-intro='play'] .hero-root {
 
 .hero-stack {
   grid-column: 1 / span 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* MOTWANI in full, one word up the column, read bottom to top. The rotation
+     lives here so the entrance animation on the row keeps its own transform. */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: start;
+  min-height: 0;
   font-family: var(--font-poster), Impact, sans-serif;
   font-weight: 800;
-  font-size: clamp(56px, 6.6vw, 112px);
+  font-size: clamp(48px, 9.4vh, 120px);
   line-height: 0.9;
   letter-spacing: -0.02em;
+  white-space: nowrap;
   pointer-events: none;
 }
 .hero-stack__row {
   display: block;
-}
-/* The middle row pushes right into the empty cell of the grid, like the
-   reference's O overlapping the tile column. */
-.hero-stack__row--mid {
-  align-self: flex-end;
-  margin-right: -30%;
+  height: 100%;
+  /* spread the seven letters over the full height of the column */
+  text-align: justify;
+  text-align-last: justify;
 }
 
 .hero-tiles {
@@ -711,14 +713,9 @@ html[data-intro='play'] .hero-root {
     top: 0;
     width: 33.333%;
     height: 100%;
-    justify-content: space-around;
-    font-size: clamp(44px, 13vw, 96px);
+    font-size: clamp(40px, 16vw, 88px);
     z-index: 2;
-    padding-left: 4px;
-  }
-  .hero-stack__row--mid {
-    align-self: flex-start;
-    margin-right: 0;
+    padding-top: 4px;
   }
   .hero-statement {
     font-size: clamp(20px, 5.4vw, 44px);

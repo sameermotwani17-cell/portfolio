@@ -47,16 +47,10 @@ export default function HeroEndFrame() {
         </div>
 
         <div className="hero-main">
-          <div className="hero-stack">
-            {HERO.stack.map((row, i) => (
-              <span
-                key={row}
-                className={`hero-stack__row${i === 1 ? ' hero-stack__row--mid' : ''}`}
-                style={{ '--i': i } as CSSProperties}
-              >
-                {row}
-              </span>
-            ))}
+          <div className="hero-stack" aria-hidden="true">
+            <span className="hero-stack__row" style={{ '--i': 0 } as CSSProperties}>
+              {HERO.surname}
+            </span>
           </div>
 
           <div className="hero-tiles" id={TILES_ID}>

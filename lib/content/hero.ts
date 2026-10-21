@@ -30,8 +30,8 @@ export const HERO = {
   role: ['ENGINEER', 'CREATIVE DIRECTOR', 'BUILDER', 'APU, JAPAN'],
   /** Full-width red display line. */
   name: 'SAMEER',
-  /** Left stacked column, letters broken across rows. */
-  stack: ['MOT', 'WA', 'NI'],
+  /** Surname, set up the left column and read bottom to top. */
+  surname: 'MOTWANI',
   /** The real, visually hidden h1. */
   h1: 'Sameer Motwani — "Retro"',
   /** Red statement block in the bottom-right cell. */
