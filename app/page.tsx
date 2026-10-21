@@ -2,6 +2,7 @@ import { preload } from 'react-dom'
 import HeroEndFrame from '@/components/intro/HeroEndFrame'
 import IntroLoader from '@/components/intro/IntroLoader'
 import IntroPosterCover from '@/components/intro/IntroPosterCover'
+import HelixTransition from '@/components/transition/HelixTransition'
 import { INTRO_SRC } from '@/lib/intro/assets'
 
 /*
@@ -32,6 +33,7 @@ export default function Home() {
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <HeroEndFrame />
+      <HelixTransition />
       <IntroPosterCover />
       <IntroLoader />
     </main>
