@@ -310,12 +310,12 @@ html[data-intro='play'] .intro-cover {
   top: var(--wm-y);
   transform: translate(-50%, -50%);
   /* letter-spacing trails the last glyph; pad the start to keep it centred */
-  padding-left: 1.6em;
+  padding-left: 0.9em;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-weight: 500;
-  font-size: clamp(9px, 0.95cqw, 15px);
+  font-size: clamp(14px, 2.2cqw, 44px);
   line-height: 1;
-  letter-spacing: 1.6em;
+  letter-spacing: 0.9em;
   color: rgba(245, 241, 234, 0.9);
   text-shadow:
     0 0 6px rgba(255, 196, 140, 0.55),
@@ -360,7 +360,7 @@ html[data-intro='play'] .intro-cover {
 /* Blinking cursor: appears after the last letter, gone once Enter is pressed. */
 .wm__cursor {
   display: inline-block;
-  margin-left: -1.2em;
+  margin-left: -0.65em;
   opacity: 0;
 }
 .wm[data-beat='word'] .wm__cursor {
@@ -379,7 +379,7 @@ html[data-intro='play'] .intro-cover {
   top: 100%;
   transform: translate(-50%, 1.6em);
   padding-left: 0;
-  font-size: 10px;
+  font-size: clamp(9px, 0.6cqw, 12px);
   letter-spacing: 0.12em;
   text-shadow: none;
   opacity: 0;
