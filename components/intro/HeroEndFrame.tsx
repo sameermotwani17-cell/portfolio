@@ -146,9 +146,9 @@ function Grunge() {
           <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.055
-                    0 0 0 0 0.055
-                    0 0 0 0 0.055
+            values="0 0 0 0 0.95
+                    0 0 0 0 0.95
+                    0 0 0 0 0.95
                     0.33 0.33 0.33 0 -0.1"
           />
           <feComponentTransfer>
@@ -159,9 +159,9 @@ function Grunge() {
           <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="4" seed="3" stitchTiles="stitch" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.055
-                    0 0 0 0 0.055
-                    0 0 0 0 0.055
+            values="0 0 0 0 0.95
+                    0 0 0 0 0.95
+                    0 0 0 0 0.95
                     0.33 0.33 0.33 0 -0.22"
           />
           <feComponentTransfer>
@@ -169,8 +169,8 @@ function Grunge() {
           </feComponentTransfer>
         </filter>
       </defs>
-      <rect width="100%" height="100%" filter="url(#hero-speckle)" opacity="0.08" />
-      <rect width="100%" height="100%" filter="url(#hero-blotch)" opacity="0.06" />
+      <rect width="100%" height="100%" filter="url(#hero-speckle)" opacity="0.07" />
+      <rect width="100%" height="100%" filter="url(#hero-blotch)" opacity="0.045" />
     </svg>
   )
 }

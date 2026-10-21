@@ -217,6 +217,10 @@ body {
   --paper: #f2f0ec;
   --ink: #0e0e0e;
   --signal: #b3060f;
+  /* Dark-ground variants: the hero and the helix share the intro's void. */
+  --void: #050302;
+  --signal-bright: #e0141e;
+  --bone-dim: rgba(242, 240, 236, 0.72);
 }
 
 /* Once the intro is over (or never ran) the document itself is paper, so
@@ -225,7 +229,7 @@ html[data-intro='done'],
 html[data-intro='static'],
 html[data-intro='done'] body,
 html[data-intro='static'] body {
-  background-color: var(--paper);
+  background-color: var(--void);
 }
 
 /* ── Intro root: fixed, opaque, above everything but the cursor ─────────── */
@@ -453,8 +457,8 @@ html[data-intro='play'] .intro-cover {
   position: relative;
   min-height: 100svh;
   padding: 20px 24px;
-  background: var(--paper);
-  color: var(--signal);
+  background: var(--void);
+  color: var(--paper);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -494,6 +498,7 @@ html[data-intro='play'] .hero-root {
   text-indent: 0.5em;
   text-align: center;
   line-height: 1;
+  color: var(--signal-bright);
 }
 
 /* SAMEER spans the full width: the letters are justified across the line. */
@@ -570,10 +575,10 @@ html[data-intro='play'] .hero-root {
   background-position: 3px 3px;
 }
 .hero-root[data-halftone='thermal'] .tile--filled {
-  --tile-dot: rgba(120, 60, 160, 0.26);
+  --tile-dot: rgba(242, 240, 236, 0.14);
 }
 .hero-root[data-halftone='mono'] .tile--filled {
-  --tile-dot: rgba(14, 14, 14, 0.2);
+  --tile-dot: rgba(242, 240, 236, 0.1);
 }
 /* Every tile shows a slice of the SAME image: the img is the size of the
    whole grid and shifted by one cell + one gutter per row/column, so the
@@ -612,6 +617,7 @@ html[data-intro='play'] .hero-root {
   font-size: clamp(26px, 3vw, 54px);
   line-height: 1.02;
   letter-spacing: -0.01em;
+  color: var(--signal-bright);
 }
 .hero-statement__line {
   display: block;
@@ -639,6 +645,7 @@ html[data-intro='play'] .hero-root {
 .hero-body {
   max-width: 58ch;
   margin: 0;
+  color: var(--bone-dim);
 }
 .hero-ctas {
   display: flex;
@@ -649,14 +656,14 @@ html[data-intro='play'] .hero-root {
   letter-spacing: 0.04em;
 }
 .hero-ctas a {
-  color: var(--signal);
+  color: var(--paper);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s;
 }
 .hero-ctas a:hover,
 .hero-ctas a:focus-visible {
-  border-bottom-color: currentColor;
+  border-bottom-color: var(--signal-bright);
   outline: none;
 }
 .hero-replay {
@@ -665,7 +672,7 @@ html[data-intro='play'] .hero-root {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: var(--signal);
+  color: var(--paper);
   opacity: 0.55;
   background: none;
   border: 0;
