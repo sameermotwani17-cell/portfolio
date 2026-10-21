@@ -1,24 +1,25 @@
 /**
- * Opt-in site sound, synthesised with Web Audio (no audio files).
- *  - ambient: low brown-noise room tone, slowly breathing
- *  - click():  a short mechanical key click (the intro's Enter press)
- * Off by default. The choice persists in localStorage. An AudioContext can
- * only start after a user gesture, so enabling always happens from a click.
+ * Site sound, synthesised with Web Audio (no audio files):
+ *  - typeKey(i): one keystroke as a letter of CREATE prints in
+ *  - click():    the heavier key press on Enter
+ * No ambient bed. On by default; the SOUND toggle turns it off and the choice
+ * persists in localStorage. Browsers only let an AudioContext run after a user
+ * gesture, so the first gesture on the page (a click, a key, a tap) unlocks it;
+ * until then these calls are silent no-ops.
  */
 const KEY = 'retro:sound'
 type Listener = (on: boolean) => void
 
 let ctx: AudioContext | null = null
 let master: GainNode | null = null
-let ambient: AudioBufferSourceNode | null = null
-let on = false
+let on = true
 const listeners = new Set<Listener>()
 
 function readPref(): boolean {
   try {
-    return window.localStorage.getItem(KEY) === '1'
+    return window.localStorage.getItem(KEY) !== '0'
   } catch {
-    return false
+    return true
   }
 }
 function writePref(v: boolean) {
@@ -35,39 +36,9 @@ function ensure(): AudioContext | null {
   if (!AC) return null
   ctx = new AC()
   master = ctx.createGain()
-  master.gain.value = 0
+  master.gain.value = on ? 1 : 0
   master.connect(ctx.destination)
   return ctx
-}
-
-function startAmbient() {
-  if (!ctx || !master || ambient) return
-  const len = ctx.sampleRate * 4
-  const buf = ctx.createBuffer(1, len, ctx.sampleRate)
-  const d = buf.getChannelData(0)
-  let last = 0
-  for (let i = 0; i < len; i++) {
-    const w = Math.random() * 2 - 1
-    last = (last + 0.02 * w) / 1.02
-    d[i] = last * 3.2
-  }
-  ambient = ctx.createBufferSource()
-  ambient.buffer = buf
-  ambient.loop = true
-  const lp = ctx.createBiquadFilter()
-  lp.type = 'lowpass'
-  lp.frequency.value = 420
-  const g = ctx.createGain()
-  g.gain.value = 0.22
-  // slow breathing on the room tone
-  const lfo = ctx.createOscillator()
-  const lfoGain = ctx.createGain()
-  lfo.frequency.value = 0.07
-  lfoGain.gain.value = 0.08
-  lfo.connect(lfoGain).connect(g.gain)
-  lfo.start()
-  ambient.connect(lp).connect(g).connect(master)
-  ambient.start()
 }
 
 export function isSoundOn() {
@@ -75,32 +46,28 @@ export function isSoundOn() {
 }
 
 export function initSound() {
-  // Remember the preference, but only start audio after a gesture.
-  on = false
-  if (readPref()) {
-    const resume = () => {
-      window.removeEventListener('pointerdown', resume)
-      window.removeEventListener('keydown', resume)
-      if (readPref()) setSound(true)
-    }
-    window.addEventListener('pointerdown', resume, { once: true })
-    window.addEventListener('keydown', resume, { once: true })
+  on = readPref()
+  ensure()
+  // an AudioContext can only start after a gesture: unlock it on the first one
+  const unlock = () => {
+    window.removeEventListener('pointerdown', unlock)
+    window.removeEventListener('keydown', unlock)
+    window.removeEventListener('touchend', unlock)
+    void ctx?.resume()
   }
+  window.addEventListener('pointerdown', unlock)
+  window.addEventListener('keydown', unlock)
+  window.addEventListener('touchend', unlock)
 }
 
 export function setSound(v: boolean) {
   on = v
   writePref(v)
-  if (v) {
-    const c = ensure()
-    if (!c || !master) return
-    void c.resume()
-    startAmbient()
+  const c = ensure()
+  if (c && master) {
+    if (v) void c.resume()
     master.gain.cancelScheduledValues(c.currentTime)
-    master.gain.setTargetAtTime(1, c.currentTime, 0.4)
-  } else if (ctx && master) {
-    master.gain.cancelScheduledValues(ctx.currentTime)
-    master.gain.setTargetAtTime(0, ctx.currentTime, 0.15)
+    master.gain.setTargetAtTime(v ? 1 : 0, c.currentTime, 0.08)
   }
   listeners.forEach((l) => l(v))
 }
@@ -112,9 +79,41 @@ export function onSound(l: Listener) {
   }
 }
 
-/** A short mechanical key click. */
+const live = () => on && !!ctx && !!master && ctx.state === 'running'
+
+/** One light keyboard keystroke; every call is a little different. */
+export function typeKey(i = 0) {
+  if (!live() || !ctx || !master) return
+  const t = ctx.currentTime
+  const len = Math.floor(ctx.sampleRate * 0.035)
+  const buf = ctx.createBuffer(1, len, ctx.sampleRate)
+  const d = buf.getChannelData(0)
+  for (let k = 0; k < len; k++) d[k] = (Math.random() * 2 - 1) * Math.pow(1 - k / len, 5)
+  const src = ctx.createBufferSource()
+  src.buffer = buf
+  const bp = ctx.createBiquadFilter()
+  bp.type = 'bandpass'
+  bp.frequency.value = 1900 + ((i * 337) % 900) + Math.random() * 300
+  bp.Q.value = 1.1
+  const g = ctx.createGain()
+  g.gain.setValueAtTime(0.55 + Math.random() * 0.15, t)
+  src.connect(bp).connect(g).connect(master)
+  // a soft low thock under the click
+  const o = ctx.createOscillator()
+  const og = ctx.createGain()
+  o.frequency.setValueAtTime(190 + Math.random() * 40, t)
+  o.frequency.exponentialRampToValueAtTime(80, t + 0.05)
+  og.gain.setValueAtTime(0.22, t)
+  og.gain.exponentialRampToValueAtTime(0.001, t + 0.07)
+  o.connect(og).connect(master)
+  src.start(t)
+  o.start(t)
+  o.stop(t + 0.08)
+}
+
+/** A short mechanical key click: the Enter press. */
 export function click() {
-  if (!on || !ctx || !master) return
+  if (!live() || !ctx || !master) return
   const t = ctx.currentTime
   const len = Math.floor(ctx.sampleRate * 0.05)
   const buf = ctx.createBuffer(1, len, ctx.sampleRate)

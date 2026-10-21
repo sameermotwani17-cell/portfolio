@@ -11,7 +11,7 @@ import { CUES, CANPLAY_TIMEOUT_MS, CROSSFADE_MS, beatAt, type Beat } from '@/lib
 import { useIntroClock } from '@/hooks/useIntroClock'
 import { usePlayOncePerSession } from '@/hooks/usePlayOncePerSession'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { click as keyClick } from '@/lib/sound'
+import { click as keyClick, typeKey } from '@/lib/sound'
 
 export const REPLAY_EVENT = 'retro:replay-intro'
 
@@ -43,6 +43,8 @@ export default function OpeningSequence() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const phaseRef = useRef<Phase>('idle')
   const beatRef = useRef<Beat>('typing')
+  // how many letters of CREATE have printed (and sounded) so far
+  const typedRef = useRef(0)
   const readyRef = useRef(false)
 
   /* ── hand-over ───────────────────────────────────────────────────────── */
@@ -83,6 +85,7 @@ export default function OpeningSequence() {
       armReplay()
       window.scrollTo(0, 0)
       beatRef.current = 'typing'
+      typedRef.current = 0
       readyRef.current = false
       setBeat('typing')
       setRun((r) => r + 1)
@@ -95,6 +98,15 @@ export default function OpeningSequence() {
 
   /* ── master clock ────────────────────────────────────────────────────── */
   useIntroClock(videoRef, phase === 'playing', (t) => {
+    // a keystroke for each letter as it prints in (same 110ms stagger as the CSS)
+    if (t >= CUES.ENTER_PRESS) typedRef.current = 6
+    else if (t >= CUES.WORD_START) {
+      const typed = Math.min(6, Math.floor((t - CUES.WORD_START) / 0.11) + 1)
+      if (typed > typedRef.current) {
+        typeKey(typed - 1)
+        typedRef.current = typed
+      }
+    }
     const b = beatAt(t)
     if (b !== beatRef.current) {
       const prev = beatRef.current
