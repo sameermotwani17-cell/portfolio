@@ -14,6 +14,17 @@ The split (`components/universe/`) ships with a synthetic placeholder in
    `backview-{desktop,mobile}-tech.webp` (graphite grade), sized to the 350 KB / 250 KB budgets.
 3. Commit the four `.webp` files. Nothing else changes.
 
+## Generated picks (already made, 4k)
+
+| | Higgsfield job id | Size |
+|---|---|---|
+| Desktop 16:9 (variant 2 of 2) | `f63b3dac-fe36-422f-a0a3-03b4eb762c3b` | 3840x2160 |
+| Mobile 4:5 | `03fd7282-df45-497f-8bf9-8d68cce9687c` | 2560x3200 |
+
+Download both PNGs from Higgsfield (Assets, or the result links), then run the
+build command above. References used: two of your own photos (front face,
+back of head) from the Higgsfield library.
+
 ## Higgsfield settings
 
 | | Desktop | Mobile |
