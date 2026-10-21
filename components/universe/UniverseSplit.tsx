@@ -13,13 +13,17 @@ import { FROM_KEY, VT_NAME, navigateWithTransition, notifyRouteReady } from '@/l
 import SplitPortrait from './SplitPortrait'
 import SideLabel from './SideLabel'
 import { initialStage, type StageState } from './types'
+import { KEYS, readFlag } from '@/lib/creative/intro'
 
 // Heavy layers load only when the section is within a viewport of the screen.
 const WarpGrid = dynamic(() => import('./WarpGrid'), { ssr: false })
 const CircuitLayer = dynamic(() => import('./CircuitLayer'), { ssr: false })
 const CreativeLayer = dynamic(() => import('./CreativeLayer'), { ssr: false })
+// Section 04 Act 1–2: loaded on CREATIVE hover/click only
+const loadCreativeEntry = () => import('@/components/creative/CreativeEntry')
+const CreativeEntry = dynamic(loadCreativeEntry, { ssr: false })
 
-type Mode = 'idle' | 'hover-left' | 'hover-right' | 'entering-left' | 'entering-right'
+type Mode = 'idle' | 'hover-left' | 'hover-right' | 'entering-left' | 'entering-right' | 'shot'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -42,6 +46,7 @@ export default function UniverseSplit({ id }: { id: string }) {
   const [near, setNear] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mode, setMode] = useState<Mode>('idle')
+  const [shot, setShot] = useState(false)
   // reduced-motion only changes markup after mount, so server and client HTML always match
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
@@ -138,7 +143,7 @@ export default function UniverseSplit({ id }: { id: string }) {
 
   const lean = useCallback(
     (side: SideId | null) => {
-      if (modeRef.current.startsWith('entering')) return
+      if (modeRef.current.startsWith('entering') || modeRef.current === 'shot') return
       setBoth(side ? (`hover-${side}` as Mode) : 'idle')
       stage.current.lean = side
       target.current = side === 'left' ? { L: 1.5, R: 0.6 } : side === 'right' ? { L: 0.6, R: 1.5 } : { L: 1, R: 1 }
@@ -153,8 +158,22 @@ export default function UniverseSplit({ id }: { id: string }) {
 
   const enter = useCallback(
     (side: SideId) => {
-      if (modeRef.current.startsWith('entering')) return
+      if (modeRef.current.startsWith('entering') || modeRef.current === 'shot') return
       const u = universeOnSide(side)
+
+      // CREATIVE, first time this session: Act 1 (the shot) replaces the sweep
+      if (u.id === 'creative' && !reduced && !readFlag(KEYS.ACTS_PLAYED) && stageRef.current) {
+        const s = stage.current
+        seamAnim.current?.stop()
+        s.freezeL = true
+        s.freezeR = true
+        s.speedL = 0
+        s.speedR = 0
+        target.current = { L: 0, R: 0 }
+        setBoth('shot')
+        setShot(true)
+        return
+      }
       setBoth(`entering-${side}` as Mode)
       try {
         sessionStorage.setItem(FROM_KEY, u.id)
@@ -207,7 +226,10 @@ export default function UniverseSplit({ id }: { id: string }) {
 
   const live = near
   const hoverProps = (side: SideId) => ({
-    onPointerEnter: (e: React.PointerEvent) => e.pointerType === 'mouse' && lean(side),
+    onPointerEnter: (e: React.PointerEvent) => {
+      if (side === 'right') void loadCreativeEntry()
+      if (e.pointerType === 'mouse') lean(side)
+    },
     onPointerLeave: (e: React.PointerEvent) => e.pointerType === 'mouse' && lean(null),
     onFocus: () => lean(side),
     onBlur: () => lean(null),
@@ -272,6 +294,7 @@ export default function UniverseSplit({ id }: { id: string }) {
           <SideLabel u={UNIVERSES.creative} />
         </a>
       </div>
+      {shot && stageRef.current && <CreativeEntry stageEl={stageRef.current} mobile={mobile} />}
     </section>
   )
 }
