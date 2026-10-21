@@ -1,6 +1,8 @@
 import { preload } from 'react-dom'
 import HeroEndFrame from '@/components/intro/HeroEndFrame'
-import MyStory from '@/components/story/MyStory'
+import AboutThisGuy from '@/components/about/AboutThisGuy'
+import UniverseSplit from '@/components/universe/UniverseSplit'
+import DeferReveal from '@/components/DeferReveal'
 import IntroLoader from '@/components/intro/IntroLoader'
 import IntroPosterCover from '@/components/intro/IntroPosterCover'
 import { INTRO_SRC } from '@/lib/intro/assets'
@@ -23,7 +25,7 @@ import { INTRO_SRC } from '@/lib/intro/assets'
  * under the intro, no flash of black if the intro never mounts (a CSS
  * failsafe reveals the hero after 4s regardless).
  */
-const BOOT = `(function(){try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var p=false;try{p=window.sessionStorage.getItem('retro:intro:v1')==='1'}catch(e){}document.documentElement.setAttribute('data-intro',(r||p)?'static':'play');document.documentElement.setAttribute('data-story',r?'static':'pinned')}catch(e){}})();`
+const BOOT = `(function(){try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var p=false;try{p=window.sessionStorage.getItem('retro:intro:v1')==='1'}catch(e){}document.documentElement.setAttribute('data-intro',(r||p)?'static':'play');document.documentElement.setAttribute('data-story',r?'static':'pinned');document.documentElement.setAttribute('data-defer','');setTimeout(function(){document.documentElement.removeAttribute('data-defer')},4000)}catch(e){}})();`
 
 export default function Home() {
   // The LCP element is this poster (or the h1), never the video.
@@ -33,13 +35,12 @@ export default function Home() {
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <HeroEndFrame />
-      {/* Section 02: the life map. The hero's scroll cue and Enter go here. */}
-      <MyStory id="story" />
-      {/* Section 03 lands here (Choose Your Universe). #universe is the story's skip target. */}
-      <div id="universe" aria-hidden="true" />
-      <section id="work" className="work-stub" aria-label="Work">
-        <span>02 · WORK</span>
-      </section>
+      {/* A short "about this guy" beat. The hero's scroll cue and Enter go here.
+          (The long story map in components/story is unmounted, not deleted.) */}
+      <AboutThisGuy id="about" />
+      {/* Section 03: choose a universe. This is the work: the split is the way into it, so nothing sits under it. */}
+      <UniverseSplit id="universe" />
+      <DeferReveal />
       <IntroPosterCover />
       <IntroLoader />
     </main>

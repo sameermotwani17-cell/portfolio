@@ -1,12 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { initSound, isSoundOn, onSound, setSound } from '@/lib/sound'
+import { initSound } from '@/lib/sound'
 
 /**
  * The hero's corner furniture:
  *  - top-left: local time in Beppu, ticking (a person, right now)
- *  - top-right: opt-in sound toggle, off by default
  *  - bottom-centre: the scroll cue, which is also "press ⏎"
  * And the Enter motif as a site rule: Enter on the hero goes to the work.
  */
@@ -28,8 +27,8 @@ function useBeppuTime() {
 }
 
 function goToWork() {
-  // the next section on the page: the story, then (until it exists) the work stub
-  const el = document.getElementById('story') ?? document.getElementById('work')
+  // the next section on the page: about this guy
+  const el = document.getElementById('about')
   if (!el) return
   if (window.__lenis) window.__lenis.scrollTo(el, { duration: 1.4 })
   else el.scrollIntoView({ behavior: 'smooth' })
@@ -37,12 +36,10 @@ function goToWork() {
 
 export default function HeroChrome() {
   const time = useBeppuTime()
-  const [sound, setSoundState] = useState(false)
 
+  // intro sounds are always on; the first gesture on the page unlocks audio
   useEffect(() => {
     initSound()
-    setSoundState(isSoundOn())
-    return onSound(setSoundState)
   }, [])
 
   // Enter anywhere on the landing (outside the intro and form fields) scrolls on.
@@ -69,15 +66,6 @@ export default function HeroChrome() {
         <span className="hero-clock__dot" aria-hidden="true" />
         BEPPU, JP · <span suppressHydrationWarning>{time || '--:--'}</span>
       </div>
-
-      <button
-        type="button"
-        className="hero-sound"
-        aria-pressed={sound}
-        onClick={() => setSound(!sound)}
-      >
-        SOUND <span aria-hidden="true">{sound ? '●' : '○'}</span>
-      </button>
 
       <button type="button" className="hero-scroll" onClick={goToWork} aria-label="Scroll to work">
         <span className="hero-scroll__label">

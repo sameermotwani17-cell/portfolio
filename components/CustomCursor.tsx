@@ -48,7 +48,11 @@ export default function CustomCursor() {
       const hit = !!(e.target as HTMLElement | null)?.closest?.('a, button, [role="button"]')
       ring.style.width = hit ? '44px' : ''
       ring.style.height = hit ? '44px' : ''
-      if (glyph) glyph.style.opacity = hit ? '1' : '0'
+      if (glyph) {
+        // a target can ask for its own glyph (the universe split shows →)
+        glyph.textContent = (e.target as HTMLElement | null)?.closest?.<HTMLElement>('[data-cursor]')?.dataset.cursor ?? '⏎'
+        glyph.style.opacity = hit ? '1' : '0'
+      }
     }
     document.addEventListener('mouseover', onOver)
 
