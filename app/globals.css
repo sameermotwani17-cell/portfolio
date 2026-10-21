@@ -299,7 +299,7 @@ html[data-intro='play'] .intro-cover {
 .intro-plate {
   position: absolute;
   inset: 0;
-  background: var(--paper);
+  background: #050302;
   pointer-events: none;
 }
 
@@ -726,11 +726,11 @@ html[data-intro='play'] .hero-root {
   }
 }
 
-/* ── Entrance (runs when the intro hands over, or on load without one) ─── */
+/* ── Entrance (runs once the hero scrolls into view, see HeroReveal) ───── */
 html:not([data-intro='play']) .hero-name {
   animation: heroSlam 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-html:not([data-intro='play']) .tile--filled {
+.hero-root[data-seen] .tile--filled {
   animation: heroPrint 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(150ms + var(--i) * 70ms);
 }
@@ -794,7 +794,7 @@ html:not([data-intro='play']) .hero-foot {
   }
 }
 
-/* ── Section 01 -> 02: the helix transition ─────────────────────────────── */
+/* ── Intro -> Section 01: the helix transition ──────────────────────────── */
 .helix-section {
   position: relative;
   height: 260vh;

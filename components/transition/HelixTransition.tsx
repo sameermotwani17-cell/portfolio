@@ -93,7 +93,7 @@ export default function HelixTransition() {
             sy: r(),
             t,
             u: u + (r() - 0.5) * 0.04,
-            d: t * 0.55 + r() * 0.18,
+            d: t * 0.6 - 0.14 + r() * 0.15,
             a: edge ? 0.95 : 0.55 + r() * 0.3,
           })
         }

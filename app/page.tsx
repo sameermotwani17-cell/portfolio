@@ -32,8 +32,8 @@ export default function Home() {
   return (
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
-      <HeroEndFrame />
       <HelixTransition />
+      <HeroEndFrame />
       <IntroPosterCover />
       <IntroLoader />
     </main>
