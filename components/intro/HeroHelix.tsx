@@ -5,22 +5,23 @@ import { useEffect, useRef } from 'react'
 /**
  * The DNA helix that lives inside the hero frame.
  *
- * A canvas behind the hero's content, so the ribbon shows in the negative
- * space (it runs down the first column of the tile grid, where the portrait
- * is blank). On the hero's first reveal the dots gather out of dust onto the
- * ribbon; after that the helix turns slowly on its own and the dots are
- * pushed away by the cursor and spring back. Hover only, never captures
- * input (pointer-events: none). Runs only while the hero is on screen.
- * Reduced motion: the formed helix is drawn once, static.
+ * A canvas behind the hero's content covering the whole frame. One wide
+ * double-helix ribbon runs across the page, and a thin field of dust fills
+ * the rest, so there is something to disturb wherever the cursor goes. On
+ * the hero's first reveal the dots gather out of scatter onto the ribbon;
+ * after that the helix turns slowly on its own and every dot is pushed away
+ * by the cursor and springs back. Hover only, never captures input
+ * (pointer-events: none). Runs only while the hero is on screen.
+ * Reduced motion: drawn once, static.
  */
 
 type P = {
-  sx: number
+  sx: number // scatter position (0..1 of width / height)
   sy: number
-  t: number
-  u: number
-  d: number
-  a: number
+  t: number // position along the ribbon, 0 left -> 1 right (dust: -1)
+  u: number // position across the ribbon, -1 .. 1
+  d: number // formation delay
+  a: number // base alpha
   edge: boolean
   ox: number // displacement from the home position (cursor push)
   oy: number
@@ -28,15 +29,13 @@ type P = {
   vy: number
 }
 
-const TURNS = 2.4
-const RUNG_PX = 8
-const DOT_PX = 5
-const FORM_SECONDS = 2.0
-const SPIN = 0.22 // rad / s
-const PUSH_RADIUS = 130
-const PUSH = 1.9
-const SPRING = 0.075
-const DAMP = 0.84
+const TURNS = 3.2 // full twists across the frame
+const FORM_SECONDS = 2.2
+const SPIN = 0.2 // rad / s
+const PUSH_RADIUS = 170
+const PUSH = 2.2
+const SPRING = 0.07
+const DAMP = 0.85
 
 function easeOutCubic(x: number) {
   return 1 - Math.pow(1 - x, 3)
@@ -52,7 +51,7 @@ function mulberry32(seed: number) {
   }
 }
 
-export default function HeroHelix({ tilesId }: { tilesId: string }) {
+export default function HeroHelix() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -66,13 +65,12 @@ export default function HeroHelix({ tilesId }: { tilesId: string }) {
 
     let W = 0
     let H = 0
-    let cx0 = 0 // ribbon centre x
-    let R = 0 // ribbon half width
+    let R = 0 // ribbon half height
     let particles: P[] = []
     let frame = 0
     let running = false
     let visible = false
-    let formedAt = -1 // performance.now() when formation started
+    let formedAt = -1
     let mx = -1e4
     let my = -1e4
     let last = 0
@@ -85,40 +83,32 @@ export default function HeroHelix({ tilesId }: { tilesId: string }) {
       canvas.width = Math.round(W * dpr)
       canvas.height = Math.round(H * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-
-      // First column of the tile grid, in hero coordinates.
-      const tiles = document.getElementById(tilesId)
-      if (tiles) {
-        const tr = tiles.getBoundingClientRect()
-        const gap = parseFloat(getComputedStyle(tiles).columnGap || '10') || 10
-        const col = (tr.width - 2 * gap) / 3
-        cx0 = tr.left - rect.left + col / 2
-        R = Math.min(col * 0.3, 150)
-      } else {
-        cx0 = W * 0.38
-        R = Math.min(W * 0.1, 150)
-      }
+      R = Math.min(H * 0.24, 260)
     }
 
     const build = () => {
       const r = mulberry32(11)
-      const span = H * 1.2
-      const rungs = Math.floor(span / RUNG_PX)
-      const perRung = Math.max(8, Math.floor((R * 2) / DOT_PX))
+      // coarser grid on small screens: keep the particle count sane
+      const small = W < 1024
+      const rungPx = small ? 10 : 8
+      const dotPx = small ? 7 : 5
+      const span = W * 1.1
+      const rungs = Math.floor(span / rungPx)
+      const perRung = Math.max(8, Math.floor((R * 2) / dotPx))
       particles = []
       for (let i = 0; i < rungs; i++) {
         const t = i / rungs
         for (let j = 0; j < perRung; j++) {
           const u = -1 + (2 * (j + 0.5)) / perRung
-          const edge = Math.abs(u) > 0.86
-          if (!edge && r() < 0.4) continue
+          const edge = Math.abs(u) > 0.88
+          if (!edge && r() < 0.45) continue
           particles.push({
             sx: r(),
             sy: r(),
             t,
             u: u + (r() - 0.5) * 0.04,
             d: t * 0.9 + r() * 0.25,
-            a: edge ? 0.9 : 0.5 + r() * 0.3,
+            a: edge ? 0.9 : 0.45 + r() * 0.3,
             edge,
             ox: 0,
             oy: 0,
@@ -126,6 +116,23 @@ export default function HeroHelix({ tilesId }: { tilesId: string }) {
             vy: 0,
           })
         }
+      }
+      // dust everywhere else, so the whole frame answers the cursor
+      const dust = Math.round((W * H) / (small ? 2600 : 1500))
+      for (let i = 0; i < dust; i++) {
+        particles.push({
+          sx: r(),
+          sy: r(),
+          t: -1,
+          u: 0,
+          d: r() * 0.4,
+          a: 0.18 + r() * 0.3,
+          edge: false,
+          ox: 0,
+          oy: 0,
+          vx: 0,
+          vy: 0,
+        })
       }
     }
 
@@ -135,44 +142,54 @@ export default function HeroHelix({ tilesId }: { tilesId: string }) {
 
       const T = formedAt < 0 ? 1 : Math.min(1, (now - formedAt) / 1000 / FORM_SECONDS)
       const phase = reduced ? 0.6 : (now / 1000) * SPIN
-      const span = H * 1.2
-      const yTop = -H * 0.1
-      const sway = R * 0.35
+      const span = W * 1.1
+      const xLeft = -W * 0.05
+      const cy0 = H * 0.56
+      const sway = H * 0.1
+      const step = dt * 60
 
       for (const q of particles) {
+        let hx: number
+        let hy: number
+        let depth = 0.5
+        if (q.t < 0) {
+          hx = q.sx * W
+          hy = q.sy * H
+        } else {
+          const theta = q.t * TURNS * Math.PI * 2 + phase
+          const cy = cy0 + Math.sin(q.t * Math.PI * 1.7 + phase * 0.6) * sway
+          hx = xLeft + q.t * span
+          hy = cy + q.u * R * Math.cos(theta)
+          depth = (q.u * Math.sin(theta) + 1) / 2
+        }
         const f = reduced ? 1 : easeOutCubic(Math.min(1, Math.max(0, (T * 1.25 - q.d) / 0.5)))
-        const theta = q.t * TURNS * Math.PI * 2 + phase
-        const cx = cx0 + Math.sin(q.t * Math.PI * 1.4 + phase * 0.5) * sway
-        const hx = cx + q.u * R * Math.cos(theta)
-        const hy = yTop + q.t * span
-        const z = q.u * Math.sin(theta)
 
-        // cursor push + spring back (only once formed)
-        if (!reduced && f > 0.98) {
+        // cursor push + spring back
+        if (!reduced) {
           const px = hx + q.ox
           const py = hy + q.oy
           const dx = px - mx
           const dy = py - my
           const dist = Math.hypot(dx, dy)
           if (dist < PUSH_RADIUS && dist > 0.001) {
-            const s = (1 - dist / PUSH_RADIUS) * PUSH * dt * 60
+            const s = (1 - dist / PUSH_RADIUS) * PUSH * step
             q.vx += (dx / dist) * s
             q.vy += (dy / dist) * s
           }
-          q.vx += -q.ox * SPRING * dt * 60
-          q.vy += -q.oy * SPRING * dt * 60
+          q.vx += -q.ox * SPRING * step
+          q.vy += -q.oy * SPRING * step
           q.vx *= DAMP
           q.vy *= DAMP
-          q.ox += q.vx * dt * 60
-          q.oy += q.vy * dt * 60
+          q.ox += q.vx * step
+          q.oy += q.vy * step
         }
 
         const x = q.sx * W + (hx - q.sx * W) * f + q.ox
         const y = q.sy * H + (hy - q.sy * H) * f + q.oy
-        const depth = (z + 1) / 2
         const disturbed = Math.min(1, Math.hypot(q.ox, q.oy) / 40)
-        ctx.globalAlpha = (0.06 + 0.94 * f) * q.a * (0.3 + 0.7 * depth) * (1 - 0.35 * disturbed)
-        const size = (q.edge ? 0.7 + 0.9 * depth : 0.8 + 1.3 * depth) * (0.6 + 0.4 * f)
+        ctx.globalAlpha = (0.06 + 0.94 * f) * q.a * (0.3 + 0.7 * depth) * (1 - 0.3 * disturbed)
+        const size =
+          q.t < 0 ? 0.9 : (q.edge ? 0.7 + 0.9 * depth : 0.8 + 1.3 * depth) * (0.6 + 0.4 * f)
         ctx.fillRect(x, y, size, size)
       }
       ctx.globalAlpha = 1
@@ -221,36 +238,36 @@ export default function HeroHelix({ tilesId }: { tilesId: string }) {
 
     if (reduced) {
       draw(performance.now(), 0)
-    } else {
-      const io = new IntersectionObserver(
-        (entries) => {
-          visible = entries.some((e) => e.isIntersecting)
-          if (visible) {
-            if (formedAt < 0) formedAt = performance.now()
-            start()
-          } else {
-            stop()
-          }
-        },
-        { threshold: 0.05 },
-      )
-      io.observe(hero)
-      hero.addEventListener('mousemove', onMove)
-      hero.addEventListener('mouseleave', onLeave)
-      document.addEventListener('visibilitychange', onVisibility)
       window.addEventListener('resize', onResize)
-      return () => {
-        io.disconnect()
-        stop()
-        hero.removeEventListener('mousemove', onMove)
-        hero.removeEventListener('mouseleave', onLeave)
-        document.removeEventListener('visibilitychange', onVisibility)
-        window.removeEventListener('resize', onResize)
-      }
+      return () => window.removeEventListener('resize', onResize)
     }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries.some((e) => e.isIntersecting)
+        if (visible) {
+          if (formedAt < 0) formedAt = performance.now()
+          start()
+        } else {
+          stop()
+        }
+      },
+      { threshold: 0.05 },
+    )
+    io.observe(hero)
+    hero.addEventListener('mousemove', onMove)
+    hero.addEventListener('mouseleave', onLeave)
+    document.addEventListener('visibilitychange', onVisibility)
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [tilesId])
+    return () => {
+      io.disconnect()
+      stop()
+      hero.removeEventListener('mousemove', onMove)
+      hero.removeEventListener('mouseleave', onLeave)
+      document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
 
   return <canvas ref={canvasRef} className="hero-helix" aria-hidden="true" />
 }

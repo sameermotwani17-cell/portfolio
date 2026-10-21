@@ -27,7 +27,7 @@ export default function HeroEndFrame() {
     <section className="hero-root" data-halftone={HALFTONE_MODE}>
       <Grunge />
       <HeroReveal />
-      <HeroHelix tilesId={TILES_ID} />
+      <HeroHelix />
       <h1 className="sr-only">{HERO.h1}</h1>
 
       <div className="hero-inner" aria-hidden="true">
