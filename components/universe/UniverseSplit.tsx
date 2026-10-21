@@ -42,6 +42,9 @@ export default function UniverseSplit({ id }: { id: string }) {
   const [near, setNear] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [mode, setMode] = useState<Mode>('idle')
+  // reduced-motion only changes markup after mount, so server and client HTML always match
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const modeRef = useRef<Mode>('idle')
   const stage = useRef<StageState>(initialStage())
   const target = useRef({ L: 1, R: 1 })
@@ -233,7 +236,7 @@ export default function UniverseSplit({ id }: { id: string }) {
             <defs>
               <filter id="uni-seam-jitter" x="-300%" y="0" width="700%" height="100%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.004 0.35" numOctaves="2" seed="3" result="n">
-                  {!reduced && (
+                  {mounted && !reduced && (
                     <animate attributeName="baseFrequency" values="0.004 0.35;0.006 0.4;0.004 0.35" dur="7s" repeatCount="indefinite" />
                   )}
                 </feTurbulence>
