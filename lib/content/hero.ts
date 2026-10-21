@@ -40,7 +40,7 @@ export const HERO = {
   body:
     "I'm Sameer Motwani. I build AI products, ship real client work, and make content people actually watch. Finance student at APU, Japan.",
   ctas: [
-    { label: 'View work ↓', href: '#work' },
+    { label: 'View work ↓', href: '#universe' },
     { label: 'CV ↗', href: '/cv.pdf' },
     { label: 'GitHub', href: SOCIAL.github, external: true },
     { label: 'LinkedIn', href: SOCIAL.linkedin, external: true },

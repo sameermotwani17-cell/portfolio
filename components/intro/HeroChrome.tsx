@@ -28,8 +28,8 @@ function useBeppuTime() {
 }
 
 function goToWork() {
-  // the next section on the page: the story, then (until it exists) the work stub
-  const el = document.getElementById('story') ?? document.getElementById('work')
+  // the next section on the page: the story
+  const el = document.getElementById('story')
   if (!el) return
   if (window.__lenis) window.__lenis.scrollTo(el, { duration: 1.4 })
   else el.scrollIntoView({ behavior: 'smooth' })

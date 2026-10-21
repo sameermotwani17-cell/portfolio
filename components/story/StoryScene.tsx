@@ -45,7 +45,7 @@ export default function StoryScene({
   const toEra = useCallback((k: number) => goto(progressForEra(k)), [goto])
   const toWhole = useCallback(() => goto(0), [goto])
   const skip = useCallback(() => {
-    const el = document.getElementById('universe') ?? document.getElementById('work')
+    const el = document.getElementById('universe')
     if (!el) return
     if (window.__lenis) window.__lenis.scrollTo(el, { duration: 1.4 })
     else el.scrollIntoView({ behavior: 'smooth' })
