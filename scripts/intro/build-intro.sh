@@ -16,6 +16,8 @@
 #   XFADE     1 to crossfade joins (default 0)
 #   FPS       output frame rate (default 30)
 #   WIDTH     output width (default 1920; height follows 16:9)
+#   TRIMS     optional per-clip in:out points in seconds, space-separated,
+#             one per clip, "-" to keep a clip whole (e.g. "1.2:- 0.6:-")
 #   TRIM_END  seconds to drop from the end of the final cut (default 0)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -24,7 +26,9 @@ cd "$(dirname "$0")/../.."
 XFADE="${XFADE:-0}"
 FPS="${FPS:-30}"
 WIDTH="${WIDTH:-1920}"
+HEIGHT=$((WIDTH * 9 / 16))
 TRIM_END="${TRIM_END:-0}"
+TRIMS="${TRIMS:-}"
 OUT=public/intro
 WORK=assets-src/intro/.work
 mkdir -p "$OUT" "$WORK"
@@ -33,11 +37,19 @@ read -r -a INPUTS <<<"$CLIPS"
 N=${#INPUTS[@]}
 
 # ── 1. concatenate ────────────────────────────────────────────────────────────
+read -r -a TRIM_LIST <<<"$TRIMS"
 norm() { # normalise every clip to the same fps/size/pixfmt so the cut is clean
   local i=0
   for f in "${INPUTS[@]}"; do
-    ffmpeg -v error -y -i "$f" \
-      -vf "fps=${FPS},scale=${WIDTH}:-2:flags=lanczos,setsar=1,format=yuv420p" \
+    local args=()
+    local t="${TRIM_LIST[$i]:-}"
+    if [ -n "$t" ] && [ "$t" != "-" ]; then
+      local in="${t%%:*}" out="${t##*:}"
+      [ -n "$in" ] && [ "$in" != "-" ] && args+=(-ss "$in")
+      [ -n "$out" ] && [ "$out" != "-" ] && args+=(-to "$out")
+    fi
+    ffmpeg -v error -y "${args[@]}" -i "$f" \
+      -vf "fps=${FPS},scale=${WIDTH}:${HEIGHT}:flags=lanczos,setsar=1,format=yuv420p" \
       -an -c:v libx264 -preset fast -crf 14 "$WORK/n$i.mp4"
     i=$((i + 1))
   done
@@ -79,11 +91,11 @@ fi
 
 # ── 2. encode ─────────────────────────────────────────────────────────────────
 ffmpeg -v error -y -i "$WORK/cut.mp4" \
-  -c:v libx264 -profile:v high -level 4.1 -preset slow -crf 27 \
+  -c:v libx264 -profile:v high -level 4.1 -preset slow -crf 21 \
   -pix_fmt yuv420p -movflags +faststart -an "$OUT/intro.mp4"
 
 ffmpeg -v error -y -i "$WORK/cut.mp4" \
-  -c:v libvpx-vp9 -b:v 0 -crf 36 -row-mt 1 -deadline good -cpu-used 2 \
+  -c:v libvpx-vp9 -b:v 0 -crf 31 -row-mt 1 -deadline good -cpu-used 2 \
   -pix_fmt yuv420p -an "$OUT/intro.webm"
 
 # ── 3. poster + endframe ──────────────────────────────────────────────────────

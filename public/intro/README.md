@@ -11,6 +11,15 @@ the space above and below it.
 | `poster.jpg` | First frame, ≤ 120 KB. Preloaded; the LCP element |
 | `endframe.jpg` | Last frame, ≤ 120 KB. Used to measure the overlay anchors |
 
+## Generated footage (Higgsfield, Kling 3.0 pro, 20.25 credits)
+
+`bash scripts/intro/fetch-footage.sh` downloads the two generated clips and
+builds the shipped assets with the trim points the cues were timed against
+(clip 1 from 1.2s, clip 2 from 0.6s, straight cut; master 6.28s). It needs
+network access to Higgsfield's CDN, which the cloud session that wrote this
+section did not have, so until it has been run the files here are the
+ffmpeg placeholder.
+
 ## Rebuilding from new footage
 
 ```bash
