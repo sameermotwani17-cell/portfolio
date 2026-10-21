@@ -26,6 +26,8 @@ export const SOCIAL = {
 export const HERO = {
   /** Small line above the name, like a catalogue number. */
   superscript: 'RETRO',
+  /** The one-line claim under the name: what, and where. */
+  role: ['ENGINEER', 'CREATIVE DIRECTOR', 'BUILDER', 'APU, JAPAN'],
   /** Full-width red display line. */
   name: 'SAMEER',
   /** Left stacked column, letters broken across rows. */

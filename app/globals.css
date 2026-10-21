@@ -815,3 +815,193 @@ html:not([data-intro='play']) .hero-foot {
   display: block;
   pointer-events: none;
 }
+
+/* ── Landing details: role line, lens, clock, sound, scroll cue, work anchor ── */
+.hero-role {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: clamp(10px, 0.85vw, 13px);
+  letter-spacing: 0.32em;
+  color: var(--bone-dim);
+}
+.hero-root[data-seen] .hero-role {
+  animation: heroFade 0.6s ease-out both;
+  animation-delay: 450ms;
+}
+
+/* Warm lens that follows the pointer across the portrait. color-dodge keeps
+   black gutters black and only heats the halftone under the cursor. */
+.hero-lens {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 150px at var(--lx, -999px) var(--ly, -999px),
+    rgba(255, 176, 90, 0.6),
+    rgba(255, 80, 60, 0.2) 45%,
+    rgba(0, 0, 0, 0) 72%
+  );
+  mix-blend-mode: color-dodge;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.hero-tiles[data-lens] .hero-lens {
+  opacity: 1;
+}
+
+.hero-clock,
+.hero-sound {
+  position: absolute;
+  top: 20px;
+  z-index: 3;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  color: var(--bone-dim);
+}
+.hero-clock {
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-clock__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal-bright);
+  animation: clockPulse 2s ease-in-out infinite;
+}
+@keyframes clockPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.hero-sound {
+  right: 24px;
+  background: none;
+  border: 0;
+  padding: 0;
+  transition: color 0.2s;
+}
+.hero-sound:hover,
+.hero-sound:focus-visible,
+.hero-sound[aria-pressed='true'] {
+  color: var(--paper);
+  outline: none;
+}
+.hero-sound[aria-pressed='true'] span {
+  color: var(--signal-bright);
+}
+
+/* Scroll cue: a line that keeps drawing itself, and the Enter motif. */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 3;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--bone-dim);
+  transition: color 0.2s;
+}
+.hero-scroll:hover,
+.hero-scroll:focus-visible {
+  color: var(--paper);
+  outline: none;
+}
+.hero-scroll__or {
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  opacity: 0.6;
+}
+.hero-scroll__line {
+  display: block;
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--paper), rgba(242, 240, 236, 0));
+  transform-origin: 50% 0;
+  animation: scrollDraw 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes scrollDraw {
+  0% { transform: scaleY(0); opacity: 1; }
+  55% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+.work-stub {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--void);
+  border-top: 1px solid rgba(242, 240, 236, 0.08);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  color: rgba(242, 240, 236, 0.35);
+}
+
+@media (max-width: 1023px) {
+  .hero-clock,
+  .hero-sound {
+    top: 16px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .hero-clock {
+    left: 16px;
+  }
+  .hero-sound {
+    right: 16px;
+  }
+  .hero-role {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 4px 14px;
+    letter-spacing: 0.2em;
+  }
+  /* in flow under the poster on phones */
+  .hero-scroll {
+    position: static;
+    order: 2;
+    transform: none;
+    align-self: center;
+    margin-top: 22px;
+  }
+  .hero-inner {
+    order: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll__line,
+  .hero-clock__dot {
+    animation: none;
+  }
+  .hero-lens {
+    display: none;
+  }
+}
+/* No Enter key on touch screens: the cue just says SCROLL. */
+@media (pointer: coarse) {
+  .hero-scroll__or {
+    display: none;
+  }
+}

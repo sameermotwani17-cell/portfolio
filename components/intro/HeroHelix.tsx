@@ -116,7 +116,8 @@ export default function HeroHelix() {
       const rungs = Math.floor(len / rungPx)
       const perRung = Math.max(8, Math.floor((R * 2) / dotPx))
       particles = []
-      for (let i = 0; i < rungs; i++) {
+      // phones: dust only, so the ribbon never crosses the face
+      for (let i = 0; i < (W < 768 ? 0 : rungs); i++) {
         const t = i / rungs
         for (let j = 0; j < perRung; j++) {
           const u = -1 + (2 * (j + 0.5)) / perRung
@@ -138,7 +139,7 @@ export default function HeroHelix() {
         }
       }
       // dust everywhere else, so the whole frame answers the cursor
-      const dust = Math.round((W * H) / (small ? 2600 : 1500))
+      const dust = Math.round((W * H) / (W < 768 ? 1400 : small ? 2600 : 1500))
       for (let i = 0; i < dust; i++) {
         particles.push({
           sx: r(),

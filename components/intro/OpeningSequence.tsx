@@ -11,6 +11,7 @@ import { CUES, CANPLAY_TIMEOUT_MS, CROSSFADE_MS, beatAt, type Beat } from '@/lib
 import { useIntroClock } from '@/hooks/useIntroClock'
 import { usePlayOncePerSession } from '@/hooks/usePlayOncePerSession'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
+import { click as keyClick } from '@/lib/sound'
 
 export const REPLAY_EVENT = 'retro:replay-intro'
 
@@ -96,6 +97,8 @@ export default function OpeningSequence() {
   useIntroClock(videoRef, phase === 'playing', (t) => {
     const b = beatAt(t)
     if (b !== beatRef.current) {
+      const prev = beatRef.current
+      if ((b === 'enter' || b === 'transition') && (prev === 'word' || prev === 'blackout')) keyClick()
       beatRef.current = b
       setBeat(b)
     }

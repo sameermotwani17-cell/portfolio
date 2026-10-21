@@ -4,6 +4,7 @@ import ReplayIntro from './ReplayIntro'
 import TileParallax from './TileParallax'
 import HeroReveal from './HeroReveal'
 import HeroHelix from './HeroHelix'
+import HeroChrome from './HeroChrome'
 
 const TILES_ID = 'hero-tiles'
 
@@ -28,6 +29,7 @@ export default function HeroEndFrame() {
       <Grunge />
       <HeroReveal />
       <HeroHelix />
+      <HeroChrome />
       <h1 className="sr-only">{HERO.h1}</h1>
 
       <div className="hero-inner" aria-hidden="true">
@@ -36,6 +38,11 @@ export default function HeroEndFrame() {
         <div className="hero-name">
           {HERO.name.split('').map((ch, i) => (
             <span key={i}>{ch}</span>
+          ))}
+        </div>
+        <div className="hero-role">
+          {HERO.role.map((r) => (
+            <span key={r}>{r}</span>
           ))}
         </div>
 
@@ -53,6 +60,7 @@ export default function HeroEndFrame() {
           </div>
 
           <div className="hero-tiles" id={TILES_ID}>
+            <div className="hero-lens" aria-hidden="true" />
             {TILE_PATTERN.map((row, r) =>
               row.map((kind, c) => {
                 if (kind === 'statement') {

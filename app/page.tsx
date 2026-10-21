@@ -32,6 +32,10 @@ export default function Home() {
     <main className="relative">
       <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       <HeroEndFrame />
+      {/* Section 02 lands here. Anchor for the scroll cue and the Enter key. */}
+      <section id="work" className="work-stub" aria-label="Work">
+        <span>02 · WORK</span>
+      </section>
       <IntroPosterCover />
       <IntroLoader />
     </main>
