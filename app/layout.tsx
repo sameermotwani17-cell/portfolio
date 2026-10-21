@@ -9,6 +9,7 @@ import {
   Cormorant,
   Poppins,
   JetBrains_Mono,
+  Gochi_Hand,
 } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
@@ -95,6 +96,16 @@ const jetbrains = JetBrains_Mono({
   preload: false,
 })
 
+/* Section 02 handwriting: centre word, era and chapter labels only. Never for paragraphs.
+   Fetched lazily (no preload) so it cannot queue ahead of the hero's LCP. */
+const gochi = Gochi_Hand({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-hand',
+  display: 'swap',
+  preload: false,
+})
+
 const SITE_URL = 'https://portfolio-gamma-two-d8j6b2mgkq.vercel.app'
 const TITLE = 'Sameer Motwani · Engineer · Creative Director · Builder'
 const DESCRIPTION =
@@ -159,7 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable} ${marker.variable} ${bebas.variable} ${inter.variable} ${cormorant.variable} ${poppins.variable} ${jetbrains.variable}`}
+      className={`${anton.variable} ${spaceGrotesk.variable} ${blackOps.variable} ${marker.variable} ${bebas.variable} ${inter.variable} ${cormorant.variable} ${poppins.variable} ${jetbrains.variable} ${gochi.variable}`}
     >
       <body className="bg-ink text-paper antialiased">
         <script

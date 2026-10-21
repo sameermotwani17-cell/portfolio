@@ -956,7 +956,7 @@ html:not([data-intro='play']) .hero-foot {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;
   letter-spacing: 0.4em;
-  color: rgba(242, 240, 236, 0.35);
+  color: var(--bone-dim);
 }
 
 @media (max-width: 1023px) {
@@ -1006,4 +1006,518 @@ html:not([data-intro='play']) .hero-foot {
   .hero-scroll__or {
     display: none;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION 02 · MY STORY  (hand-drawn life map, pinned camera tour)
+   Modes are decided once by the boot script in app/page.tsx:
+     html[data-story='pinned']  the tour (default when JS runs)
+     anything else              static map + stacked cards (reduced motion, no JS)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.story {
+  --story-ink: rgba(14, 14, 14, 0.9);
+  --hand: var(--font-hand), 'Patrick Hand', 'Comic Sans MS', cursive;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--story-ink);
+}
+.story-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* paper: soft light from the centre + 4% ink grain (SVG noise, no image file).
+   It lives on its own layer behind the svg so camera repaints never redraw it. */
+.story-stage {
+  position: relative;
+  width: 100%;
+  background-color: var(--paper);
+}
+.story-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 70% 62% at 50% 50%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .055  0 0 0 0 .055  0 0 0 0 .055  .5 .5 .5 0 -.62'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/></svg>");
+  background-size: auto, 220px 220px;
+}
+.story-svg {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* static (default) layout: map first, then the cards */
+.story-pinned {
+  order: -1;
+}
+.story-stage {
+  aspect-ratio: 2000 / 1400;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.story-svg {
+  position: absolute;
+  inset: 0;
+}
+
+/* pinned: a tall track with a sticky 100svh stage inside it */
+html[data-story='pinned'] .story-pinned {
+  order: 0;
+  height: 1290vh;
+  height: 1290svh;
+}
+html[data-story='pinned'] .story-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  max-width: none;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  /* shorter chapters on phones: ~60vh each (50 + 15x60 + 90 + 100) */
+  html[data-story='pinned'] .story-pinned {
+    height: 1140vh;
+    height: 1140svh;
+  }
+}
+
+/* ── type (user units inside the svg: 1u = 1 css px at scale 1) ───────────── */
+.story .t-centre {
+  font-family: var(--hand);
+  font-size: 150px;
+  fill: var(--story-ink);
+  stroke: var(--story-ink);
+  stroke-width: 1.2px;
+  stroke-linejoin: round;
+}
+.story .t-era {
+  font-family: var(--hand);
+  font-size: 40px;
+  letter-spacing: 0.05em;
+  fill: currentColor;
+  stroke: none;
+  transition: fill 0.4s;
+}
+.story .t-ch {
+  font-family: var(--hand);
+  font-size: 27px;
+  fill: currentColor;
+  stroke: none;
+  transition: fill 0.4s;
+}
+.story .t-outro {
+  font-family: var(--hand);
+  font-size: 48px;
+  fill: var(--signal);
+  stroke: var(--signal);
+  stroke-width: 0.8px;
+}
+.story .dd-text {
+  font-family: var(--hand);
+}
+.story .twig {
+  transition: stroke-width 0.4s;
+}
+
+/* labels are buttons: invisible hit area, dashed ring on keyboard focus */
+.story .lbl {
+  cursor: pointer;
+  outline: none;
+}
+.story .hit {
+  fill: transparent;
+  stroke: transparent;
+  pointer-events: all;
+}
+.story .lbl:focus-visible .hit {
+  stroke: var(--ink);
+  stroke-width: 2.5px;
+  stroke-dasharray: 8 7;
+  fill: rgba(14, 14, 14, 0.04);
+}
+.story .lbl .t-ch,
+.story .lbl .dd {
+  transition: transform 0.3s ease, fill 0.4s;
+}
+.story .lbl:hover .t-ch,
+.story .lbl:hover .dd {
+  transform: translateY(-3px);
+}
+
+/* ── tour state (set by StoryScene) ──────────────────────────────────────── */
+.story .eg {
+  color: var(--story-ink);
+  transition: color 0.5s ease;
+}
+.story .eg[data-dim] {
+  color: rgba(14, 14, 14, 0.27);
+}
+.story .eg[data-era-active] .t-era {
+  stroke: currentColor;
+  stroke-width: 1.4px;
+}
+.story .cg[data-active] .twig {
+  stroke-width: 2.8px;
+}
+.story .cg[data-active] .t-ch {
+  fill: var(--signal);
+}
+
+/* ── draw-on (pinned only: static mode and no-JS show everything drawn) ─── */
+html[data-story='pinned'] .story .draw {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+}
+html[data-story='pinned'] .story .fade {
+  opacity: 0;
+}
+html[data-story='pinned'] .story .t-centre {
+  stroke-dasharray: 760;
+  stroke-dashoffset: 760;
+  fill-opacity: 0;
+}
+html[data-story='pinned'] .story .t-outro {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  fill-opacity: 0;
+}
+html[data-story='pinned'] .story[data-drawn] .draw {
+  animation: sdraw 0.9s cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0s) forwards;
+}
+html[data-story='pinned'] .story[data-drawn] .fade {
+  animation: sfade 0.6s ease var(--d, 0s) forwards;
+}
+html[data-story='pinned'] .story[data-drawn] .t-centre {
+  animation:
+    swrite 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    sfill 0.5s ease 0.85s forwards;
+}
+html[data-story='pinned'] .story[data-outro] .t-outro {
+  animation:
+    swrite 1.7s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    sfill 0.6s ease 1.3s forwards;
+}
+/* once the intro has played, hovering a chapter redraws its twig once */
+html[data-story='pinned'] .story[data-done] .draw {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+html[data-story='pinned'] .story[data-done] .cg:hover .twig {
+  animation: sdraw 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes sdraw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes sfade {
+  to { opacity: 1; }
+}
+@keyframes swrite {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes sfill {
+  to { fill-opacity: 1; }
+}
+
+/* the one idle motion: a single doodle tilts +-1deg every ~4s (never the candle) */
+.story .dd.wob > use {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: swob 1.1s ease-in-out;
+}
+@keyframes swob {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(1deg); }
+  70% { transform: rotate(-1deg); }
+}
+
+/* phones: at the full-map zoom only the eras are labelled */
+@media (max-width: 767px) {
+  .story .t-centre { font-size: 190px; }
+  .story .t-era { font-size: 78px; }
+  .story .t-outro { font-size: 74px; }
+  .story .cg:not([data-active]) .t-ch,
+  .story .cg:not([data-active]) .dd {
+    opacity: 0 !important;
+  }
+  .story .t-ch { font-size: 30px; }
+}
+
+/* ── chapter panel ───────────────────────────────────────────────────────── */
+.story-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-block: auto;
+  height: fit-content;
+  width: min(30vw, 460px);
+  min-width: 300px;
+  z-index: 4;
+  padding: 26px 28px 28px;
+  background: #f7f5f0;
+  color: var(--ink);
+  border: 1px solid rgba(14, 14, 14, 0.14);
+  border-radius: 4px;
+  box-shadow: 0 22px 44px -26px rgba(14, 14, 14, 0.45);
+}
+.story-panel[data-side='left'] { left: 4vw; }
+.story-panel[data-side='right'] { right: 4vw; }
+.sp-count {
+  margin: 0 0 4px;
+  font-family: var(--hand);
+  font-size: 22px;
+  color: rgba(14, 14, 14, 0.45);
+}
+.sp-cap {
+  margin: 0 0 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(14, 14, 14, 0.62);
+}
+.sp-body {
+  margin: 0;
+  max-width: 60ch;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.55;
+}
+.sp-body em, .st-body em { font-style: italic; }
+@media (max-width: 767px) {
+  .story-panel {
+    top: auto;
+    bottom: 0;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0;
+    width: auto;
+    min-width: 0;
+    max-height: 56vh;
+    max-height: 56svh;
+    overflow: auto;
+    padding: 18px 20px 76px;
+    border-radius: 14px 14px 0 0;
+    border-width: 1px 0 0;
+  }
+  .sp-body { font-size: 17px; }
+}
+
+/* ── nav: era tabs, dots, prev/next, skip ────────────────────────────────── */
+.sn-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  padding: 14px 24px 22px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--paper) 55%, rgba(242, 240, 236, 0));
+}
+.sn-top > * { pointer-events: auto; }
+.sn-tabs {
+  display: flex;
+  gap: clamp(14px, 2.4vw, 36px);
+}
+.sn-tab,
+.sn-btn,
+.sn-skip {
+  font-family: var(--hand);
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  cursor: pointer;
+}
+.sn-tab {
+  font-size: clamp(18px, 1.6vw, 24px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.sn-tab:hover { opacity: 0.85; }
+.sn-tab[aria-current='true'] {
+  opacity: 1;
+  border-bottom-color: var(--ink);
+}
+.sn-skip {
+  position: absolute;
+  right: 24px;
+  top: 16px;
+  font-size: 19px;
+  opacity: 0.65;
+}
+.sn-skip:hover { opacity: 1; }
+.sn-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 30px);
+  padding: 22px 24px 14px;
+  background: linear-gradient(to top, var(--paper) 55%, rgba(242, 240, 236, 0));
+  transition: opacity 0.5s;
+}
+.sn-bottom[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+}
+.sn-btn { font-size: 21px; }
+.sn-btn:disabled { opacity: 0.25; cursor: default; }
+.sn-btn:not(:disabled):hover { text-decoration: underline; text-underline-offset: 4px; }
+.sn-dots { display: flex; gap: 0; align-items: center; }
+/* 24px touch target, 12px visible dot */
+.sn-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.sn-dot::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+}
+.sn-dot[aria-current='true']::before { background: var(--ink); }
+.sn-tab:focus-visible,
+.sn-btn:focus-visible,
+.sn-skip:focus-visible,
+.sn-dot:focus-visible {
+  outline: 2px dashed var(--ink);
+  outline-offset: 4px;
+}
+@media (max-width: 767px) {
+  .sn-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 8px 14px 18px;
+  }
+  .sn-skip { position: static; align-self: flex-end; font-size: 17px; }
+  .sn-tabs {
+    overflow-x: auto;
+    max-width: 100%;
+    scrollbar-width: none;
+    gap: 18px;
+    padding-bottom: 2px;
+  }
+  .sn-tabs::-webkit-scrollbar { display: none; }
+  .sn-tab { font-size: 18px; flex: none; }
+  .sn-bottom { gap: 10px; padding: 18px 14px 10px; flex-wrap: wrap; row-gap: 4px; }
+  .sn-btn { font-size: 18px; }
+  .sn-dots { order: 5; flex-basis: 100%; justify-content: center; }
+}
+
+/* ── semantic story: hidden behind the pinned map, stacked cards otherwise ── */
+.story-text {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 96px) clamp(16px, 5vw, 48px);
+}
+html[data-story='pinned'] .story-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.st-h2 {
+  margin: 0 0 clamp(28px, 5vw, 56px);
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(56px, 8vw, 128px);
+  line-height: 1;
+  display: inline-block;
+  border-bottom: 5px solid var(--signal);
+}
+.st-era { margin-top: clamp(36px, 6vw, 72px); }
+.st-h3 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 20px;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 40px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.st-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.st-card {
+  position: relative;
+  padding: 22px 22px 24px;
+  background: #f7f5f0;
+  border: 1px solid rgba(14, 14, 14, 0.14);
+  border-radius: 4px;
+  box-shadow: 0 14px 30px -22px rgba(14, 14, 14, 0.4);
+}
+.st-doodle { color: var(--ink); flex: none; }
+.st-card .st-doodle { position: absolute; top: 16px; right: 16px; }
+.st-h4 {
+  margin: 0 0 4px;
+  padding-right: 64px;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.st-cap {
+  margin: 0 0 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(14, 14, 14, 0.62);
+}
+.st-body {
+  margin: 0;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.st-outro {
+  margin: clamp(28px, 5vw, 56px) 0 0;
+  font-family: var(--hand);
+  font-size: clamp(26px, 3.4vw, 42px);
+  line-height: 1.25;
+  color: var(--signal);
 }
