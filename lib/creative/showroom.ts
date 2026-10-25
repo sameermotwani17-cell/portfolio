@@ -57,6 +57,8 @@ const FILMS: ShowroomItem[] = [
   clip('opus-vs-astra', 'films', 'Opus vs Astra', 'Fight Night intro · AI heavyweights', 4 / 3),
   clip('horror-teaser', 'films', 'Something big is coming', 'Halloween teaser', 16 / 9),
   clip('gomiyage-ad', 'films', 'Gomiyage', 'Product ad · Beppu', 16 / 9),
+  clip('2026-09-fightnight-faceoff-liveposter-4x3', 'films', 'Fight Night face-off', 'Live poster · AI heavyweights', 4 / 3),
+  clip('linkedin-prove-a-point-vidoe', 'films', 'Prove a point', 'Retro Studios · LinkedIn', 16 / 9),
 ]
 
 const STILLS: ShowroomItem[] = [
@@ -72,6 +74,18 @@ const STILLS: ShowroomItem[] = [
   still('cancha-argument', 'The argument', 'DK2R · La Cancha'),
   still('medianoche-beetle', 'Neon Beetle', 'DK2R · Medianoche'),
   still('calor-sprinkler', 'Sprinkler day', 'DK2R · Calor'),
+  still('lucha-ring', 'In the ring', 'DK2R · Lucha'),
+  still('lucha-luchador', 'Luchador', 'DK2R · Lucha'),
+  still('lucha-low', 'Low angle', 'DK2R · Lucha'),
+  still('lucha-tape', 'Wrist tape', 'DK2R · Lucha'),
+  still('reinas-rooftop', 'Rooftop skyline', 'DK2R · Las Reinas'),
+  still('reinas-portrait', 'Beauty portrait', 'DK2R · Las Reinas'),
+  still('reinas-marigold', 'Marigold wind', 'DK2R · Las Reinas'),
+  still('reinas-two', 'Back to back', 'DK2R · Las Reinas'),
+  still('archivo-stadium', 'Stadium, 1986', 'DK2R · Archivo 86'),
+  still('archivo-plaza', 'Plaza, 1986', 'DK2R · Archivo 86'),
+  still('archivo-car', 'Car hood', 'DK2R · Archivo 86'),
+  still('archivo-tunnel', 'Stadium tunnel', 'DK2R · Archivo 86'),
 ]
 
 const REELS: ShowroomItem[] = [
@@ -79,12 +93,20 @@ const REELS: ShowroomItem[] = [
   clip('usa-airport', 'reels', 'Through customs', 'DK2R · USA · POV'),
   clip('usa-pov', 'reels', 'Limited edition, 014 of 300', 'DK2R · USA · POV'),
   clip('usa-cooked', 'reels', 'POV: Retro Studios cooked', 'DK2R · USA · POV'),
+  clip('usa-reel-4-honorable-c-note-edit', 'reels', 'The C-Note edit', 'DK2R · USA edition'),
+  clip('brazil-video-1-documentary', 'reels', 'Brazil, the documentary', 'DK2R · Brazil'),
+  clip('brazil-video-2-unexpected-like-a-mixtape', 'reels', 'Unexpected, like a mixtape', 'DK2R · Brazil'),
+  clip('brazil-video-6-pov-got-paid-to-make-ads', 'reels', 'POV: got paid to make ads', 'DK2R · Brazil'),
+  clip('brazil-video-7-person-on-the-wing', 'reels', 'Walking the wing', 'DK2R · Brazil'),
 ]
 
 const MOTION: ShowroomItem[] = [
   clip('flash-reel', 'motion', 'Retro Studios flash reel', 'Retro Studios · 2026', 16 / 9),
   clip('usa-museum', 'motion', 'The museum case', 'DK2R · motion graphics'),
   clip('retro-flash', 'motion', 'Retro, in frames', 'Retro Studios · title cards'),
+  clip('landscape-glitvh-linkedin', 'motion', 'Glitch title', 'Retro Studios · LinkedIn', 16 / 9),
+  clip('retrostudios-motion-graphics', 'motion', 'Motion graphics reel', 'Retro Studios · 2026', 4 / 3),
+  clip('2026-07-xs-logoreveal-v1', 'motion', 'Xs logo reveal', 'Xs · brand motion'),
 ]
 
 const CREATORS: ShowroomItem[] = [
@@ -94,6 +116,10 @@ const CREATORS: ShowroomItem[] = [
   clip('fitz-bar-fight', 'creators', 'Bar fight', 'Fitz · DayZ'),
   clip('bluecollar-ignorance', 'creators', 'Nobody cares about 15 years', 'Blue Collar Business Podcast'),
   clip('bazza-boss', 'creators', 'Boss battle at the docks', 'Bazza · GTA RP'),
+  clip('2026-09-ag-herenow-opusclip-test-01-onlyoneme', 'creators', 'Only one me', 'AG · Here Now'),
+  clip('2026-09-ag-herenow-opusclip-test-02-backwithheat', 'creators', 'Back with heat', 'AG · Here Now'),
+  clip('2026-07-xs-reel-9x16-v1', 'creators', 'No mediocrity, no apology', 'Xs · launch reel'),
+  clip('2026-07-xs-video-v1', 'creators', 'Built for the driven', 'Xs · brand film'),
 ]
 
 const SHORTS: ShowroomItem[] = [
@@ -105,6 +131,10 @@ const SHORTS: ShowroomItem[] = [
   clip('short-liberia', 'shorts', 'From Liberia to study in Israel', 'Short · my story'),
   clip('short-model', 'shorts', 'Trying to become a model', 'Short · next week'),
   clip('short-attention', 'shorts', 'Attention is the whole game', 'Short · content'),
+  clip('s39-ai-boom', 'shorts', 'The AI boom', 'Short · AI'),
+  clip('s13-claude-prompts-itself', 'shorts', 'Claude prompts itself', 'Short · AI'),
+  clip('s17-forward-deployed', 'shorts', 'Forward deployed', 'Short · work'),
+  clip('s22-ai-with-taste', 'shorts', 'AI with taste', 'Short · AI'),
 ]
 
 /** "All" interleaves the categories so no single type clumps together. */
