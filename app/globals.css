@@ -2866,6 +2866,43 @@ html[data-defer] .uni-stage {
 }
 
 /* ── ajiwow case study ─────────────────────────────────────────────────── */
+.cr-case {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #0a0d14;
+  animation: crCaseIn 0.35s ease both;
+}
+@keyframes crCaseIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.cr-case__x {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 101;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245, 243, 238, 0.35);
+  border-radius: 50%;
+  background: rgba(10, 13, 20, 0.7);
+  backdrop-filter: blur(8px);
+  color: #f5f3ee;
+  font-size: 16px;
+  cursor: pointer;
+}
+.cr-case__x:hover {
+  background: var(--case-accent, #cc4210);
+}
 .cr-aj {
   position: relative;
   background: #0a0d14;
@@ -2883,7 +2920,7 @@ html[data-defer] .uni-stage {
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #cc4210;
+  color: var(--case-accent, #cc4210);
 }
 .cr-aj__eyebrow span {
   margin-left: 8px;
@@ -2945,8 +2982,8 @@ html[data-defer] .uni-stage {
   text-decoration: none;
 }
 .cr-aj__links a:first-child {
-  background: #cc4210;
-  border-color: #cc4210;
+  background: var(--case-accent, #cc4210);
+  border-color: var(--case-accent, #cc4210);
 }
 .cr-aj__links a:hover {
   filter: brightness(1.15);
@@ -3064,7 +3101,7 @@ html[data-defer] .uni-stage {
 .cr-aj__steps li > span {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;
-  color: #cc4210;
+  color: var(--case-accent, #cc4210);
   padding-top: 4px;
 }
 .cr-aj__steps b {

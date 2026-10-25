@@ -116,11 +116,10 @@ export const WORKS: Work[] = [
     role: 'Brand system · Website · Poster · Short-form video',
     tools: ['Brand identity', 'Next.js', 'Design tokens', 'Short-form edit'],
     description:
-      'The full identity for a Tokyo food-tech startup: logo, an 18 page brand system, ten templates, a bilingual website live on their domain, a tourist poster and launch films. Case study below.',
+      'The full identity for a Tokyo food-tech startup: logo, an 18 page brand system, ten templates, a bilingual website live on their domain, a tourist poster and launch films.',
     thumb: `/creative/ajiwow/brand-cover.webp`,
     links: [
       { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },
-      { label: 'Read the case study', href: '#ajiwow' },
     ],
   },
   {

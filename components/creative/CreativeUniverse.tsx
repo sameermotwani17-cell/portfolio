@@ -4,12 +4,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
-import { AnimatePresence } from 'framer-motion'
-import WorkDetail from './WorkDetail'
+import CaseStudySheet from './CaseStudySheet'
 import Showroom from './Showroom'
-import AjiwowSection from './AjiwowSection'
-import CaseStudyOverlay from '@/components/scenes/CaseStudyOverlay'
-import { albums, retroReleases } from '@/lib/projects'
+import { caseFor } from '@/lib/creative/cases'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
 import { CATEGORIES, type CategoryId } from '@/lib/creative/categories'
 import { KEYS, LOADER, readFlag, setFlag } from '@/lib/creative/intro'
@@ -24,13 +21,6 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
  * split arrives here after Acts 1–2. Reduced motion: a 300ms crossfade to the
  * finished gallery.
  */
-/** a work that has a full case study on the main site opens that same sheet */
-const CASE_STUDY_ID: Record<string, string> = { 'dk2r-mexico': 'dk2r', 'dk2r-morocco': 'dk2r' }
-function caseStudyFor(id: string) {
-  const key = CASE_STUDY_ID[id] ?? id
-  return retroReleases.find((r) => r.id === key) ?? albums.find((a) => a.id === key) ?? null
-}
-
 const SKY = { desktop: '/creative/sky-desktop.webp', mobile: '/creative/sky-mobile.webp' }
 
 export default function CreativeUniverse() {
@@ -126,12 +116,6 @@ export default function CreativeUniverse() {
           <button type="button" onClick={() => setFilter('music')}>
             Music
           </button>
-          <button
-            type="button"
-            onClick={() => document.getElementById('ajiwow')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })}
-          >
-            Ajiwow
-          </button>
           <button type="button" onClick={scrollToShowroom}>
             Showroom
           </button>
@@ -189,13 +173,7 @@ export default function CreativeUniverse() {
           reduced={reduced}
           skyShift={skyShift}
           paused={!!detail}
-          onOpen={(work, rect) => {
-            if (work.id === 'ajiwow') {
-              document.getElementById('ajiwow')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
-              return
-            }
-            setDetail({ work, rect })
-          }}
+          onOpen={(work, rect) => setDetail({ work, rect })}
         />
       )}
 
@@ -215,16 +193,8 @@ export default function CreativeUniverse() {
         </p>
       )}
 
-      {detail && !caseStudyFor(detail.work.id) && (
-        <WorkDetail work={detail.work} from={detail.rect} onClose={() => setDetail(null)} />
-      )}
-      <AnimatePresence>
-        {detail && caseStudyFor(detail.work.id) && (
-          <CaseStudyOverlay item={caseStudyFor(detail.work.id)!} onClose={() => setDetail(null)} />
-        )}
-      </AnimatePresence>
+      {detail && <CaseStudySheet study={caseFor(detail.work)} onClose={() => setDetail(null)} />}
     </main>
-    <AjiwowSection />
     <Showroom />
     </>
   )
