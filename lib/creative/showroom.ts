@@ -3,11 +3,12 @@
  * under the creative arc, sorted into categories. Files live in
  * /public/creative/showroom (webp up to 1600px, mp4 up to 720p/1280p, muted).
  */
-export type ShowroomCategory = 'films' | 'stills' | 'reels' | 'motion' | 'creators' | 'shorts'
+export type ShowroomCategory = 'films' | 'stills' | 'graphics' | 'reels' | 'motion' | 'creators' | 'shorts'
 
 export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
   { id: 'films', label: 'Trailers & ads' },
   { id: 'stills', label: 'Campaign stills' },
+  { id: 'graphics', label: 'Brand graphics' },
   { id: 'reels', label: 'Brand reels' },
   { id: 'motion', label: 'Motion' },
   { id: 'creators', label: 'Creator clips' },
@@ -52,7 +53,25 @@ const clip = (id: string, cat: ShowroomCategory, title: string, tag: string, rat
   ratio,
 })
 
+const graphic = (id: string, title: string, tag: string): ShowroomItem => ({
+  id,
+  kind: 'image',
+  cat: 'graphics',
+  src: `${S}/${id}.webp`,
+  title,
+  tag,
+  ratio: 4 / 5,
+})
+
+const GRAPHICS: ShowroomItem[] = [
+  graphic('xs-community', 'Welcome to the Xs community', 'Xs · launch carousel'),
+  graphic('xs-clothing-brand', 'More than a clothing brand', 'Xs · launch carousel'),
+  graphic('xs-roadmap', 'The roadmap', 'Xs · launch carousel'),
+  graphic('xs-group-chats', 'Most group chats are dead', 'Xs · launch carousel'),
+]
+
 const FILMS: ShowroomItem[] = [
+  clip('here-now-mv', 'films', 'Here Now', 'AG · official music video', 16 / 9),
   clip('watashi-kerie', 'films', 'Watashi... kirei?', 'Pre-trailer · Halloween 2026', 16 / 9),
   clip('opus-vs-astra', 'films', 'Opus vs Astra', 'Fight Night intro · AI heavyweights', 4 / 3),
   clip('horror-teaser', 'films', 'Something big is coming', 'Halloween teaser', 16 / 9),
@@ -145,4 +164,4 @@ function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   return out
 }
 
-export const SHOWROOM: ShowroomItem[] = interleave([FILMS, STILLS, REELS, CREATORS, SHORTS, MOTION])
+export const SHOWROOM: ShowroomItem[] = interleave([FILMS, STILLS, GRAPHICS, REELS, CREATORS, SHORTS, MOTION])
