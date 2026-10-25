@@ -1,11 +1,15 @@
 'use client'
 
-import { useEffect, useRef, type CSSProperties } from 'react'
+import { useEffect, useRef } from 'react'
 import type { CaseStudy } from '@/lib/creative/cases'
+import { RELEASES, SPOTIFY_ARTIST, APPLE_ARTIST } from '@/lib/creative/music'
+
+const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
 /**
- * The sheet every arc card opens: a client style case study. Esc or the close
- * button returns to the arc. Body and smooth scroll are locked while it is open.
+ * The sheet every arc card opens: a client style case study with its own theme
+ * (colours, type, pattern) and its album cover art. The music card opens a
+ * Spotify style discography instead. Esc or the close button returns to the arc.
  */
 export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -33,57 +37,112 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
   }, [study.id])
 
   const s = study
+  const isMusic = s.id === 'music'
+
   return (
-    <div
-      ref={sheetRef}
-      className="cr-case"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${s.title} case study`}
-      style={{ ['--case-accent' as string]: s.accent } as CSSProperties}
-    >
+    <div ref={sheetRef} className="cr-case" data-theme={s.theme} role="dialog" aria-modal="true" aria-label={`${s.title} case study`}>
       <button ref={closeRef} type="button" className="cr-case__x" onClick={onClose} aria-label="Close case study">
         ✕
       </button>
 
       <section className="cr-aj">
-        <header className="cr-aj__head">
-          <p className="cr-aj__eyebrow">
-            Case study · {s.client.split(' · ')[0]}
-            {s.jpName && <span lang="ja">{s.jpName}</span>}
-          </p>
-          <h2>{s.title}</h2>
-          {s.titleJp && (
-            <p className="cr-aj__jp" lang="ja">
-              {s.titleJp}
+        <header className="cr-aj__hero">
+          <div>
+            <p className="cr-aj__eyebrow">
+              {isMusic ? 'Artist' : 'Case study'} · {s.client.split(' · ')[0]}
+              {s.jpName && <span lang="ja">{s.jpName}</span>}
             </p>
-          )}
-          {s.kicker && !s.titleJp && <p className="cr-aj__jp">{s.kicker}</p>}
-          <p className="cr-aj__intro">{s.intro}</p>
-          <dl className="cr-aj__meta">
-            <div>
-              <dt>Client</dt>
-              <dd>{s.client}</dd>
-            </div>
-            <div>
-              <dt>My role</dt>
-              <dd>{s.role}</dd>
-            </div>
-            <div>
-              <dt>When</dt>
-              <dd>{s.when}</dd>
-            </div>
-          </dl>
-          {s.links.length > 0 && (
-            <div className="cr-aj__links">
-              {s.links.map((l) => (
-                <a key={l.href + l.label} href={l.href} target="_blank" rel="noopener noreferrer">
-                  {l.label} ↗
-                </a>
-              ))}
-            </div>
-          )}
+            <h2>{s.title}</h2>
+            {s.titleJp && (
+              <p className="cr-aj__jp" lang="ja">
+                {s.titleJp}
+              </p>
+            )}
+            {s.kicker && !s.titleJp && <p className="cr-aj__jp">{s.kicker}</p>}
+            <p className="cr-aj__intro">{s.intro}</p>
+            {isMusic && (
+              <div className="cr-disc__bar">
+                <div className="cr-aj__links">
+                  <a href={SPOTIFY_ARTIST} target="_blank" rel="noopener noreferrer">
+                    Open on Spotify ↗
+                  </a>
+                  <a href={APPLE_ARTIST} target="_blank" rel="noopener noreferrer">
+                    Apple Music ↗
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="cr-aj__art" aria-hidden="true">
+            <div className="cr-aj__vinyl" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={s.cover} alt="" />
+          </div>
         </header>
+
+        <dl className="cr-aj__meta">
+          <div>
+            <dt>{isMusic ? 'Name' : 'Client'}</dt>
+            <dd>{s.client}</dd>
+          </div>
+          <div>
+            <dt>My role</dt>
+            <dd>{s.role}</dd>
+          </div>
+          <div>
+            <dt>When</dt>
+            <dd>{s.when}</dd>
+          </div>
+        </dl>
+        {!isMusic && s.links.length > 0 && (
+          <div className="cr-aj__links">
+            {s.links.map((l) => (
+              <a key={l.href + l.label} href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label} ↗
+              </a>
+            ))}
+          </div>
+        )}
+
+        {isMusic && (
+          <>
+            <div className="cr-aj__block">
+              <h3>Popular</h3>
+              <ol className="cr-disc__list">
+                {RELEASES.slice(0, 5).map((r, i) => (
+                  <li key={r.slug}>
+                    <a href={r.apple} target="_blank" rel="noopener noreferrer">
+                      <span className="n">{i + 1}</span>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={r.cover} alt="" loading="lazy" />
+                      <span>
+                        <b>{r.title}</b>
+                        <small>{r.feat ? `RETRO, ${r.feat}` : 'RETRO'}</small>
+                      </span>
+                      <span className="d">{r.year}</span>
+                      <span className="d">{mmss(r.seconds)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="cr-aj__block">
+              <h3>Discography</h3>
+              <div className="cr-disc__grid">
+                {RELEASES.map((r) => (
+                  <a key={r.slug} href={r.apple} target="_blank" rel="noopener noreferrer">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={r.cover} alt={`${r.title} cover art`} loading="lazy" />
+                    <b>{r.title}</b>
+                    <small>
+                      {r.year} · Single
+                    </small>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
 
         {s.stats.length > 0 && (
           <div className="cr-aj__stats">
@@ -111,7 +170,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
           </div>
         )}
 
-        {s.rail && s.rail.length > 0 && (
+        {s.rail && s.rail.length > 0 && !isMusic && (
           <div className="cr-aj__block">
             <h3>{s.railTitle ?? 'The work'}</h3>
             {s.swatches && (

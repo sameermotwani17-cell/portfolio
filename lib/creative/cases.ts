@@ -32,6 +32,10 @@ export type CaseStudy = {
   poster?: CaseMedia & { ratio: number }
   films?: CaseFilm[]
   accent: string
+  /** which look the sheet wears */
+  theme: string
+  /** the album cover art */
+  cover: string
 }
 
 const byId = (ids: string[]) =>
@@ -88,6 +92,8 @@ const AJIWOW_CASE: CaseStudy = {
   poster: { ...AJIWOW.poster },
   films: AJIWOW.films.map((f) => ({ src: f.src, poster: f.poster, title: f.title, tag: f.tag, ratio: f.ratio })),
   accent: '#cc4210',
+  theme: 'ajiwow',
+  cover: '/creative/covers/ajiwow.webp',
 }
 
 const dedupe = (links: { label: string; href: string }[]) => {
@@ -97,6 +103,24 @@ const dedupe = (links: { label: string; href: string }[]) => {
 
 export function caseFor(work: Work): CaseStudy {
   if (work.id === 'ajiwow') return AJIWOW_CASE
+  if (work.id === 'music') {
+    return {
+      id: 'music',
+      kicker: 'Artist',
+      title: 'RETRO',
+      intro:
+        'Seven singles written, produced and released as RETRO, with features from Roblyne Ketter and TLE Fries. Every cover below is the real release art, straight from the stores.',
+      client: 'RETRO · artist',
+      role: work.role,
+      when: work.year,
+      links: work.links,
+      stats: [],
+      steps: [],
+      accent: '#8a7dff',
+      theme: 'music',
+      cover: '/creative/music/best-friend.webp',
+    }
+  }
 
   const key = RECORD[work.id] ?? work.id
   const rec = retroReleases.find((r) => r.id === key) ?? albums.find((a) => a.id === key)
@@ -124,6 +148,8 @@ export function caseFor(work: Work): CaseStudy {
       railTitle: media?.railTitle ?? 'The work',
       films: media?.films ? filmsOf(media.films) : undefined,
       accent: rec.accent && rec.accent.length === 7 ? rec.accent : '#cc4210',
+      theme: work.id,
+      cover: `/creative/covers/${work.id}.webp`,
     }
   }
 
@@ -142,5 +168,7 @@ export function caseFor(work: Work): CaseStudy {
     railTitle: 'The work',
     films: media?.films ? filmsOf(media.films) : undefined,
     accent: '#cc4210',
+    theme: work.id,
+    cover: `/creative/covers/${work.id}.webp`,
   }
 }

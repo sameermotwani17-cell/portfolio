@@ -38,12 +38,6 @@ const TIKTOK = 'https://www.tiktok.com/@retro.studios'
 
 export const SOCIAL = { instagram: IG, tiktok: TIKTOK } as const
 
-const TRACKS = [
-  ['best-friend', 'Best Friend'],
-  ['desire', 'Desire'],
-  ['easy-come', 'Easy Come Easy Go'],
-  ['suavemente', 'Suavemente'],
-] as const
 
 export const WORKS: Work[] = [
   {
@@ -56,7 +50,7 @@ export const WORKS: Work[] = [
     tools: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Next.js', 'Supabase', 'PayPal'],
     description:
       'The first paid job the studio took. Twelve country editions for the 2026 World Cup, 300 numbered pieces each, no restocks, run solo. Morocco got Zellige tiles, Japan got kintsugi through the sakura, Brazil got the rhinestone crest. Three silhouettes per edition, 36 SKUs, 150+ hero images on one locked colour science, with a dedicated prompt layer there only to kill the tells of AI imagery. I built the store it sold from too, Next.js and Supabase with PayPal checkout. It closed out with the tournament.',
-    thumb: `${W}/dk2r-logo.webp`,
+    thumb: '/creative/works/sleeve-dk2r.webp',
     gallery: [1, 2, 3, 4, 5, 6].map((i) => `${W}/dk2r-${i}.webp`),
     links: [
       { label: 'Visit the store', href: 'https://dkai2ray.company/' },
@@ -74,7 +68,7 @@ export const WORKS: Work[] = [
     tools: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Seedance 2.0', 'Suno', 'CapCut', 'Next.js', 'Supabase', 'Vercel'],
     description:
       'A one-person AI creative studio under StarLabs, founded April 2026, built on the thesis that one operator on an AI-native stack can outproduce a crew. Statics, reels and commercial ads with no crew. First paid brief: the 12-country DK2R World Cup campaign, 150+ hero images and a 55-asset QA report with zero redos. Open for the next brief.',
-    thumb: `${W}/retro-studios.webp`,
+    thumb: '/creative/works/sleeve-retro-studios.webp',
     links: [{ label: '@retro.studios_', href: IG }],
     placeholder: ['preview', 'video'],
   },
@@ -88,7 +82,7 @@ export const WORKS: Work[] = [
     tools: ['Brand identity', 'Next.js', 'Design tokens', 'Short-form edit'],
     description:
       'The full identity for a Tokyo food-tech startup: logo, an 18 page brand system, ten templates, a bilingual website live on their domain, a tourist poster and launch films.',
-    thumb: `/creative/ajiwow/brand-cover.webp`,
+    thumb: '/creative/works/sleeve-ajiwow.webp',
     links: [
       { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },
     ],
@@ -103,7 +97,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'A minimal streetwear label built as an exercise, to see what holds once the story is taken away. No manifesto, no lifestyle shoot. Five pieces from $89 to $249, shot on white and priced like a real drop, two colours in the whole stylesheet (#0D0D0D on #FFFFFF), and a grid that has to carry them on its own.',
-    thumb: `${W}/too-easy.webp`,
+    thumb: '/creative/works/sleeve-too-easy.webp',
     links: [
       { label: 'Visit the site', href: 'https://too-easy-seven.vercel.app/' },
       { label: 'Brand assets', href: 'https://drive.google.com/drive/folders/1u-UNW_YvpI0KB_-1Q5qtutXyOYDUkjdf' },
@@ -120,7 +114,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'A concept brand for AD WARS, the marketing simulation at APU, not a real product: a shoe that eats microplastics instead of another recycling campaign. BioSole is a four-layer enzyme membrane built on PETase, a real enzyme found in 2016. Three colorways (Origin, Reef, Deep Sea), two scroll-scrubbed film sequences, and a site that reads like an investor deck. The science is made up, and the footer says so.',
-    thumb: `${W}/plastivore.webp`,
+    thumb: '/creative/works/sleeve-plastivore.webp',
     links: [{ label: 'Visit the site', href: 'https://plastivore-plum.vercel.app/' }],
     placeholder: ['tools', 'preview'],
   },
@@ -134,7 +128,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'The Lines They Drew, 26 June 2026 at Millennium Hall: a ticketing site, not a poster. 732 seats in live availability, a seat picker, free entry down to a name and an email, and a QR ticket that lands straight away. Red, gold and green run through every band and divider as structure.',
-    thumb: `${W}/afro-week.webp`,
+    thumb: '/creative/works/sleeve-afro-week.webp',
     links: [
       { label: 'Reserve a seat', href: 'https://millennium-hall.vercel.app/' },
       { label: '@afroweekapu', href: 'https://www.instagram.com/afroweekapu' },
@@ -151,7 +145,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'A birthday gift for Dan, dressed up as a streaming service. A profile gate, a wordmark ident with its own sting, ten titles, a deadpan park-ranger documentary and a finale called The Bench. All footage of one person, cut and graded on Netflix’s own design tokens, lifted from the live DOM.',
-    thumb: `${W}/danflix.webp`,
+    thumb: '/creative/works/sleeve-danflix.webp',
     links: [{ label: 'Open Danflix', href: 'https://danflix-murex.vercel.app/' }],
     placeholder: ['tools', 'preview', 'video'],
   },
@@ -165,7 +159,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'A photo-culling tool built as a gift. Point it at a shoot (1,847 frames from a wedding in the real example), say what you want in plain English, and it hands back a ranked shortlist with a line of reasoning on every pick. Near-duplicates collapse to the sharpest, and nothing full size leaves your computer.',
-    thumb: `${W}/first-light.webp`,
+    thumb: '/creative/works/sleeve-first-light.webp',
     links: [{ label: 'Open First Light', href: 'https://first-light-alpha.vercel.app/' }],
     placeholder: ['tools'],
   },
@@ -179,7 +173,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'The studio working folder, opened up. Not a case study and not a cut reel: the project Drive, shared read only.',
-    thumb: `${W}/retro-raven.webp`,
+    thumb: '/creative/works/sleeve-retro-projects.webp',
     links: [
       { label: 'Open the Drive folder', href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV' },
     ],
@@ -193,7 +187,7 @@ export const WORKS: Work[] = [
     role: 'Content',
     tools: [],
     description: 'Short-form pieces from @retro.studios_.',
-    thumb: `${W}/retro-raven.webp`,
+    thumb: '/creative/works/sleeve-content-instagram.webp',
     links: [{ label: '@retro.studios_', href: IG }],
     placeholder: ['the pieces themselves', 'thumb', 'preview'],
   },
@@ -206,7 +200,7 @@ export const WORKS: Work[] = [
     role: 'Content',
     tools: [],
     description: 'Short-form pieces from @retro.studios.',
-    thumb: `${W}/retro-raven.webp`,
+    thumb: '/creative/works/sleeve-content-tiktok.webp',
     links: [{ label: '@retro.studios', href: TIKTOK }],
     placeholder: ['the pieces themselves', 'thumb', 'preview'],
   },
@@ -219,28 +213,25 @@ export const WORKS: Work[] = [
     role: 'Streaming',
     tools: [],
     description: 'Live streams.',
-    thumb: `${W}/retro-studios.webp`,
+    thumb: '/creative/works/sleeve-streams.webp',
     links: [],
     placeholder: ['platform', 'link', 'thumb', 'description', 'year'],
   },
-  ...TRACKS.map(
-    ([id, title]): Work => ({
-      id: `music-${id}`,
-      title,
-      category: 'music',
-      client: 'RETRO',
-      year: '2026',
-      role: 'Writing · production',
-      tools: [],
-      description: 'Original production, released as RETRO.',
-      thumb: `${W}/music.webp`,
-      links: [
-        { label: 'Spotify', href: SPOTIFY },
-        { label: 'Apple Music', href: APPLE },
-      ],
-      placeholder: ['cover art', 'per-track links', 'confirm title'],
-    }),
-  ),
+  {
+    id: 'music',
+    title: 'RETRO',
+    category: 'music',
+    client: 'RETRO · artist',
+    year: '2025 to 2026',
+    role: 'Writing · production · artwork',
+    tools: ['Suno', 'Logic', 'CapCut'],
+    description: 'Seven singles written and produced as RETRO. The full discography is inside.',
+    thumb: '/creative/works/sleeve-music.webp',
+    links: [
+      { label: 'Spotify', href: SPOTIFY },
+      { label: 'Apple Music', href: APPLE },
+    ],
+  },
 ]
 
 /** Every image the loader waits for. */
