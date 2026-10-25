@@ -351,7 +351,19 @@ export default function ArcGallery({ works, filter, phase, progress, mobile, red
 
   return (
     <div ref={stageRef} className="cr-arc" data-phase={phase} data-mobile={mobile || undefined}>
-      <div className="cr-arc__scene">
+      <div
+        className="cr-arc__scene"
+        onClick={(e) => {
+          // 3D hit-testing can land the click on the scene instead of the card
+          // under the cursor; find the card by point and open it
+          if ((e.target as HTMLElement).closest('.cr-card')) return
+          if (rot.current.moved > 6) return
+          const card = document
+            .elementsFromPoint(e.clientX, e.clientY)
+            .find((el) => el instanceof HTMLElement && el.classList.contains('cr-card')) as HTMLElement | undefined
+          if (card) card.click()
+        }}
+      >
         {works.map((w, i) => (
           <button
             key={w.id}
