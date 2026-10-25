@@ -88,7 +88,7 @@ function Lightbox({
   }, [index, items.length, onClose, onIndex])
 
   return (
-    <div className="cr-lb" role="dialog" aria-modal="true" aria-label={item.title} onClick={onClose}>
+    <div className="cr-lb" data-lenis-prevent role="dialog" aria-modal="true" aria-label={item.title} onClick={onClose}>
       <button ref={closeRef} type="button" className="cr-lb__x" onClick={onClose} aria-label="Close">
         ✕
       </button>

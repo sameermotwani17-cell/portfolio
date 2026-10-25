@@ -108,7 +108,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
   const hasScopes = !!s.scopes?.length
 
   return (
-    <div ref={sheetRef} className="cr-case" data-theme={s.theme} role="dialog" aria-modal="true" aria-label={`${s.title} case study`}>
+    <div ref={sheetRef} className="cr-case" data-lenis-prevent data-theme={s.theme} role="dialog" aria-modal="true" aria-label={`${s.title} case study`}>
       <button ref={closeRef} type="button" className="cr-case__x" onClick={onClose} aria-label="Close case study">
         ✕
       </button>
