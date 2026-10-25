@@ -173,7 +173,7 @@ export const WORKS: Work[] = [
     tools: [],
     description:
       'The studio working folder, opened up. Not a case study and not a cut reel: the project Drive, shared read only.',
-    thumb: '/creative/works/sleeve-retro-studios.webp',
+    thumb: '/creative/works/sleeve-retro-projects.webp',
     links: [
       { label: 'Open the Drive folder', href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV' },
     ],
