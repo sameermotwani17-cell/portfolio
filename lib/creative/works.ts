@@ -108,6 +108,22 @@ export const WORKS: Work[] = [
     placeholder: ['preview', 'video'],
   },
   {
+    id: 'ajiwow',
+    title: 'Ajiwow',
+    category: 'brand',
+    client: 'Ajiwow Inc. · Tokyo',
+    year: '2026',
+    role: 'Brand system · Website · Poster · Short-form video',
+    tools: ['Brand identity', 'Next.js', 'Design tokens', 'Short-form edit'],
+    description:
+      'The full identity for a Tokyo food-tech startup: logo, an 18 page brand system, ten templates, a bilingual website live on their domain, a tourist poster and launch films. Case study below.',
+    thumb: `/creative/ajiwow/brand-cover.webp`,
+    links: [
+      { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },
+      { label: 'Read the case study', href: '#ajiwow' },
+    ],
+  },
+  {
     id: 'too-easy',
     title: 'TOO EASY',
     category: 'brand',

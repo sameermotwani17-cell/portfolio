@@ -9,7 +9,7 @@ MAXS="${3:-45}"
 LONG="${LONG:-1280}"
 CRF="${CRF:-28}"
 ABR="${ABR:-96k}"
-OUT="$(cd "$(dirname "$0")/../.." && pwd)/public/creative/showroom"
+OUT="${OUT_DIR:-$(cd "$(dirname "$0")/../.." && pwd)/public/creative/showroom}"
 TMP="$(mktemp -d)"
 cp "$SRC" "$TMP/in.mp4" # plain ascii path, ffmpeg on Windows chokes on odd filenames
 ffmpeg -loglevel error -y -t "$MAXS" -i "$TMP/in.mp4" \

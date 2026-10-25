@@ -7,6 +7,7 @@ import ArcGallery, { type GalleryPhase } from './ArcGallery'
 import { AnimatePresence } from 'framer-motion'
 import WorkDetail from './WorkDetail'
 import Showroom from './Showroom'
+import AjiwowSection from './AjiwowSection'
 import CaseStudyOverlay from '@/components/scenes/CaseStudyOverlay'
 import { albums, retroReleases } from '@/lib/projects'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
@@ -125,6 +126,12 @@ export default function CreativeUniverse() {
           <button type="button" onClick={() => setFilter('music')}>
             Music
           </button>
+          <button
+            type="button"
+            onClick={() => document.getElementById('ajiwow')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })}
+          >
+            Ajiwow
+          </button>
           <button type="button" onClick={scrollToShowroom}>
             Showroom
           </button>
@@ -182,7 +189,13 @@ export default function CreativeUniverse() {
           reduced={reduced}
           skyShift={skyShift}
           paused={!!detail}
-          onOpen={(work, rect) => setDetail({ work, rect })}
+          onOpen={(work, rect) => {
+            if (work.id === 'ajiwow') {
+              document.getElementById('ajiwow')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+              return
+            }
+            setDetail({ work, rect })
+          }}
         />
       )}
 
@@ -211,6 +224,7 @@ export default function CreativeUniverse() {
         )}
       </AnimatePresence>
     </main>
+    <AjiwowSection />
     <Showroom />
     </>
   )
