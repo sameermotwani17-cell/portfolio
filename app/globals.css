@@ -3595,3 +3595,208 @@ html[data-defer] .uni-stage {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ── water: the whole site breathes ────────────────────────────────────── */
+@keyframes crBob {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -6px;
+    rotate: 0.4deg;
+  }
+}
+@keyframes crDrift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 60%;
+  }
+}
+@keyframes crWave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes crRipple {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(16);
+    opacity: 0;
+  }
+}
+@keyframes crGlow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* album sleeves on the arc: richer colour, a bobbing float, caustic light */
+.cr-card__media {
+  animation: crBob 7s ease-in-out infinite;
+}
+.cr-card:nth-child(3n) .cr-card__media {
+  animation-duration: 8.6s;
+  animation-delay: -2.4s;
+}
+.cr-card:nth-child(3n + 1) .cr-card__media {
+  animation-duration: 6.2s;
+  animation-delay: -4.1s;
+}
+.cr-card__media img {
+  filter: saturate(1.55) contrast(1.08) brightness(1.05);
+}
+.cr-card__media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: url('/creative/water/caustics.webp') 0 0 / 70% auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+  pointer-events: none;
+  animation: crDrift 20s linear infinite;
+}
+.cr-card:hover .cr-card__media::before {
+  opacity: 1;
+}
+
+/* a wave band at the foot of the arc, tinted by the dusk sky */
+.cr-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24vh;
+  z-index: 14;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.4s ease 0.6s;
+  -webkit-mask-image: linear-gradient(transparent, #000 45%);
+  mask-image: linear-gradient(transparent, #000 45%);
+}
+.cr-universe[data-phase='live'] .cr-water {
+  opacity: 1;
+}
+.cr-water::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/creative/water/caustics.webp') 0 0 / 38% auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+  animation: crDrift 26s linear infinite;
+}
+.cr-water svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+}
+.cr-water path:nth-child(1) {
+  fill: rgba(255, 120, 150, 0.2);
+  animation: crWave 22s linear infinite;
+}
+.cr-water path:nth-child(2) {
+  fill: rgba(140, 90, 255, 0.26);
+  animation: crWave 15s linear infinite reverse;
+}
+.cr-water path:nth-child(3) {
+  fill: rgba(30, 10, 60, 0.5);
+  animation: crWave 10s linear infinite;
+}
+
+/* ripples that follow the pointer */
+.cr-ripple {
+  position: fixed;
+  z-index: 12;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  animation: crRipple 1.5s ease-out forwards;
+}
+
+/* inside an album sheet: the cover art ripples like it is under water */
+.cr-aj__art > img {
+  filter: url(#crWater) saturate(1.4) contrast(1.06);
+}
+.cr-aj__art::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 86%;
+  aspect-ratio: 1;
+  border-radius: calc(var(--c-radius) / 2);
+  background: url('/creative/water/caustics.webp') 0 0 / 55% auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+  pointer-events: none;
+  animation: crDrift 18s linear infinite;
+}
+.cr-aj__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/creative/water/caustics.webp') 0 0 / 420px auto;
+  mix-blend-mode: soft-light;
+  opacity: 0.22;
+  pointer-events: none;
+  animation: crDrift 40s linear infinite;
+}
+.cr-aj__hero > * {
+  position: relative;
+}
+.cr-aj__vinyl {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 80px color-mix(in srgb, var(--c-accent) 35%, transparent);
+}
+
+/* showroom tiles catch the light */
+.cr-show__tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: url('/creative/water/caustics.webp') 0 0 / 60% auto;
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  animation: crDrift 18s linear infinite;
+}
+.cr-show__tile:hover::before {
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-card__media,
+  .cr-card__media::before,
+  .cr-water::after,
+  .cr-water path,
+  .cr-aj__art::after,
+  .cr-aj__hero::before,
+  .cr-show__tile::before {
+    animation: none !important;
+  }
+  .cr-ripple {
+    display: none;
+  }
+  .cr-aj__art > img {
+    filter: saturate(1.4);
+  }
+}

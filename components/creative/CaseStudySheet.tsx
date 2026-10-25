@@ -109,6 +109,14 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
 
   return (
     <div ref={sheetRef} className="cr-case" data-lenis-prevent data-theme={s.theme} role="dialog" aria-modal="true" aria-label={`${s.title} case study`}>
+      <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
+        <filter id="crWater" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006 0.01" numOctaves="2" seed="4" result="n">
+            <animate attributeName="baseFrequency" dur="16s" values="0.006 0.01;0.011 0.016;0.006 0.01" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       <button ref={closeRef} type="button" className="cr-case__x" onClick={onClose} aria-label="Close case study">
         ✕
       </button>

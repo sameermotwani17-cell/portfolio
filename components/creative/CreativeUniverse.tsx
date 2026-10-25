@@ -35,6 +35,7 @@ export default function CreativeUniverse() {
   const progress = useRef(0)
   const skyShift = useRef(0)
   const skyRef = useRef<HTMLDivElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
@@ -65,6 +66,26 @@ export default function CreativeUniverse() {
     return () => cancelAnimationFrame(raf)
   }, [phase, reduced])
 
+  // water: a faint ripple follows the pointer
+  useEffect(() => {
+    const el = mainRef.current
+    if (!el || reduced) return
+    let last = 0
+    const on = (e: PointerEvent) => {
+      const now = performance.now()
+      if (now - last < 120 || el.querySelectorAll('.cr-ripple').length > 7) return
+      last = now
+      const r = document.createElement('span')
+      r.className = 'cr-ripple'
+      r.style.left = `${e.clientX}px`
+      r.style.top = `${e.clientY}px`
+      r.addEventListener('animationend', () => r.remove())
+      el.appendChild(r)
+    }
+    el.addEventListener('pointermove', on, { passive: true })
+    return () => el.removeEventListener('pointermove', on)
+  }, [reduced])
+
   const onLoaded = useCallback(() => {
     setPhase('reveal')
     window.setTimeout(() => setPhase('live'), LOADER.REVEAL_MS)
@@ -93,13 +114,21 @@ export default function CreativeUniverse() {
 
   return (
     <>
-    <main className={`cr-universe ${garamond.variable}`} data-phase={phase} data-reduced={reduced || undefined}>
+    <main ref={mainRef} className={`cr-universe ${garamond.variable}`} data-phase={phase} data-reduced={reduced || undefined}>
       <div ref={skyRef} className="cr-sky" aria-hidden="true">
         <picture>
           <source media="(max-width: 767px)" srcSet={SKY.mobile} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={SKY.desktop} alt="" decoding="async" />
         </picture>
+      </div>
+
+      <div className="cr-water" aria-hidden="true">
+        <svg viewBox="0 0 2880 220" preserveAspectRatio="none">
+          <path d="M0 80 Q180 20 360 80 T720 80 T1080 80 T1440 80 T1800 80 T2160 80 T2520 80 T2880 80 V220 H0 Z" />
+          <path d="M0 110 Q180 60 360 110 T720 110 T1080 110 T1440 110 T1800 110 T2160 110 T2520 110 T2880 110 V220 H0 Z" />
+          <path d="M0 140 Q180 100 360 140 T720 140 T1080 140 T1440 140 T1800 140 T2160 140 T2520 140 T2880 140 V220 H0 Z" />
+        </svg>
       </div>
 
       <header className="cr-bar">
