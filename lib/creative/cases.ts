@@ -149,7 +149,7 @@ export function caseFor(work: Work): CaseStudy {
       films: media?.films ? filmsOf(media.films) : undefined,
       accent: rec.accent && rec.accent.length === 7 ? rec.accent : '#cc4210',
       theme: work.id,
-      cover: `/creative/covers/${work.id}.webp`,
+      cover: `/creative/covers/${work.id === 'retro-projects' ? 'retro-studios' : work.id}.webp`,
     }
   }
 
@@ -169,6 +169,6 @@ export function caseFor(work: Work): CaseStudy {
     films: media?.films ? filmsOf(media.films) : undefined,
     accent: '#cc4210',
     theme: work.id,
-    cover: `/creative/covers/${work.id}.webp`,
+    cover: `/creative/covers/${work.id === 'retro-projects' ? 'retro-studios' : work.id}.webp`,
   }
 }
