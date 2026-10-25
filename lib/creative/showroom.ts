@@ -3,13 +3,16 @@
  * under the creative arc, sorted into categories. Files live in
  * /public/creative/showroom (webp up to 1600px, mp4 up to 720p/1280p, muted).
  */
-export type ShowroomCategory = 'films' | 'episodes' | 'stills' | 'graphics' | 'reels' | 'motion' | 'creators' | 'shorts'
+import { XS_ITEMS } from '@/lib/creative/xs'
+
+export type ShowroomCategory = 'films' | 'episodes' | 'stills' | 'graphics' | 'product' | 'reels' | 'motion' | 'creators' | 'shorts'
 
 export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
   { id: 'films', label: 'Trailers & ads' },
   { id: 'episodes', label: 'Episodes' },
   { id: 'stills', label: 'Campaign stills' },
-  { id: 'graphics', label: 'Brand graphics' },
+  { id: 'graphics', label: 'Xs posts' },
+  { id: 'product', label: 'Xs product' },
   { id: 'reels', label: 'Brand reels' },
   { id: 'motion', label: 'Motion' },
   { id: 'creators', label: 'Creator clips' },
@@ -54,14 +57,14 @@ const clip = (id: string, cat: ShowroomCategory, title: string, tag: string, rat
   ratio,
 })
 
-const graphic = (id: string, title: string, tag: string): ShowroomItem => ({
+const graphic = (id: string, title: string, tag: string, ratio = 4 / 5, cat: ShowroomCategory = 'graphics'): ShowroomItem => ({
   id,
   kind: 'image',
-  cat: 'graphics',
+  cat,
   src: `${S}/${id}.webp`,
   title,
   tag,
-  ratio: 4 / 5,
+  ratio,
 })
 
 const GRAPHICS: ShowroomItem[] = [
@@ -70,6 +73,13 @@ const GRAPHICS: ShowroomItem[] = [
   graphic('xs-roadmap', 'The roadmap', 'Xs · launch carousel'),
   graphic('xs-group-chats', 'Most group chats are dead', 'Xs · launch carousel'),
 ]
+GRAPHICS.push(
+  ...XS_ITEMS.filter((x) => x.group === 'posts').map((x) => graphic(x.id, x.title, x.tag, x.ratio)),
+)
+
+const PRODUCT: ShowroomItem[] = XS_ITEMS.filter((x) => x.group === 'product').map((x) =>
+  graphic(x.id, x.title, x.tag, x.ratio, 'product'),
+)
 
 const FILMS: ShowroomItem[] = [
   clip('here-now-mv', 'films', 'Here Now', 'AG · official music video', 16 / 9),
@@ -155,7 +165,6 @@ const SHORTS: ShowroomItem[] = [
   clip('short-japan', 'shorts', 'Liberia, Israel, Japan', 'Short · my story'),
   clip('short-music', 'shorts', 'Quit music? Never.', 'Short · music'),
   clip('short-ai-content', 'shorts', '$1,000 from AI content', 'Short · AI content'),
-  clip('short-client-paid', 'shorts', "The client who paid and didn't use it", 'Short · freelance'),
   clip('short-liberia', 'shorts', 'From Liberia to study in Israel', 'Short · my story'),
   clip('short-model', 'shorts', 'Trying to become a model', 'Short · next week'),
   clip('short-attention', 'shorts', 'Attention is the whole game', 'Short · content'),
@@ -173,4 +182,4 @@ function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   return out
 }
 
-export const SHOWROOM: ShowroomItem[] = interleave([FILMS, EPISODES, STILLS, GRAPHICS, REELS, CREATORS, SHORTS, MOTION])
+export const SHOWROOM: ShowroomItem[] = interleave([FILMS, EPISODES, STILLS, GRAPHICS, PRODUCT, REELS, CREATORS, SHORTS, MOTION])

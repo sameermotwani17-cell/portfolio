@@ -66,10 +66,7 @@ const MEDIA: Record<string, { rail?: string[]; films?: string[]; railTitle?: str
 }
 
 /** which record on the main site a card is built from */
-const RECORD: Record<string, string> = {
-  'dk2r-mexico': 'dk2r',
-  'dk2r-morocco': 'dk2r',
-}
+const RECORD: Record<string, string> = {}
 
 const AJIWOW_CASE: CaseStudy = {
   id: 'ajiwow',
