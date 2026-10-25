@@ -1,10 +1,77 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import type { CaseStudy } from '@/lib/creative/cases'
+import type { CaseStudy, Scope } from '@/lib/creative/cases'
 import { RELEASES, SPOTIFY_ARTIST, APPLE_ARTIST } from '@/lib/creative/music'
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
+
+
+function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
+  if (e.kind === 'images') {
+    return (
+      <div className="cr-aj__rail" tabIndex={0} aria-label="Examples, scroll sideways">
+        {e.items.map((m) => (
+          <figure key={m.src}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={m.src} alt={m.label} loading="lazy" decoding="async" />
+            <figcaption>{m.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )
+  }
+  if (e.kind === 'films') {
+    return (
+      <div className="cr-aj__films">
+        {e.items.map((f) => (
+          <figure key={f.src}>
+            <video src={f.src} poster={f.poster} controls playsInline preload="none" style={{ aspectRatio: String(f.ratio) }} />
+            <figcaption>
+              <b>{f.title}</b>
+              <i>{f.tag}</i>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    )
+  }
+  if (e.kind === 'site') {
+    return (
+      <figure className="cr-browser">
+        <div className="cr-browser__bar">
+          <i />
+          <i />
+          <i />
+          <a href={e.href} target="_blank" rel="noopener noreferrer">
+            {e.label} ↗
+          </a>
+        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={e.shot} alt={e.label} loading="lazy" decoding="async" />
+      </figure>
+    )
+  }
+  if (e.kind === 'swatches') {
+    return (
+      <div className="cr-aj__swatches" aria-label="Colours">
+        {e.items.map((c) => (
+          <span key={c.hex} style={{ background: c.hex }} data-light={/^#(?:f|e)/i.test(c.hex) || undefined}>
+            {c.name}
+            <i>{c.hex}</i>
+          </span>
+        ))}
+      </div>
+    )
+  }
+  return (
+    <figure className="cr-aj__poster cr-aj__poster--inline">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={e.src} alt={e.label} loading="lazy" decoding="async" style={{ aspectRatio: String(e.ratio) }} />
+      <figcaption>{e.label}</figcaption>
+    </figure>
+  )
+}
 
 /**
  * The sheet every arc card opens: a client style case study with its own theme
@@ -38,6 +105,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
 
   const s = study
   const isMusic = s.id === 'music'
+  const hasScopes = !!s.scopes?.length
 
   return (
     <div ref={sheetRef} className="cr-case" data-theme={s.theme} role="dialog" aria-modal="true" aria-label={`${s.title} case study`}>
@@ -155,7 +223,36 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
           </div>
         )}
 
-        {s.site && s.site.length > 0 && (
+        {hasScopes && (
+          <div className="cr-aj__block">
+            <h3>Scopes of work</h3>
+            <div className="cr-scopes">
+              {s.scopes!.map((sc, i) => (
+                <article className="cr-scope" key={sc.title}>
+                  <header>
+                    <span>{String(i + 1).padStart(2, '0')}</span>
+                    <h4>{sc.title}</h4>
+                    <p>{sc.summary}</p>
+                    <ul>
+                      {sc.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  </header>
+                  {sc.embeds.length > 0 && (
+                    <div className="cr-scope__embed">
+                      {sc.embeds.map((e, k) => (
+                        <ScopeEmbed key={k} e={e} />
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!hasScopes && s.site && s.site.length > 0 && (
           <div className="cr-aj__block">
             <h3>The website, live</h3>
             <div className="cr-aj__site">
@@ -170,7 +267,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
           </div>
         )}
 
-        {s.rail && s.rail.length > 0 && !isMusic && (
+        {!hasScopes && s.rail && s.rail.length > 0 && !isMusic && (
           <div className="cr-aj__block">
             <h3>{s.railTitle ?? 'The work'}</h3>
             {s.swatches && (
@@ -195,8 +292,8 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
           </div>
         )}
 
-        {(s.steps.length > 0 || s.poster) && (
-          <div className={`cr-aj__block ${s.steps.length > 0 && s.poster ? 'cr-aj__split' : ''}`}>
+        {(s.steps.length > 0 || (!hasScopes && s.poster)) && (
+          <div className={`cr-aj__block ${s.steps.length > 0 && !hasScopes && s.poster ? 'cr-aj__split' : ''}`}>
             {s.steps.length > 0 && (
               <div>
                 <h3>How it went</h3>
@@ -213,7 +310,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
                 </ol>
               </div>
             )}
-            {s.poster && (
+            {!hasScopes && s.poster && (
               <figure className="cr-aj__poster">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.poster.src} alt={s.poster.label} loading="lazy" decoding="async" />
@@ -223,7 +320,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
           </div>
         )}
 
-        {s.films && s.films.length > 0 && (
+        {!hasScopes && s.films && s.films.length > 0 && (
           <div className="cr-aj__block">
             <h3>Films</h3>
             <div className="cr-aj__films">

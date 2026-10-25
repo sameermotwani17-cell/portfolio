@@ -3483,3 +3483,115 @@ html[data-defer] .uni-stage {
     display: none;
   }
 }
+
+/* scopes of work */
+.cr-scopes {
+  display: grid;
+  gap: 56px;
+}
+.cr-scope {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+  padding-top: 32px;
+  border-top: 1px solid var(--c-line);
+}
+.cr-scope header {
+  position: sticky;
+  top: 24px;
+}
+.cr-scope header > span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--c-accent);
+}
+.cr-scope h4 {
+  margin: 8px 0 12px;
+  font-family: var(--c-head);
+  font-weight: var(--c-head-w);
+  text-transform: var(--c-head-tt);
+  letter-spacing: var(--c-head-ls);
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.05;
+}
+.cr-scope header p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--c-mute);
+}
+.cr-scope ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cr-scope li {
+  padding: 6px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--c-fg);
+}
+.cr-scope__embed {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.cr-scope__embed .cr-aj__films {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.cr-scope__embed .cr-aj__rail figure {
+  flex-basis: min(60vw, 360px);
+}
+.cr-aj__poster--inline {
+  position: static;
+  max-width: 420px;
+}
+.cr-browser {
+  margin: 0;
+  border: 1px solid var(--c-line);
+  border-radius: var(--c-radius);
+  overflow: hidden;
+  background: var(--c-card);
+}
+.cr-browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--c-line);
+}
+.cr-browser__bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c-line);
+}
+.cr-browser__bar a {
+  margin-left: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--c-mute);
+  text-decoration: none;
+}
+.cr-browser__bar a:hover {
+  color: var(--c-accent);
+}
+.cr-browser img {
+  border-radius: 0;
+}
+@media (max-width: 1000px) {
+  .cr-scope {
+    grid-template-columns: 1fr;
+  }
+  .cr-scope header {
+    position: static;
+  }
+  .cr-scope__embed .cr-aj__films {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

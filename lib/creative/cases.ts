@@ -2,6 +2,9 @@ import { albums, retroReleases } from '@/lib/projects'
 import { AJIWOW } from '@/lib/creative/ajiwow'
 import { SHOWROOM } from '@/lib/creative/showroom'
 import type { Work } from '@/lib/creative/works'
+import { SCOPES, type CaseMedia, type CaseFilm, type Scope } from '@/lib/creative/scopes'
+
+export type { CaseMedia, CaseFilm, Scope }
 
 /**
  * Every card in the arc opens one of these: a client style case study sheet.
@@ -9,8 +12,6 @@ import type { Work } from '@/lib/creative/works'
  * on the main site (overview, stats, flow) plus the best matching media from
  * the showroom, so nothing is written twice.
  */
-export type CaseMedia = { src: string; label: string }
-export type CaseFilm = { src: string; poster?: string; title: string; tag: string; ratio: number }
 
 export type CaseStudy = {
   id: string
@@ -32,6 +33,8 @@ export type CaseStudy = {
   poster?: CaseMedia & { ratio: number }
   films?: CaseFilm[]
   accent: string
+  /** each discipline delivered, with an embedded example */
+  scopes?: Scope[]
   /** which look the sheet wears */
   theme: string
   /** the album cover art */
@@ -69,6 +72,12 @@ const MEDIA: Record<string, { rail?: string[]; films?: string[]; railTitle?: str
   },
 }
 
+/** public source for the projects that have one */
+const REPOS: Record<string, string> = {
+  'too-easy': 'https://github.com/sameermotwani17-cell/too-easy',
+  'afro-week': 'https://github.com/sameermotwani17-cell/millennium-hall-booking',
+}
+
 /** which record on the main site a card is built from */
 const RECORD: Record<string, string> = {}
 
@@ -94,6 +103,7 @@ const AJIWOW_CASE: CaseStudy = {
   accent: '#cc4210',
   theme: 'ajiwow',
   cover: '/creative/covers/ajiwow.webp',
+  scopes: SCOPES.ajiwow,
 }
 
 const dedupe = (links: { label: string; href: string }[]) => {
@@ -137,7 +147,11 @@ export function caseFor(work: Work): CaseStudy {
       client: work.client,
       role: work.role,
       when: work.year,
-      links: dedupe([...(d.links ?? []), ...work.links]),
+      links: dedupe([
+        ...(d.links ?? []),
+        ...work.links,
+        ...(REPOS[work.id] ? [{ label: 'Source on GitHub', href: REPOS[work.id] }] : []),
+      ]),
       stats: (d.stats ?? []).slice(0, 4),
       steps: d.flow.map((f, i) => ({
         n: String(i + 1).padStart(2, '0'),
@@ -150,6 +164,7 @@ export function caseFor(work: Work): CaseStudy {
       accent: rec.accent && rec.accent.length === 7 ? rec.accent : '#cc4210',
       theme: work.id,
       cover: `/creative/covers/${work.id}.webp`,
+      scopes: SCOPES[work.id],
     }
   }
 
@@ -170,5 +185,6 @@ export function caseFor(work: Work): CaseStudy {
     accent: '#cc4210',
     theme: work.id,
     cover: `/creative/covers/${work.id}.webp`,
+    scopes: SCOPES[work.id],
   }
 }
