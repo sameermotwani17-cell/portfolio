@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { SHOWROOM, type ShowroomItem } from '@/lib/creative/showroom'
+import { SHOWROOM, SHOWROOM_CATEGORIES, type ShowroomCategory, type ShowroomItem } from '@/lib/creative/showroom'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
-type Filter = 'all' | 'image' | 'video'
-const FILTERS: { id: Filter; label: string }[] = [
-  { id: 'all', label: 'All' },
-  { id: 'image', label: 'Images' },
-  { id: 'video', label: 'Videos' },
+type Filter = 'all' | ShowroomCategory
+const FILTERS: { id: Filter; label: string; count: number }[] = [
+  { id: 'all', label: 'All', count: SHOWROOM.length },
+  ...SHOWROOM_CATEGORIES.map((c) => ({ ...c, count: SHOWROOM.filter((s) => s.cat === c.id).length })),
 ]
 
 /** A wall tile: stills are plain images, videos autoplay muted while on screen. */
@@ -136,7 +135,7 @@ export default function Showroom() {
   const reduced = usePrefersReducedMotion()
   const [filter, setFilter] = useState<Filter>('all')
   const [open, setOpen] = useState<number | null>(null)
-  const items = SHOWROOM.filter((s) => filter === 'all' || s.kind === filter)
+  const items = SHOWROOM.filter((s) => filter === 'all' || s.cat === filter)
 
   return (
     <section id="showroom" className="cr-show" aria-labelledby="cr-show-h">
@@ -154,9 +153,12 @@ export default function Showroom() {
               role="tab"
               aria-selected={filter === f.id}
               data-on={filter === f.id || undefined}
-              onClick={() => setFilter(f.id)}
+              onClick={() => {
+                setFilter(f.id)
+                setOpen(null)
+              }}
             >
-              {f.label}
+              {f.label} <span>{f.count}</span>
             </button>
           ))}
         </div>

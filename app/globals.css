@@ -2851,3 +2851,16 @@ html[data-defer] .uni-stage {
     grid-template-columns: 36px minmax(0, 1fr) 36px;
   }
 }
+
+.cr-show__filters button span {
+  margin-left: 6px;
+  opacity: 0.5;
+  font-size: 10px;
+}
+.cr-show__filters {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 10px 0;
+  background: linear-gradient(#0b0a0d 70%, rgba(11, 10, 13, 0));
+}
