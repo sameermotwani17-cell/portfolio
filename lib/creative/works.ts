@@ -56,7 +56,7 @@ export const WORKS: Work[] = [
     tools: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Next.js', 'Supabase', 'PayPal'],
     description:
       'The first paid job the studio took. Twelve country editions for the 2026 World Cup, 300 numbered pieces each, no restocks, run solo. Morocco got Zellige tiles, Japan got kintsugi through the sakura, Brazil got the rhinestone crest. Three silhouettes per edition, 36 SKUs, 150+ hero images on one locked colour science, with a dedicated prompt layer there only to kill the tells of AI imagery. I built the store it sold from too, Next.js and Supabase with PayPal checkout. It closed out with the tournament.',
-    thumb: `${W}/dk2r.webp`,
+    thumb: `${W}/dk2r-logo.webp`,
     gallery: [1, 2, 3, 4, 5, 6].map((i) => `${W}/dk2r-${i}.webp`),
     links: [
       { label: 'Visit the store', href: 'https://dkai2ray.company/' },
