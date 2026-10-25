@@ -42,7 +42,7 @@ function Tile({ item, reduced, onOpen }: { item: ShowroomItem; reduced: boolean;
         // eslint-disable-next-line @next/next/no-img-element
         <img src={item.src} alt="" loading="lazy" decoding="async" draggable={false} />
       )}
-      {item.kind === 'video' && <span className="cr-show__badge">Video</span>}
+      {item.kind === 'video' && <span className="cr-show__badge">Video · tap for sound</span>}
       <span className="cr-show__cap">
         <b>{item.title}</b>
         <i>{item.tag}</i>

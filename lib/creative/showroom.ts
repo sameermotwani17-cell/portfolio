@@ -3,9 +3,10 @@
  * under the creative arc, sorted into categories. Files live in
  * /public/creative/showroom (webp up to 1600px, mp4 up to 720p/1280p, muted).
  */
-export type ShowroomCategory = 'stills' | 'reels' | 'motion' | 'creators' | 'shorts'
+export type ShowroomCategory = 'films' | 'stills' | 'reels' | 'motion' | 'creators' | 'shorts'
 
 export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
+  { id: 'films', label: 'Trailers & ads' },
   { id: 'stills', label: 'Campaign stills' },
   { id: 'reels', label: 'Brand reels' },
   { id: 'motion', label: 'Motion' },
@@ -50,6 +51,13 @@ const clip = (id: string, cat: ShowroomCategory, title: string, tag: string, rat
   tag,
   ratio,
 })
+
+const FILMS: ShowroomItem[] = [
+  clip('watashi-kerie', 'films', 'Watashi... kirei?', 'Pre-trailer · Halloween 2026', 16 / 9),
+  clip('opus-vs-astra', 'films', 'Opus vs Astra', 'Fight Night intro · AI heavyweights', 4 / 3),
+  clip('horror-teaser', 'films', 'Something big is coming', 'Halloween teaser', 16 / 9),
+  clip('gomiyage-ad', 'films', 'Gomiyage', 'Product ad · Beppu', 16 / 9),
+]
 
 const STILLS: ShowroomItem[] = [
   still('calor-fan', 'Fan alley', 'DK2R · Calor'),
@@ -107,4 +115,4 @@ function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   return out
 }
 
-export const SHOWROOM: ShowroomItem[] = interleave([STILLS, REELS, CREATORS, SHORTS, MOTION])
+export const SHOWROOM: ShowroomItem[] = interleave([FILMS, STILLS, REELS, CREATORS, SHORTS, MOTION])
