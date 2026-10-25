@@ -3,10 +3,11 @@
  * under the creative arc, sorted into categories. Files live in
  * /public/creative/showroom (webp up to 1600px, mp4 up to 720p/1280p, muted).
  */
-export type ShowroomCategory = 'films' | 'stills' | 'graphics' | 'reels' | 'motion' | 'creators' | 'shorts'
+export type ShowroomCategory = 'films' | 'episodes' | 'stills' | 'graphics' | 'reels' | 'motion' | 'creators' | 'shorts'
 
 export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
   { id: 'films', label: 'Trailers & ads' },
+  { id: 'episodes', label: 'Episodes' },
   { id: 'stills', label: 'Campaign stills' },
   { id: 'graphics', label: 'Brand graphics' },
   { id: 'reels', label: 'Brand reels' },
@@ -128,6 +129,14 @@ const MOTION: ShowroomItem[] = [
   clip('2026-07-xs-logoreveal-v1', 'motion', 'Xs logo reveal', 'Xs · brand motion'),
 ]
 
+const EPISODES: ShowroomItem[] = [
+  clip('rp-episode-1', 'episodes', 'Episode 1', 'RETRO Projects · AP House', 960 / 540),
+  clip('rp-episode-2', 'episodes', 'Episode 2', 'RETRO Projects · Formula', 960 / 406),
+  clip('rp-episode-3', 'episodes', 'Episode 3', 'RETRO Projects · ISO'),
+  clip('rp-episode-4', 'episodes', 'Episode 4', 'RETRO Projects · Tokyo', 960 / 536),
+  clip('rp-episode-5', 'episodes', 'Episode 5', 'RETRO Projects · After dark', 960 / 540),
+]
+
 const CREATORS: ShowroomItem[] = [
   clip('fitz-dont-hurt', 'creators', "Don't hurt me", 'Fitz · DayZ'),
   clip('bluecollar-do-it', 'creators', 'Do it for $4K?', 'Blue Collar Business Podcast'),
@@ -164,4 +173,4 @@ function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   return out
 }
 
-export const SHOWROOM: ShowroomItem[] = interleave([FILMS, STILLS, GRAPHICS, REELS, CREATORS, SHORTS, MOTION])
+export const SHOWROOM: ShowroomItem[] = interleave([FILMS, EPISODES, STILLS, GRAPHICS, REELS, CREATORS, SHORTS, MOTION])
