@@ -6,6 +6,7 @@ import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
 import { AnimatePresence } from 'framer-motion'
 import WorkDetail from './WorkDetail'
+import Showroom from './Showroom'
 import CaseStudyOverlay from '@/components/scenes/CaseStudyOverlay'
 import { albums, retroReleases } from '@/lib/projects'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
@@ -78,6 +79,9 @@ export default function CreativeUniverse() {
     window.setTimeout(() => setPhase('live'), LOADER.REVEAL_MS)
   }, [])
 
+  const scrollToShowroom = () =>
+    document.getElementById('showroom')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+
   const go = (href: string, from: 'creative' | 'tech') => (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
     e.preventDefault()
@@ -97,6 +101,7 @@ export default function CreativeUniverse() {
   const live = phase === 'live'
 
   return (
+    <>
     <main className={`cr-universe ${garamond.variable}`} data-phase={phase} data-reduced={reduced || undefined}>
       <div ref={skyRef} className="cr-sky" aria-hidden="true">
         <picture>
@@ -119,6 +124,9 @@ export default function CreativeUniverse() {
           </button>
           <button type="button" onClick={() => setFilter('music')}>
             Music
+          </button>
+          <button type="button" onClick={scrollToShowroom}>
+            Showroom
           </button>
           <a href="/#universe" onClick={go('/#universe', 'creative')}>
             ← Universe
@@ -184,6 +192,11 @@ export default function CreativeUniverse() {
         Retro Studios, Beppu.
       </p>
       {live && (
+        <button type="button" className="cr-cue" onClick={scrollToShowroom}>
+          Showroom ↓
+        </button>
+      )}
+      {live && (
         <p className="cr-hint" aria-hidden="true">
           {mobile ? 'Swipe' : 'Drag · scroll · ← →'}
         </p>
@@ -198,5 +211,7 @@ export default function CreativeUniverse() {
         )}
       </AnimatePresence>
     </main>
+    <Showroom />
+    </>
   )
 }
