@@ -4,7 +4,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
+import { AnimatePresence } from 'framer-motion'
 import WorkDetail from './WorkDetail'
+import CaseStudyOverlay from '@/components/scenes/CaseStudyOverlay'
+import { albums, retroReleases } from '@/lib/projects'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
 import { CATEGORIES, type CategoryId } from '@/lib/creative/categories'
 import { KEYS, LOADER, readFlag, setFlag } from '@/lib/creative/intro'
@@ -19,6 +22,13 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
  * split arrives here after Acts 1–2. Reduced motion: a 300ms crossfade to the
  * finished gallery.
  */
+/** a work that has a full case study on the main site opens that same sheet */
+const CASE_STUDY_ID: Record<string, string> = { 'dk2r-mexico': 'dk2r', 'dk2r-morocco': 'dk2r' }
+function caseStudyFor(id: string) {
+  const key = CASE_STUDY_ID[id] ?? id
+  return retroReleases.find((r) => r.id === key) ?? albums.find((a) => a.id === key) ?? null
+}
+
 const SKY = { desktop: '/creative/sky-desktop.webp', mobile: '/creative/sky-mobile.webp' }
 
 export default function CreativeUniverse() {
@@ -179,7 +189,14 @@ export default function CreativeUniverse() {
         </p>
       )}
 
-      {detail && <WorkDetail work={detail.work} from={detail.rect} onClose={() => setDetail(null)} />}
+      {detail && !caseStudyFor(detail.work.id) && (
+        <WorkDetail work={detail.work} from={detail.rect} onClose={() => setDetail(null)} />
+      )}
+      <AnimatePresence>
+        {detail && caseStudyFor(detail.work.id) && (
+          <CaseStudyOverlay item={caseStudyFor(detail.work.id)!} onClose={() => setDetail(null)} />
+        )}
+      </AnimatePresence>
     </main>
   )
 }
