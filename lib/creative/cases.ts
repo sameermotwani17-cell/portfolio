@@ -92,7 +92,7 @@ const AJIWOW_CASE: CaseStudy = {
   titleJp: AJIWOW.titleJp,
   jpName: AJIWOW.jp,
   intro: AJIWOW.intro,
-  client: 'Ajiwow Inc. · Tokyo',
+  client: 'Ajiwow Inc. · Tokyo · Techstars Tokyo 2026',
   role: AJIWOW.role,
   when: AJIWOW.when,
   links: [...AJIWOW.links],

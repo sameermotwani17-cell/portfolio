@@ -107,10 +107,10 @@ export const WORKS: Work[] = [
     category: 'brand',
     client: 'Ajiwow Inc. · Tokyo',
     year: '2026',
-    role: 'Brand system · Website · Poster · Short-form video',
-    tools: ['Brand identity', 'Next.js', 'Design tokens', 'Short-form edit'],
+    role: 'Brand system · Website on Azure · Poster · Video',
+    tools: ['Brand identity', 'Astro', 'Azure', 'GitHub Actions', 'Design tokens', 'Short-form edit'],
     description:
-      'The full identity for a Tokyo food-tech startup: logo, an 18 page brand system, ten templates, a bilingual website live on their domain, a tourist poster and launch films.',
+      'Branding and launching a Sony-born food-tech startup for Techstars Tokyo: an 18 page brand system, a bilingual website deployed on Azure, a tourist poster, the Demo Day video direction and short-form videos, built end to end with the CEO.',
     thumb: '/creative/works/sleeve-ajiwow.webp',
     links: [
       { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },

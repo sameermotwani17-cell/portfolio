@@ -8,23 +8,23 @@ const A = '/creative/ajiwow'
 export const AJIWOW = {
   name: 'Ajiwow',
   jp: '味わう株式会社',
-  kicker: 'Brand system · Website · Launch content',
+  kicker: 'Brand system · Bilingual website on Azure · Poster · Video',
   title: 'Great cooking, replayed.',
   titleJp: '料理の感動は、再現できる。',
   intro:
-    'Ajiwow records a chef cooking and replays it on an induction cooktop as step by step navigation. It is a Tokyo startup with a working product and no identity. I built the brand system, the bilingual website and the first wave of launch content.',
-  role: 'Brand identity · Web design and build · Poster · Short-form video',
-  when: 'September to October 2026',
+    'Ajiwow, a Tokyo food-tech startup in the Techstars Tokyo 2026 cohort, born inside Sony, records a chef’s cooking to the second, the degree and the gram, and replays it on an induction cooktop. It had a working product and no identity. In about three weeks, working directly with the CEO, I built the brand system, a bilingual website draft deployed on Azure, a tourist poster, the direction of the Demo Day video and a run of short-form videos.',
+  role: 'Brand identity · Web design, build and Azure deploy · Poster · Video direction · Short-form',
+  when: 'Sep 30 to Oct 2026',
   links: [
     { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },
     { label: '日本語サイト', href: 'https://ajiwow.co.jp/' },
     { label: 'ROKU SHOKU 録食', href: 'https://ajiwow.co.jp/en/technology/' },
   ],
   stats: [
-    { value: '4 → 1', label: 'Brand directions pitched, one chosen' },
+    { value: '4 days', label: 'From first quote to an approved brand system' },
     { value: '18', label: 'Page brand guidelines, in 4K' },
     { value: '10', label: 'Ready to use templates' },
-    { value: '2', label: 'Languages on the website, JP and EN' },
+    { value: '31', label: 'Point automated check on every print export' },
   ],
   swatches: [
     { name: 'Navy', hex: '#00357A' },
@@ -36,32 +36,32 @@ export const AJIWOW = {
     {
       n: '01',
       title: 'The brief',
-      body: 'A startup with a finished product, a subscription for restaurant chains and hotels, and no logo, no colours and a one page site that Google did not trust. The ask was professional, trustworthy and high tech. Not gaming, not fashion, not casual.',
+      body: 'A startup with a finished product, a subscription for restaurant chains and hotels, and no logo, no colours and a one page site. Four deliverables at the start: a bilingual website, a product demo video, a tourist poster and a tourist short. About 14 hours a week, one approver, the CEO.',
     },
     {
       n: '02',
       title: 'Four directions, one idea',
-      body: 'I pitched four directions: Corporate Navy, Heat as Data, Ink and Paper, and The Record. The Record won. Record cooking like music, and the coil of an induction cooktop already looks like a record. Ember stayed as the single accent.',
+      body: 'Four directions in one day: Corporate Navy, Heat as Data, Ink and Paper, and The Record. The CEO narrowed it to two and approved The Record with the Ember red from Heat as Data. Music was recorded, film was recorded, now cooking: the groove of a record doubles as the coil of an induction cooktop.',
     },
     {
       n: '03',
-      title: 'The mark',
-      body: 'The first symbol read the wrong way, so I redrew it. The final one colour mark is a set of bold grooves. The colour version is the same rings run through a heat scale, a thermal picture of a coil.',
+      title: 'The mark, redrawn',
+      body: 'The first symbol read the wrong way, and Ajiwow is firmly anti-war, so I redrew it as closed, bold grooves with no loose ends. Approved the same day. The colour version is the same rings through a heat scale, a thermal picture of a coil.',
     },
     {
       n: '04',
       title: 'Brand system v1.0',
-      body: 'An 18 page guide, vector logos in every colourway, colour and type tokens as CSS and JSON, free fonts, graphics and ten templates for slides, posters, social, video end cards and business cards. It also ships as a design system and a skill, so the team can make on brand work without me.',
+      body: 'An 18 page guide, vector logos in every colourway, colour and type tokens as CSS and JSON, free fonts instead of a yearly licence, graphics and ten templates. 166 files in all, plus a Claude design system and a skill so the team can make on brand work without me. Approved on October 3.',
     },
     {
       n: '05',
-      title: 'The website',
-      body: 'A full bilingual rebuild on the new tokens: an opening record player, a three step record, analyse and playback story, business and individual paths, FAQ and contact. Built for search and for phones, and live on the company domain.',
+      title: 'The website draft',
+      body: 'A bilingual Japanese and English site built in Astro on the new tokens, deployed on Azure Static Web Apps in the client’s own account with a push-to-deploy pipeline and preview links. The finish was handed to their in-house engineers on October 14.',
     },
     {
       n: '06',
-      title: 'Poster and film',
-      body: 'A tourist cooking experience poster in a second, Ink and Paper language so it reads Japanese at a glance while keeping the Ajiwow lockup. Then the short form films for TikTok and Instagram, in English and Japanese cuts.',
+      title: 'Poster, video and shorts',
+      body: 'A tourist poster in a second, Ink and Paper language, designed through five rounds of feedback in about 48 hours. The Demo Day product video, directed from a storyboard and cut by an editor. And short-form videos for TikTok and Reels, with the cooktop’s own voice as a signature sound.',
     },
   ],
   brand: [

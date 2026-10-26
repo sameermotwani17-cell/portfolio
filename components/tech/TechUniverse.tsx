@@ -35,25 +35,30 @@ const NAV = [
 ] as const
 
 function BuildCard({ b, open, onToggle }: { b: Build; open: boolean; onToggle: () => void }) {
-  const r = b.record
-  const stats = r.detail.stats ?? []
   return (
-    <article className="tech-build" data-open={open || undefined} style={{ ['--b' as string]: r.accent }}>
+    <article className="tech-build" data-open={open || undefined} style={{ ['--b' as string]: b.accent }}>
       <button type="button" className="tech-build__head" onClick={onToggle} aria-expanded={open} aria-controls={`b-${b.id}`}>
         <span className="tech-build__idx">{String(TECH_BUILDS.indexOf(b) + 1).padStart(2, '0')}</span>
         <span className="tech-build__title">
-          <b>{r.title}</b>
-          <i>{r.subtitle}</i>
+          <b>{b.title}</b>
+          <i>{b.subtitle}</i>
         </span>
-        <span className="tech-build__tag">{r.tag}</span>
+        <span className="tech-build__tag">{b.tag}</span>
         <span className="tech-build__plus" aria-hidden="true">
           {open ? '−' : '+'}
         </span>
       </button>
-      <p className="tech-build__hook">{b.hook}</p>
-      {stats.length > 0 && (
+      <p className="tech-plain">
+        <span>In plain English</span>
+        {b.plain}
+      </p>
+      <p className="tech-build__hook">
+        <span>Technically</span>
+        {b.hook}
+      </p>
+      {b.stats.length > 0 && (
         <dl className="tech-build__stats">
-          {stats.slice(0, 4).map((s) => (
+          {b.stats.map((s) => (
             <div key={s.label}>
               <dt>{s.value}</dt>
               <dd>{s.label}</dd>
@@ -62,15 +67,15 @@ function BuildCard({ b, open, onToggle }: { b: Build; open: boolean; onToggle: (
         </dl>
       )}
       <ul className="tech-chips" aria-label="Stack">
-        {('tech' in r ? r.tech : []).map((t) => (
+        {b.tech.map((t) => (
           <li key={t}>{t}</li>
         ))}
       </ul>
       {open && (
         <div id={`b-${b.id}`} className="tech-build__body">
-          <p className="tech-build__over">{r.detail.overview}</p>
+          <p className="tech-build__over">{b.overview}</p>
           <ol className="tech-flow">
-            {r.detail.flow.map((f, i) => (
+            {b.flow.map((f, i) => (
               <li key={f.label}>
                 <span className="tech-flow__n">{String(i + 1).padStart(2, '0')}</span>
                 <div>
@@ -87,9 +92,9 @@ function BuildCard({ b, open, onToggle }: { b: Build; open: boolean; onToggle: (
               </li>
             ))}
           </ol>
-          {(b.links.length > 0 || (r.detail.links ?? []).length > 0) && (
+          {b.links.length > 0 && (
             <div className="tech-links">
-              {[...b.links, ...(r.detail.links ?? []).filter((l) => !b.links.some((x) => x.href === l.href))].map((l) => (
+              {b.links.map((l) => (
                 <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
                   {l.label} ↗
                 </a>
@@ -181,6 +186,7 @@ export default function TechUniverse() {
             <span>$</span> cat summary.txt
           </p>
           <p className="tech-sum">{P.summary}</p>
+          <p className="tech-sum tech-sum--plain">{P.plain}</p>
           <div className="tech-cta">
             <a href={`mailto:${P.email}`}>Email me</a>
             <a href={P.github} target="_blank" rel="noopener noreferrer">
@@ -290,10 +296,32 @@ export default function TechUniverse() {
 
         <section id="skills" className="tech-sec" aria-labelledby="tech-s">
           <h2 id="tech-s" className="tech-h">
-            <span>04</span> Skills, with proof
+            <span>04</span> Technical skills
           </h2>
-          <p className="tech-lede">Every skill is tied to the build that shows it. A dot means it was used in that build.</p>
+          <p className="tech-lede">Each skill: the technical name, what it means in plain words, and the builds that prove it.</p>
+          <div className="tech-skills">
+            {TECH_SKILLS.map((g) => (
+              <div key={g.group} className="tech-skillgroup">
+                <h3>{g.group}</h3>
+                <ul>
+                  {g.skills.map((k) => (
+                    <li key={k.name}>
+                      <b>{k.name}</b>
+                      <p>{k.plain}</p>
+                      <span>
+                        {k.used.map((u) => (
+                          <i key={u}>{MATRIX_COLS.find((c) => c.id === u)?.label}</i>
+                        ))}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <h3 className="tech-sub">Evidence map</h3>
           <div className="tech-matrix-wrap">
+
             <table className="tech-matrix">
               <thead>
                 <tr>

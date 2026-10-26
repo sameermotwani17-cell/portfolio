@@ -240,15 +240,20 @@ export const SCOPES: Record<string, Scope[]> = {
     {
       title: 'Brand identity',
       summary:
-        'Four directions pitched, one chosen. The Record: record cooking like music, because the coil of an induction cooktop already looks like a record. A one colour mark and a thermal colour mark, with Ember as the single accent.',
-      bullets: ['Logo, lockups and a heat-scale colour system', '18 page guidelines, 4K', 'Tokens as CSS and JSON, free fonts', 'Shipped as a design system and skill'],
+        'Four directions pitched in a day, one chosen. The Record: record cooking like music, because the coil of an induction cooktop already looks like a record. A one colour mark and a thermal colour mark, with Ember as the only accent.',
+      bullets: [
+        'Logo, lockups and a heat-scale colour system',
+        '18 page guidelines, 4K, 166 files in the pack',
+        'Tokens as CSS and JSON, free fonts instead of a yearly licence',
+        'A Claude design system and skill, so the team can work without me',
+      ],
       embeds: [{ kind: 'swatches', items: [...AJIWOW.swatches] }, { kind: 'images', items: [...AJIWOW.brand] }],
     },
     {
-      title: 'Website',
+      title: 'Website and Azure deploy',
       summary:
-        'A full bilingual rebuild on the new tokens: an opening record player, a three step record, analyse and playback story, business and individual paths, FAQ and contact. Search ready and live on the company domain.',
-      bullets: ['Japanese and English', 'Mobile first', 'Contact page and FAQ'],
+        'A bilingual Japanese and English site built in Astro on the new tokens: an opening record player, a record, translate and replay story, business and individual paths, FAQ and contact. Deployed on Azure Static Web Apps with push-to-deploy and preview links. The finish was handed to in-house engineers.',
+      bullets: ['Astro static site, JA at the root and EN under /en', 'GitHub Actions deploy, a preview link per pull request', 'Repo moved into the client’s own GitHub organisation', 'First draft delivered in three days from access'],
       embeds: [
         site('/creative/ajiwow/site-hero.webp', 'ajiwow.co.jp/en, the opening record player', 'https://ajiwow.co.jp/en/'),
         { kind: 'images', items: AJIWOW.site.slice(1).map((x) => ({ ...x })) },
@@ -257,15 +262,22 @@ export const SCOPES: Record<string, Scope[]> = {
     {
       title: 'Print poster',
       summary:
-        'A tourist cooking experience poster in a second visual language, Ink and Paper, so it reads Japanese at a glance while keeping the Ajiwow lockup and the approved copy word for word.',
-      bullets: ['Second system derived from the first', 'B2 and A4 handout versions', 'Print-ready PDF and 300 dpi PNG'],
+        'A tourist cooking experience poster in a second visual language, Ink and Paper, so it reads Japanese at a glance while keeping the Ajiwow lockup. Four drafts in about 48 hours through five rounds of feedback. The real product is never redrawn, and the imagery was supplied by the client.',
+      bullets: ['Second system derived from the first, with a red hanko seal', 'A4 and A2 versions plus a 4K image', 'A scripted render and a 31 point automated check against the feedback'],
       embeds: [{ kind: 'poster', ...AJIWOW.poster }],
     },
     {
-      title: 'Short-form film',
+      title: 'Demo Day video direction',
       summary:
-        'Launch films for TikTok and Instagram: a stove from 2050, a first-time cook who “can’t cook, like at all”, in English and Japanese cuts.',
-      bullets: ['Script and edit', 'English and Japanese captions', 'Vertical 1080 x 1920'],
+        'The product-only cut for a three minute Techstars pitch: a storyboard of Record, Analyse and Transform, then Playback, cut from 90 seconds of source to 25 to 30. I directed it and picked the shots, and the edit was done by an editor.',
+      bullets: ['Storyboard and shot selection', 'Directed an external editor', 'Held back until Demo Day'],
+      embeds: [],
+    },
+    {
+      title: 'Short-form video',
+      summary:
+        'Short videos for TikTok and Reels cut from guest cooking-class footage in a Gen Z, first person style. The cooktop’s own voice became the signature sound, since a business account cannot use trending music, and the final was re-voiced five ways in one day.',
+      bullets: ['Concepts, edit and captions in English and Japanese', 'Stem separation and loudness mastering, so a voice can be swapped cleanly', 'Vertical 1080 x 1920'],
       embeds: [{ kind: 'films', items: AJIWOW.films.map((f) => ({ src: f.src, poster: f.poster, title: f.title, tag: f.tag, ratio: f.ratio })) }],
     },
   ],

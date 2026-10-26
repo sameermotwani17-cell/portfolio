@@ -1,16 +1,19 @@
 /**
- * The tech side. Every claim here comes from the CV (public/cv.pdf) or from the
- * project records in lib/projects.ts. Nothing is invented. Edit the numbers in
- * one place and the page follows.
+ * The tech side. Every claim here comes from the CV (public/cv.pdf), the
+ * project records in lib/projects.ts or the Ajiwow portfolio record. Nothing is
+ * invented, and nothing from the "keep private" list is used (no fees, no IDs,
+ * no preview URLs). Edit the numbers in one place and the page follows.
  */
-import { albums, vault, type Album, type VaultItem } from '@/lib/projects'
+import { albums, vault, type FlowStage, type ProjectLink, type ProjectStat } from '@/lib/projects'
 
 export const TECH_PROFILE = {
   name: 'Sameer Motwani',
   role: 'Software engineer · AI systems',
   where: 'Beppu, Japan · remote',
   summary:
-    'I build and ship production software and AI systems. A slide-delivery rebuild for a live EdTech platform, a server-authoritative multiplayer game, a credit-risk model that reached a national final, and a civic-tech PWA piloted with a city. I measure first, keep a fallback for every failure, and verify with data instead of trusting a report.',
+    'I build and ship production software and AI systems. A slide-delivery rebuild for a live EdTech platform, a server-authoritative multiplayer game, a credit-risk model that reached a national final, and a civic-tech app piloted with a city. I measure first, keep a fallback for every failure, and verify with data instead of trusting a report.',
+  plain:
+    'In plain English: I make software that works for real people on bad internet, I test it honestly, and I plan for the day something breaks.',
   email: 'sameermotwani17@gmail.com',
   github: 'https://github.com/sameermotwani17-cell',
   linkedin: 'https://www.linkedin.com/in/sameer-motwani-2625a62b5',
@@ -27,8 +30,8 @@ export const TECH_METRICS: Metric[] = [
   { value: '520+', label: 'organic users, 95.3% adoption intent (n=400)', src: 'GOMI Snap' },
   { value: '13', label: 'curriculum standards mapped across UK, India and USA', src: "Stick'Em" },
   { value: '30 Hz', label: 'server-authoritative tick with client-side prediction', src: 'SCRAPYARD' },
+  { value: '31', label: 'point automated check on every print export', src: 'Ajiwow' },
   { value: '36', label: 'SKUs on a live Next.js, Supabase, PayPal and Stripe store', src: 'DK2R' },
-  { value: '732', label: 'seats in live availability behind a QR e-ticket flow', src: 'AFRO WEEK' },
 ]
 
 export type Role = {
@@ -52,6 +55,20 @@ export const TECH_EXPERIENCE: Role[] = [
       'Built a virtualized snap-scroll slide viewer (current slide plus or minus 2) with dual IntersectionObserver media gating, validated against 55+ decks and tested across network throttling profiles.',
       'Found and closed a public-bundle secret exposure (NEXT_PUBLIC_ prefix) before merge. Kept SQL-verified QA over agent self-reports and strict branch isolation, zero commits to main.',
       'Shipped a curriculum-alignment engine mapping STEM lessons to 13 government standards, with index-only selection against hallucination and two-tier validation.',
+    ],
+  },
+  {
+    org: 'Ajiwow Inc. (ROKU SHOKU)',
+    note: 'Tokyo food-tech startup · Techstars Tokyo 2026',
+    title: 'Freelance Creative Technologist',
+    when: 'Sep 30 to Oct 2026',
+    where: 'Tokyo · remote',
+    bullets: [
+      'Built a JA/EN Astro site and deployed it on Azure Static Web Apps in the client’s own tenant, with a GitHub Actions push-to-deploy pipeline and per-PR preview URLs. The finish was handed to in-house engineers.',
+      'Set up company-grade source control: the repo moved into the client’s GitHub org with history intact, SSH identity separation, Copilot Business, and a rule that AI reviews before engineers do.',
+      'Scripted a print pipeline in Python: one master file out to print PDFs and share PDFs under 10 MB, with a 31-point automated check against client feedback.',
+      'Audio pipeline: stem separation (demucs), AI voice variants (ElevenLabs) and loudness mastering to -14 LUFS, so a voiceover can be swapped without losing the music.',
+      'Shipped Brand System v1.0 in 2 days: an 18-page guide, colour and type tokens as CSS and JSON, a Claude design system and a skill the team can reuse.',
     ],
   },
   {
@@ -96,60 +113,162 @@ export type BuildLink = { label: string; href: string }
 
 export type Build = {
   id: string
-  /** the record in lib/projects.ts */
-  record: Album | VaultItem
+  title: string
+  subtitle: string
+  tag: string
+  accent: string
+  tech: string[]
   /** one-line technical hook */
   hook: string
+  /** the same thing, for a human */
+  plain: string
+  overview: string
+  stats: ProjectStat[]
+  flow: FlowStage[]
   links: BuildLink[]
 }
 
 const rec = (id: string) => {
   const r = [...albums, ...vault].find((x) => x.id === id)
   if (!r) throw new Error(`tech build record missing: ${id}`)
-  return r as Album | VaultItem
+  return r
+}
+
+const fromRecord = (id: string, hook: string, plain: string, links: BuildLink[]): Build => {
+  const r = rec(id)
+  const extra: ProjectLink[] = (r.detail.links ?? []).filter((l) => !links.some((x) => x.href === l.href))
+  return {
+    id,
+    title: r.title,
+    subtitle: r.subtitle,
+    tag: r.tag,
+    accent: r.accent,
+    tech: 'tech' in r ? r.tech : [],
+    hook,
+    plain,
+    overview: r.detail.overview,
+    stats: (r.detail.stats ?? []).slice(0, 4),
+    flow: r.detail.flow,
+    links: [...links, ...extra],
+  }
 }
 
 /** the flagship engineering case files */
 export const TECH_BUILDS: Build[] = [
+  fromRecord(
+    'slideviewer',
+    'Pre-render once, serve WebP from a CDN, keep the iframe as the fallback.',
+    'Teachers on slow internet were staring at a black screen. I turned each lesson into small pre-made pictures that load almost instantly, and kept the old way as a safety net so a lesson never goes blank.',
+    [],
+  ),
   {
-    id: 'slideviewer',
-    record: rec('slideviewer'),
-    hook: 'Pre-render once, serve WebP from a CDN, keep the iframe as the fallback.',
-    links: [],
+    id: 'ajiwow',
+    title: 'Ajiwow site and pipelines',
+    subtitle: 'Brand, bilingual site and CI/CD on Azure',
+    tag: 'Freelance Creative Technologist · Ajiwow Inc. · Sep to Oct 2026',
+    accent: '#cc4210',
+    tech: ['Astro', 'Tailwind v4', 'Astro i18n', 'Azure Static Web Apps', 'GitHub Actions', 'Python', 'demucs', 'ElevenLabs'],
+    hook: 'Push to main, and it is live: Astro on Azure Static Web Apps with preview URLs per pull request.',
+    plain:
+      'A food-tech startup needed a brand, a Japanese and English website, a poster and videos, fast. I built the website so it publishes itself whenever code is pushed, and scripted the poster and audio work so a change takes minutes, not a redo.',
+    overview:
+      'Ajiwow records a chef’s cooking to the second, degree and gram and replays it on an induction cooktop. As the only builder on a three-week engagement I shipped the brand system, a bilingual website draft on the client’s own Azure tenant, a print pipeline and the audio tooling for short videos, then handed the website finish to their in-house engineers.',
+    stats: [
+      { value: '4 days', label: 'From first quote to an approved brand system' },
+      { value: '31', label: 'Point automated check on every print export' },
+      { value: '2', label: 'Languages, JA and EN, from one Astro codebase' },
+      { value: '-14 LUFS', label: 'Loudness target for every mastered video' },
+    ],
+    flow: [
+      {
+        label: 'the brief',
+        headline: 'A product with no identity and a hard time cap',
+        points: [
+          'Four deliverables: a bilingual website, a demo video, a tourist poster and a tourist short',
+          'About 14 hours a week inside a 28-hour weekly cap alongside a full course load',
+          'One approver, the CEO, so every round had to be fast and clear',
+        ],
+      },
+      {
+        label: 'the stack',
+        headline: 'Static, bilingual, on the client’s own cloud',
+        points: [
+          'Astro 7 static build on Node 22 with Tailwind v4 and the brand tokens',
+          'Astro i18n routing, Japanese at the root and English under /en, with a controlled glossary',
+          'Azure Static Web Apps on the free plan, provisioned in the client’s own tenant',
+        ],
+      },
+      {
+        label: 'the pipeline',
+        headline: 'Push-to-deploy from day one',
+        points: [
+          'GitHub Actions builds and deploys every push to main',
+          'Per-pull-request preview URLs so the CEO could review before anything shipped',
+          'DNS cutover planned with the client’s engineer: a CNAME for www and a TXT record to verify the apex',
+        ],
+      },
+      {
+        label: 'the hygiene',
+        headline: 'Work that is easy to take over',
+        points: [
+          'Repo moved from a personal account into the client’s GitHub org with history intact',
+          'SSH keys per identity, so company and personal work never mix',
+          'AI reviews first, then humans: the client adopted that as a rule',
+        ],
+      },
+      {
+        label: 'the print and audio kit',
+        headline: 'Scripts instead of redos',
+        points: [
+          'Python render kit: one master file out to print PDFs and share PDFs under 10 MB, then a 31-point check',
+          'Stem separation with demucs, AI voice variants with ElevenLabs, loudness mastering to -14 LUFS and -1 dBTP',
+          'A voiceover swapped in minutes without losing the music or sound effects',
+        ],
+      },
+      {
+        label: 'the handoff',
+        headline: 'Draft delivered, finish handed over',
+        points: [
+          'First draft delivered on day 9, then the finish moved to in-house engineers',
+          'Brand pack, tokens and a design skill shipped so the team can work without me',
+        ],
+      },
+    ],
+    links: [{ label: 'ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' }],
   },
-  {
-    id: 'scrapyard',
-    record: rec('scrapyard'),
-    hook: 'A ~200-line spec executed milestone by milestone: server-authoritative netcode on Durable Objects.',
-    links: [{ label: 'Play it', href: 'https://scrapyard-lake.vercel.app' }],
-  },
-  {
-    id: 'aihack-2026',
-    record: rec('aihack-2026'),
-    hook: 'Temporal drift found, dual validation designed, a lost pipeline rebuilt from rank arrays.',
-    links: [],
-  },
-  {
-    id: 'stickem-curriculum',
-    record: rec('stickem-curriculum'),
-    hook: 'The model picks indices, never writes standards. Two-tier validation with one automatic retry.',
-    links: [],
-  },
-  {
-    id: 'gomi-snap',
-    record: rec('gomi-snap'),
-    hook: 'GPT-4V in front of a rule engine reverse-engineered from municipal PDFs.',
-    links: [{ label: 'GOMI Snap 2.0', href: 'https://gomisnap.org/2point0' }],
-  },
-  {
-    id: 'miru',
-    record: rec('miru'),
-    hook: 'A voice interviewer on Claude, scored on what Japanese hiring weighs. 72 hours.',
-    links: [
+  fromRecord(
+    'scrapyard',
+    'A ~200-line spec executed milestone by milestone: server-authoritative netcode on Durable Objects.',
+    'I wrote a two-page plan and let an AI build a real multiplayer shooter from it in a day. The server decides who got shot, so nobody can cheat, and your own player moves instantly so it never feels laggy.',
+    [{ label: 'Play it', href: 'https://scrapyard-lake.vercel.app' }],
+  ),
+  fromRecord(
+    'aihack-2026',
+    'Temporal drift found, dual validation designed, a lost pipeline rebuilt from rank arrays.',
+    'I trained models to guess who might not repay a loan. The applicants changed over time, so a model that looked great stopped working. I tested on future data to stay honest, and when we lost our code I rebuilt it from the results.',
+    [],
+  ),
+  fromRecord(
+    'stickem-curriculum',
+    'The model picks indices, never writes standards. Two-tier validation with one automatic retry.',
+    'A teacher picks a lesson and the tool shows which official curriculum goals it covers. The AI can only choose from a real list, so it cannot make up fake standards.',
+    [],
+  ),
+  fromRecord(
+    'gomi-snap',
+    'GPT-4V in front of a rule engine reverse-engineered from municipal PDFs.',
+    'Take a photo of your rubbish and get told exactly how to sort it under Beppu’s 20+ categories. The app reads the photo, then checks the city’s own rules.',
+    [{ label: 'GOMI Snap 2.0', href: 'https://gomisnap.org/2point0' }],
+  ),
+  fromRecord(
+    'miru',
+    'A voice interviewer on Claude, scored on what Japanese hiring weighs. 72 hours.',
+    'A practice job interview in voice, run by a Japanese-style interviewer, followed by an honest English debrief on how you came across.',
+    [
       { label: 'Frontend', href: 'https://github.com/sameermotwani17-cell/miru-frontend' },
       { label: 'Backend', href: 'https://github.com/sameermotwani17-cell/miru-backend' },
     ],
-  },
+  ),
 ]
 
 export type WebBuild = { id: string; name: string; what: string; stack: string[]; live: string; repo?: string }
@@ -210,8 +329,6 @@ export const TECH_WEB: WebBuild[] = [
   },
 ]
 
-export type SkillGroup = { group: string; skills: { name: string; used: string[] }[] }
-
 /** column codes for the evidence matrix */
 export const MATRIX_COLS = [
   { id: 'sv', label: 'SlideViewer' },
@@ -221,44 +338,52 @@ export const MATRIX_COLS = [
   { id: 'mr', label: 'MIRU' },
   { id: 'sy', label: 'SCRAPYARD' },
   { id: 'dk', label: 'DK2R' },
+  { id: 'aj', label: 'Ajiwow' },
 ] as const
 
-/** each skill, and the builds that prove it */
+export type Skill = { name: string; plain: string; used: string[] }
+export type SkillGroup = { group: string; skills: Skill[] }
+
+/** each skill: the technical name, what it means for a human, and the builds that prove it */
 export const TECH_SKILLS: SkillGroup[] = [
   {
     group: 'Programming',
     skills: [
-      { name: 'TypeScript', used: ['gs', 'mr'] },
-      { name: 'JavaScript', used: ['ce', 'sy'] },
-      { name: 'Python', used: ['ai', 'mr'] },
-      { name: 'SQL', used: ['sv', 'dk'] },
-      { name: 'React', used: ['ce', 'gs'] },
-      { name: 'Next.js', used: ['sv', 'mr', 'dk'] },
-      { name: 'FastAPI', used: ['mr'] },
-      { name: 'Node and Express', used: ['ce', 'gs'] },
-      { name: 'Three.js and WebSockets', used: ['sy'] },
+      { name: 'TypeScript', plain: 'JavaScript with a safety net. The editor catches whole classes of mistakes before the code ever runs.', used: ['gs', 'mr'] },
+      { name: 'JavaScript', plain: 'The language of the web. I use it on the page and on the server.', used: ['ce', 'sy'] },
+      { name: 'Python', plain: 'My tool for data, machine learning and backend services.', used: ['ai', 'mr', 'aj'] },
+      { name: 'SQL', plain: 'Asking a database exact questions. I also use it to check what really happened instead of trusting a report.', used: ['sv', 'dk'] },
+      { name: 'React', plain: 'Builds screens out of small reusable pieces that update when the data changes.', used: ['ce', 'gs'] },
+      { name: 'Next.js', plain: 'Turns React into fast, search-friendly sites and apps with the server and the page in one project.', used: ['sv', 'mr', 'dk'] },
+      { name: 'Astro and i18n', plain: 'A site builder that ships almost no JavaScript, with a Japanese and an English version of every page.', used: ['aj'] },
+      { name: 'FastAPI', plain: 'A Python framework for the server side: the part that answers when the screen asks for something.', used: ['mr'] },
+      { name: 'Node and Express', plain: 'JavaScript on the server, used for small, readable APIs.', used: ['ce', 'gs'] },
+      { name: 'Three.js and WebSockets', plain: '3D in the browser, and a live open line between every player and the server.', used: ['sy'] },
     ],
   },
   {
     group: 'AI and ML',
     skills: [
-      { name: 'LightGBM, CatBoost, XGBoost', used: ['ai'] },
-      { name: 'Optuna and scikit-learn', used: ['ai'] },
-      { name: 'Claude API', used: ['mr', 'sy'] },
-      { name: 'OpenAI APIs and vision', used: ['gs', 'ce'] },
-      { name: 'Prompt architecture', used: ['dk'] },
-      { name: 'LLM evaluation design', used: ['ce', 'mr'] },
+      { name: 'LightGBM, CatBoost, XGBoost', plain: 'Models made of many small decision trees. The standard way to predict from tables of data, like who may default.', used: ['ai'] },
+      { name: 'Optuna and scikit-learn', plain: 'Tools that tune models automatically and test them fairly.', used: ['ai'] },
+      { name: 'Claude API', plain: 'Building features on top of Claude: voice interviews, agents and AI-written code held to tests.', used: ['mr', 'sy', 'aj'] },
+      { name: 'OpenAI APIs and vision', plain: 'Using GPT models to read photos and text inside real products.', used: ['gs', 'ce'] },
+      { name: 'Prompt architecture', plain: 'Prompts written as layered, reusable systems, so 150+ images keep one look.', used: ['dk'] },
+      { name: 'LLM evaluation design', plain: 'Checking an AI’s answers are valid: index-only picks, two checks, one retry.', used: ['ce', 'mr'] },
+      { name: 'Audio and voice pipelines', plain: 'Split music from speech, swap in an AI voice, and master the loudness to broadcast level.', used: ['aj'] },
     ],
   },
   {
     group: 'Infrastructure',
     skills: [
-      { name: 'Supabase and Postgres', used: ['sv', 'dk'] },
-      { name: 'Vercel', used: ['sy', 'dk'] },
-      { name: 'Cloudflare Durable Objects', used: ['sy'] },
-      { name: 'Google Cloud APIs', used: ['sv'] },
-      { name: 'CDN pipelines and virtualization', used: ['sv'] },
-      { name: 'Automated testing', used: ['sy'] },
+      { name: 'Supabase and Postgres', plain: 'A hosted database with file storage: where the data and the images live.', used: ['sv', 'dk'] },
+      { name: 'Vercel', plain: 'Hosting that publishes every change automatically.', used: ['sy', 'dk'] },
+      { name: 'Azure Static Web Apps', plain: 'Microsoft’s hosting for websites, set up inside the client’s own account.', used: ['aj'] },
+      { name: 'GitHub Actions CI/CD', plain: 'Every push is built and published by a robot, with a preview link per change.', used: ['aj'] },
+      { name: 'Cloudflare Durable Objects', plain: 'A tiny always-on server for each game room, close to the players.', used: ['sy'] },
+      { name: 'Google Cloud APIs', plain: 'Reading Google Slides by code, to turn whole decks into images.', used: ['sv'] },
+      { name: 'CDN pipelines and virtualization', plain: 'Serve files from servers near the user, and only draw what is on screen.', used: ['sv'] },
+      { name: 'Automated testing', plain: '91 tests that must pass before a milestone counts as done.', used: ['sy'] },
     ],
   },
 ]
@@ -295,6 +420,11 @@ export const TECH_PRINCIPLES: { title: string; body: string; proof: string }[] =
     title: 'Spec first, tests as gates',
     body: 'A ~200-line spec, executed in milestones, each gated by proof of run and 91 automated tests.',
     proof: 'SCRAPYARD',
+  },
+  {
+    title: 'Script it, then check it',
+    body: 'One master file becomes every print export, and a 31-point check runs against the client’s feedback before anyone sees it.',
+    proof: 'Ajiwow',
   },
   {
     title: 'Close security gaps early',
