@@ -184,9 +184,10 @@ const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
       'Talking-head shorts about the studio, the music and life in Beppu, written and cut by me. Desire is out now.',
     ],
     facts: [
-      { value: '18.3K', label: 'Likes' },
+      { value: '198K', label: 'Views, last 365 days' },
+      { value: '40K', label: 'Views, top video' },
+      { value: '18.4K', label: 'Likes' },
       { value: '914', label: 'Followers' },
-      { value: '4K', label: 'Views, top video' },
     ],
   },
 }
