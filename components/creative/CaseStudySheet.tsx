@@ -64,6 +64,23 @@ function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
       </div>
     )
   }
+  if (e.kind === 'lookbook') {
+    return (
+      <div className="cr-look-wrap">
+        {e.rows.map((r, i) => (
+          <div key={i} className={`cr-look cr-look--${r.layout}`}>
+            {r.items.map((m) => (
+              <figure key={m.src}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={m.src} alt={m.label} loading="lazy" decoding="async" />
+                <figcaption>{m.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  }
   if (e.kind === 'tiktok') {
     return (
       <div className="cr-aj__tt" tabIndex={0} aria-label="TikTok posts, scroll sideways">

@@ -131,8 +131,21 @@ const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
     photo: '/creative/model/08883.webp',
     title: 'About',
     body: [
+      'One studio shoot in Beppu, built as a book: low-key noir, a clean profile set, an all-white look, close details and a commercial frame.',
+      'It is the same eye I use on the AI work, pointed at a real face. If you want to book it, the next album is the comp card.',
+    ],
+    facts: [
+      { value: '29', label: 'Frames' },
+      { value: '5', label: 'Looks' },
+      { value: '2026', label: 'Shoot' },
+    ],
+  },
+  'book-me': {
+    photo: '/creative/model/08891.webp',
+    title: 'About',
+    body: [
       'Born in Monrovia, Liberia, with Liberian and Indian roots. I left home at 17 on a scholarship, studied the IB in Israel and now live in Beppu, Japan.',
-      'I am looking for modeling work. Editorial, commercial and product, in Japan or anywhere a shoot needs a face with curls and some attitude. I am still a builder first, so the tech side of this portfolio is coming next.',
+      'I am looking for modeling work, in Japan or wherever a shoot needs a face with curls and some attitude. I am still a builder first, so the tech side of this portfolio is coming next.',
     ],
     facts: [
       { value: 'Beppu', label: 'Based in Japan' },
@@ -193,17 +206,37 @@ function buildCase(work: Work): CaseStudy {
     }
   }
 
+  if (work.id === 'book-me') {
+    return {
+      id: 'book-me',
+      kicker: 'Casting',
+      title: 'Looking for Model Work',
+      intro:
+        'Open for modeling work: editorial, commercial and product. Born in Monrovia, raised between Liberia, Israel and Japan, based in Beppu. Curls, a camera-ready stare and a habit of building things between shoots.',
+      client: work.client,
+      role: work.role,
+      when: work.year,
+      links: [...work.links, { label: 'Tech portfolio, next', href: '/tech' }],
+      stats: [],
+      steps: [],
+      accent: '#c1272d',
+      theme: 'booking',
+      cover: '/creative/covers/book-me.webp',
+      scopes: SCOPES['book-me'],
+    }
+  }
+
   if (work.id === 'modeling') {
     return {
       id: 'modeling',
       kicker: 'Model',
       title: 'Modeling',
       intro:
-        'Looking for modeling work. A studio shoot in Beppu: low-key black, a clean white profile set, an all-white look, close details and one commercial frame. Twenty-nine frames, picked to show range.',
+        'The modeling book. A studio shoot in Beppu: low-key black, a clean white profile set, an all-white look, close details and one commercial frame. Twenty-nine frames, picked to show range.',
       client: work.client,
       role: work.role,
       when: work.year,
-      links: [...work.links, { label: 'Tech portfolio, next', href: '/tech' }],
+      links: [],
       stats: [
         { value: '29', label: 'Frames' },
         { value: '5', label: 'Looks' },

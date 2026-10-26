@@ -18,8 +18,22 @@ export type Embed =
   | { kind: 'swatches'; items: { name: string; hex: string }[] }
   | { kind: 'poster'; src: string; label: string; ratio: number }
   | { kind: 'tiktok'; items: { id: string; title: string }[] }
+  | { kind: 'lookbook'; rows: { layout: 'solo' | 'duo' | 'trio' | 'quad' | 'feature' | 'feature-r' | 'wide'; items: CaseMedia[] }[] }
 
 export type Scope = { title: string; summary: string; bullets: string[]; embeds: Embed[] }
+
+type LookLayout = Extract<Embed, { kind: 'lookbook' }>['rows'][number]['layout']
+const look = (rows: [LookLayout, string[]][]): Embed => ({
+  kind: 'lookbook',
+  rows: rows.map(([layout, ids]) => ({
+    layout,
+    items: ids.map((id) => {
+      const m = MODEL_SHOTS.find((x) => x.id === 'm' + id.toLowerCase())
+      if (!m) throw new Error('missing model shot ' + id)
+      return { src: m.src, label: m.title }
+    }),
+  })),
+})
 
 const shots = (groups: ModelGroup[]): Embed => ({
   kind: 'images',
@@ -153,31 +167,72 @@ export const SCOPES: Record<string, Scope[]> = {
       title: 'Studio noir',
       summary: 'Low-key light on black: a face, a chain, a pair of hands. Built to show what the camera finds in one frame with nothing else in it.',
       bullets: ['Black backdrop, shaped light', 'Full length, seated and close', 'Hands, rings and the gaze'],
-      embeds: [shots(['noir'])],
+      embeds: [
+        look([
+          ['feature', ['08842', '08844', '08847']],
+          ['trio', ['08858', '08861', '08865']],
+          ['duo', ['08822-Edit', '08814-Edit']],
+          ['trio', ['08898', '08906', '08839']],
+          ['duo', ['08897-Edit', '08842-Edit']],
+        ]),
+      ],
     },
     {
       title: 'Profile and line',
       summary: 'Straight on a clean white seamless: jaw, neck and curl in silhouette, for the casting directors who need to see structure.',
       bullets: ['Profile left and up', 'High key, clean edges'],
-      embeds: [shots(['profile'])],
+      embeds: [look([['duo', ['08883', '08891']]])],
     },
     {
       title: 'Paper white',
       summary: 'A second look in all white: loose shirt, wide trousers, a stool and a soft grey wall. Quiet, editorial and easy to cast.',
       bullets: ['White on white styling', 'Seated poses, head up and head down', 'Colour and mono edits'],
-      embeds: [shots(['paper'])],
+      embeds: [
+        look([
+          ['feature-r', ['09067', '09057', '09060']],
+          ['trio', ['09073', '09074', '09075']],
+          ['duo', ['09054', '09077']],
+        ]),
+      ],
     },
     {
       title: 'Details',
       summary: 'The close work: chain, cross and rings. The kind of frame jewellery and menswear brands ask for.',
       bullets: ['Macro and tight crops', 'Hands and accessories'],
-      embeds: [shots(['detail'])],
+      embeds: [look([['trio', ['08829', '08853', '08856']]])],
     },
     {
       title: 'Commercial and lifestyle',
       summary: 'Product in motion: a hair care jar thrown, caught and held, with the expression carrying the ad. Proof that the face can sell something.',
       bullets: ['Hair care, mid throw', 'Expression for the product shot'],
-      embeds: [shots(['lifestyle']), films(['short-model'])],
+      embeds: [
+        look([
+          ['wide', ['08924']],
+          ['duo', ['09017', '09025']],
+        ]),
+        films(['short-model']),
+      ],
+    },
+  ],
+
+  'book-me': [
+    {
+      title: 'The comp card',
+      summary: 'The four frames a casting needs: headshot, profile, full length and a white-on-white look.',
+      bullets: ['Headshot and profile', 'Full length', 'Colour and mono'],
+      embeds: [look([['quad', ['08898', '08883', '08822-Edit', '09060']]])],
+    },
+    {
+      title: 'What I can do',
+      summary: 'Editorial and portrait work, commercial and product shots, and lifestyle content. I also shoot, cut and post my own content, so a campaign gets the face and the edit.',
+      bullets: ['Editorial and portrait', 'Commercial and product, hair care and accessories', 'Lifestyle and social content', 'Direction, edit and delivery if you want it'],
+      embeds: [look([['duo', ['09017', '08861']]])],
+    },
+    {
+      title: 'How to book',
+      summary: 'Email the brief, dates and usage and I will send the full set and reply with availability. Based in Beppu, Japan.',
+      bullets: ['Email: sameermotwani17@gmail.com', 'Brief, dates, usage'],
+      embeds: [],
     },
   ],
 

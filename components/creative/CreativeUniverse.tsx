@@ -6,7 +6,6 @@ import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
 import CaseStudySheet from './CaseStudySheet'
 import Showroom from './Showroom'
-import ModelingSection from './ModelingSection'
 import { caseFor } from '@/lib/creative/cases'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
 import { CATEGORIES, type CategoryId } from '@/lib/creative/categories'
@@ -87,6 +86,14 @@ export default function CreativeUniverse() {
     return () => el.removeEventListener('pointermove', on)
   }, [reduced])
 
+  // /creative#modeling opens the modeling album once the arc is live
+  useEffect(() => {
+    if (phase === 'live' && window.location.hash === '#modeling') {
+      const w = WORKS.find((x) => x.id === 'modeling')
+      if (w) setDetail({ work: w, rect: new DOMRect() })
+    }
+  }, [phase])
+
   const onLoaded = useCallback(() => {
     setPhase('reveal')
     window.setTimeout(() => setPhase('live'), LOADER.REVEAL_MS)
@@ -99,9 +106,6 @@ export default function CreativeUniverse() {
     const w = WORKS.find((x) => x.id === 'modeling')
     if (w) setDetail({ work: w, rect: new DOMRect() })
   }
-
-  const scrollToModeling = () =>
-    document.getElementById('modeling')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
 
   const go = (href: string, from: 'creative' | 'tech') => (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
@@ -154,7 +158,7 @@ export default function CreativeUniverse() {
           <button type="button" onClick={() => setFilter('music')}>
             Music
           </button>
-          <button type="button" onClick={scrollToModeling}>
+          <button type="button" onClick={openModeling}>
             Modeling
           </button>
           <button type="button" onClick={scrollToShowroom}>
@@ -236,7 +240,6 @@ export default function CreativeUniverse() {
 
       {detail && <CaseStudySheet study={caseFor(detail.work)} onClose={() => setDetail(null)} />}
     </main>
-    <ModelingSection onOpenAlbum={openModeling} />
     <Showroom />
     </>
   )
