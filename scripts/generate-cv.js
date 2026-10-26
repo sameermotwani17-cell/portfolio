@@ -115,7 +115,7 @@ async function main() {
   )
   y -= 10
   centered(
-    'Portfolio: portfolio-gamma-two-d8j6b2mgkq.vercel.app  ·  linkedin.com/in/sameer-motwani-2625a62b5',
+    'Portfolio: xsofficialbrand.com  ·  linkedin.com/in/sameer-motwani-2625a62b5',
     sans,
     8.3,
     SOFT

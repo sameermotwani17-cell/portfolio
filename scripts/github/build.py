@@ -12,7 +12,7 @@ from svg import activity, banner, divider, marquee  # noqa: E402
 
 STAGE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.getcwd(), 'gh-stage')
 USER = 'sameermotwani17-cell'
-PORTFOLIO = 'https://portfolio-sameermotwani17-cells-projects.vercel.app'
+PORTFOLIO = 'https://xsofficialbrand.com'
 
 
 def put(repo, rel, text):

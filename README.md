@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://portfolio-sameermotwani17-cells-projects.vercel.app"><img alt="Live" src="https://img.shields.io/badge/live-portfolio-ff5a1f?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+  <a href="https://xsofficialbrand.com"><img alt="Live" src="https://img.shields.io/badge/live-portfolio-ff5a1f?style=for-the-badge&logo=vercel&logoColor=white" /></a>
   <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript&logoColor=white" />
   <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-3-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
@@ -39,7 +39,6 @@ A cinematic scroll narrative that opens into a **split screen**. Pick a side and
 |---|---|---|
 | DK2R | Black and antique gold | Stadium floodlight and pitch lines |
 | RETRO Studios and Projects | Monochrome | Film strip perforations |
-| Ajiwow | Navy and ember | Record grooves, heat scale |
 | TOO EASY | Paper white and ink | A hairline grid and nothing else |
 | PLASTIVORE | Enzyme green and teal | Hexagon cells |
 | AFRO WEEK | Red, gold and green | Flag bands and a sunburst |
@@ -77,7 +76,7 @@ lib/
     music.ts             releases and cover art
 components/creative/
   ArcGallery.tsx         the curved, draggable 3D arc
-  CaseStudySheet.tsx     one sheet, thirteen themes
+  CaseStudySheet.tsx     one sheet, twelve themes
   Showroom.tsx           tabs, lazy video, lightbox
 scripts/
   showroom/encode.sh     ffmpeg pipeline for web video and posters

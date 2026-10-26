@@ -489,10 +489,6 @@ export default function TechUniverse() {
               </article>
             ))}
           </div>
-          <blockquote className="tech-quote tech-quote--wide">
-            <p>{HIRE_EXTRA.quote.text}</p>
-            <cite>{HIRE_EXTRA.quote.who}</cite>
-          </blockquote>
 
           <h3 className="tech-sub">What I take on</h3>
           <div className="tech-services">
@@ -505,7 +501,7 @@ export default function TechUniverse() {
             ))}
           </div>
 
-          <div className="tech-sw">
+          <div className="tech-sw tech-sw--one">
             <div>
               <h3 className="tech-sub">Strengths</h3>
               <ul>
@@ -513,18 +509,6 @@ export default function TechUniverse() {
                   <li key={x.title}>
                     <b>{x.title}</b>
                     <p>{x.body}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="tech-sub">Weaknesses, and what I do about them</h3>
-              <ul>
-                {HIRE.weaknesses.map((x) => (
-                  <li key={x.title}>
-                    <b>{x.title}</b>
-                    <p>{x.body}</p>
-                    <em>{x.fix}</em>
                   </li>
                 ))}
               </ul>

@@ -106,7 +106,7 @@ const gochi = Gochi_Hand({
   preload: false,
 })
 
-const SITE_URL = 'https://portfolio-gamma-two-d8j6b2mgkq.vercel.app'
+const SITE_URL = 'https://xsofficialbrand.com'
 const TITLE = 'Sameer Motwani · Engineer · Creative Director · Builder'
 const DESCRIPTION =
   'Engineer and creative director in Beppu, Japan. Production infrastructure rebuilds, AI systems and agent pipelines. Plus Retro Studios, a one-person creative studio that delivered a paid 12-country World Cup campaign end to end.'

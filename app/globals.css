@@ -5450,3 +5450,15 @@ html[data-defer] .uni-stage {
 .cr-aj__tt figure {
   position: relative;
 }
+
+.tech-sw--one {
+  grid-template-columns: 1fr;
+}
+.tech-sw--one ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 899px) {
+  .tech-sw--one ul {
+    grid-template-columns: 1fr;
+  }
+}

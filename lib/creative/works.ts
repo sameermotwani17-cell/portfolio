@@ -1,4 +1,5 @@
 import type { CategoryId } from './categories'
+import { SHOW_AJIWOW } from '@/lib/config'
 
 /**
  * The creative portfolio. Built from the main-branch audit (approved: keep all).
@@ -39,7 +40,7 @@ const TIKTOK = 'https://www.tiktok.com/@we_love_you_retro'
 export const SOCIAL = { instagram: IG, tiktok: TIKTOK } as const
 
 
-export const WORKS: Work[] = [
+const ALL_WORKS: Work[] = [
   {
     id: 'dk2r',
     title: 'DK2R',
@@ -234,6 +235,8 @@ export const WORKS: Work[] = [
     ],
   },
 ]
+
+export const WORKS: Work[] = ALL_WORKS.filter((w) => SHOW_AJIWOW || w.id !== 'ajiwow')
 
 /** Every image the loader waits for. */
 export const PRELOAD = Array.from(new Set(WORKS.map((w) => w.thumb)))

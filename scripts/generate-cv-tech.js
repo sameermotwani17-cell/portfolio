@@ -70,7 +70,7 @@ async function main() {
   y -= 12
   center('Beppu, Oita, Japan · sameermotwani17@gmail.com · linkedin.com/in/sameer-motwani-2625a62b5 · github.com/sameermotwani17-cell', reg, 8.3, SOFT)
   y -= 10
-  center('Portfolio: portfolio-sameermotwani17-cells-projects.vercel.app/tech', reg, 8.3, SOFT)
+  center('Portfolio: xsofficialbrand.com/tech', reg, 8.3, SOFT)
   y -= 14
 
   section('Education')
@@ -90,11 +90,13 @@ async function main() {
   bullet('Identified and closed a public-bundle secret exposure (NEXT_PUBLIC_ prefix) before merge; kept SQL-verified QA over agent self-reports and strict branch isolation, zero commits to main.')
   bullet('Shipped a curriculum-alignment engine mapping STEM lessons to 13 government standards (UK, India, USA) with anti-hallucination index-only selection and two-tier validation.')
   y -= 3
+  if (process.env.SHOW_AJIWOW === '1') {
   entry('Ajiwow Inc. (ROKU SHOKU, Techstars Tokyo 2026)', 'Tokyo, remote')
   sub('Freelance Creative Technologist', 'Sep 30 - Nov 2026')
   bullet('Built a JA/EN Astro site deployed on Azure Static Web Apps in the client tenant with GitHub Actions push-to-deploy and per-PR previews; moved the repo into the client GitHub org and handed the finish to in-house engineers.')
   bullet('Shipped the brand system (18-page guide, tokens as CSS/JSON, Claude design system and skill) in 2 days; scripted a Python print pipeline with a 31-point automated check, and an audio pipeline (demucs, ElevenLabs, -14 LUFS mastering).')
   y -= 3
+  }
   entry('Retro Studios (under StarLabs)', 'Beppu, Japan')
   sub('Founder & Creative Director', 'Apr 2026 - Present')
   bullet('One-person AI creative studio running a paid campaign for DK2R Football Wear (2026 World Cup capsule): 12 country editions, 36 SKUs, 150+ AI-generated hero images delivered; 55-asset manufacturing QA with zero redos.')

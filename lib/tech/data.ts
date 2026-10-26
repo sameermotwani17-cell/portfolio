@@ -4,6 +4,7 @@
  * invented, and nothing from the "keep private" list is used (no fees, no IDs,
  * no preview URLs). Edit the numbers in one place and the page follows.
  */
+import { SHOW_AJIWOW } from '@/lib/config'
 import { albums, vault, type FlowStage, type ProjectLink, type ProjectStat } from '@/lib/projects'
 
 export const TECH_PROFILE = {
@@ -23,7 +24,7 @@ export const TECH_PROFILE = {
 export type Metric = { value: string; label: string; src: string }
 
 /** the numbers, in one strip */
-export const TECH_METRICS: Metric[] = [
+const ALL_TECH_METRICS: Metric[] = [
   { value: '~15x', label: 'faster slide load on simulated Slow-3G (678 ms vs 10 s+)', src: "Stick'Em" },
   { value: '91', label: 'automated tests gating a one-day multiplayer FPS', src: 'SCRAPYARD' },
   { value: '0.7635', label: 'peak public AUC on 68,546 credit applications', src: 'AI Hack 2026' },
@@ -33,6 +34,7 @@ export const TECH_METRICS: Metric[] = [
   { value: '31', label: 'point automated check on every print export', src: 'Ajiwow' },
   { value: '36', label: 'SKUs on a live Next.js, Supabase, PayPal and Stripe store', src: 'DK2R' },
 ]
+export const TECH_METRICS: Metric[] = ALL_TECH_METRICS.filter((m) => SHOW_AJIWOW || m.src !== 'Ajiwow')
 
 export type Role = {
   org: string
@@ -43,7 +45,7 @@ export type Role = {
   bullets: string[]
 }
 
-export const TECH_EXPERIENCE: Role[] = [
+const ALL_TECH_EXPERIENCE: Role[] = [
   {
     org: "Stick'Em Pte Ltd",
     note: 'Singapore EdTech · Hult Prize Global 2025 winner',
@@ -93,6 +95,7 @@ export const TECH_EXPERIENCE: Role[] = [
     ],
   },
 ]
+export const TECH_EXPERIENCE: Role[] = ALL_TECH_EXPERIENCE.filter((r) => SHOW_AJIWOW || !r.org.startsWith('Ajiwow'))
 
 export const TECH_EDUCATION = [
   {
@@ -159,7 +162,7 @@ const fromRecord = (id: string, hook: string, plain: string, links: BuildLink[])
 }
 
 /** the flagship engineering case files */
-export const TECH_BUILDS: Build[] = [
+const ALL_TECH_BUILDS: Build[] = [
   fromRecord(
     'slideviewer',
     'Pre-render once, serve WebP from a CDN, keep the iframe as the fallback.',
@@ -289,6 +292,7 @@ export const TECH_BUILDS: Build[] = [
     ],
   ),
 ]
+export const TECH_BUILDS: Build[] = ALL_TECH_BUILDS.filter((b) => SHOW_AJIWOW || b.id !== 'ajiwow')
 
 export type WebBuild = { id: string; name: string; what: string; stack: string[]; live: string; repo?: string }
 
@@ -349,7 +353,7 @@ export const TECH_WEB: WebBuild[] = [
 ]
 
 /** column codes for the evidence matrix */
-export const MATRIX_COLS = [
+const ALL_COLS = [
   { id: 'sv', label: 'SlideViewer' },
   { id: 'ce', label: 'Curriculum' },
   { id: 'gs', label: 'GOMI' },
@@ -359,6 +363,8 @@ export const MATRIX_COLS = [
   { id: 'dk', label: 'DK2R' },
   { id: 'aj', label: 'Ajiwow' },
 ] as const
+
+export const MATRIX_COLS = ALL_COLS.filter((c) => SHOW_AJIWOW || c.id !== 'aj')
 
 export type Skill = { name: string; plain: string; used: string[] }
 export type SkillGroup = { group: string; skills: Skill[] }
@@ -389,7 +395,6 @@ export const TECH_SKILLS: SkillGroup[] = [
       { name: 'OpenAI APIs and vision', plain: 'Using GPT models to read photos and text inside real products.', used: ['gs', 'ce'] },
       { name: 'Prompt architecture', plain: 'Prompts written as layered, reusable systems, so 150+ images keep one look.', used: ['dk'] },
       { name: 'LLM evaluation design', plain: 'Checking an AI’s answers are valid: index-only picks, two checks, one retry.', used: ['ce', 'mr'] },
-      { name: 'Audio and voice pipelines', plain: 'Split music from speech, swap in an AI voice, and master the loudness to broadcast level.', used: ['aj'] },
     ],
   },
   {
@@ -428,7 +433,7 @@ TECH_SKILLS.push(
 
 export const TECH_LANGUAGES = 'English (native) · Spanish (intermediate) · Japanese (developing)'
 
-export const TECH_PRINCIPLES: { title: string; body: string; proof: string }[] = [
+const ALL_TECH_PRINCIPLES: { title: string; body: string; proof: string }[] = [
   {
     title: 'Measure before you claim',
     body: 'Slow-3G was the baseline, so it was the benchmark. Successful loads are logged too, because a failure count without a denominator means nothing.',
@@ -470,3 +475,4 @@ export const TECH_PRINCIPLES: { title: string; body: string; proof: string }[] =
     proof: "Stick'Em",
   },
 ]
+export const TECH_PRINCIPLES: { title: string; body: string; proof: string }[] = ALL_TECH_PRINCIPLES.filter((p) => SHOW_AJIWOW || p.proof !== 'Ajiwow')
