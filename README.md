@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://portfolio-gamma-two-d8j6b2mgkq.vercel.app"><img alt="Live" src="https://img.shields.io/badge/live-portfolio-ff5a1f?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+  <a href="https://portfolio-sameermotwani17-cells-projects.vercel.app"><img alt="Live" src="https://img.shields.io/badge/live-portfolio-ff5a1f?style=for-the-badge&logo=vercel&logoColor=white" /></a>
   <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript&logoColor=white" />
   <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-3-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
@@ -21,8 +21,8 @@ A cinematic scroll narrative that opens into a **split screen**. Pick a side and
 | | **TECH** · `/tech` | **CREATIVE** · `/creative` |
 |---|---|---|
 | Feels like | Circuit boards, warp grids, flow fields | A curved gallery under a dusk sky |
-| You get | Products, systems and engineering write-ups | Album-style case studies, a showroom and a discography |
-| Built on | Canvas layers, simplex noise, generated circuits | Hit-tested 3D arc, themed sheets, lazy media |
+| You get | Case files with problem, constraints, approach, decisions and result, a skills table tied to real builds, and a hire-me section | Album-style case studies, a showroom and a discography |
+| Built on | A fixed circuit backdrop, data-driven sections from the CV and project records | Hit-tested 3D arc, themed sheets, lazy media |
 
 <p align="center">
   <img src="docs/marquee.svg" alt="Album cover art for every project, scrolling" width="100%" />
@@ -100,9 +100,10 @@ npm run dev        # http://localhost:3000
 npm run build      # production build
 ```
 
-Re-encode a clip for the showroom, then rebuild the README art:
+Rebuild the CV from the same numbers the tech page uses, re-encode a showroom clip, then rebuild the README art:
 
 ```bash
+node scripts/generate-cv-tech.js
 bash scripts/showroom/encode.sh "path/to/clip.mp4" my-clip 40
 python scripts/readme/make-assets.py
 ```
@@ -115,6 +116,7 @@ python scripts/readme/make-assets.py
 | AFRO WEEK 2026 | [`millennium-hall-booking`](https://github.com/sameermotwani17-cell/millennium-hall-booking) |
 | MIRU | [`miru-frontend`](https://github.com/sameermotwani17-cell/miru-frontend) · [`miru-backend`](https://github.com/sameermotwani17-cell/miru-backend) |
 | GitHub agent | [`retro_github_agent`](https://github.com/sameermotwani17-cell/retro_github_agent) |
+| More | [the full list, sorted by activity](https://github.com/sameermotwani17-cell) |
 
 <p align="center">
   <img src="docs/divider.svg" alt="" width="100%" />
