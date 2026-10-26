@@ -48,7 +48,7 @@ export const TECH_EXPERIENCE: Role[] = [
     org: "Stick'Em Pte Ltd",
     note: 'Singapore EdTech · Hult Prize Global 2025 winner',
     title: 'Contract Software Engineer',
-    when: 'May 2026 to present',
+    when: 'May 2026 to Oct 2026 (contract completed)',
     where: 'Remote from Japan',
     bullets: [
       'Rebuilt production slide delivery for teachers in Brunei and the Philippines. Replaced failing Google Slides iframes with a pre-processed WebP pipeline (Slides API, Sharp, Supabase CDN), about 15x faster on simulated Slow-3G, with the legacy iframe kept as an automatic fallback.',

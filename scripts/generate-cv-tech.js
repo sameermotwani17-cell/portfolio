@@ -84,7 +84,7 @@ async function main() {
 
   section('Experience')
   entry("Stick'Em Pte Ltd  (Singapore EdTech; Hult Prize Global 2025 winner)", 'Remote from Japan')
-  sub('Contract Software Engineer', 'May 2026 - Present')
+  sub('Contract Software Engineer', 'May 2026 - Oct 2026')
   bullet('Rebuilt production slide-delivery infrastructure serving teachers in Brunei and the Philippines: replaced failing Google Slides iframes with a pre-processed WebP pipeline (Slides API, Sharp, Supabase CDN), ~15x faster on simulated Slow-3G (678ms vs 10s+), legacy iframe kept as automatic fallback.')
   bullet('Built a virtualized snap-scroll slide viewer (current slide +/-2) with dual IntersectionObserver media gating; validated against 55+ slide decks and tested across network throttling profiles.')
   bullet('Identified and closed a public-bundle secret exposure (NEXT_PUBLIC_ prefix) before merge; kept SQL-verified QA over agent self-reports and strict branch isolation, zero commits to main.')

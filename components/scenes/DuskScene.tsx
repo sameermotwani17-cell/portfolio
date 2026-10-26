@@ -238,7 +238,7 @@ function ContactBlock() {
       <motion.p {...fadeUp} transition={{ duration: 1, delay: 0.3, ease: EXHALE }}
         className="font-body text-[11px] tracking-[0.14em] uppercase mt-5 max-w-xl mx-auto leading-loose"
         style={{ color: 'rgba(139,147,201,0.75)' }}>
-        currently: rebuilding production slide infrastructure for Stick&apos;Em (contract) ·
+        recently finished contracts with Stick&apos;Em (slide infrastructure) and Ajiwow (brand and Azure site) ·
         running Retro Studios under StarLabs · BBA at APU, Beppu
       </motion.p>
 

@@ -79,7 +79,7 @@ Software engineer, creative director and now **open to modeling work**. I build 
 
 **In plain English:** I make software that works for real people on bad internet, I test it honestly, and I plan for the day something breaks.
 
-Born in Monrovia, Liberia. Studied the IB in Israel. Now based in **Beppu, Japan** (JST), studying finance at APU and taking on contract work.
+Born in Monrovia, Liberia. Studied the IB in Israel. Now based in **Beppu, Japan** (JST), studying finance at APU and open to new contract work.
 
 </td>
 <td width="300" valign="top"><img src="assets/portrait.jpg" alt="Sameer Motwani" width="300" /></td>
@@ -90,9 +90,10 @@ Born in Monrovia, Liberia. Studied the IB in Israel. Now based in **Beppu, Japan
 
 ## Now
 
-- **Contract software engineer at Stick'Em**, a Singapore EdTech and 2025 Hult Prize Global winner. Rebuilt slide delivery for classrooms in Brunei and the Philippines: about **15x faster on Slow-3G** (678 ms vs 10 s+), with the old iframe kept as an automatic fallback.
-- **Founder of Retro Studios** under StarLabs. A paid 12-country World Cup campaign, a solo-built store with live PayPal and Stripe, and brand, site and video work for a Techstars Tokyo startup.
-- **B.B.A. in Finance at APU**, Beppu. 1st place at the APU Annual Hackathon 2025 and Hult Prize APU runner-up with Best Speaker.
+- **Available for new contract work.** I just wrapped two contracts, with **Stick'Em** and **Ajiwow**, and I can start right away.
+- **Stick'Em** (Singapore EdTech, 2025 Hult Prize Global winner), contract software engineer, May to Oct 2026. Rebuilt slide delivery for classrooms in Brunei and the Philippines: about **15x faster on Slow-3G** (678 ms vs 10 s+), with the old iframe kept as an automatic fallback.
+- **Ajiwow** (Tokyo food-tech, Techstars Tokyo 2026), freelance creative technologist, Sep to Oct 2026. Brand system, a bilingual site on Azure with push-to-deploy, a print pipeline and video direction.
+- **Founder of Retro Studios** under StarLabs, and **B.B.A. in Finance at APU**, Beppu. 1st place at the APU Annual Hackathon 2025 and Hult Prize APU runner-up with Best Speaker.
 
 ## Shipping log
 
