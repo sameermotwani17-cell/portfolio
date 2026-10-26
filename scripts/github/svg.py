@@ -119,7 +119,7 @@ def marquee(items, accent='#ff6a2b'):
 '''
 
 
-def activity(rows, accent='#ff6a2b'):
+def activity(rows, accent='#ff6a2b', mid='#6a4bff'):
     """rows: (name, tier, pushed_label, days_ago, lang)"""
     rh = 46
     h = 70 + rh * len(rows)
@@ -132,7 +132,7 @@ def activity(rows, accent='#ff6a2b'):
         y = 70 + i * rh
         bar = max(40, int(430 * (1 - days / (maxd + 60))))
         hot = days <= 30
-        col = accent if hot else ('#6a4bff' if days <= 120 else '#4a5163')
+        col = accent if hot else (mid if days <= 120 else '#4a5163')
         out += (
             f'<g><text x="28" y="{y + 20}" font-family="{MONO}" font-size="15" fill="#e9ecf0">{escape(name)}</text>'
             f'<text x="28" y="{y + 36}" font-family="{MONO}" font-size="11" fill="rgba(255,255,255,.45)">{escape(lang)} · {escape(tier)}</text>'
@@ -144,3 +144,15 @@ def activity(rows, accent='#ff6a2b'):
         out += f'<text x="980" y="{y + 22}" text-anchor="end" font-family="{MONO}" font-size="13" fill="rgba(255,255,255,.7)">{escape(label)}</text></g>\n'
     out += '</svg>\n'
     return out
+
+
+def button(label, delay=0.0, w=None):
+    """A small outlined black and white link button, drawn in a pulse."""
+    w = w or int(len(label) * 11 + 46)
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} 44" width="{w}" height="44" role="img" aria-label="{escape(label)}">
+  <rect x="1" y="1" width="{w - 2}" height="42" rx="21" fill="#07080c" stroke="#e9ecf0" stroke-opacity=".55"/>
+  <rect x="1" y="1" width="{w - 2}" height="42" rx="21" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="40 {2 * w}">
+    <animate attributeName="stroke-dashoffset" values="0;-{2 * w + 40}" dur="3.6s" begin="{delay:.2f}s" repeatCount="indefinite"/></rect>
+  <text x="{w / 2}" y="28" text-anchor="middle" font-family="{MONO}" font-size="14" letter-spacing="2" fill="#fff">{escape(label)}</text>
+</svg>
+'''
