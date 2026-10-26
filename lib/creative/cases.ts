@@ -39,6 +39,8 @@ export type CaseStudy = {
   theme: string
   /** the album cover art */
   cover: string
+  /** a short artist-profile style bio */
+  bio?: { title: string; body: string[]; facts: { value: string; label: string }[] }
 }
 
 const byId = (ids: string[]) =>
@@ -111,7 +113,50 @@ const dedupe = (links: { label: string; href: string }[]) => {
   return links.filter((l) => (seen.has(l.href) ? false : (seen.add(l.href), true)))
 }
 
+const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
+  music: {
+    title: 'About',
+    body: [
+      'RETRO is the music name of Sameer Motwani, a Liberian artist living in Japan. Music, visuals, and doing way too much.',
+      'Seven singles since March 2025, all written, produced and released independently, with features from Roblyne Ketter and TLE Fries. The covers are the real release art, and the visuals that go with each song are made in the same studio.',
+    ],
+    facts: [
+      { value: '7', label: 'Singles' },
+      { value: '2', label: 'Features' },
+      { value: '2025', label: 'First release' },
+    ],
+  },
+  streams: {
+    title: 'About',
+    body: [
+      'I started streaming in 2026, from my room in Beppu. It is the loosest thing I make: no script, no edit, just me, the chat and whatever I am building that night.',
+      'I am Liberian, living in Japan after Ghana and Israel, studying finance at APU and running a one-person AI studio on the side. The streams are where the studio, the music and the story meet, and the best moments get cut into the shorts you see in the showroom.',
+    ],
+    facts: [
+      { value: '2026', label: 'Started' },
+      { value: 'Live', label: 'No edit' },
+      { value: 'Beppu', label: 'Base' },
+    ],
+  },
+  'content-tiktok': {
+    title: 'About',
+    body: [
+      'Retro, a Liberian in Japan. Music, visuals, doing way too much, curly head.',
+      'Talking-head shorts about the studio, the music and life in Beppu, written and cut by me. Desire is out now.',
+    ],
+    facts: [
+      { value: '18.3K', label: 'Likes' },
+      { value: '914', label: 'Followers' },
+      { value: '4K', label: 'Views, top video' },
+    ],
+  },
+}
+
 export function caseFor(work: Work): CaseStudy {
+  return { ...buildCase(work), bio: BIOS[work.id] }
+}
+
+function buildCase(work: Work): CaseStudy {
   if (work.id === 'ajiwow') return AJIWOW_CASE
   if (work.id === 'music') {
     return {

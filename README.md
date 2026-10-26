@@ -45,7 +45,7 @@ A cinematic scroll narrative that opens into a **split screen**. Pick a side and
 | AFRO WEEK | Red, gold and green | Flag bands and a sunburst |
 | DANFLIX | Streaming red | Film cards |
 | First Light | Cream and apricot | Dawn rays, editorial serif |
-| Instagram, TikTok, Streams | Pop, glitch, CRT | Halftone, scanlines, split RGB |
+| TikTok, Streams | Glitch, CRT | Scanlines, split RGB |
 | RETRO (music) | Violet on black | Vinyl grooves |
 
 <p align="center">
@@ -75,7 +75,7 @@ lib/
     music.ts             releases and cover art
 components/creative/
   ArcGallery.tsx         the curved, draggable 3D arc
-  CaseStudySheet.tsx     one sheet, twelve themes
+  CaseStudySheet.tsx     one sheet, eleven themes
   Showroom.tsx           tabs, lazy video, lightbox
 scripts/
   showroom/encode.sh     ffmpeg pipeline for web video and posters

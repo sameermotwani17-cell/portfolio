@@ -16,6 +16,7 @@ export type Embed =
   | { kind: 'site'; shot: string; label: string; href: string }
   | { kind: 'swatches'; items: { name: string; hex: string }[] }
   | { kind: 'poster'; src: string; label: string; ratio: number }
+  | { kind: 'tiktok'; items: { id: string; title: string }[] }
 
 export type Scope = { title: string; summary: string; bullets: string[]; embeds: Embed[] }
 
@@ -291,38 +292,51 @@ export const SCOPES: Record<string, Scope[]> = {
     },
   ],
 
-  'content-instagram': [
+  'content-tiktok': [
     {
-      title: 'Carousel design system',
-      summary:
-        'A six part launch carousel for the Xs community brand: navy and cream, one script mark, one rule per slide. A different carousel each day, from The Roadmap to The Rules to The Standard.',
-      bullets: ['Daily carousels, July 23 to 28', 'Type-led, one idea per slide', 'Brush, pixel and crown motifs as a visual library'],
+      title: 'Story and identity',
+      summary: 'The posts that carry the account: where I come from, how I look at it and the question that keeps people watching to the end.',
+      bullets: ['Hook in the first second', 'One idea, written to be said out loud', 'Captions designed for sound off'],
       embeds: [
-        stills([
-          'xs/xs-c24-2', 'xs/xs-c25-1', 'xs/xs-c25-3', 'xs/xs-c26-1', 'xs/xs-c26-2', 'xs/xs-c27-1', 'xs/xs-c27-3', 'xs/xs-c28-1', 'xs/xs-c28-3', 'xs/xs-cin-1',
-        ]),
+        {
+          kind: 'tiktok',
+          items: [
+            { id: '7697279686975540501', title: 'Guess my mix' },
+            { id: '7693152167812795668', title: 'Being a Liberian is an advantage' },
+            { id: '7688944318781852948', title: 'Glow up' },
+          ],
+        },
       ],
     },
     {
-      title: 'Product drop',
-      summary: 'The Gas Me Up drop: tee, hoodie, shorts, sweats and socks in a brushstroke print, laid out as product pages.',
-      bullets: ['Five piece capsule', 'Brush print across the range'],
-      embeds: [stills(['xs/xs-gmu-tee', 'xs/xs-gmu-hoodie', 'xs/xs-gmu-shorts', 'xs/xs-gmu-sweats', 'xs/xs-gmu-socks'])],
+      title: 'Studio and AI, in public',
+      summary: 'The studio told as it happens: what an AI clipping tool gets wrong, what a website really costs and the road from Liberia to Japan.',
+      bullets: ['Build in public', 'Plain numbers, no pitch', 'The studio shown between the stories'],
+      embeds: [
+        {
+          kind: 'tiktok',
+          items: [
+            { id: '7699109437423996181', title: 'AI can clip, it cannot pick' },
+            { id: '7699109056249711892', title: 'My rate for a website' },
+            { id: '7699108892244151573', title: 'Liberia, Israel, Ghana, Japan' },
+          ],
+        },
+      ],
     },
-  ],
-
-  'content-tiktok': [
     {
-      title: 'Short-form video',
-      summary: 'POV and UGC formats built for the first second: a hook line, a face or a product, and captions that carry the sound-off viewer.',
-      bullets: ['POV hooks', 'UGC delivery', 'Captions and pacing for the feed'],
-      embeds: [films(['usa-ugc-man', 'usa-pov', 'usa-airport', 'brazil-video-6-pov-got-paid-to-make-ads'])],
-    },
-    {
-      title: 'Editing craft',
-      summary: 'Talking-head edits with animated captions, emphasis words and jump cuts timed to the sentence.',
-      bullets: ['Animated captions', 'Jump cut rhythm'],
-      embeds: [films(['s39-ai-boom', 's17-forward-deployed', 's22-ai-with-taste'])],
+      title: 'Life in Japan',
+      summary: 'The small daily things from a Liberian living in Beppu: the coin laundry, the skincare, the routines.',
+      bullets: ['Everyday, unstaged', 'Local life seen fresh', 'Short, warm, repeatable'],
+      embeds: [
+        {
+          kind: 'tiktok',
+          items: [
+            { id: '7699105650118479156', title: 'Coin laundry' },
+            { id: '7699109269232258325', title: 'No filter, Japanese skincare' },
+            { id: '7700847558700059925', title: 'I love y\u2019all' },
+          ],
+        },
+      ],
     },
   ],
 

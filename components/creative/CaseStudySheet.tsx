@@ -64,6 +64,24 @@ function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
       </div>
     )
   }
+  if (e.kind === 'tiktok') {
+    return (
+      <div className="cr-aj__tt" tabIndex={0} aria-label="TikTok posts, scroll sideways">
+        {e.items.map((t) => (
+          <figure key={t.id}>
+            <iframe
+              src={`https://www.tiktok.com/embed/v2/${t.id}`}
+              title={t.title}
+              loading="lazy"
+              allow="encrypted-media; fullscreen"
+              allowFullScreen
+            />
+            <figcaption>{t.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )
+  }
   return (
     <figure className="cr-aj__poster cr-aj__poster--inline">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -218,6 +236,25 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
               </div>
             </div>
           </>
+        )}
+
+        {s.bio && (
+          <div className="cr-aj__block cr-bio">
+            <div>
+              <h3>{s.bio.title}</h3>
+              {s.bio.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <dl>
+              {s.bio.facts.map((f) => (
+                <div key={f.label}>
+                  <dt>{f.value}</dt>
+                  <dd>{f.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         )}
 
         {s.stats.length > 0 && (

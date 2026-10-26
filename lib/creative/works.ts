@@ -34,7 +34,7 @@ const W = '/creative/works'
 const SPOTIFY = 'https://open.spotify.com/artist/2vNpaYQTU7PNUh3BjOx07b'
 const APPLE = 'https://music.apple.com/jp/artist/retro/1803961641?l=en-US'
 const IG = 'https://www.instagram.com/retro.studios_'
-const TIKTOK = 'https://www.tiktok.com/@retro.studios'
+const TIKTOK = 'https://www.tiktok.com/@we_love_you_retro'
 
 export const SOCIAL = { instagram: IG, tiktok: TIKTOK } as const
 
@@ -167,43 +167,30 @@ export const WORKS: Work[] = [
     placeholder: ['tools'],
   },
   {
-    id: 'content-instagram',
-    title: 'Instagram',
-    category: 'content',
-    client: 'Self',
-    year: '2026',
-    role: 'Content',
-    tools: [],
-    description: 'Short-form pieces from @retro.studios_.',
-    thumb: '/creative/works/sleeve-content-instagram.webp',
-    links: [{ label: '@retro.studios_', href: IG }],
-    placeholder: ['the pieces themselves', 'thumb', 'preview'],
-  },
-  {
     id: 'content-tiktok',
     title: 'TikTok',
     category: 'content',
-    client: 'Self',
+    client: 'Self · @we_love_you_retro',
     year: '2026',
-    role: 'Content',
-    tools: [],
-    description: 'Short-form pieces from @retro.studios.',
+    role: 'Creator · writer · editor',
+    tools: ['CapCut', 'Higgsfield', 'Suno'],
+    description:
+      'My own TikTok, in public since the start of the studio: who I am, what I am building and what life in Japan looks like from a Liberian in Beppu. Talking-head shorts written, shot and cut by me, with the studio work and the music showing up between the stories.',
     thumb: '/creative/works/sleeve-content-tiktok.webp',
-    links: [{ label: '@retro.studios', href: TIKTOK }],
-    placeholder: ['the pieces themselves', 'thumb', 'preview'],
+    links: [{ label: '@we_love_you_retro', href: TIKTOK }],
   },
   {
     id: 'streams',
     title: 'Streams',
     category: 'content',
     client: 'Self',
-    year: 'TBC',
-    role: 'Streaming',
-    tools: [],
-    description: 'Live streams.',
+    year: '2026',
+    role: 'Host · producer',
+    tools: ['CapCut'],
+    description:
+      'Just started streaming: no script, no edit, me and the chat building the studio live. The best moments get cut into the shorts in the showroom.',
     thumb: '/creative/works/sleeve-streams.webp',
-    links: [],
-    placeholder: ['platform', 'link', 'thumb', 'description', 'year'],
+    links: [{ label: 'Follow on TikTok', href: TIKTOK }],
   },
   {
     id: 'music',

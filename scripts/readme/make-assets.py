@@ -72,7 +72,7 @@ covers = [
     'public/creative/covers/dk2r.webp', 'public/creative/covers/retro-studios.webp', 'public/creative/covers/ajiwow.webp',
     'public/creative/covers/too-easy.webp', 'public/creative/covers/plastivore.webp', 'public/creative/covers/afro-week.webp',
     'public/creative/covers/danflix.webp', 'public/creative/covers/first-light.webp',
-    'public/creative/covers/content-instagram.webp', 'public/creative/covers/content-tiktok.webp', 'public/creative/covers/streams.webp',
+    'public/creative/covers/content-tiktok.webp', 'public/creative/covers/streams.webp',
     'public/creative/music/best-friend.webp', 'public/creative/music/desire.webp', 'public/creative/music/easy-come-easy-go.webp',
     'public/creative/music/suavemente.webp', 'public/creative/music/fairy-tales.webp', 'public/creative/music/drop-top.webp',
     'public/creative/music/deux-mille-vingt-six.webp',
