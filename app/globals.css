@@ -4781,3 +4781,30 @@ html[data-defer] .uni-stage {
 .tech-mail:hover {
   color: #e8541a;
 }
+
+/* headings and ledes sit on the busy circuit: give them a quiet ground */
+.tech-h {
+  padding: 14px 16px 12px;
+  background: rgba(207, 210, 214, 0.9);
+  backdrop-filter: blur(6px);
+}
+.tech-lede {
+  display: inline-block;
+  margin-top: 0;
+  padding: 8px 14px;
+  background: rgba(207, 210, 214, 0.9);
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+}
+.tech-sub {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(207, 210, 214, 0.9);
+  border-radius: 4px;
+}
+.tech-langs {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(207, 210, 214, 0.9);
+  border-radius: 4px;
+}
