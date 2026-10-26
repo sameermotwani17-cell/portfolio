@@ -17,7 +17,7 @@ export type Embed =
   | { kind: 'site'; shot: string; label: string; href: string }
   | { kind: 'swatches'; items: { name: string; hex: string }[] }
   | { kind: 'poster'; src: string; label: string; ratio: number }
-  | { kind: 'tiktok'; items: { id: string; title: string }[] }
+  | { kind: 'tiktok'; items: { id: string; title: string; note?: string }[] }
   | { kind: 'lookbook'; rows: { layout: 'solo' | 'duo' | 'trio' | 'quad' | 'feature' | 'feature-r' | 'wide'; items: CaseMedia[] }[] }
 
 export type Scope = { title: string; summary: string; bullets: string[]; embeds: Embed[] }
@@ -414,23 +414,39 @@ export const SCOPES: Record<string, Scope[]> = {
 
   'content-tiktok': [
     {
-      title: 'Story and identity',
-      summary: 'The posts that carry the account: where I come from, how I look at it and the question that keeps people watching to the end.',
-      bullets: ['Hook in the first second', 'One idea, written to be said out loud', 'Captions designed for sound off'],
+      title: 'The viral clips',
+      summary: 'The posts that took off, ranked by views from TikTok Studio. A question in the first second, a face, and a reason to watch to the end.',
+      bullets: ['Ranked by real views, as of Oct 2026', 'A hook in the first second', 'Written to be said out loud, captioned for sound off'],
       embeds: [
         {
           kind: 'tiktok',
           items: [
-            { id: '7697279686975540501', title: 'Guess my mix' },
-            { id: '7693152167812795668', title: 'Being a Liberian is an advantage' },
+            { id: '7697279686975540501', title: 'Guess my mix', note: '40K views' },
+            { id: '7693152167812795668', title: 'Being a Liberian is an advantage', note: '19K views' },
+            { id: '7698387557809229076', title: 'Lock in twin', note: '1.6K views' },
+            { id: '7698711720084245781', title: 'I’m Indian. Where are the Indians on TikTok?', note: '1.6K views' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Story and identity',
+      summary: 'Where I come from, how I got to Japan, and the question I am asking right now.',
+      bullets: ['One idea per post', 'First person, no script on screen', 'Captions designed for sound off'],
+      embeds: [
+        {
+          kind: 'tiktok',
+          items: [
             { id: '7688944318781852948', title: 'Glow up' },
+            { id: '7699108892244151573', title: 'Liberia, Israel, Ghana, Japan' },
+            { id: '7700904608754896148', title: 'How do I get a modeling gig?' },
           ],
         },
       ],
     },
     {
       title: 'Studio and AI, in public',
-      summary: 'The studio told as it happens: what an AI clipping tool gets wrong, what a website really costs and the road from Liberia to Japan.',
+      summary: 'The studio told as it happens: what an AI clipping tool gets wrong, what a website really costs and getting attention on purpose.',
       bullets: ['Build in public', 'Plain numbers, no pitch', 'The studio shown between the stories'],
       embeds: [
         {
@@ -438,7 +454,7 @@ export const SCOPES: Record<string, Scope[]> = {
           items: [
             { id: '7699109437423996181', title: 'AI can clip, it cannot pick' },
             { id: '7699109056249711892', title: 'My rate for a website' },
-            { id: '7699108892244151573', title: 'Liberia, Israel, Ghana, Japan' },
+            { id: '7699108689092857140', title: 'Nothing came to me. I went and got it' },
           ],
         },
       ],
@@ -453,7 +469,7 @@ export const SCOPES: Record<string, Scope[]> = {
           items: [
             { id: '7699105650118479156', title: 'Coin laundry' },
             { id: '7699109269232258325', title: 'No filter, Japanese skincare' },
-            { id: '7700847558700059925', title: 'I love y\u2019all' },
+            { id: '7700847558700059925', title: 'I love y’all' },
           ],
         },
       ],

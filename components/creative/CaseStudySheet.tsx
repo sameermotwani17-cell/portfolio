@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react'
 import type { CaseStudy, Scope } from '@/lib/creative/cases'
 import { RELEASES, SPOTIFY_ARTIST, APPLE_ARTIST } from '@/lib/creative/music'
 
+const TT_PATH =
+  'M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.1c-1.5.1-2.8-.4-4-1.1v6.2c0 3.6-2.8 5.9-5.8 5.9A5.8 5.8 0 0 1 5 15.2c0-3.6 3.1-6.2 6.7-5.6v3.2c-1.6-.4-3.4.6-3.4 2.4 0 1.5 1.2 2.6 2.6 2.6 1.6 0 2.6-1 2.6-2.9V3h3.1z'
+
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
 
@@ -93,7 +96,10 @@ function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
               allow="encrypted-media; fullscreen"
               allowFullScreen
             />
-            <figcaption>{t.title}</figcaption>
+            <figcaption>
+              {t.note && <b>{t.note}</b>}
+              {t.title}
+            </figcaption>
           </figure>
         ))}
       </div>
@@ -186,6 +192,13 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
               {isMusic ? 'Artist' : 'Case study'} · {s.client.split(' · ')[0]}
               {s.jpName && <span lang="ja">{s.jpName}</span>}
             </p>
+            {s.id === 'content-tiktok' && (
+              <svg className="cr-mark-tt" viewBox="0 0 24 24" aria-hidden="true">
+                <path className="c" transform="translate(-.5 -.3)" d={TT_PATH} />
+                <path className="r" transform="translate(.5 .3)" d={TT_PATH} />
+                <path className="w" d={TT_PATH} />
+              </svg>
+            )}
             <h2>{s.title}</h2>
             {s.titleJp && (
               <p className="cr-aj__jp" lang="ja">

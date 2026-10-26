@@ -5369,3 +5369,30 @@ html[data-defer] .uni-stage {
     animation: none;
   }
 }
+
+/* the real TikTok mark on its album, and view counts on the viral clips */
+.cr-mark-tt {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 0 14px;
+  overflow: visible;
+}
+.cr-mark-tt .c {
+  fill: #25f4ee;
+}
+.cr-mark-tt .r {
+  fill: #fe2c55;
+}
+.cr-mark-tt .w {
+  fill: #fff;
+}
+.cr-aj__tt figcaption b {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
