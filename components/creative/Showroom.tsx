@@ -79,7 +79,22 @@ function Lightbox({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Tab') {
+        const root = document.querySelector<HTMLElement>('.cr-lb')
+        const items = root ? Array.from(root.querySelectorAll<HTMLElement>('button, video[controls]')) : []
+        if (items.length) {
+          const active = document.activeElement as HTMLElement | null
+          const first = items[0]
+          const last = items[items.length - 1]
+          if (e.shiftKey && (active === first || !root?.contains(active))) {
+            e.preventDefault()
+            last.focus()
+          } else if (!e.shiftKey && (active === last || !root?.contains(active))) {
+            e.preventDefault()
+            first.focus()
+          }
+        }
+      } else if (e.key === 'Escape') onClose()
       else if (e.key === 'ArrowRight') onIndex((index + 1) % items.length)
       else if (e.key === 'ArrowLeft') onIndex((index - 1 + items.length) % items.length)
     }

@@ -39,6 +39,8 @@ export type CaseStudy = {
   theme: string
   /** the album cover art */
   cover: string
+  /** a client testimonial */
+  quote?: { text: string; who: string }
   /** photographer or other credit, shown in the meta row */
   credit?: string
   /** a short artist-profile style bio */
@@ -107,6 +109,7 @@ const AJIWOW_CASE: CaseStudy = {
   accent: '#cc4210',
   theme: 'ajiwow',
   cover: '/creative/covers/ajiwow.webp',
+  quote: { ...AJIWOW.quote },
   scopes: SCOPES.ajiwow,
 }
 

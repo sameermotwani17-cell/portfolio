@@ -126,6 +126,11 @@ export type Build = {
   stats: ProjectStat[]
   flow: FlowStage[]
   links: BuildLink[]
+  /** a labelled left-to-right pipeline, drawn as a diagram */
+  diagram?: string[]
+  /** dated milestones */
+  timeline?: { date: string; what: string }[]
+  quote?: { text: string; who: string }
 }
 
 const rec = (id: string) => {
@@ -235,6 +240,20 @@ export const TECH_BUILDS: Build[] = [
       },
     ],
     links: [{ label: 'ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' }],
+    diagram: ['git push to main', 'GitHub Actions build', 'Azure Static Web Apps', 'ajiwow.co.jp'],
+    quote: { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow, on the brand system' },
+    timeline: [
+      { date: 'Sep 30', what: 'Quote, call and scope confirmed: four deliverables' },
+      { date: 'Oct 2', what: 'Four brand directions sent' },
+      { date: 'Oct 3', what: 'Direction approved, symbol redrawn, Brand System v1.0 shipped, Azure access granted' },
+      { date: 'Oct 4 to 5', what: 'Poster drafts 1 to 4 through five feedback rounds' },
+      { date: 'Oct 6', what: 'Poster final. Azure Static Web App and GitHub Actions pipeline live on a preview' },
+      { date: 'Oct 8', what: 'Product brief written from public sources to fix the site’s story' },
+      { date: 'Oct 9 to 10', what: 'Website first draft delivered. Repo moved into the client’s GitHub org' },
+      { date: 'Oct 11 to 12', what: 'Demo video brief locked and rough cut delivered' },
+      { date: 'Oct 14', what: 'Scope changed: website finish to in-house engineers, nine short videos added' },
+      { date: 'Oct 16 to 17', what: 'First short final, then five re-voiced finals delivered the same day' },
+    ],
   },
   fromRecord(
     'scrapyard',
@@ -387,6 +406,25 @@ export const TECH_SKILLS: SkillGroup[] = [
     ],
   },
 ]
+
+TECH_SKILLS.push(
+  {
+    group: 'Automation and agents',
+    skills: [
+      { name: 'n8n workflow orchestration', plain: 'Wiring apps together so work happens without anyone clicking, like a repo that updates itself from a sentence.', used: [] },
+      { name: 'Agent architecture and Claude Code pipelines', plain: 'Giving an AI a job, the tools to do it and gates it must pass, instead of one giant prompt.', used: ['sy', 'aj'] },
+      { name: 'Spec-driven development', plain: 'Write the plan first, let the machine build to it, and check every milestone with proof it ran.', used: ['sy'] },
+      { name: 'Webhooks and integrations', plain: 'Making one service tell another when something happens, like a booking triggering an e-ticket.', used: ['ce'] },
+    ],
+  },
+  {
+    group: 'Security',
+    skills: [
+      { name: 'Web security', plain: 'Keeping secrets out of public code and closing holes before they ship.', used: ['sv'] },
+      { name: 'Penetration testing and network security', plain: 'Learning how attackers think so defences get built in at the start. TryHackMe certified.', used: [] },
+    ],
+  },
+)
 
 export const TECH_LANGUAGES = 'English (native) · Spanish (intermediate) · Japanese (developing)'
 

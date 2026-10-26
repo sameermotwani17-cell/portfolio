@@ -26,6 +26,7 @@ export const AJIWOW = {
     { value: '10', label: 'Ready to use templates' },
     { value: '31', label: 'Point automated check on every print export' },
   ],
+  quote: { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow, on the brand system' },
   swatches: [
     { name: 'Navy', hex: '#00357A' },
     { name: 'Studio black', hex: '#0A0D14' },

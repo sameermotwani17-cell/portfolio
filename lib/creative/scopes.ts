@@ -280,6 +280,20 @@ export const SCOPES: Record<string, Scope[]> = {
       bullets: ['Concepts, edit and captions in English and Japanese', 'Stem separation and loudness mastering, so a voice can be swapped cleanly', 'Vertical 1080 x 1920'],
       embeds: [{ kind: 'films', items: AJIWOW.films.map((f) => ({ src: f.src, poster: f.poster, title: f.title, tag: f.tag, ratio: f.ratio })) }],
     },
+    {
+      title: 'Timeline',
+      summary: 'From first quote to an approved brand system in 4 days, and to a deployed website draft in 6 more.',
+      bullets: [
+        'Sep 30: quote, call and scope confirmed',
+        'Oct 3: direction approved, symbol redrawn, Brand System v1.0 shipped',
+        'Oct 6: poster final, Azure pipeline live on a preview',
+        'Oct 9: website first draft delivered',
+        'Oct 12: Demo Day video rough cut',
+        'Oct 14: website finish moves to in-house engineers, nine short videos added',
+        'Oct 17: five re-voiced finals delivered the same day',
+      ],
+      embeds: [],
+    },
   ],
 
   'too-easy': [

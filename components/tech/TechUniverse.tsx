@@ -21,6 +21,7 @@ import {
   TECH_WEB,
   type Build,
 } from '@/lib/tech/data'
+import { HIRE, STICKEM, TECH_ACHIEVEMENTS } from '@/lib/tech/hire'
 
 const WarpGrid = dynamic(() => import('@/components/universe/WarpGrid'), { ssr: false })
 const CircuitLayer = dynamic(() => import('@/components/universe/CircuitLayer'), { ssr: false })
@@ -30,7 +31,9 @@ const NAV = [
   ['experience', 'Experience'],
   ['builds', 'Builds'],
   ['skills', 'Skills'],
+  ['recognition', 'Recognition'],
   ['method', 'Method'],
+  ['hire', 'Hire me'],
   ['contact', 'Contact'],
 ] as const
 
@@ -74,6 +77,19 @@ function BuildCard({ b, open, onToggle }: { b: Build; open: boolean; onToggle: (
       {open && (
         <div id={`b-${b.id}`} className="tech-build__body">
           <p className="tech-build__over">{b.overview}</p>
+          {b.diagram && (
+            <ol className="tech-diagram" aria-label="Deploy pipeline">
+              {b.diagram.map((n) => (
+                <li key={n}>{n}</li>
+              ))}
+            </ol>
+          )}
+          {b.quote && (
+            <blockquote className="tech-quote">
+              <p>{b.quote.text}</p>
+              <cite>{b.quote.who}</cite>
+            </blockquote>
+          )}
           <ol className="tech-flow">
             {b.flow.map((f, i) => (
               <li key={f.label}>
@@ -92,6 +108,19 @@ function BuildCard({ b, open, onToggle }: { b: Build; open: boolean; onToggle: (
               </li>
             ))}
           </ol>
+          {b.timeline && (
+            <div className="tech-timeline">
+              <h4>Timeline</h4>
+              <ul>
+                {b.timeline.map((t) => (
+                  <li key={t.date}>
+                    <b>{t.date}</b>
+                    <span>{t.what}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {b.links.length > 0 && (
             <div className="tech-links">
               {b.links.map((l) => (
@@ -261,7 +290,41 @@ export default function TechUniverse() {
           <h2 id="tech-b" className="tech-h">
             <span>03</span> Case files
           </h2>
-          <p className="tech-lede">Six engineering builds. Open one for the problem, the constraints, the approach, the decisions and the result.</p>
+          <p className="tech-lede">Seven engineering builds. Open one for the problem, the constraints, the approach, the decisions and the result.</p>
+          <article className="tech-company" aria-label="Stick'Em">
+            <header>
+              <div>
+                <h3>{STICKEM.name}</h3>
+                <p>{STICKEM.what}</p>
+              </div>
+              <ul className="tech-chips">
+                {STICKEM.badges.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </header>
+            <p className="tech-company__role">{STICKEM.role}</p>
+            <p className="tech-plain">
+              <span>In plain English</span>
+              {STICKEM.plain}
+            </p>
+            <dl className="tech-company__stats">
+              {STICKEM.stats.map((x) => (
+                <div key={x.label}>
+                  <dt>{x.value}</dt>
+                  <dd>{x.label}</dd>
+                </div>
+              ))}
+            </dl>
+            <ul className="tech-company__work">
+              {STICKEM.work.map((x) => (
+                <li key={x.title}>
+                  <b>{x.title}</b>
+                  <span>{x.body}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
           <div className="tech-builds">
             {TECH_BUILDS.map((b) => (
               <BuildCard key={b.id} b={b} open={open === b.id} onToggle={() => setOpen(open === b.id ? null : b.id)} />
@@ -359,9 +422,26 @@ export default function TechUniverse() {
           <p className="tech-langs">Languages: {TECH_LANGUAGES}</p>
         </section>
 
+        <section id="recognition" className="tech-sec" aria-labelledby="tech-r">
+          <h2 id="tech-r" className="tech-h">
+            <span>05</span> Recognition
+          </h2>
+          <ol className="tech-awards">
+            {TECH_ACHIEVEMENTS.map((a) => (
+              <li key={a.title}>
+                <span className="tech-awards__yr">{a.year}</span>
+                <div>
+                  <b>{a.title}</b>
+                  <p>{a.note}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         <section id="method" className="tech-sec" aria-labelledby="tech-m">
           <h2 id="tech-m" className="tech-h">
-            <span>05</span> How I work
+            <span>06</span> How I work
           </h2>
           <div className="tech-principles">
             {TECH_PRINCIPLES.map((p, i) => (
@@ -375,9 +455,80 @@ export default function TechUniverse() {
           </div>
         </section>
 
+        <section id="hire" className="tech-sec" aria-labelledby="tech-hire">
+          <h2 id="tech-hire" className="tech-h">
+            <span>07</span> Hire me
+          </h2>
+          <div className="tech-hire__lead">
+            <p className="tech-hire__head">{HIRE.headline}</p>
+            <p className="tech-sum tech-sum--plain">{HIRE.plain}</p>
+            <ul className="tech-chips" aria-label="Roles">
+              {HIRE.open.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+            <p className="tech-hire__terms">{HIRE.terms}</p>
+          </div>
+
+          <h3 className="tech-sub">What I take on</h3>
+          <div className="tech-services">
+            {HIRE.services.map((x) => (
+              <article key={x.title}>
+                <h4>{x.title}</h4>
+                <p>{x.body}</p>
+                <i>{x.proof}</i>
+              </article>
+            ))}
+          </div>
+
+          <div className="tech-sw">
+            <div>
+              <h3 className="tech-sub">Strengths</h3>
+              <ul>
+                {HIRE.strengths.map((x) => (
+                  <li key={x.title}>
+                    <b>{x.title}</b>
+                    <p>{x.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="tech-sub">Weaknesses, and what I do about them</h3>
+              <ul>
+                {HIRE.weaknesses.map((x) => (
+                  <li key={x.title}>
+                    <b>{x.title}</b>
+                    <p>{x.body}</p>
+                    <em>{x.fix}</em>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="tech-how">
+            <div>
+              <h3 className="tech-sub">How a project runs</h3>
+              <ol>
+                {HIRE.how.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ol>
+            </div>
+            <p className="tech-hire__terms">{HIRE.availability}</p>
+          </div>
+          <div className="tech-cta">
+            <a href={`mailto:${P.email}?subject=Project`}>Pitch me a project</a>
+            <a href="/creative" onClick={go('/creative')}>
+              See the clipping and creative work
+            </a>
+          </div>
+        </section>
+
         <section id="contact" className="tech-sec tech-contact" aria-labelledby="tech-c">
           <h2 id="tech-c" className="tech-h">
-            <span>06</span> Contact
+            <span>08</span> Contact
           </h2>
           <a className="tech-mail" href={`mailto:${P.email}`}>
             {P.email}

@@ -116,6 +116,9 @@ function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
 export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const sheetRef = useRef<HTMLDivElement>(null)
+  // keep the latest onClose without re-running the focus and scroll-lock effect on every parent render
+  const closeRef2 = useRef(onClose)
+  closeRef2.current = onClose
 
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null
@@ -123,7 +126,27 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
     window.__lenis?.stop()
     closeRef.current?.focus()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        closeRef2.current()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const root = sheetRef.current
+      if (!root) return
+      const items = Array.from(
+        root.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), iframe'),
+      ).filter((el) => el.offsetParent !== null)
+      if (!items.length) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      if (e.shiftKey && (active === first || !root.contains(active))) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && (active === last || !root.contains(active))) {
+        e.preventDefault()
+        first.focus()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
@@ -132,7 +155,7 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
       window.__lenis?.start()
       prev?.focus?.()
     }
-  }, [onClose])
+  }, [])
 
   useEffect(() => {
     sheetRef.current?.scrollTo({ top: 0 })
@@ -219,6 +242,13 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
               </a>
             ))}
           </div>
+        )}
+
+        {s.quote && (
+          <blockquote className="cr-quote">
+            <p>{s.quote.text}</p>
+            <cite>{s.quote.who}</cite>
+          </blockquote>
         )}
 
         {isMusic && (
