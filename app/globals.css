@@ -5240,3 +5240,132 @@ html[data-defer] .uni-stage {
   text-transform: uppercase;
   color: var(--c-mute);
 }
+
+/* ── hire me, built up ─────────────────────────────────────────────────── */
+.tech-hire__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 106, 43, 0.6);
+  border-radius: 999px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff6a2b;
+}
+.tech-hire__status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff6a2b;
+  box-shadow: 0 0 0 0 rgba(255, 106, 43, 0.6);
+  animation: techPulse 2s ease-out infinite;
+}
+@keyframes techPulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(255, 106, 43, 0);
+  }
+}
+.tech-packs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.tech-packs article {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  background: rgba(16, 19, 25, 0.94);
+  border: 1px solid rgba(233, 236, 240, 0.16);
+  border-top: 3px solid #ff6a2b;
+  border-radius: 6px;
+}
+.tech-packs h4 {
+  margin: 0 0 6px;
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.tech-packs__for {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(233, 236, 240, 0.78);
+}
+.tech-packs ul {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.tech-packs i {
+  margin-top: auto;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: #ff6a2b;
+}
+.tech-quote--wide {
+  margin: 22px 0 0;
+  padding: 20px 24px;
+}
+.tech-quote--wide p {
+  font-family: var(--font-poster), Impact, sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: clamp(22px, 3vw, 40px);
+  line-height: 1.1;
+}
+.tech-need {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 22px;
+  margin: 8px 0 28px;
+}
+.tech-need ul {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.tech-faq {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.tech-faq > div {
+  padding: 12px 16px;
+  background: rgba(16, 19, 25, 0.92);
+  border: 1px solid rgba(233, 236, 240, 0.16);
+  border-radius: 6px;
+}
+.tech-faq dt {
+  font-weight: 600;
+  font-size: 15px;
+}
+.tech-faq dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(233, 236, 240, 0.8);
+}
+@media (max-width: 899px) {
+  .tech-packs,
+  .tech-need {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tech-hire__status i {
+    animation: none;
+  }
+}

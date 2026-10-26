@@ -127,7 +127,7 @@ export const albums: Album[] = [
         "Stick'Em is a Singapore EdTech company and 2025 Hult Prize Global Winner with US$1M in seed funding. Its lesson slides loaded through a Google Slides iframe that hung or went black on slow connections. I built a pipeline that pre-processes every deck into WebP images served from a CDN, kept the iframe as an automatic fallback, and added the logging the team needs to measure reliability without me.",
       stats: [
         { value: '~15x', label: 'Faster on Slow 3G: roughly 0.7s, down from 10s+' },
-        { value: '65+', label: 'Decks processed through the pipeline' },
+        { value: '55+', label: 'Decks validated through the pipeline' },
         { value: '2', label: 'Render paths: a broken pipeline never shows a blank lesson' },
         { value: 'CEO', label: 'Validated it live in a workshop with real teachers' },
       ],
@@ -176,7 +176,7 @@ export const albums: Album[] = [
           headline: 'Roughly 0.7s, down from 10s+',
           points: [
             'About 15x faster on Slow 3G, where the product was worst',
-            '65+ decks processed through the pipeline',
+            '55+ decks validated through the pipeline',
             'The CEO ran it live in a workshop with real teachers',
             'Fallback and load logging feed a daily health view. The team measures reliability without me',
           ],

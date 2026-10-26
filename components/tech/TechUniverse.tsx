@@ -21,7 +21,7 @@ import {
   TECH_WEB,
   type Build,
 } from '@/lib/tech/data'
-import { HIRE, STICKEM, TECH_ACHIEVEMENTS } from '@/lib/tech/hire'
+import { HIRE, HIRE_EXTRA, STICKEM, TECH_ACHIEVEMENTS } from '@/lib/tech/hire'
 
 const WarpGrid = dynamic(() => import('@/components/universe/WarpGrid'), { ssr: false })
 const CircuitLayer = dynamic(() => import('@/components/universe/CircuitLayer'), { ssr: false })
@@ -460,6 +460,10 @@ export default function TechUniverse() {
             <span>07</span> Hire me
           </h2>
           <div className="tech-hire__lead">
+            <p className="tech-hire__status">
+              <i aria-hidden="true" />
+              {HIRE_EXTRA.status}
+            </p>
             <p className="tech-hire__head">{HIRE.headline}</p>
             <p className="tech-sum tech-sum--plain">{HIRE.plain}</p>
             <ul className="tech-chips" aria-label="Roles">
@@ -469,6 +473,26 @@ export default function TechUniverse() {
             </ul>
             <p className="tech-hire__terms">{HIRE.terms}</p>
           </div>
+
+          <h3 className="tech-sub">Three ways to work together</h3>
+          <div className="tech-packs">
+            {HIRE_EXTRA.packages.map((p) => (
+              <article key={p.name}>
+                <h4>{p.name}</h4>
+                <p className="tech-packs__for">{p.for}</p>
+                <ul>
+                  {p.get.map((g) => (
+                    <li key={g}>{g}</li>
+                  ))}
+                </ul>
+                <i>Proof: {p.ref}</i>
+              </article>
+            ))}
+          </div>
+          <blockquote className="tech-quote tech-quote--wide">
+            <p>{HIRE_EXTRA.quote.text}</p>
+            <cite>{HIRE_EXTRA.quote.who}</cite>
+          </blockquote>
 
           <h3 className="tech-sub">What I take on</h3>
           <div className="tech-services">
@@ -518,8 +542,29 @@ export default function TechUniverse() {
             </div>
             <p className="tech-hire__terms">{HIRE.availability}</p>
           </div>
+          <div className="tech-need">
+            <div>
+              <h3 className="tech-sub">What I need from you</h3>
+              <ul>
+                {HIRE_EXTRA.need.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="tech-sub">Questions</h3>
+              <dl className="tech-faq">
+                {HIRE_EXTRA.faq.map((f) => (
+                  <div key={f.q}>
+                    <dt>{f.q}</dt>
+                    <dd>{f.a}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
           <div className="tech-cta">
-            <a href={`mailto:${P.email}?subject=Project`}>Pitch me a project</a>
+            <a href={`mailto:${P.email}?subject=Project&body=${HIRE_EXTRA.brief}`}>Pitch me a project</a>
             <a href="/creative" onClick={go('/creative')}>
               See the clipping and creative work
             </a>

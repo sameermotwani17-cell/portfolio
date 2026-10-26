@@ -13,7 +13,7 @@ export const STICKEM = {
     'Two jobs for one product: make lessons load on bad school internet, and show teachers which official curriculum goals each lesson meets.',
   stats: [
     { value: '~15x', label: 'faster lessons on Slow-3G, 678 ms vs 10 s+' },
-    { value: '65+', label: 'slide decks through the pipeline' },
+    { value: '55+', label: 'slide decks validated through the pipeline' },
     { value: '13', label: 'curriculum standards across UK, India and USA' },
     { value: '72+', label: 'lessons served from Airtable' },
     { value: '3', label: 'countries deployed' },
@@ -104,4 +104,39 @@ export const HIRE = {
       fix: 'I validate against future data and keep the pipeline auditable.',
     },
   ],
+}
+
+export const HIRE_EXTRA = {
+  status: 'Taking new briefs',
+  packages: [
+    {
+      name: 'Clipping sprint',
+      for: 'Streamers, podcasts, founders and brands with long footage and no time to cut it.',
+      get: ['Hooks picked from your footage', 'Animated captions and clean pacing', 'Audio mastered to broadcast level', 'Vertical cuts for TikTok, Reels and Shorts'],
+      ref: 'Creator clips, the Ajiwow shorts and the Showroom',
+    },
+    {
+      name: 'Ship-it sprint',
+      for: 'Teams that need a feature built, a slow page fixed or a pipeline put in place.',
+      get: ['A written scope and a working draft early', 'Tests, a fallback and logging', 'CI/CD with preview links', 'A handover pack so your team can carry on'],
+      ref: "Stick'Em SlideViewer, the Ajiwow site and pipelines",
+    },
+    {
+      name: 'Launch pack',
+      for: 'Startups that have a product and no identity, site or launch content.',
+      get: ['A brand system with tokens and templates', 'A bilingual website on your own cloud', 'Print and video, directed and delivered', 'A design skill so your team stays on brand'],
+      ref: 'Ajiwow: brand in 4 days, site draft in 10',
+    },
+  ],
+  need: ['A short brief: the goal, the deadline and who approves', 'Access to the footage, repo or accounts the work needs', 'One person who can say yes, so rounds stay fast'],
+  quote: { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow' },
+  faq: [
+    { q: 'What does it cost?', a: 'Quoted per scope after a short call. A contract and a deposit come before any engagement.' },
+    { q: 'What if the scope changes?', a: 'It happens. On Ajiwow the website finish moved to in-house engineers mid-project and nine short videos were added. Milestones make that a clean swap, not a fight.' },
+    { q: 'Can you work in Japanese?', a: 'Working Japanese for client work, still developing for long formal documents. I keep a term list and ask for a native review where it matters.' },
+    { q: 'Will I be talking to one person?', a: 'Yes. You get one person from brief to handover, and a partner brought in only when a project needs more hands.' },
+    { q: 'How fast can you start?', a: 'It depends on my current load, so ask. I work up to about 28 hours a week across all paid work.' },
+  ],
+  brief:
+    'Hi Sameer,%0D%0A%0D%0AProject: %0D%0AGoal: %0D%0ADeadline: %0D%0AWho approves: %0D%0AWhat I have (footage, repo, brand): %0D%0AWhat I need from you: ',
 }

@@ -164,7 +164,7 @@ function ChessBlock() {
 // ─── Awards (migrated, restyled quieter) ──────────────────────────────────────
 
 const awards = [
-  { title: 'AIHack 2026 · Top 4, Final Round', subtitle: 'Aiful Corporation · ¥1,000,000 prize competition', year: '2026' },
+  { title: 'AI Hack 2026 · Kyoto Finalist, Top 8', subtitle: 'Aiful Corporation · 4th at prelims · the only all-freshman team in the final', year: '2026' },
   { title: 'APU Annual Hackathon 2025 · 1st Place', subtitle: 'GOMI Snap · AI Waste Classification Platform', year: '2025' },
   { title: 'Hult Prize APU Campus Round 2026', subtitle: '1st Runner-Up · Best Speaker Award · Global STEAM Initiative', year: '2026' },
   { title: 'Next Einstein Forum · 1st Place', subtitle: 'Africa Science Week · Educate the Next Generation', year: '2023' },
