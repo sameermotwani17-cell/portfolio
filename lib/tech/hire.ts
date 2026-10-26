@@ -8,7 +8,7 @@ export const STICKEM = {
   name: "Stick'Em Pte Ltd",
   what: 'Singapore EdTech that puts hands-on STEAM lessons into classrooms.',
   badges: ['2025 Hult Prize Global winner', 'US$1M seed'],
-  role: 'Contract Software Engineer · May to Oct 2026 · remote from Japan · contract completed',
+  role: 'Contract Software Engineer · May to Sep 2026 · remote from Japan · contract completed',
   plain:
     'Two jobs for one product: make lessons load on bad school internet, and show teachers which official curriculum goals each lesson meets.',
   stats: [
@@ -69,7 +69,7 @@ export const HIRE = {
     'Short written updates, and a working draft early.',
     'A handover pack at the end: docs, tokens, a design skill or runbook, so your team can carry on.',
   ],
-  availability: 'Available to start now. Part-time, up to about 28 hours a week across all paid work. Based in Japan (JST).',
+  availability: 'Taking new briefs now: open capacity today and more from November. Part-time, up to about 28 hours a week across all paid work. Based in Japan (JST).',
   strengths: [
     { title: 'I ship the whole thing', body: 'From first quote to an approved brand system in 4 days, and to a deployed website draft in 6 more.' },
     { title: 'I measure and verify', body: 'Benchmarks on the slowest network that matters. QA checked with SQL, not with a status report.' },
@@ -135,7 +135,7 @@ export const HIRE_EXTRA = {
     { q: 'What if the scope changes?', a: 'It happens. On Ajiwow the website finish moved to in-house engineers mid-project and nine short videos were added. Milestones make that a clean swap, not a fight.' },
     { q: 'Can you work in Japanese?', a: 'Working Japanese for client work, still developing for long formal documents. I keep a term list and ask for a native review where it matters.' },
     { q: 'Will I be talking to one person?', a: 'Yes. You get one person from brief to handover, and a partner brought in only when a project needs more hands.' },
-    { q: 'How fast can you start?', a: 'Right away. My contracts with Stick’Em and Ajiwow have just finished. I work up to about 28 hours a week across all paid work.' },
+    { q: 'How fast can you start?', a: 'This week. My Stick’Em contract ended in September and Ajiwow wraps in November, so I have open capacity now. I work up to about 28 hours a week across all paid work.' },
   ],
   brief:
     'Hi Sameer,%0D%0A%0D%0AProject: %0D%0AGoal: %0D%0ADeadline: %0D%0AWho approves: %0D%0AWhat I have (footage, repo, brand): %0D%0AWhat I need from you: ',

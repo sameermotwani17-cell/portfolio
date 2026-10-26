@@ -48,7 +48,7 @@ export const TECH_EXPERIENCE: Role[] = [
     org: "Stick'Em Pte Ltd",
     note: 'Singapore EdTech · Hult Prize Global 2025 winner',
     title: 'Contract Software Engineer',
-    when: 'May 2026 to Oct 2026 (contract completed)',
+    when: 'May 2026 to Sep 2026 (contract completed)',
     where: 'Remote from Japan',
     bullets: [
       'Rebuilt production slide delivery for teachers in Brunei and the Philippines. Replaced failing Google Slides iframes with a pre-processed WebP pipeline (Slides API, Sharp, Supabase CDN), about 15x faster on simulated Slow-3G, with the legacy iframe kept as an automatic fallback.',
@@ -61,7 +61,7 @@ export const TECH_EXPERIENCE: Role[] = [
     org: 'Ajiwow Inc. (ROKU SHOKU)',
     note: 'Tokyo food-tech startup · Techstars Tokyo 2026',
     title: 'Freelance Creative Technologist',
-    when: 'Sep 30 to Oct 2026',
+    when: 'Sep 30 to Nov 2026',
     where: 'Tokyo · remote',
     bullets: [
       'Built a JA/EN Astro site and deployed it on Azure Static Web Apps in the client’s own tenant, with a GitHub Actions push-to-deploy pipeline and per-PR preview URLs. The finish was handed to in-house engineers.',
@@ -170,7 +170,7 @@ export const TECH_BUILDS: Build[] = [
     id: 'ajiwow',
     title: 'Ajiwow site and pipelines',
     subtitle: 'Brand, bilingual site and CI/CD on Azure',
-    tag: 'Freelance Creative Technologist · Ajiwow Inc. · Sep to Oct 2026',
+    tag: 'Freelance Creative Technologist · Ajiwow Inc. · Sep to Nov 2026',
     accent: '#cc4210',
     tech: ['Astro', 'Tailwind v4', 'Astro i18n', 'Azure Static Web Apps', 'GitHub Actions', 'Python', 'demucs', 'ElevenLabs'],
     hook: 'Push to main, and it is live: Astro on Azure Static Web Apps with preview URLs per pull request.',

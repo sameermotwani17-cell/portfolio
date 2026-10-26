@@ -84,14 +84,14 @@ async function main() {
 
   section('Experience')
   entry("Stick'Em Pte Ltd  (Singapore EdTech; Hult Prize Global 2025 winner)", 'Remote from Japan')
-  sub('Contract Software Engineer', 'May 2026 - Oct 2026')
+  sub('Contract Software Engineer', 'May 2026 - Sep 2026')
   bullet('Rebuilt production slide-delivery infrastructure serving teachers in Brunei and the Philippines: replaced failing Google Slides iframes with a pre-processed WebP pipeline (Slides API, Sharp, Supabase CDN), ~15x faster on simulated Slow-3G (678ms vs 10s+), legacy iframe kept as automatic fallback.')
   bullet('Built a virtualized snap-scroll slide viewer (current slide +/-2) with dual IntersectionObserver media gating; validated against 55+ slide decks and tested across network throttling profiles.')
   bullet('Identified and closed a public-bundle secret exposure (NEXT_PUBLIC_ prefix) before merge; kept SQL-verified QA over agent self-reports and strict branch isolation, zero commits to main.')
   bullet('Shipped a curriculum-alignment engine mapping STEM lessons to 13 government standards (UK, India, USA) with anti-hallucination index-only selection and two-tier validation.')
   y -= 3
   entry('Ajiwow Inc. (ROKU SHOKU, Techstars Tokyo 2026)', 'Tokyo, remote')
-  sub('Freelance Creative Technologist', 'Sep 30 - Oct 2026')
+  sub('Freelance Creative Technologist', 'Sep 30 - Nov 2026')
   bullet('Built a JA/EN Astro site deployed on Azure Static Web Apps in the client tenant with GitHub Actions push-to-deploy and per-PR previews; moved the repo into the client GitHub org and handed the finish to in-house engineers.')
   bullet('Shipped the brand system (18-page guide, tokens as CSS/JSON, Claude design system and skill) in 2 days; scripted a Python print pipeline with a 31-point automated check, and an audio pipeline (demucs, ElevenLabs, -14 LUFS mastering).')
   y -= 3

@@ -90,9 +90,9 @@ Born in Monrovia, Liberia. Studied the IB in Israel. Now based in **Beppu, Japan
 
 ## Now
 
-- **Available for new contract work.** I just wrapped two contracts, with **Stick'Em** and **Ajiwow**, and I can start right away.
-- **Stick'Em** (Singapore EdTech, 2025 Hult Prize Global winner), contract software engineer, May to Oct 2026. Rebuilt slide delivery for classrooms in Brunei and the Philippines: about **15x faster on Slow-3G** (678 ms vs 10 s+), with the old iframe kept as an automatic fallback.
-- **Ajiwow** (Tokyo food-tech, Techstars Tokyo 2026), freelance creative technologist, Sep to Oct 2026. Brand system, a bilingual site on Azure with push-to-deploy, a print pipeline and video direction.
+- **Taking new contract work.** My **Stick'Em** contract ended in September and **Ajiwow** wraps in November, so I have open capacity now and more from then.
+- **Stick'Em** (Singapore EdTech, 2025 Hult Prize Global winner), contract software engineer, May to Sep 2026. Rebuilt slide delivery for classrooms in Brunei and the Philippines: about **15x faster on Slow-3G** (678 ms vs 10 s+), with the old iframe kept as an automatic fallback.
+- **Ajiwow** (Tokyo food-tech, Techstars Tokyo 2026), freelance creative technologist, Sep 30 to Nov 2026. Brand system, a bilingual site on Azure with push-to-deploy, a print pipeline and video direction.
 - **Founder of Retro Studios** under StarLabs, and **B.B.A. in Finance at APU**, Beppu. 1st place at the APU Annual Hackathon 2025 and Hult Prize APU runner-up with Best Speaker.
 
 ## Shipping log

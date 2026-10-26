@@ -110,7 +110,7 @@ export const albums: Album[] = [
     track: 'tech',
     title: "Stick'Em SlideViewer",
     subtitle: 'Production Infrastructure Rebuild',
-    tag: "Software Engineer · Stick'Em Pte Ltd · May–Oct 2026",
+    tag: "Software Engineer · Stick'Em Pte Ltd · May–Sep 2026",
     short:
       'Rebuilt slide delivery for a live EdTech platform serving teachers in Brunei and the Philippines. Slides that took 10s+ now load in roughly 0.7s.',
     tracklist: ['01 · The Black Screen', '02 · 0.7 Seconds', '03 · The Fallback', '04 · The Handover'],
@@ -798,7 +798,7 @@ export const vault: VaultItem[] = [
     id: 'stickem-curriculum',
     title: "Stick'Em Curriculum Engine",
     subtitle: 'Curriculum Alignment Engine',
-    tag: 'Product & AI Systems Developer · Feb 2026–Oct 2026',
+    tag: 'Product & AI Systems Developer · Feb 2026–Sep 2026',
     short: 'AI-powered curriculum alignment engine for global STEAM deployment.',
     tech: ['React 18', 'Express 5', 'OpenAI API', 'Airtable', 'Zod', 'pdfmake', 'Node.js'],
     badge: 'Hult Prize Global Winner 2025',

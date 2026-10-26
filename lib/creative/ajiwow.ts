@@ -14,7 +14,7 @@ export const AJIWOW = {
   intro:
     'Ajiwow, a Tokyo food-tech startup in the Techstars Tokyo 2026 cohort, born inside Sony, records a chef’s cooking to the second, the degree and the gram, and replays it on an induction cooktop. It had a working product and no identity. In about three weeks, working directly with the CEO, I built the brand system, a bilingual website draft deployed on Azure, a tourist poster, the direction of the Demo Day video and a run of short-form videos.',
   role: 'Brand identity · Web design, build and Azure deploy · Poster · Video direction · Short-form',
-  when: 'Sep 30 to Oct 2026',
+  when: 'Sep 30 to Nov 2026',
   links: [
     { label: 'Visit ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' },
     { label: '日本語サイト', href: 'https://ajiwow.co.jp/' },
