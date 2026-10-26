@@ -121,6 +121,24 @@ export const SCOPES: Record<string, Scope[]> = {
       bullets: ['Hook selection and cut', 'Animated captions', 'Branded lower thirds'],
       embeds: [films(['fitz-dont-hurt', 'bluecollar-do-it', 'bazza-clerk', 'bluecollar-ignorance', 'bazza-boss', 'fitz-bar-fight'])],
     },
+    {
+      title: 'Episodes',
+      summary: 'A running series made in the open: five episodes so far, each trying a different format.',
+      bullets: ['Shot and edited in house', 'A new format tried each episode'],
+      embeds: [films(['rp-episode-1', 'rp-episode-2', 'rp-episode-3', 'rp-episode-4', 'rp-episode-5'])],
+    },
+    {
+      title: 'Short-form series',
+      summary: 'Talking-head shorts built on the same system: hook first, big captions, one idea.',
+      bullets: ['Hook first, captions designed', 'One idea per clip'],
+      embeds: [films(['s39-ai-boom', 's13-claude-prompts-itself', 's17-forward-deployed', 's22-ai-with-taste'])],
+    },
+    {
+      title: 'The open folder',
+      summary: 'The working Drive for the studio, shared read only. Click through and have a look.',
+      bullets: ['Not a case study, not a cut reel', 'Shared read only'],
+      embeds: [],
+    },
   ],
 
   ajiwow: [
@@ -269,27 +287,6 @@ export const SCOPES: Record<string, Scope[]> = {
       title: 'Privacy by design',
       summary: 'Nothing full size ever leaves your computer. Small copies go out for analysis and are thrown away.',
       bullets: ['Local first processing', 'Small analysis copies only'],
-      embeds: [],
-    },
-  ],
-
-  'retro-projects': [
-    {
-      title: 'Episodes',
-      summary: 'A running series made in the open: five episodes so far, each trying a different format.',
-      bullets: ['Shot and edited in house', 'A new format tried each episode'],
-      embeds: [films(['rp-episode-1', 'rp-episode-2', 'rp-episode-3', 'rp-episode-4', 'rp-episode-5'])],
-    },
-    {
-      title: 'Short-form series',
-      summary: 'Talking-head shorts built on the same system: hook first, big captions, one idea.',
-      bullets: ['Hook first, captions designed', 'One idea per clip'],
-      embeds: [films(['s39-ai-boom', 's13-claude-prompts-itself', 's17-forward-deployed', 's22-ai-with-taste'])],
-    },
-    {
-      title: 'The open folder',
-      summary: 'The working Drive for the studio, shared read only. Click through and have a look.',
-      bullets: ['Not a case study, not a cut reel', 'Shared read only'],
       embeds: [],
     },
   ],

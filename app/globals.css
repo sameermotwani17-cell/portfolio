@@ -3800,3 +3800,43 @@ html[data-defer] .uni-stage {
     filter: saturate(1.4);
   }
 }
+
+/* ── album titles on the sleeves, coloured to each theme ───────────────── */
+.cr-card__title {
+  position: absolute;
+  z-index: 3;
+  left: 18.75%;
+  width: 50%;
+  bottom: 10%;
+  padding: 0 4%;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: calc(var(--cw, 300px) * 0.05);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--t-fg, #f5f3ee);
+  text-shadow: 0 1px 12px var(--t-glow, rgba(0, 0, 0, 0.7)), 0 0 2px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+.cr-card__title::before {
+  content: '';
+  position: absolute;
+  inset: -90% -4% -12%;
+  z-index: -1;
+  background: linear-gradient(transparent, var(--t-scrim, rgba(0, 0, 0, 0.62)));
+}
+.cr-card[data-id='dk2r'] { --t-fg: #e9c96a; --t-glow: rgba(201, 168, 76, 0.55); }
+.cr-card[data-id='retro-studios'] { --t-fg: #f5f5f2; --t-glow: rgba(255, 255, 255, 0.35); }
+.cr-card[data-id='ajiwow'] { --t-fg: #ff8a4a; --t-glow: rgba(204, 66, 16, 0.6); }
+.cr-card[data-id='too-easy'] { --t-fg: #0d0d0d; --t-glow: rgba(255, 255, 255, 0.7); --t-scrim: rgba(255, 255, 255, 0.7); }
+.cr-card[data-id='plastivore'] { --t-fg: #b6ff3a; --t-glow: rgba(158, 255, 0, 0.5); }
+.cr-card[data-id='afro-week'] { --t-fg: #fcd116; --t-glow: rgba(252, 209, 22, 0.45); }
+.cr-card[data-id='danflix'] { --t-fg: #ff2a35; --t-glow: rgba(229, 9, 20, 0.55); }
+.cr-card[data-id='first-light'] { --t-fg: #5a3416; --t-glow: rgba(255, 244, 226, 0.8); --t-scrim: rgba(248, 243, 234, 0.72); }
+.cr-card[data-id='content-instagram'] { --t-fg: #ff5cae; --t-glow: rgba(255, 61, 154, 0.55); }
+.cr-card[data-id='content-tiktok'] { --t-fg: #25f4ee; --t-glow: rgba(37, 244, 238, 0.5); }
+.cr-card[data-id='streams'] { --t-fg: #c98bff; --t-glow: rgba(178, 102, 255, 0.55); }
+.cr-card[data-id='music'] { --t-fg: #a99dff; --t-glow: rgba(138, 125, 255, 0.55); }

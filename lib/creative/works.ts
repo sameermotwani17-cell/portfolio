@@ -67,9 +67,12 @@ export const WORKS: Work[] = [
     role: 'Founder & Creative Director',
     tools: ['GPT Image 2', 'Higgsfield Cinema Studio', 'Kling 3.0', 'Seedance 2.0', 'Suno', 'CapCut', 'Next.js', 'Supabase', 'Vercel'],
     description:
-      'A one-person AI creative studio under StarLabs, founded April 2026, built on the thesis that one operator on an AI-native stack can outproduce a crew. Statics, reels and commercial ads with no crew. First paid brief: the 12-country DK2R World Cup campaign, 150+ hero images and a 55-asset QA report with zero redos. Open for the next brief.',
+      'A one-person AI creative studio under StarLabs, founded April 2026, built on the thesis that one operator on an AI-native stack can outproduce a crew. Statics, reels and commercial ads with no crew. First paid brief: the 12-country DK2R World Cup campaign, 150+ hero images and a 55-asset QA report with zero redos. Open for the next brief. The working folder is open too: five episodes and a run of shorts made in public, with the project Drive shared read only.',
     thumb: '/creative/works/sleeve-retro-studios.webp',
-    links: [{ label: '@retro.studios_', href: IG }],
+    links: [
+      { label: '@retro.studios_', href: IG },
+      { label: 'Open the Drive folder', href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV' },
+    ],
     placeholder: ['preview', 'video'],
   },
   {
@@ -162,21 +165,6 @@ export const WORKS: Work[] = [
     thumb: '/creative/works/sleeve-first-light.webp',
     links: [{ label: 'Open First Light', href: 'https://first-light-alpha.vercel.app/' }],
     placeholder: ['tools'],
-  },
-  {
-    id: 'retro-projects',
-    title: 'RETRO PROJECTS',
-    category: 'content',
-    client: 'Retro Studios',
-    year: '2026',
-    role: 'The studio folder',
-    tools: [],
-    description:
-      'The studio working folder, opened up. Not a case study and not a cut reel: the project Drive, shared read only.',
-    thumb: '/creative/works/sleeve-retro-projects.webp',
-    links: [
-      { label: 'Open the Drive folder', href: 'https://drive.google.com/drive/folders/1MjXPVTnsR7WjbrrVjk0Ro7GnN007HCEV' },
-    ],
   },
   {
     id: 'content-instagram',

@@ -373,6 +373,7 @@ export default function ArcGallery({ works, filter, phase, progress, mobile, red
             type="button"
             className="cr-card"
             data-category={w.category}
+            data-id={w.id}
             aria-label={`${w.title}, ${w.client}, ${w.year}`}
             onClick={(e) => {
               if (rot.current.moved > 6) return
@@ -383,6 +384,9 @@ export default function ArcGallery({ works, filter, phase, progress, mobile, red
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={w.thumb} alt="" draggable={false} decoding="async" loading={i < 6 ? 'eager' : 'lazy'} />
               {w.preview && <video src={w.preview} poster={w.thumb} muted loop playsInline preload="none" />}
+              <span className="cr-card__title" aria-hidden="true">
+                {w.title}
+              </span>
             </span>
             <span className="cr-card__cap">
               <b>{w.title}</b> · {w.client.split(' · ')[0]} · {w.year}
