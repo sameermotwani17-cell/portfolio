@@ -46,12 +46,12 @@ img.paste(crop, (W - 700, 0), mask)
 d = ImageDraw.Draw(img)
 big = ImageFont.truetype(FONT, 250)
 mid = ImageFont.truetype(FONT, 118)
-mono = ImageFont.truetype(MONO, 22)
-small = ImageFont.truetype(MONO, 17)
+mono = ImageFont.truetype(MONO, 30)
+small = ImageFont.truetype(MONO, 22)
 d.text((70, 52), 'SAMEER', font=mid, fill=0, stroke_width=2, stroke_fill=255)
 d.text((64, 150), 'MOTWANI', font=big, fill=255)
-d.text((74, 428), 'SOFTWARE ENGINEER   CREATIVE DIRECTOR   MODEL', font=mono, fill=200)
-d.text((74, 462), 'BEPPU  JAPAN   LOCKED IN', font=small, fill=120)
+d.text((74, 412), 'SOFTWARE ENGINEER  /  CREATIVE DIRECTOR  /  MODEL', font=mono, fill=215)
+d.text((74, 456), 'BEPPU, JAPAN  -  LOCKED IN', font=small, fill=140)
 # crop marks
 for (x, y, sx, sy) in [(24, 24, 1, 1), (W - 24, 24, -1, 1), (24, H - 24, 1, -1), (W - 24, H - 24, -1, -1)]:
     d.line([(x, y), (x + 34 * sx, y)], fill=170, width=2)
@@ -82,11 +82,10 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org
 open(os.path.join(OUT, 'banner.svg'), 'w', encoding='utf-8', newline='\n').write(svg)
 
 # ───────────── intro portrait ─────────────
-q = load('8844')
+q = load('9054')
 w, h = q.size
-side = int(w * 0.92)
-q = q.crop((int(w * 0.04), int(h * 0.10), int(w * 0.04) + side, int(h * 0.10) + int(side * 1.25))).resize((560, 700), Image.LANCZOS).convert('L')
-q = curve(ImageOps.autocontrast(q, cutoff=0.5), 0.03, 0.85, 0.7)
+q = q.crop((0, int(h * 0.06), w, int(h * 0.06) + int(w * 1.25))).resize((560, 700), Image.LANCZOS).convert('L')
+q = curve(ImageOps.autocontrast(q, cutoff=0.5), 0.03, 0.97, 0.9)
 q.save(os.path.join(OUT, 'portrait.jpg'), quality=88)
 
 # ───────────── ink avatar ─────────────
@@ -106,5 +105,22 @@ ink[arr > 0.36] = 0.62
 ink[arr > 0.60] = 1.0
 out = ink * 255
 av = Image.fromarray(out.astype(np.uint8))
-av.save(os.path.join(OUT, 'avatar.png'))
+av.save(os.path.join(OUT, 'avatar-noir.png'))
+
+# the white outfit, drawn as ink on white
+f = load('9057')
+w, h = f.size
+cx, cy, side = int(w * 0.46), int(h * 0.325), 1950
+f = f.crop((cx - side // 2, cy - side // 2, cx + side // 2, cy + side // 2)).resize((1024, 1024), Image.LANCZOS).convert('L')
+f = ImageOps.autocontrast(f, cutoff=0.3).filter(ImageFilter.GaussianBlur(2.4))
+arr = np.asarray(f, dtype=np.float32) / 255.0
+yy, xx = np.mgrid[0:1024, 0:1024] / 1024.0
+rr = np.sqrt((xx - 0.5) ** 2 + (yy - 0.5) ** 2)
+ink = np.ones_like(arr)
+ink[arr < 0.80] = 0.82
+ink[arr < 0.62] = 0.56
+ink[arr < 0.42] = 0.26
+ink[arr < 0.22] = 0.0
+ink = np.where(rr > 0.47, 1.0, ink)  # clean white corners
+Image.fromarray((ink * 255).astype(np.uint8)).save(os.path.join(OUT, 'avatar.png'))
 print('ok', os.path.getsize(os.path.join(OUT, 'banner.svg')) // 1024, 'KB banner')
