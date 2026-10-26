@@ -6,6 +6,7 @@ import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
 import CaseStudySheet from './CaseStudySheet'
 import Showroom from './Showroom'
+import ModelingSection from './ModelingSection'
 import { caseFor } from '@/lib/creative/cases'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
 import { CATEGORIES, type CategoryId } from '@/lib/creative/categories'
@@ -94,6 +95,14 @@ export default function CreativeUniverse() {
   const scrollToShowroom = () =>
     document.getElementById('showroom')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
 
+  const openModeling = () => {
+    const w = WORKS.find((x) => x.id === 'modeling')
+    if (w) setDetail({ work: w, rect: new DOMRect() })
+  }
+
+  const scrollToModeling = () =>
+    document.getElementById('modeling')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' })
+
   const go = (href: string, from: 'creative' | 'tech') => (e: React.MouseEvent) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
     e.preventDefault()
@@ -144,6 +153,9 @@ export default function CreativeUniverse() {
           </button>
           <button type="button" onClick={() => setFilter('music')}>
             Music
+          </button>
+          <button type="button" onClick={scrollToModeling}>
+            Modeling
           </button>
           <button type="button" onClick={scrollToShowroom}>
             Showroom
@@ -224,6 +236,7 @@ export default function CreativeUniverse() {
 
       {detail && <CaseStudySheet study={caseFor(detail.work)} onClose={() => setDetail(null)} />}
     </main>
+    <ModelingSection onOpenAlbum={openModeling} />
     <Showroom />
     </>
   )

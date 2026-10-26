@@ -69,7 +69,7 @@ open(os.path.join(DOCS, 'banner.svg'), 'w', encoding='utf-8').write(banner)
 
 # ── marquee of cover art ─────────────────────────────────────────────────
 covers = [
-    'public/creative/covers/dk2r.webp', 'public/creative/covers/retro-studios.webp', 'public/creative/covers/ajiwow.webp',
+    'public/creative/covers/dk2r.webp', 'public/creative/covers/modeling.webp', 'public/creative/covers/retro-studios.webp', 'public/creative/covers/ajiwow.webp',
     'public/creative/covers/too-easy.webp', 'public/creative/covers/plastivore.webp', 'public/creative/covers/afro-week.webp',
     'public/creative/covers/danflix.webp', 'public/creative/covers/first-light.webp',
     'public/creative/covers/content-tiktok.webp', 'public/creative/covers/streams.webp',

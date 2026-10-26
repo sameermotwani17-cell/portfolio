@@ -4,8 +4,9 @@
  * /public/creative/showroom (webp up to 1600px, mp4 up to 720p/1280p, muted).
  */
 import { XS_ITEMS } from '@/lib/creative/xs'
+import { MODEL_SHOTS } from '@/lib/creative/model'
 
-export type ShowroomCategory = 'films' | 'episodes' | 'stills' | 'graphics' | 'product' | 'reels' | 'motion' | 'creators' | 'shorts'
+export type ShowroomCategory = 'films' | 'episodes' | 'stills' | 'graphics' | 'product' | 'reels' | 'motion' | 'creators' | 'shorts' | 'modeling'
 
 export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
   { id: 'films', label: 'Trailers & ads' },
@@ -17,6 +18,7 @@ export const SHOWROOM_CATEGORIES: { id: ShowroomCategory; label: string }[] = [
   { id: 'motion', label: 'Motion' },
   { id: 'creators', label: 'Creator clips' },
   { id: 'shorts', label: 'Shorts' },
+  { id: 'modeling', label: 'Modeling' },
 ]
 
 export type ShowroomItem = {
@@ -174,6 +176,16 @@ const SHORTS: ShowroomItem[] = [
   clip('s22-ai-with-taste', 'shorts', 'AI with taste', 'Short · AI'),
 ]
 
+const MODELING: ShowroomItem[] = MODEL_SHOTS.map((m) => ({
+  id: m.id,
+  kind: 'image',
+  cat: 'modeling',
+  src: m.src,
+  title: m.title,
+  tag: 'Modeling · Beppu 2026',
+  ratio: m.ratio,
+}))
+
 /** "All" interleaves the categories so no single type clumps together. */
 function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   const out: ShowroomItem[] = []
@@ -182,4 +194,4 @@ function interleave(lists: ShowroomItem[][]): ShowroomItem[] {
   return out
 }
 
-export const SHOWROOM: ShowroomItem[] = interleave([FILMS, EPISODES, STILLS, GRAPHICS, PRODUCT, REELS, CREATORS, SHORTS, MOTION])
+export const SHOWROOM: ShowroomItem[] = interleave([FILMS, EPISODES, STILLS, GRAPHICS, PRODUCT, REELS, CREATORS, SHORTS, MOTION, MODELING])

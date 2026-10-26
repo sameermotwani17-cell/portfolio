@@ -1,3 +1,4 @@
+import { MODEL_SHOTS, type ModelGroup } from '@/lib/creative/model'
 import { AJIWOW } from '@/lib/creative/ajiwow'
 import { SHOWROOM } from '@/lib/creative/showroom'
 
@@ -19,6 +20,11 @@ export type Embed =
   | { kind: 'tiktok'; items: { id: string; title: string }[] }
 
 export type Scope = { title: string; summary: string; bullets: string[]; embeds: Embed[] }
+
+const shots = (groups: ModelGroup[]): Embed => ({
+  kind: 'images',
+  items: MODEL_SHOTS.filter((m) => groups.includes(m.group)).map((m) => ({ src: m.src, label: m.title })),
+})
 
 const pick = (ids: string[]) => ids.map((id) => SHOWROOM.find((s) => s.id === id)).filter((s): s is NonNullable<typeof s> => !!s)
 
@@ -139,6 +145,39 @@ export const SCOPES: Record<string, Scope[]> = {
       summary: 'The working Drive for the studio, shared read only. Click through and have a look.',
       bullets: ['Not a case study, not a cut reel', 'Shared read only'],
       embeds: [],
+    },
+  ],
+
+  modeling: [
+    {
+      title: 'Studio noir',
+      summary: 'Low-key light on black: a face, a chain, a pair of hands. Built to show what the camera finds in one frame with nothing else in it.',
+      bullets: ['Black backdrop, shaped light', 'Full length, seated and close', 'Hands, rings and the gaze'],
+      embeds: [shots(['noir'])],
+    },
+    {
+      title: 'Profile and line',
+      summary: 'Straight on a clean white seamless: jaw, neck and curl in silhouette, for the casting directors who need to see structure.',
+      bullets: ['Profile left and up', 'High key, clean edges'],
+      embeds: [shots(['profile'])],
+    },
+    {
+      title: 'Paper white',
+      summary: 'A second look in all white: loose shirt, wide trousers, a stool and a soft grey wall. Quiet, editorial and easy to cast.',
+      bullets: ['White on white styling', 'Seated poses, head up and head down', 'Colour and mono edits'],
+      embeds: [shots(['paper'])],
+    },
+    {
+      title: 'Details',
+      summary: 'The close work: chain, cross and rings. The kind of frame jewellery and menswear brands ask for.',
+      bullets: ['Macro and tight crops', 'Hands and accessories'],
+      embeds: [shots(['detail'])],
+    },
+    {
+      title: 'Commercial and lifestyle',
+      summary: 'Product in motion: a hair care jar thrown, caught and held, with the expression carrying the ad. Proof that the face can sell something.',
+      bullets: ['Hair care, mid throw', 'Expression for the product shot'],
+      embeds: [shots(['lifestyle']), films(['short-model'])],
     },
   ],
 

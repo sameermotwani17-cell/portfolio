@@ -40,7 +40,7 @@ export type CaseStudy = {
   /** the album cover art */
   cover: string
   /** a short artist-profile style bio */
-  bio?: { title: string; body: string[]; facts: { value: string; label: string }[] }
+  bio?: { title: string; body: string[]; facts: { value: string; label: string }[]; photo?: string }
 }
 
 const byId = (ids: string[]) =>
@@ -115,6 +115,7 @@ const dedupe = (links: { label: string; href: string }[]) => {
 
 const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
   music: {
+    photo: '/creative/model/08906.webp',
     title: 'About',
     body: [
       'RETRO is the music name of Sameer Motwani, a Liberian artist living in Japan. Music, visuals, and doing way too much.',
@@ -126,7 +127,21 @@ const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
       { value: '2025', label: 'First release' },
     ],
   },
+  modeling: {
+    photo: '/creative/model/08883.webp',
+    title: 'About',
+    body: [
+      'Born in Monrovia, Liberia, with Liberian and Indian roots. I left home at 17 on a scholarship, studied the IB in Israel and now live in Beppu, Japan.',
+      'I am looking for modeling work. Editorial, commercial and product, in Japan or anywhere a shoot needs a face with curls and some attitude. I am still a builder first, so the tech side of this portfolio is coming next.',
+    ],
+    facts: [
+      { value: 'Beppu', label: 'Based in Japan' },
+      { value: 'LR · IN', label: 'Roots' },
+      { value: 'Open', label: 'To bookings' },
+    ],
+  },
   streams: {
+    photo: '/creative/model/08865.webp',
     title: 'About',
     body: [
       'I started streaming in 2026, from my room in Beppu. It is the loosest thing I make: no script, no edit, just me, the chat and whatever I am building that night.',
@@ -139,6 +154,7 @@ const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
     ],
   },
   'content-tiktok': {
+    photo: '/creative/model/08861.webp',
     title: 'About',
     body: [
       'Retro, a Liberian in Japan. Music, visuals, doing way too much, curly head.',
@@ -174,6 +190,30 @@ function buildCase(work: Work): CaseStudy {
       accent: '#8a7dff',
       theme: 'music',
       cover: '/creative/music/best-friend.webp',
+    }
+  }
+
+  if (work.id === 'modeling') {
+    return {
+      id: 'modeling',
+      kicker: 'Model',
+      title: 'Modeling',
+      intro:
+        'Looking for modeling work. A studio shoot in Beppu: low-key black, a clean white profile set, an all-white look, close details and one commercial frame. Twenty-nine frames, picked to show range.',
+      client: work.client,
+      role: work.role,
+      when: work.year,
+      links: [...work.links, { label: 'Tech portfolio, next', href: '/tech' }],
+      stats: [
+        { value: '29', label: 'Frames' },
+        { value: '5', label: 'Looks' },
+        { value: '2026', label: 'Shoot' },
+      ],
+      steps: [],
+      accent: '#e8dccb',
+      theme: 'modeling',
+      cover: '/creative/covers/modeling.webp',
+      scopes: SCOPES.modeling,
     }
   }
 

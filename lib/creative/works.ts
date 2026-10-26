@@ -59,6 +59,19 @@ export const WORKS: Work[] = [
     placeholder: ['preview', 'video'],
   },
   {
+    id: 'modeling',
+    title: 'Modeling',
+    category: 'model',
+    client: 'Self · open to bookings',
+    year: '2026',
+    role: 'Model',
+    tools: [],
+    description:
+      'Looking for modeling work. A studio shoot in Beppu, from low-key black to a white seamless set, with editorial portraits, profiles, details and a commercial frame. Still a builder too: the tech portfolio is next.',
+    thumb: '/creative/works/sleeve-modeling.webp',
+    links: [{ label: 'Book me', href: 'mailto:sameermotwani17@gmail.com?subject=Modeling' }],
+  },
+  {
     id: 'retro-studios',
     title: 'RETRO Studios',
     category: 'motion',

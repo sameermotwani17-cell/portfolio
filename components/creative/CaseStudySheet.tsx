@@ -239,7 +239,13 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
         )}
 
         {s.bio && (
-          <div className="cr-aj__block cr-bio">
+          <div className={`cr-aj__block cr-bio ${s.bio.photo ? 'cr-bio--photo' : ''}`}>
+            {s.bio.photo && (
+              <figure className="cr-bio__photo">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.bio.photo} alt="" loading="lazy" decoding="async" />
+              </figure>
+            )}
             <div>
               <h3>{s.bio.title}</h3>
               {s.bio.body.map((p) => (
