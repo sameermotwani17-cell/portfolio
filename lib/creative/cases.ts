@@ -39,6 +39,8 @@ export type CaseStudy = {
   theme: string
   /** the album cover art */
   cover: string
+  /** photographer or other credit, shown in the meta row */
+  credit?: string
   /** a short artist-profile style bio */
   bio?: { title: string; body: string[]; facts: { value: string; label: string }[]; photo?: string }
 }
@@ -113,6 +115,11 @@ const dedupe = (links: { label: string; href: string }[]) => {
   return links.filter((l) => (seen.has(l.href) ? false : (seen.add(l.href), true)))
 }
 
+const PHOTO_LINKS = [
+  { label: 'Photography · @samiclicks', href: 'https://www.instagram.com/samiclicks' },
+  { label: 'samiclicks.com', href: 'http://www.samiclicks.com/' },
+]
+
 const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
   music: {
     photo: '/creative/model/08906.webp',
@@ -131,7 +138,7 @@ const BIOS: Record<string, NonNullable<CaseStudy['bio']>> = {
     photo: '/creative/model/08883.webp',
     title: 'About',
     body: [
-      'One studio shoot in Beppu, built as a book: low-key noir, a clean profile set, an all-white look, close details and a commercial frame.',
+      'Photographed by Sami (@samiclicks). One studio shoot in Beppu, built as a book: low-key noir, a clean profile set, an all-white look, close details and a commercial frame.',
       'It is the same eye I use on the AI work, pointed at a real face. If you want to book it, the next album is the comp card.',
     ],
     facts: [
@@ -216,7 +223,8 @@ function buildCase(work: Work): CaseStudy {
       client: work.client,
       role: work.role,
       when: work.year,
-      links: [...work.links, { label: 'Tech portfolio, next', href: '/tech' }],
+      links: [...work.links, ...PHOTO_LINKS, { label: 'Tech portfolio, next', href: '/tech' }],
+      credit: 'Sami · @samiclicks',
       stats: [],
       steps: [],
       accent: '#c1272d',
@@ -236,7 +244,8 @@ function buildCase(work: Work): CaseStudy {
       client: work.client,
       role: work.role,
       when: work.year,
-      links: [],
+      links: PHOTO_LINKS,
+      credit: 'Sami · @samiclicks',
       stats: [
         { value: '29', label: 'Frames' },
         { value: '5', label: 'Looks' },

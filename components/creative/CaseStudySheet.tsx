@@ -204,6 +204,12 @@ export default function CaseStudySheet({ study, onClose }: { study: CaseStudy; o
             <dt>When</dt>
             <dd>{s.when}</dd>
           </div>
+          {s.credit && (
+            <div>
+              <dt>Photography</dt>
+              <dd>{s.credit}</dd>
+            </div>
+          )}
         </dl>
         {!isMusic && s.links.length > 0 && (
           <div className="cr-aj__links">
