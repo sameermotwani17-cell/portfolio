@@ -39,6 +39,7 @@ A cinematic scroll narrative that opens into a **split screen**. Pick a side and
 |---|---|---|
 | DK2R | Black and antique gold | Stadium floodlight and pitch lines |
 | RETRO Studios and Projects | Monochrome | Film strip perforations |
+| Ajiwow | Navy and ember | Record grooves, heat scale |
 | TOO EASY | Paper white and ink | A hairline grid and nothing else |
 | PLASTIVORE | Enzyme green and teal | Hexagon cells |
 | AFRO WEEK | Red, gold and green | Flag bands and a sunburst |
@@ -76,7 +77,7 @@ lib/
     music.ts             releases and cover art
 components/creative/
   ArcGallery.tsx         the curved, draggable 3D arc
-  CaseStudySheet.tsx     one sheet, twelve themes
+  CaseStudySheet.tsx     one sheet, thirteen themes
   Showroom.tsx           tabs, lazy video, lightbox
 scripts/
   showroom/encode.sh     ffmpeg pipeline for web video and posters

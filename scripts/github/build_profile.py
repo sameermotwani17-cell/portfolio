@@ -90,8 +90,9 @@ Born in Monrovia, Liberia. Studied the IB in Israel. Now based in **Beppu, Japan
 
 ## Now
 
-- **Taking new contract work.** My **Stick'Em** contract ended in September, so I have open capacity now.
+- **Taking new contract work.** My **Stick'Em** contract ended in September and **Ajiwow** wraps in November, so I have open capacity now and more from then.
 - **Stick'Em** (Singapore EdTech, 2025 Hult Prize Global winner), contract software engineer, May to Sep 2026. Rebuilt slide delivery for classrooms in Brunei and the Philippines: about **15x faster on Slow-3G** (678 ms vs 10 s+), with the old iframe kept as an automatic fallback.
+- **Ajiwow** (Tokyo food-tech, Techstars Tokyo 2026), freelance creative technologist, Sep 30 to Nov 2026. Brand system, a bilingual site on Azure with push-to-deploy, a print pipeline and video direction.
 - **Founder of Retro Studios** under StarLabs, and **B.B.A. in Finance at APU**, Beppu. 1st place at the APU Annual Hackathon 2025 and Hult Prize APU runner-up with Best Speaker.
 
 ## Shipping log
@@ -118,10 +119,11 @@ The longer write-ups live on the portfolio, each with the problem, constraints, 
 | | Build | Headline |
 |---|---|---|
 | 01 | [Stick'Em SlideViewer]({P}/tech#builds) | 678 ms vs 10 s+ on Slow-3G, with a fallback for every failure |
-| 02 | [SCRAPYARD]({P}/tech#builds) | A multiplayer shooter from a 200-line spec in one day, 91 tests |
-| 03 | [AI Hack 2026]({P}/tech#builds) | AUC 0.7635, Kyoto finalist, the only all-freshman team |
-| 04 | [Curriculum engine]({P}/tech#builds) | An AI that picks from a list and never invents a standard |
-| 05 | [GOMI Snap]({P}/tech#builds) | 520+ organic users, 95.3% adoption intent (n=400) |
+| 02 | [Ajiwow site and pipelines]({P}/tech#builds) | Astro on Azure, push-to-deploy, a 31-point print check |
+| 03 | [SCRAPYARD]({P}/tech#builds) | A multiplayer shooter from a 200-line spec in one day, 91 tests |
+| 04 | [AI Hack 2026]({P}/tech#builds) | AUC 0.7635, Kyoto finalist, the only all-freshman team |
+| 05 | [Curriculum engine]({P}/tech#builds) | An AI that picks from a list and never invents a standard |
+| 06 | [GOMI Snap]({P}/tech#builds) | 520+ organic users, 95.3% adoption intent (n=400) |
 
 ## Stack
 

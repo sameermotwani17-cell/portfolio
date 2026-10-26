@@ -90,7 +90,7 @@ async function main() {
   bullet('Identified and closed a public-bundle secret exposure (NEXT_PUBLIC_ prefix) before merge; kept SQL-verified QA over agent self-reports and strict branch isolation, zero commits to main.')
   bullet('Shipped a curriculum-alignment engine mapping STEM lessons to 13 government standards (UK, India, USA) with anti-hallucination index-only selection and two-tier validation.')
   y -= 3
-  if (process.env.SHOW_AJIWOW === '1') {
+  if (process.env.SHOW_AJIWOW !== '0') {
   entry('Ajiwow Inc. (ROKU SHOKU, Techstars Tokyo 2026)', 'Tokyo, remote')
   sub('Freelance Creative Technologist', 'Sep 30 - Nov 2026')
   bullet('Built a JA/EN Astro site deployed on Azure Static Web Apps in the client tenant with GitHub Actions push-to-deploy and per-PR previews; moved the repo into the client GitHub org and handed the finish to in-house engineers.')

@@ -489,6 +489,10 @@ export default function TechUniverse() {
               </article>
             ))}
           </div>
+          <blockquote className="tech-quote tech-quote--wide">
+            <p>{HIRE_EXTRA.quote.text}</p>
+            <cite>{HIRE_EXTRA.quote.who}</cite>
+          </blockquote>
 
           <h3 className="tech-sub">What I take on</h3>
           <div className="tech-services">
