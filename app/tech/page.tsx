@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import UniverseShell from '@/components/universe/UniverseShell'
+import TechUniverse from '@/components/tech/TechUniverse'
 import { UNIVERSES } from '@/lib/universe/sides'
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function TechPage() {
-  return <UniverseShell universe="tech" />
+  return <TechUniverse />
 }
