@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CaseStudy, Scope } from '@/lib/creative/cases'
 import { RELEASES, SPOTIFY_ARTIST, APPLE_ARTIST } from '@/lib/creative/music'
 
@@ -9,6 +9,33 @@ const TT_PATH =
 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
+
+/** A TikTok post that only loads its player when tapped, so a page of them stays fast. */
+function TikTokCard({ id, title, note }: { id: string; title: string; note?: string }) {
+  const [on, setOn] = useState(false)
+  return (
+    <figure>
+      {on ? (
+        <iframe src={`https://www.tiktok.com/embed/v2/${id}`} title={title} allow="encrypted-media; fullscreen" allowFullScreen />
+      ) : (
+        <button type="button" className="cr-tt-face" onClick={() => setOn(true)} aria-label={`Play ${title} from TikTok`}>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path className="c" transform="translate(-.5 -.3)" d={TT_PATH} />
+            <path className="r" transform="translate(.5 .3)" d={TT_PATH} />
+            <path className="w" d={TT_PATH} />
+          </svg>
+          {note && <b>{note}</b>}
+          <span>{title}</span>
+          <i>Tap to play</i>
+        </button>
+      )}
+      <figcaption>
+        {note && <b>{note}</b>}
+        {title}
+      </figcaption>
+    </figure>
+  )
+}
 
 function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
   if (e.kind === 'images') {
@@ -88,19 +115,7 @@ function ScopeEmbed({ e }: { e: Scope['embeds'][number] }) {
     return (
       <div className="cr-aj__tt" tabIndex={0} aria-label="TikTok posts, scroll sideways">
         {e.items.map((t) => (
-          <figure key={t.id}>
-            <iframe
-              src={`https://www.tiktok.com/embed/v2/${t.id}`}
-              title={t.title}
-              loading="lazy"
-              allow="encrypted-media; fullscreen"
-              allowFullScreen
-            />
-            <figcaption>
-              {t.note && <b>{t.note}</b>}
-              {t.title}
-            </figcaption>
-          </figure>
+          <TikTokCard key={t.id} id={t.id} title={t.title} note={t.note} />
         ))}
       </div>
     )
