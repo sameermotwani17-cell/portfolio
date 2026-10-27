@@ -1828,19 +1828,6 @@ html[data-defer] .uni-stage {
   object-position: 50% 20%;
   filter: grayscale(0.15) contrast(1.05);
 }
-.about__model {
-  grid-column: 1 / -1;
-  justify-self: start;
-  margin-top: clamp(24px, 4vw, 48px);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--paper);
-  text-decoration: none;
-  border-bottom: 1px solid var(--signal-bright);
-  padding-bottom: 4px;
-}
 @media (max-width: 899px) {
   .about__photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about__photos li:nth-child(even) { transform: none; }
@@ -5461,4 +5448,70 @@ html[data-defer] .uni-stage {
   .tech-sw--one ul {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── /creative: modeling and on-camera work ────────────────────────────── */
+.cr-hire {
+  position: relative;
+  background: #0b0a0d;
+  color: #f4f1ec;
+  padding: clamp(64px, 9vw, 120px) clamp(16px, 4vw, 56px);
+  border-top: 1px solid rgba(244, 241, 236, 0.1);
+}
+.cr-hire__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.cr-hire__eyebrow {
+  margin: 0 0 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8dccb;
+}
+.cr-hire h2 {
+  margin: 0 0 16px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(34px, 5.4vw, 76px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.cr-hire__lead {
+  max-width: 56ch;
+  margin: 0 0 24px;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+  color: rgba(244, 241, 236, 0.78);
+}
+.cr-hire__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cr-hire__cta a,
+.cr-hire__cta button {
+  padding: 13px 22px;
+  border: 1px solid rgba(244, 241, 236, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: #f4f1ec;
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.cr-hire__cta button {
+  background: #e8dccb;
+  border-color: #e8dccb;
+  color: #0b0a0d;
+}
+.cr-hire__cta a:hover,
+.cr-hire__cta button:hover {
+  background: #f4f1ec;
+  color: #0b0a0d;
 }

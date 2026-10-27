@@ -6,6 +6,7 @@ import ArcLoader from './ArcLoader'
 import ArcGallery, { type GalleryPhase } from './ArcGallery'
 import CaseStudySheet from './CaseStudySheet'
 import Showroom from './Showroom'
+import CreativeHire from './CreativeHire'
 import { caseFor } from '@/lib/creative/cases'
 import { WORKS, PRELOAD, SOCIAL, type Work } from '@/lib/creative/works'
 import { CATEGORIES, type CategoryId } from '@/lib/creative/categories'
@@ -240,6 +241,7 @@ export default function CreativeUniverse() {
 
       {detail && <CaseStudySheet study={caseFor(detail.work)} onClose={() => setDetail(null)} />}
     </main>
+    <CreativeHire onOpenModeling={openModeling} />
     <Showroom />
     </>
   )

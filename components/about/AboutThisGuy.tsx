@@ -1,10 +1,10 @@
 import { ABOUT } from '@/lib/content/about'
 
 const PHOTOS = [
-  '/creative/model/08898.webp',
-  '/creative/model/08847.webp',
-  '/creative/model/08883.webp',
-  '/creative/model/09060.webp',
+  '/about/portrait-08898.webp',
+  '/about/portrait-08847.webp',
+  '/about/portrait-08883.webp',
+  '/about/portrait-09060.webp',
 ]
 
 /**
@@ -37,9 +37,6 @@ export default function AboutThisGuy({ id }: { id: string }) {
             </li>
           ))}
         </ul>
-        <a className="about__model" href="/creative#modeling">
-          Looking for modeling work →
-        </a>
       </div>
     </section>
   )
