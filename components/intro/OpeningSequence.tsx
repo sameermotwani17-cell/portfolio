@@ -7,16 +7,19 @@ import IntroVideo from './IntroVideo'
 import CreateWordmark from './CreateWordmark'
 import EnterPulse from './EnterPulse'
 import SkipControl from './SkipControl'
-import IntroGate from './IntroGate'
+import SoundToggle from './SoundToggle'
 import { CUES, CANPLAY_TIMEOUT_MS, CROSSFADE_MS, beatAt, type Beat } from '@/lib/intro/cues'
 import { useIntroClock } from '@/hooks/useIntroClock'
 import { usePlayOncePerSession } from '@/hooks/usePlayOncePerSession'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { audioRunning, click as keyClick, initSound, swoosh, typeKey, unlockSound } from '@/lib/sound'
+import { click as keyClick, initSound, swoosh, typeKey, unlockSound } from '@/lib/sound'
 
 export const REPLAY_EVENT = 'retro:replay-intro'
 
-type Phase = 'idle' | 'gate' | 'playing'
+type Phase = 'idle' | 'playing'
+
+/** The intro hands over by itself this long after it starts. Any key, tap or scroll skips sooner. */
+const AUTO_ADVANCE_MS = 2000
 
 /* Keys that must not skip: Tab (reaching the skip button) and bare modifiers. */
 const PASSTHROUGH_KEYS = new Set(['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'CapsLock'])
@@ -24,7 +27,7 @@ const PASSTHROUGH_KEYS = new Set(['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'Cap
 /**
  * State machine + layers for the opening sequence.
  *
- *   boot script  ->  html[data-intro=play]  ->  playing  ->  hand-over  ->  idle
+ *   boot script  ->  html[data-intro=play]  ->  playing (muted)  ->  hand-over  ->  idle
  *
  * The video clock is the only timeline. Beats are derived from
  * `video.currentTime` every frame; the Enter shortcut *seeks* the video to
@@ -40,8 +43,6 @@ export default function OpeningSequence() {
   const [phase, setPhase] = useState<Phase>('idle')
   const [run, setRun] = useState(0)
   const [beat, setBeat] = useState<Beat>('typing')
-  // the "press any key" prompt, shown only if the browser still blocks audio
-  const [gateVisible, setGateVisible] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement>(null)
   const phaseRef = useRef<Phase>('idle')
@@ -74,7 +75,6 @@ export default function OpeningSequence() {
     // only a gesture that started the intro needs protecting from also skipping it
     startedAtRef.current = gesture ? performance.now() : 0
     phaseRef.current = 'playing'
-    setGateVisible(false)
     setPhase('playing')
   }, [])
 
@@ -85,9 +85,9 @@ export default function OpeningSequence() {
       return
     }
     if (shouldPlay()) {
+      // starts straight away and muted; the visitor can turn sound on from the intro
       initSound()
-      phaseRef.current = 'gate'
-      setPhase('gate')
+      startPlaying()
     }
     // Boot decision only; later `reduced` changes are handled by the skip path.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,46 +112,6 @@ export default function OpeningSequence() {
     window.addEventListener(REPLAY_EVENT, onReplay)
     return () => window.removeEventListener(REPLAY_EVENT, onReplay)
   }, [armReplay, reduced])
-
-  /* ── gate: wait for the gesture that unlocks sound ───────────────────── */
-  useEffect(() => {
-    if (phase !== 'gate') return
-    const body = document.body
-    const prevOverflow = body.style.overflow
-    body.style.overflow = 'hidden'
-    window.__lenis?.stop()
-
-    // browsers that already allow audio (or a returning visitor) never see the prompt
-    const check = window.setTimeout(() => {
-      if (audioRunning()) startPlaying()
-      else setGateVisible(true)
-    }, 250)
-    // nobody there (or a crawler): play silently rather than wait forever
-    const giveUp = window.setTimeout(() => startPlaying(), 8000)
-
-    const go = () => {
-      unlockSound()
-      startPlaying(true)
-    }
-    const onPointer = () => go()
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Tab' || PASSTHROUGH_KEYS.has(e.key) || e.repeat) return
-      go()
-    }
-    window.addEventListener('pointerdown', onPointer)
-    window.addEventListener('touchend', onPointer)
-    window.addEventListener('keydown', onKey)
-    return () => {
-      window.clearTimeout(check)
-      window.clearTimeout(giveUp)
-      window.removeEventListener('pointerdown', onPointer)
-      window.removeEventListener('touchend', onPointer)
-      window.removeEventListener('keydown', onKey)
-      // always hand the page back; the playing phase re-locks it in the same commit
-      body.style.overflow = prevOverflow
-      window.__lenis?.start()
-    }
-  }, [phase, startPlaying])
 
   /* ── master clock ────────────────────────────────────────────────────── */
   useIntroClock(videoRef, phase === 'playing', (t) => {
@@ -186,6 +146,9 @@ export default function OpeningSequence() {
     body.style.overflow = 'hidden'
     window.__lenis?.stop()
 
+    // Nobody waits more than ~2s: jump to the hand-over beat on a timer.
+    const auto = window.setTimeout(() => seekToTransition(), AUTO_ADVANCE_MS)
+
     // If the video hasn't reached canplay in time, don't make anyone wait.
     const guard = window.setTimeout(() => {
       if (!readyRef.current) finish()
@@ -197,6 +160,8 @@ export default function OpeningSequence() {
     }
     const onKey = (e: KeyboardEvent) => {
       if (PASSTHROUGH_KEYS.has(e.key)) return
+      // the sound toggle is a button: Enter and Space on it must not skip the intro
+      if ((e.target as HTMLElement | null)?.closest?.('[data-sound]')) return
       // the key that started the intro (or its auto-repeat) must not skip it
       if (e.repeat || performance.now() - startedAtRef.current < 500) return
       if (e.key === 'Enter') {
@@ -222,6 +187,7 @@ export default function OpeningSequence() {
 
     return () => {
       window.clearTimeout(guard)
+      window.clearTimeout(auto)
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('wheel', onWheel)
@@ -245,7 +211,6 @@ export default function OpeningSequence() {
 
   return (
     <>
-    {phase === 'gate' && gateVisible && <IntroGate />}
     <AnimatePresence>
       {phase === 'playing' && (
         <motion.div
@@ -278,6 +243,7 @@ export default function OpeningSequence() {
             animate={{ opacity: beat === 'transition' || beat === 'hero' ? 1 : 0 }}
             transition={{ delay: 0.25, duration: 0.3, ease: 'easeOut' }}
           />
+          <SoundToggle />
           <SkipControl onSkip={finish} />
         </motion.div>
       )}

@@ -53,8 +53,8 @@ export const STORM = {
 } as const
 
 export const LOADER = {
-  MIN_MS: 2500,
-  MAX_MS: 4000,
+  MIN_MS: 1200,
+  MAX_MS: 2000,
   /** arc → panoramic wall */
   REVEAL_MS: 1400,
 } as const

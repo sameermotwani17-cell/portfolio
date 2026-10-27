@@ -36,6 +36,16 @@ export default function ArcLoader({ urls, progress, skip, onDone }: Props) {
       return im
     })
 
+    // any tap, key or scroll skips the wait (the images still have to be in)
+    let skipNow = false
+    const onInput = () => {
+      skipNow = true
+    }
+    window.addEventListener('pointerdown', onInput)
+    window.addEventListener('keydown', onInput)
+    window.addEventListener('wheel', onInput, { passive: true })
+    window.addEventListener('touchstart', onInput, { passive: true })
+
     const t0 = performance.now()
     let shown = 0
     let raf = 0
@@ -43,7 +53,7 @@ export default function ArcLoader({ urls, progress, skip, onDone }: Props) {
     const loop = (now: number) => {
       const elapsed = now - t0
       const real = total ? loaded / total : 1
-      const timeGate = skip ? 1 : Math.min(1, elapsed / LOADER.MIN_MS)
+      const timeGate = skip || skipNow ? 1 : Math.min(1, elapsed / LOADER.MIN_MS)
       let target = Math.min(real, timeGate)
       if (elapsed >= LOADER.MAX_MS) target = 1
       // ease toward the target, and always creep a little so it never freezes
@@ -63,6 +73,10 @@ export default function ArcLoader({ urls, progress, skip, onDone }: Props) {
     }
     raf = requestAnimationFrame(loop)
     return () => {
+      window.removeEventListener('pointerdown', onInput)
+      window.removeEventListener('keydown', onInput)
+      window.removeEventListener('wheel', onInput)
+      window.removeEventListener('touchstart', onInput)
       cancelAnimationFrame(raf)
       imgs.forEach((im) => {
         im.onload = null

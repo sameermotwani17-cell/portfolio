@@ -7,6 +7,18 @@
  * gesture on the page (a click, a key, a tap) unlocks it; until then these
  * calls are silent no-ops.
  */
+// Off by default: the intro is silent unless the visitor turns the sound on.
+let enabled = false
+
+export function setSoundEnabled(on: boolean) {
+  enabled = on
+  if (on) unlockSound() // call from inside the click that turns it on
+}
+
+export function isSoundEnabled() {
+  return enabled
+}
+
 let ctx: AudioContext | null = null
 let master: GainNode | null = null
 
@@ -50,7 +62,7 @@ export function audioRunning() {
   return !!ctx && ctx.state === 'running'
 }
 
-const live = () => !!ctx && !!master && ctx.state === 'running'
+const live = () => enabled && !!ctx && !!master && ctx.state === 'running'
 
 /** One light keyboard keystroke; every call is a little different. */
 export function typeKey(i = 0) {
