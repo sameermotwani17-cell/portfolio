@@ -9,10 +9,10 @@ import { albums, vault, type FlowStage, type ProjectLink, type ProjectStat } fro
 
 export const TECH_PROFILE = {
   name: 'Sameer Motwani',
-  role: 'Software engineer · AI systems',
+  role: 'Forward deployed engineer · AI systems',
   where: 'Beppu, Japan · remote',
   summary:
-    'I build and ship production software and AI systems. A slide-delivery rebuild for a live EdTech platform, a server-authoritative multiplayer game, a credit-risk model that reached a national final, and a civic-tech app piloted with a city. I measure first, keep a fallback for every failure, and verify with data instead of trusting a report.',
+    'I embed with a team, ship into real conditions, measure what happened and hand over something they can run without me. A slide pipeline for classrooms on Slow-3G, a multiplayer game with server-authoritative netcode, a credit-risk model that reached a national final, and a civic-tech app taken to Beppu City.',
   plain:
     'In plain English: I make software that works for real people on bad internet, I test it honestly, and I plan for the day something breaks.',
   email: 'sameermotwani17@gmail.com',

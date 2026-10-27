@@ -27,7 +27,7 @@ export const HERO = {
   /** Small line above the name, like a catalogue number. */
   superscript: 'RETRO',
   /** The one-line claim under the name: what, and where. */
-  role: ['ENGINEER', 'CREATIVE DIRECTOR', 'BUILDER', 'APU, JAPAN'],
+  role: ['FORWARD DEPLOYED ENGINEER', 'CREATIVE DIRECTOR', 'BUILDER', 'APU, JAPAN'],
   /** Full-width red display line. */
   name: 'SAMEER',
   /** Surname, set up the left column and read bottom to top. */
