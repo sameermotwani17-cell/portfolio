@@ -1,5 +1,7 @@
 'use client'
 
+import { CREATIVE_PACKS, CREATIVE_QUOTE } from '@/lib/creative/hire'
+
 const MAIL = 'mailto:sameermotwani17@gmail.com?subject=Modeling'
 
 /**
@@ -20,6 +22,29 @@ export default function CreativeHire({ onOpenModeling }: { onOpenModeling: () =>
             Open the modeling book
           </button>
           <a href={MAIL}>Book me</a>
+        </div>
+
+        <h3 className="cr-hire__sub">Work with Retro Studios</h3>
+        <div className="cr-hire__packs">
+          {CREATIVE_PACKS.map((p) => (
+            <article key={p.name}>
+              <h4>{p.name}</h4>
+              <p className="cr-hire__for">{p.for}</p>
+              <ul>
+                {p.get.map((g) => (
+                  <li key={g}>{g}</li>
+                ))}
+              </ul>
+              <i>Proof: {p.ref}</i>
+            </article>
+          ))}
+        </div>
+        <blockquote className="cr-hire__quote">
+          <p>{CREATIVE_QUOTE.text}</p>
+          <cite>{CREATIVE_QUOTE.who}</cite>
+        </blockquote>
+        <div className="cr-hire__cta">
+          <a href="mailto:sameermotwani17@gmail.com?subject=Retro%20Studios%20brief">Send a brief</a>
         </div>
       </div>
     </section>

@@ -36,45 +36,36 @@ export const TECH_ACHIEVEMENTS = [
 ]
 
 export const HIRE = {
-  headline: 'Hire me for the work, not the title.',
+  headline: 'Embed me. I ship it, measure it, hand it over.',
   plain:
-    'I take on contract and freelance work for companies that need something built, fixed, clipped or launched, and I run it like a small studio: clear scope, steady updates, a handover you can use without me.',
-  open: ['AI Engineer', 'Founding or early-stage engineer', 'Full-stack product engineer', 'Multimedia designer'],
-  terms: 'Contract · freelance project · part-time · remote worldwide or Japan',
+    'I join your team on contract, build and fix things under real production conditions, measure the result, and leave a handover pack your team can run without me.',
+  open: ['Forward Deployed Engineer', 'AI Engineer'],
+  terms: 'Contract · part-time · remote worldwide, or on site in Japan',
   services: [
     {
-      title: 'Software engineering contracts',
-      body: 'Production web apps, performance work and pipelines. Next.js, Supabase and Postgres, Azure or Vercel, CI/CD, and a fallback for every failure.',
+      title: 'Embedded software engineering',
+      body: 'I work alongside your team on production web apps, performance work and pipelines: Next.js, Supabase and Postgres, Azure or Vercel, CI/CD, and a fallback for every failure.',
       proof: "Stick'Em SlideViewer · Ajiwow site · DK2R store",
     },
     {
-      title: 'AI-first builds and agents',
-      body: 'LLM features with guardrails, validation and evaluation, plus modeling and agent pipelines in n8n and Claude Code.',
+      title: 'AI features and agents in production',
+      body: 'LLM features with guardrails, validation and evaluation, plus machine-learning models and agent pipelines in n8n and Claude Code, shipped inside your stack.',
       proof: 'Curriculum engine · AI Hack 2026 · GitHub agent',
-    },
-    {
-      title: 'Clipping and short-form',
-      body: 'Long streams, podcasts and footage cut into hooks, captions and posts. Pipelines built for daily output, with audio mastered to broadcast level.',
-      proof: 'Creator clips · Ajiwow shorts · Showroom',
-    },
-    {
-      title: 'Creative technology',
-      body: 'A brand system, a bilingual site, a print poster and video direction from one person, so the pieces actually match.',
-      proof: 'Ajiwow · DK2R',
     },
   ],
   how: [
     'Scope and milestones agreed in writing before any work starts.',
     'Contract and deposit before an engagement begins.',
-    'Short written updates, and a working draft early.',
-    'A handover pack at the end: docs, tokens, a design skill or runbook, so your team can carry on.',
+    'I join your channels, ship a working draft early and send short written updates.',
+    'Every change is measured against a baseline, on the slowest conditions your users really have.',
+    'A handover pack at the end: docs, runbook and tokens, so your team carries on without me.',
   ],
   availability: 'Taking new briefs now: open capacity today and more from November. Part-time, up to about 28 hours a week across all paid work. Based in Japan (JST).',
   strengths: [
-    { title: 'I ship the whole thing', body: 'From first quote to an approved brand system in 4 days, and to a deployed website draft in 6 more.' },
+    { title: 'I ship into real conditions', body: 'Live classrooms on slow networks, a paid store with real checkout, a pilot with a city.' },
     { title: 'I measure and verify', body: 'Benchmarks on the slowest network that matters. QA checked with SQL, not with a status report.' },
     { title: 'I plan for failure', body: 'Every pipeline has a fallback, so a bad day never shows a blank screen.' },
-    { title: 'I cover the range', body: 'Engineering, brand, print, video and audio in one person, with the client talking to one person.' },
+    { title: 'I hand over cleanly', body: 'Docs, a runbook and logging, so the team can read, run and measure it without me.' },
     { title: 'I communicate fast and short', body: 'Quick updates in English, and working Japanese for client work. Clients have said so.' },
   ],
 }
@@ -83,33 +74,20 @@ export const HIRE_EXTRA = {
   status: 'Taking new briefs',
   packages: [
     {
-      name: 'Clipping sprint',
-      for: 'Streamers, podcasts, founders and brands with long footage and no time to cut it.',
-      get: ['Hooks picked from your footage', 'Animated captions and clean pacing', 'Audio mastered to broadcast level', 'Vertical cuts for TikTok, Reels and Shorts'],
-      ref: 'Creator clips, the Ajiwow shorts and the Showroom',
-    },
-    {
       name: 'Ship-it sprint',
-      for: 'Teams that need a feature built, a slow page fixed or a pipeline put in place.',
+      for: 'Teams that need a feature built, a slow page fixed or a pipeline put in place, with someone inside the team to do it.',
       get: ['A written scope and a working draft early', 'Tests, a fallback and logging', 'CI/CD with preview links', 'A handover pack so your team can carry on'],
       ref: "Stick'Em SlideViewer, the Ajiwow site and pipelines",
     },
-    {
-      name: 'Launch pack',
-      for: 'Startups that have a product and no identity, site or launch content.',
-      get: ['A brand system with tokens and templates', 'A bilingual website on your own cloud', 'Print and video, directed and delivered', 'A design skill so your team stays on brand'],
-      ref: 'Ajiwow: brand in 4 days, site draft in 10',
-    },
   ],
-  quote: { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow' },
-  need: ['A short brief: the goal, the deadline and who approves', 'Access to the footage, repo or accounts the work needs', 'One person who can say yes, so rounds stay fast'],
+  need: ['A short brief: the goal, the deadline and who approves', 'Access to the repo, the environments and the people the work needs', 'One person who can say yes, so rounds stay fast'],
   faq: [
     { q: 'What does it cost?', a: 'Quoted per scope after a short call. A contract and a deposit come before any engagement.' },
-    { q: 'What if the scope changes?', a: 'It happens. On Ajiwow the website finish moved to in-house engineers mid-project and nine short videos were added. Milestones make that a clean swap, not a fight.' },
+    { q: 'What if the scope changes?', a: 'It happens. On a recent engagement the website finish moved to in-house engineers mid-project. Milestones make that a clean swap, not a fight.' },
     { q: 'Can you work in Japanese?', a: 'Working Japanese for client work, still developing for long formal documents. I keep a term list and ask for a native review where it matters.' },
     { q: 'Will I be talking to one person?', a: 'Yes. You get one person from brief to handover, and a partner brought in only when a project needs more hands.' },
     { q: 'How fast can you start?', a: 'This week. My Stick’Em contract ended in September and Ajiwow wraps in November, so I have open capacity now. I work up to about 28 hours a week across all paid work.' },
   ],
   brief:
-    'Hi Sameer,%0D%0A%0D%0AProject: %0D%0AGoal: %0D%0ADeadline: %0D%0AWho approves: %0D%0AWhat I have (footage, repo, brand): %0D%0AWhat I need from you: ',
+    'Hi Sameer,%0D%0A%0D%0AProject: %0D%0AGoal: %0D%0ADeadline: %0D%0AWho approves: %0D%0AWhat I have (repo, access, current setup): %0D%0AWhat I need from you: ',
 }

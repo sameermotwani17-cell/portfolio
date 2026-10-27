@@ -474,7 +474,7 @@ export default function TechUniverse() {
             <p className="tech-hire__terms">{HIRE.terms}</p>
           </div>
 
-          <h3 className="tech-sub">Three ways to work together</h3>
+          <h3 className="tech-sub">The engagement</h3>
           <div className="tech-packs">
             {HIRE_EXTRA.packages.map((p) => (
               <article key={p.name}>
@@ -489,11 +489,6 @@ export default function TechUniverse() {
               </article>
             ))}
           </div>
-          <blockquote className="tech-quote tech-quote--wide">
-            <p>{HIRE_EXTRA.quote.text}</p>
-            <cite>{HIRE_EXTRA.quote.who}</cite>
-          </blockquote>
-
           <h3 className="tech-sub">What I take on</h3>
           <div className="tech-services">
             {HIRE.services.map((x) => (
@@ -554,7 +549,7 @@ export default function TechUniverse() {
           <div className="tech-cta">
             <a href={`mailto:${P.email}?subject=Project&body=${HIRE_EXTRA.brief}`}>Pitch me a project</a>
             <a href="/creative" onClick={go('/creative')}>
-              See the clipping and creative work
+              See the creative side
             </a>
           </div>
         </section>

@@ -244,7 +244,6 @@ const ALL_TECH_BUILDS: Build[] = [
     ],
     links: [{ label: 'ajiwow.co.jp', href: 'https://ajiwow.co.jp/en/' }],
     diagram: ['git push to main', 'GitHub Actions build', 'Azure Static Web Apps', 'ajiwow.co.jp'],
-    quote: { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow, on the brand system' },
     timeline: [
       { date: 'Sep 30', what: 'Quote, call and scope confirmed: four deliverables' },
       { date: 'Oct 2', what: 'Four brand directions sent' },
