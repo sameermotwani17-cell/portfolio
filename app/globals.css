@@ -5627,3 +5627,8 @@ html[data-defer] .uni-stage {
     bottom: calc(max(20px, env(safe-area-inset-bottom)) + 52px);
   }
 }
+
+.tech-sec,
+.tech-hero {
+  scroll-margin-top: 72px;
+}

@@ -102,9 +102,9 @@ async function main() {
   bullet('One-person AI creative studio running a paid campaign for DK2R Football Wear (2026 World Cup capsule): 12 country editions, 36 SKUs, 150+ AI-generated hero images delivered; 55-asset manufacturing QA with zero redos.')
   bullet('Solo-built the brand e-commerce platform (Next.js 14, Supabase, live PayPal + Stripe on Vercel) and an 8-layer reference-locked prompt architecture reused across every edition.')
   y -= 3
-  entry('GOMI Snap', 'Beppu, Japan')
+  entry('GOMI Snap (2025, sunset)', 'Beppu, Japan')
   sub('Founder & CTO', 'Nov 2025 - 2026')
-  bullet('AI waste-classification PWA (GPT-4V + rule engine reverse-engineered from municipal PDFs) for a city with 20+ waste categories: 520+ organic users, 95.3% adoption intent (n=400), Beppu City government engagement.')
+  bullet('AI waste-classification PWA (GPT-4V + rule engine reverse-engineered from municipal PDFs) for a city with 20+ waste categories: 520+ organic users, 95.3% stated adoption intent (survey, n=400), Beppu City government engagement.')
   bullet('Shipped GOMI Snap 2.0 (per-tenant QR logging + property-manager compliance dashboards); wound the company down and folded it into StarLabs.')
   y -= 4
 
