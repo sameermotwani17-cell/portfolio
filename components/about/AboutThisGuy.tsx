@@ -27,7 +27,6 @@ export default function AboutThisGuy({ id }: { id: string }) {
           {ABOUT.body.map((p) => (
             <p key={p}>{p}</p>
           ))}
-          <p className="about__close">{ABOUT.close}</p>
         </div>
         <ul className="about__photos">
           {PHOTOS.map((p) => (

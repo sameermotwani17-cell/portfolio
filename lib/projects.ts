@@ -254,7 +254,7 @@ export const albums: Album[] = [
       overview:
         'Snap a photo of your trash, get instant sorting instructions for Beppu’s 20+ waste categories. Built, validated, piloted with the city, then honestly wound down and folded into StarLabs.',
       stats: [
-        { value: '95.3%', label: 'Survey adoption intent (n=400)' },
+        { value: '95.3%', label: 'Stated adoption intent, survey n=400' },
         { value: '520+', label: 'Organic users · zero paid acquisition' },
         { value: '¥25K', label: 'Monthly operating cost' },
         { value: '2x', label: 'Podiums: APU Hackathon 1st · Hult Prize runner-up' },
@@ -273,7 +273,7 @@ export const albums: Album[] = [
         {
           label: 'the traction',
           headline: '500+ organic users in month one',
-          points: ['95.3% adoption intent across 400 surveyed', 'Beppu City government engagement', 'B2B dashboard for property managers'],
+          points: ['95.3% stated adoption intent across 400 surveyed', 'Beppu City government engagement', 'B2B dashboard for property managers'],
         },
         {
           label: 'the chapter close',

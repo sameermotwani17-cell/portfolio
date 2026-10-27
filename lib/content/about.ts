@@ -11,5 +11,4 @@ export const ABOUT = {
     'I left home at 17 on a scholarship to study the IB in Israel. Now I study finance in Beppu, Japan.',
     'I build AI products, ship real client work and release music as RETRO.',
   ],
-  close: "This guy doesn't give up. The doors closed, and he still made a way.",
 } as const

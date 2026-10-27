@@ -28,7 +28,7 @@ const ALL_TECH_METRICS: Metric[] = [
   { value: '~15x', label: 'faster slide load on simulated Slow-3G (678 ms vs 10 s+)', src: "Stick'Em" },
   { value: '91', label: 'automated tests gating a one-day multiplayer FPS', src: 'SCRAPYARD' },
   { value: '0.7635', label: 'peak public AUC on 68,546 credit applications', src: 'AI Hack 2026' },
-  { value: '520+', label: 'organic users, 95.3% adoption intent (n=400)', src: 'GOMI Snap' },
+  { value: '520+', label: 'organic users, 95.3% stated adoption intent (survey, n=400)', src: 'GOMI Snap · 2025 · sunset' },
   { value: '13', label: 'curriculum standards mapped across UK, India and USA', src: "Stick'Em" },
   { value: '30 Hz', label: 'server-authoritative tick with client-side prediction', src: 'SCRAPYARD' },
   { value: '31', label: 'point automated check on every print export', src: 'Ajiwow' },
@@ -86,11 +86,12 @@ const ALL_TECH_EXPERIENCE: Role[] = [
   },
   {
     org: 'GOMI Snap',
+    note: '2025 · sunset · folded into StarLabs',
     title: 'Founder and CTO',
     when: 'Nov 2025 to 2026',
     where: 'Beppu, Japan',
     bullets: [
-      'AI waste-classification PWA (GPT-4V plus a rule engine reverse-engineered from municipal PDFs) for a city with 20+ waste categories. 520+ organic users, 95.3% adoption intent (n=400), engagement with Beppu City government.',
+      'AI waste-classification PWA (GPT-4V plus a rule engine reverse-engineered from municipal PDFs) for a city with 20+ waste categories. 520+ organic users, 95.3% stated adoption intent (survey, n=400), engagement with Beppu City government.',
       'Shipped GOMI Snap 2.0 with per-tenant QR logging and property-manager compliance dashboards, then wound the company down and folded it into StarLabs.',
     ],
   },
@@ -148,7 +149,7 @@ const fromRecord = (id: string, hook: string, plain: string, links: BuildLink[])
   return {
     id,
     title: r.title,
-    subtitle: r.subtitle,
+    subtitle: id === 'gomi-snap' ? '2025 · sunset · AI civic-tech' : r.subtitle,
     tag: r.tag,
     accent: r.accent,
     tech: 'tech' in r ? r.tech : [],

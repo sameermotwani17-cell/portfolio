@@ -30,9 +30,8 @@ export const TECH_ACHIEVEMENTS = [
   { title: 'AI Hack 2026, Kyoto finalist', note: 'Aiful Corporation. 4th at prelims, top 8 nationwide, the only all-freshman team in the final.', year: '2026' },
   { title: 'Hult Prize APU Campus Round', note: '1st runner-up and Best Speaker Award. Global STEAM Initiative.', year: '2026' },
   { title: 'Kyutech x Science Tokyo x APU Hackathon', note: 'Bronze prize for MIRU. The only APU team on the podium among 15+ teams.', year: '2026' },
-  { title: 'APU Annual Hackathon, 1st place', note: 'GOMI Snap, the AI waste-classification platform.', year: '2025' },
+  { title: 'APU Annual Hackathon, 1st place', note: 'GOMI Snap (2025 · sunset), the AI waste-classification platform.', year: '2025' },
   { title: 'Next Einstein Forum, 1st place', note: 'Africa Science Week. Educate the Next Generation.', year: '2023' },
-  { title: 'Best High School Short Story Writer', note: 'Educate the Next Generation.', year: '2023' },
 ]
 
 export const HIRE = {
