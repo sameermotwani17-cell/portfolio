@@ -13,5 +13,3 @@ export const CREATIVE_PACKS = [
     ref: 'Ajiwow: brand in 4 days, site draft in 10',
   },
 ] as const
-
-export const CREATIVE_QUOTE = { text: 'Mind blowing!! You really are a pro!!!', who: 'Tomoko Nomoto, CEO, Ajiwow, on the brand system' } as const

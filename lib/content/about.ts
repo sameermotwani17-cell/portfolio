@@ -9,6 +9,6 @@ export const ABOUT = {
   body: [
     'Born in Monrovia, Liberia, with Liberian and Indian roots.',
     'I left home at 17 on a scholarship to study the IB in Israel. Now I study finance in Beppu, Japan.',
-    'I build AI products, ship real client work and release music as RETRO.',
+    'I build AI products, ship real client work and help startups turn requirements into working software. I am available for remote, freelance and contract opportunities alongside my studies.',
   ],
 } as const

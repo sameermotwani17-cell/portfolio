@@ -1,6 +1,6 @@
 'use client'
 
-import { CREATIVE_PACKS, CREATIVE_QUOTE } from '@/lib/creative/hire'
+import { CREATIVE_PACKS } from '@/lib/creative/hire'
 
 const MAIL = 'mailto:sameermotwani17@gmail.com?subject=Modeling'
 
@@ -39,10 +39,6 @@ export default function CreativeHire({ onOpenModeling }: { onOpenModeling: () =>
             </article>
           ))}
         </div>
-        <blockquote className="cr-hire__quote">
-          <p>{CREATIVE_QUOTE.text}</p>
-          <cite>{CREATIVE_QUOTE.who}</cite>
-        </blockquote>
         <div className="cr-hire__cta">
           <a href="mailto:sameermotwani17@gmail.com?subject=Retro%20Studios%20brief">Send a brief</a>
         </div>

@@ -109,7 +109,6 @@ const AJIWOW_CASE: CaseStudy = {
   accent: '#cc4210',
   theme: 'ajiwow',
   cover: '/creative/covers/ajiwow.webp',
-  quote: { ...AJIWOW.quote },
   scopes: SCOPES.ajiwow,
 }
 

@@ -27,20 +27,21 @@ export const HERO = {
   /** Small line above the name, like a catalogue number. */
   superscript: 'RETRO',
   /** The one-line claim under the name: what, and where. */
-  role: ['FORWARD DEPLOYED ENGINEER', 'CREATIVE DIRECTOR', 'BUILDER', 'APU, JAPAN'],
+  role: ['AI & FULL-STACK ENGINEER', 'PRODUCT BUILDER', 'APU, JAPAN', 'REMOTE · JST'],
   /** Full-width red display line. */
   name: 'SAMEER',
   /** Surname, set up the left column and read bottom to top. */
   surname: 'MOTWANI',
   /** The real, visually hidden h1. */
-  h1: 'Sameer Motwani — "Retro"',
+  h1: 'Sameer Motwani — AI and Full-Stack Engineer',
   /** Red statement block in the bottom-right cell. */
-  statement: ['MY NAME', 'IS', 'RETRO.'],
+  statement: ['I BUILD', 'AND SHIP', 'SOFTWARE.'],
   /** Body line under the grid. Placeholder copy, to be edited. */
   body:
-    "I'm Sameer Motwani. I build AI products, ship real client work, and make content people actually watch. Finance student at APU, Japan.",
+    'AI & Full-Stack Engineer. I build and ship production software for startups across AI engineering, full-stack development and product automation. Based in Beppu, Japan · available for remote, freelance and contract work.',
   ctas: [
-    { label: 'View work ↓', href: '#universe' },
+    { label: 'View Technical Work ↓', href: '#universe' },
+    { label: 'Work With Me ↗', href: 'mailto:sameermotwani17@gmail.com?subject=Engineering%20opportunity' },
     { label: 'CV ↗', href: '/cv.pdf' },
     { label: 'GitHub', href: SOCIAL.github, external: true },
     { label: 'LinkedIn', href: SOCIAL.linkedin, external: true },

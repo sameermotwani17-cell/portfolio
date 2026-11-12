@@ -107,9 +107,9 @@ const gochi = Gochi_Hand({
 })
 
 const SITE_URL = 'https://xsofficialbrand.com'
-const TITLE = 'Sameer Motwani · Engineer · Creative Director · Builder'
+const TITLE = 'Sameer Motwani · AI & Full-Stack Engineer'
 const DESCRIPTION =
-  'Engineer and creative director in Beppu, Japan. Production infrastructure rebuilds, AI systems and agent pipelines. Plus Retro Studios, a one-person creative studio that delivered a paid 12-country World Cup campaign end to end.'
+  'AI and full-stack engineer in Beppu, Japan. Production infrastructure, AI systems and product automation for startups and real users.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -149,7 +149,7 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Sameer Motwani',
-  jobTitle: 'Software Engineer, Creative Director & Founder',
+  jobTitle: 'AI and Full-Stack Engineer',
   url: SITE_URL,
   email: 'mailto:sameermotwani17@gmail.com',
   address: { '@type': 'PostalAddress', addressLocality: 'Beppu', addressCountry: 'JP' },
