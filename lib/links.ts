@@ -45,7 +45,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'tiktok', icon: 'tiktok',
+    slug: 'tiktok', img: '/links/tiktok.webp', icon: 'tiktok',
     group: 'follow',
     label: 'TikTok',
     note: '@we_love_you_retro',
@@ -53,7 +53,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'instagram', icon: 'instagram',
+    slug: 'instagram', img: '/links/instagram.webp', icon: 'instagram',
     group: 'follow',
     label: 'Instagram',
     note: '@we_love_you_retro',
@@ -61,7 +61,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'youtube', img: '/links/youtube.png', icon: 'youtube',
+    slug: 'youtube', img: '/links/youtube.webp', icon: 'youtube',
     group: 'follow',
     label: 'YouTube',
     note: '@we_love_you_retro',
@@ -77,7 +77,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-tt', icon: 'tiktok',
+    slug: 'clips-tt', img: '/links/tiktok.webp', icon: 'tiktok',
     group: 'clips',
     label: 'Retro Clips on TikTok',
     note: '@we_love_you_retro_2',
@@ -85,7 +85,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-tt-2', icon: 'tiktok',
+    slug: 'clips-tt-2', img: '/links/tiktok.webp', icon: 'tiktok',
     group: 'clips',
     label: 'Retro Clips on TikTok, 2',
     note: '@pumarahh',
@@ -93,7 +93,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-ig', icon: 'instagram',
+    slug: 'clips-ig', img: '/links/instagram.webp', icon: 'instagram',
     group: 'clips',
     label: 'Retro Clips on Instagram',
     note: '@retroclips_77',
@@ -101,7 +101,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-ig-2', icon: 'instagram',
+    slug: 'clips-ig-2', img: '/links/instagram.webp', icon: 'instagram',
     group: 'clips',
     label: 'Retro Clips on Instagram, 2',
     note: '@we_love_you_retro_2',
