@@ -65,6 +65,22 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
+    slug: 'clips-tt',
+    group: 'clips',
+    label: 'Retro Clips on TikTok',
+    note: '@we_love_you_retro_2',
+    href: 'https://www.tiktok.com/@we_love_you_retro_2',
+    external: true,
+  },
+  {
+    slug: 'clips-tt-2',
+    group: 'clips',
+    label: 'Retro Clips on TikTok, 2',
+    note: '@pumarahh',
+    href: 'https://www.tiktok.com/@pumarahh',
+    external: true,
+  },
+  {
     slug: 'clips-ig',
     group: 'clips',
     label: 'Retro Clips on Instagram',
