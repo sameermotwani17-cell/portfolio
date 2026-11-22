@@ -14,12 +14,14 @@ export type LinkItem = {
   href: string
   /** key into lib/icons.ts */
   icon?: string
+  /** custom logo in /public/links, overrides icon */
+  img?: string
   /** external links go through /go/[slug] so clicks can be counted per source */
   external: boolean
 }
 
 export const SONG = {
-  slug: 'song', icon: 'spotify',
+  slug: 'song', img: '/links/spotify.webp', icon: 'spotify',
   title: 'RETRO did it again',
   href: 'https://open.spotify.com/album/301p9vX5ZwvoMpwhO1zPsG',
 } as const
@@ -27,7 +29,7 @@ export const SONG = {
 export const LINKS: LinkItem[] = [
   { slug: 'song', group: 'music', label: 'Stream on Spotify', note: SONG.title, href: SONG.href, external: true },
   {
-    slug: 'apple', icon: 'apple',
+    slug: 'apple', img: '/links/apple.webp', icon: 'apple',
     group: 'music',
     label: 'Apple Music',
     note: 'All releases',
@@ -35,7 +37,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'ytmusic', icon: 'ytmusic',
+    slug: 'ytmusic', img: '/links/ytmusic.png', icon: 'ytmusic',
     group: 'music',
     label: 'YouTube Music',
     note: SONG.title,
@@ -59,7 +61,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'youtube', icon: 'youtube',
+    slug: 'youtube', img: '/links/youtube.png', icon: 'youtube',
     group: 'follow',
     label: 'YouTube',
     note: '@we_love_you_retro',

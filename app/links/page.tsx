@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     url: '/links',
     siteName: 'RETRO',
-    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'RETRO' }],
+    images: [{ url: '/links/cover-og.jpg', width: 1200, height: 1200, alt: 'RETRO did it again cover art' }],
     type: 'website',
   },
-  twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION, images: ['/og.jpg'] },
+  twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION, images: ['/links/cover-og.jpg'] },
 }
 
 const ROW =
@@ -40,9 +40,14 @@ function Row({ link, src }: { link: LinkItem; src: string }) {
   const inner = (
     <>
       <span className="flex min-w-0 items-center gap-4">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-paper">
-          <Glyph name={link.icon} />
-        </span>
+        {link.img ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={link.img} alt="" width={40} height={40} className="h-10 w-10 shrink-0 rounded-xl object-contain" />
+        ) : (
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-paper">
+            <Glyph name={link.icon} />
+          </span>
+        )}
         <span className="min-w-0">
         <span className="block font-body text-base text-paper">{link.label}</span>
         {link.note && <span className="block truncate font-mono text-xs text-paper/50">{link.note}</span>}
@@ -99,21 +104,19 @@ export default function LinksPage({ searchParams }: { searchParams: { src?: stri
           className="group mt-10 block rounded-3xl border border-[#8b5cf6]/40 bg-[#8b5cf6]/[0.08] p-4 shadow-[0_0_60px_-12px_rgba(139,92,246,0.55)] transition-colors duration-200 hover:bg-[#8b5cf6]/[0.14] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b5cf6]"
         >
           <div className="flex items-center gap-4">
-            <div
-              aria-hidden
-              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-paper p-2 text-center font-stencil text-[17px] uppercase leading-[0.95] text-ink"
-            >
-              RETRO
-              <br />
-              DID IT
-              <br />
-              AGAIN
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/links/cover.webp"
+              alt="RETRO did it again cover art"
+              width={96}
+              height={96}
+              className="h-24 w-24 shrink-0 rounded-xl object-cover"
+            />
             <div className="min-w-0">
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a78bfa]">New single · out now</p>
               <p className="mt-1 font-display text-2xl leading-tight">{SONG.title}</p>
               <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 font-body text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-transform duration-200 group-hover:scale-[1.03]">
-                <Glyph name="spotify" className="h-4 w-4" />{song.label}
+                {song.label} <span aria-hidden>↗</span>
               </span>
             </div>
           </div>
