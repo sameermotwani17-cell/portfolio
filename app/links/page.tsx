@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { ICONS } from '@/lib/icons'
 import { GROUPS, LINKS, SONG, cleanSrc, type LinkItem } from '@/lib/links'
 
 const TITLE = 'RETRO · links'
@@ -25,12 +26,27 @@ const ROW =
   'transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.07] ' +
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b5cf6]'
 
+function Glyph({ name, className = 'h-5 w-5' }: { name?: string; className?: string }) {
+  const ic = name ? ICONS[name] : undefined
+  if (!ic) return null
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={`${className} shrink-0 fill-current`}>
+      <path d={ic.path} />
+    </svg>
+  )
+}
+
 function Row({ link, src }: { link: LinkItem; src: string }) {
   const inner = (
     <>
-      <span className="min-w-0">
+      <span className="flex min-w-0 items-center gap-4">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-paper">
+          <Glyph name={link.icon} />
+        </span>
+        <span className="min-w-0">
         <span className="block font-body text-base text-paper">{link.label}</span>
         {link.note && <span className="block truncate font-mono text-xs text-paper/50">{link.note}</span>}
+        </span>
       </span>
       <span
         aria-hidden
@@ -60,7 +76,7 @@ function Row({ link, src }: { link: LinkItem; src: string }) {
 export default function LinksPage({ searchParams }: { searchParams: { src?: string } }) {
   const src = cleanSrc(searchParams?.src)
   const song = LINKS.find((l) => l.slug === 'song')!
-  const apple = LINKS.find((l) => l.slug === 'apple')!
+  const more = LINKS.filter((l) => l.group === 'music' && l.slug !== 'song')
   const goSong = `/go/song${src ? `?src=${src}` : ''}`
 
   return (
@@ -97,13 +113,15 @@ export default function LinksPage({ searchParams }: { searchParams: { src?: stri
               <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a78bfa]">New single · out now</p>
               <p className="mt-1 font-display text-2xl leading-tight">{SONG.title}</p>
               <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-paper px-4 py-2 font-body text-xs font-semibold uppercase tracking-[0.12em] text-ink transition-transform duration-200 group-hover:scale-[1.03]">
-                {song.label} <span aria-hidden>↗</span>
+                <Glyph name="spotify" className="h-4 w-4" />{song.label}
               </span>
             </div>
           </div>
         </a>
-        <div className="mt-3">
-          <Row link={apple} src={src} />
+        <div className="mt-3 flex flex-col gap-3">
+          {more.map((l) => (
+            <Row key={l.slug} link={l} src={src} />
+          ))}
         </div>
 
         {GROUPS.map((g) => {

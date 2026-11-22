@@ -12,12 +12,14 @@ export type LinkItem = {
   /** shown under the label */
   note?: string
   href: string
+  /** key into lib/icons.ts */
+  icon?: string
   /** external links go through /go/[slug] so clicks can be counted per source */
   external: boolean
 }
 
 export const SONG = {
-  slug: 'song',
+  slug: 'song', icon: 'spotify',
   title: 'RETRO did it again',
   href: 'https://open.spotify.com/album/301p9vX5ZwvoMpwhO1zPsG',
 } as const
@@ -25,7 +27,7 @@ export const SONG = {
 export const LINKS: LinkItem[] = [
   { slug: 'song', group: 'music', label: 'Stream on Spotify', note: SONG.title, href: SONG.href, external: true },
   {
-    slug: 'apple',
+    slug: 'apple', icon: 'apple',
     group: 'music',
     label: 'Apple Music',
     note: 'All releases',
@@ -33,7 +35,15 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'tiktok',
+    slug: 'ytmusic', icon: 'ytmusic',
+    group: 'music',
+    label: 'YouTube Music',
+    note: SONG.title,
+    href: 'https://music.youtube.com/watch?v=cwCbEYf8yN0',
+    external: true,
+  },
+  {
+    slug: 'tiktok', icon: 'tiktok',
     group: 'follow',
     label: 'TikTok',
     note: '@we_love_you_retro',
@@ -41,7 +51,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'instagram',
+    slug: 'instagram', icon: 'instagram',
     group: 'follow',
     label: 'Instagram',
     note: '@we_love_you_retro',
@@ -49,7 +59,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'youtube',
+    slug: 'youtube', icon: 'youtube',
     group: 'follow',
     label: 'YouTube',
     note: '@we_love_you_retro',
@@ -57,7 +67,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'threads',
+    slug: 'threads', icon: 'threads',
     group: 'follow',
     label: 'Threads',
     note: '@we_love_you_retro',
@@ -65,7 +75,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-tt',
+    slug: 'clips-tt', icon: 'tiktok',
     group: 'clips',
     label: 'Retro Clips on TikTok',
     note: '@we_love_you_retro_2',
@@ -73,7 +83,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-tt-2',
+    slug: 'clips-tt-2', icon: 'tiktok',
     group: 'clips',
     label: 'Retro Clips on TikTok, 2',
     note: '@pumarahh',
@@ -81,7 +91,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-ig',
+    slug: 'clips-ig', icon: 'instagram',
     group: 'clips',
     label: 'Retro Clips on Instagram',
     note: '@retroclips_77',
@@ -89,7 +99,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'clips-ig-2',
+    slug: 'clips-ig-2', icon: 'instagram',
     group: 'clips',
     label: 'Retro Clips on Instagram, 2',
     note: '@we_love_you_retro_2',
