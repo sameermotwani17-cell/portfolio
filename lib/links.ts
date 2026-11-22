@@ -21,13 +21,13 @@ export type LinkItem = {
 }
 
 export const SONG = {
-  slug: 'song', img: '/links/spotify.webp', icon: 'spotify',
+  slug: 'song',
   title: 'RETRO did it again',
   href: 'https://open.spotify.com/album/301p9vX5ZwvoMpwhO1zPsG',
 } as const
 
 export const LINKS: LinkItem[] = [
-  { slug: 'song', group: 'music', label: 'Stream on Spotify', note: SONG.title, href: SONG.href, external: true },
+  { slug: 'song', img: '/links/spotify.webp', icon: 'spotify', group: 'music', label: 'Spotify', note: SONG.title, href: SONG.href, external: true },
   {
     slug: 'apple', img: '/links/apple.webp', icon: 'apple',
     group: 'music',
@@ -42,6 +42,14 @@ export const LINKS: LinkItem[] = [
     label: 'YouTube Music',
     note: SONG.title,
     href: 'https://music.youtube.com/watch?v=cwCbEYf8yN0',
+    external: true,
+  },
+  {
+    slug: 'audiomack', img: '/links/audiomack.webp',
+    group: 'music',
+    label: 'Audiomack',
+    note: SONG.title,
+    href: 'https://audiomack.com/weloveyouretro/song/retro-did-it-again',
     external: true,
   },
   {
@@ -108,8 +116,8 @@ export const LINKS: LinkItem[] = [
     href: 'https://www.instagram.com/we_love_you_retro_2/',
     external: true,
   },
-  { slug: 'portfolio', group: 'work', label: 'Portfolio', note: 'Engineer, creative director, builder', href: '/', external: false },
-  { slug: 'creative', group: 'work', label: 'Creative work', note: 'Retro Studios, music, model work', href: '/creative', external: false },
+  { slug: 'portfolio', icon: 'portfolio', group: 'work', label: 'Portfolio', note: 'Engineer, creative director, builder', href: '/', external: false },
+  { slug: 'creative', icon: 'creative', group: 'work', label: 'Creative work', note: 'Retro Studios, music, model work', href: '/creative', external: false },
 ]
 
 export const GROUPS: { id: LinkGroup; title: string }[] = [
