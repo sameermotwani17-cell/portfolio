@@ -69,7 +69,7 @@ export const LINKS: LinkItem[] = [
     external: true,
   },
   {
-    slug: 'threads', icon: 'threads',
+    slug: 'threads', img: '/links/threads.webp', icon: 'threads',
     group: 'follow',
     label: 'Threads',
     note: '@we_love_you_retro',
